@@ -4,15 +4,15 @@
 
 const userLogin = (req,res)=>{
 
-    const {email,password} = req.body;
+    const {user_email,user_password} = req.body;
     
-    if( !email || !password){
+    if( !user_email || !user_password){
         res.status(400)
         throw new Error("All field are mandatory")
     }
 
     res.status(200).json({
-        email, password
+        user_email, user_password
     })
 }
 

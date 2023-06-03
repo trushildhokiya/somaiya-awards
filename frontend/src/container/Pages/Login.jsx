@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../../components/Navbar'
 import Wave from 'react-wavify'
 import Field from '../../components/utils/Field'
-
+import axios from 'axios'
 
 const Login = () => {
 
@@ -17,8 +17,16 @@ const Login = () => {
 
       };
 
-      const handleSubmit = ()=>{
-        console.log(credentials);
+      const handleSubmit = async()=>{
+
+        await axios.post('http://localhost:5001/auth/login',credentials)
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+        
       }
 
     return (
