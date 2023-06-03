@@ -1,0 +1,17 @@
+input::file-selector-button{
+    padding: 0.75rem;
+    border-radius: 15px;
+    background-color: white;
+    border-color: red;
+    margin: 10px 25px 0 0;
+    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+input::file-selector-button:hover{
+    background-color: rgb(185,28,28);
+    border-color: white;
+    color: white;
+    font-weight:600;
+}
