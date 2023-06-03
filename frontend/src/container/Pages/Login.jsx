@@ -1,32 +1,25 @@
 import React, { useState } from 'react'
 import Navbar from '../../components/Navbar'
 import Wave from 'react-wavify'
+import Field from '../../components/utils/Field'
 
 
 const Login = () => {
 
-    const [credentials, setCredentials] = useState({});
+    const [credentials,setCredentials] = useState({})
 
-    const RenderField = (props) => {
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setCredentials((prevCredentials) => ({
+          ...prevCredentials,
+          [name]: value,
+        }));
 
-        return (
-            <div className='m-5  font-Poppins'>
-                <div>
-                <label className='block my-1'>
-                    {props.title}
-                </label>
-                </div>
-                <div>
-                <input
-                    className='w-64 transition-all duration-500 p-2 outline-none border-b-2 focus:border-red-700 border-gray-400 focus:w-full'
-                    type={props.type}
-                    placeholder={props.placeholder}
-                    required
-                />
-                </div>
-            </div>
-        )
-    }
+      };
+
+      const handleSubmit = ()=>{
+        console.log(credentials);
+      }
 
     return (
         <div className='h-screen'>
@@ -39,16 +32,26 @@ const Login = () => {
                             Login
                         </h2>
                     </div>
-                    <div className='py-5'>
-                        <RenderField
-                         title="Email"
-                         type="text"
-                         placeholder="kjsit_hoi@somaiya.edu"
+                    <div className='p-5'>
+                        <Field
+                            className='w-full'
+                            page='login'
+                            placeholder="kjsit_hoi@somaiya.edu"
+                            title="Email"
+                            type='email'
+                            name="user_email"
+                            value={credentials['user_email'] || ''}
+                            onChange={handleChange}
                         />
-                        <RenderField
-                            title="password"
-                            type="password"
+                        <Field
+                            className="w-full"
+                            page='login'
                             placeholder="password"
+                            title="Password"
+                            type='password'
+                            name="user_password"
+                            value={credentials['user_password'] || ''}
+                            onChange={handleChange}
                         />
                         <p className='mx-5 py-3 font-Poppins text-sm'>
                             <a href="#" className=' text-blue-800'>
@@ -59,6 +62,7 @@ const Login = () => {
                     <div className='flex justify-center p-5'>
                         <button
                         className='w-[70%] text-white rounded-lg bg-red-700 p-3 hover:bg-red-600'
+                        onClick = {handleSubmit}
                         type='submit'>
                             Submit
                         </button>
