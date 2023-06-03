@@ -1,4 +1,5 @@
 const express = require('express')
+const { userLogin } = require('../controllers/authController')
 
 const router = express.Router()
 
@@ -6,14 +7,7 @@ const router = express.Router()
  *  Routes
  */
 
-router.route('/login').post((req,res)=>{
-    
-    const {name, password} = req.body
-    res.status(200).json({
-        name:name,
-        password:password
-    })
-})
+router.route('/login').post(userLogin)
 
 
 /**
