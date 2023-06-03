@@ -12,8 +12,8 @@ const app = express()
  * Middleware
  */
 app.use(express.json())
-app.use(errorHandler)
 app.use('/auth', authRoute)
+app.use(errorHandler)
 
 /**
  * server listen
