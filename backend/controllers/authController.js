@@ -111,13 +111,13 @@ const passwordReset = asyncHandler(async (req, res) => {
 
     let message = {
         from: '"Somaiya Awards Server" <somaiya_awards@somaiya.edu>',
-        to: "anybody@gmail.com",
+        to: "<recievers email>",
         subject: "Testing",
         text: `${link}`,
         html: `
                 <h2> Link To reset your password </h2>
                 <br>
-                <p style="color-red"> <strong> Link will expire in 5 minutes <strong> </p>
+                <p style="color:red"> <strong> Link will expire in 5 minutes <strong> </p>
                 <br>
                 <p> ${link} <p>
             `,
