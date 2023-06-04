@@ -161,8 +161,7 @@ const Field = (props) => {
             placeholder={props.placeholder === undefined ? null : props.placeholder}
             name={props.name}
             required={props.required}
-            className={`focus:outline-none border-b-2 font-Poppins border-gray-700 focus:border-red-700 ${props.page !== 'login' ? 'w-64 focus:w-full transition-all duration-500' : 'w-64 focus:w-full transition-all duration-500'
-              }`}
+            className={`focus:outline-none border-b-2 font-Poppins border-gray-700 focus:border-red-700 w-64 focus:w-full transition-all  duration-500 `}
             value={props.value}
             onFocus={handleFocus}
             onBlur={handleBlur}

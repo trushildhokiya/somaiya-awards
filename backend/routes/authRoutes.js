@@ -1,5 +1,9 @@
 const express = require('express')
-const { userLogin } = require('../controllers/authController')
+const {
+    userLogin, 
+    passwordReset,
+    verifyForPasswordReset,
+    changePassword } = require('../controllers/authController')
 
 const router = express.Router()
 
@@ -8,8 +12,9 @@ const router = express.Router()
  */
 
 router.route('/login').post(userLogin)
-
-
+router.route('/forgot-password').post(passwordReset)
+router.route('/:id/:token').get(verifyForPasswordReset)
+router.route('/:id/:token').post(changePassword)
 /**
  * Exports
  */

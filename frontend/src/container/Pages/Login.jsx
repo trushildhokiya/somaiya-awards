@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import {useNavigate} from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 import Wave from 'react-wavify'
 import Field from '../../components/utils/Field'
@@ -7,6 +8,7 @@ import axios from 'axios'
 const Login = () => {
 
     const [credentials, setCredentials] = useState({})
+    const navigate = useNavigate()
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -16,6 +18,11 @@ const Login = () => {
         }));
 
     };
+
+    const handleClick = ()=>{
+
+        navigate('/auth/forgot-password')
+    }
 
     const handleSubmit = async () => {
 
@@ -67,10 +74,11 @@ const Login = () => {
                             value={credentials['user_password'] || ''}
                             onChange={handleChange}
                         />
-                        <p className='mx-5 py-3 font-Poppins text-sm'>
-                            <a href="#" className=' text-blue-800'>
-                                Forgot password ?
-                            </a>
+                        <p
+                            onClick={handleClick}
+                            className='mx-4 py-3 hover:cursor-pointer font-Poppins text-md text-blue-800 hover:animate-pulse'
+                        >
+                            Forgot password ?
                         </p>
                     </div>
                     <div className='flex justify-center p-5'>

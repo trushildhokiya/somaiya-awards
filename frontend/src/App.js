@@ -10,12 +10,16 @@ import FeedbackNonTeachingST from './container/Pages/Forms/FeedbackNonTeachingST
 import FeedbackNonTeachingPR from './container/Pages/Forms/FeedbackNonTeachingPR'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./container/Pages/Login";
+import ForgotPassword from "./container/Pages/ForgotPassword";
+import ResetPassword from "./container/Pages/ResetPassword";
  
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+        <Route path="/auth/:id/:token" element={<ResetPassword />} />
         <Route path="/outstanding-institution" element={<OutstandingInstitution />}  />
         <Route path="/sports-star" element={<SportsStar />}  />
         <Route path="/research" element={<Research />}  />
