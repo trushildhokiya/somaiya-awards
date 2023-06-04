@@ -3,6 +3,7 @@ const dotenv = require('dotenv').config()
 const authRoute = require('./routes/authRoutes')
 const errorHandler = require('./middleware/errorHandler')
 const cors = require('cors')
+const db = require('./models')
 /**
  * creating express app 
  */
@@ -18,8 +19,13 @@ app.use('/auth', authRoute)
 app.use(errorHandler)
 
 /**
- * server listen
+ * server listen and database configuration
  */
+
+db.sequelize.sync().then((req)=>{
+    console.log("connected to mysql database ");
+})
+
 
 const PORT =  process.env.PORT || 5000
 

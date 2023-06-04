@@ -6,28 +6,34 @@ import axios from 'axios'
 
 const Login = () => {
 
-    const [credentials,setCredentials] = useState({})
+    const [credentials, setCredentials] = useState({})
 
     const handleChange = (event) => {
         const { name, value } = event.target;
         setCredentials((prevCredentials) => ({
-          ...prevCredentials,
-          [name]: value,
+            ...prevCredentials,
+            [name]: value,
         }));
 
-      };
+    };
 
-      const handleSubmit = async()=>{
+    const handleSubmit = async () => {
 
-        await axios.post('http://localhost:5001/auth/login',credentials)
-        .then((res)=>{
-            console.log(res);
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
-        
-      }
+        if (Object.keys(credentials).length === 2) {
+
+            await axios.post('http://localhost:5001/auth/login', credentials)
+                .then((res) => {
+                    console.log(res);
+                    setCredentials({})
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+        else {
+            alert('Fill out the form man! ')
+        }
+    }
 
     return (
         <div className='h-screen'>
@@ -69,9 +75,9 @@ const Login = () => {
                     </div>
                     <div className='flex justify-center p-5'>
                         <button
-                        className='w-[70%] text-white rounded-lg bg-red-700 p-3 hover:bg-red-600'
-                        onClick = {handleSubmit}
-                        type='submit'>
+                            className='w-[70%] text-white rounded-lg bg-red-700 p-3 hover:bg-red-600'
+                            onClick={handleSubmit}
+                            type='submit'>
                             Submit
                         </button>
                     </div>
