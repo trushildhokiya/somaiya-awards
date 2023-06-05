@@ -63,7 +63,7 @@ const userLogin = asyncHandler(async (req, res) => {
 
 //     const hashedPassword = await bcrypt.hash(user_password,10);
 
-//     await User.create({email_id:user_email , password: hashedPassword })
+//     await User.create({email_id:user_email , password: hashedPassword , role:"admin" })
 
 //     res.status(200).json({
 //         message:"User created successfully"
@@ -111,15 +111,26 @@ const passwordReset = asyncHandler(async (req, res) => {
 
     let message = {
         from: '"Somaiya Awards Server" <somaiya_awards@somaiya.edu>',
-        to: "<recievers email>",
+        to: "<recievers email address>",
         subject: "Testing",
         text: `${link}`,
         html: `
-                <h2> Link To reset your password </h2>
-                <br>
-                <p style="color:red"> <strong> Link will expire in 5 minutes <strong> </p>
+                <h2 style= "background-color: rgb(185,28,28); width:100%;  text-align:center; padding:20px; color:white">
+                     Link to Reset Password
+                </h2>
+                <br/>
+      
+                <p style="font-size:20px ;color: rgb(185,28,28)">
+                    <strong> NOTE <strong> : Link will expire in 5 minutes
+                </p>
                 <br>
                 <p> ${link} <p>
+                <br>
+                <p style="text-align:center; background-color: #ededed; padding: 20px; line-height:2; ">
+                    All Rights Reserved 
+                    <br>
+                    Somaiya Awards Team
+                </p>
             `,
     }
 
@@ -177,14 +188,14 @@ const changePassword = asyncHandler(async (req, res) => {
 
     const { user_email, user_password_new } = req.body;
 
-    const {id,token} = req.params
+    const { id, token } = req.params
 
-    const user = await User.findOne({where : {id: id}})
+    const user = await User.findOne({ where: { id: id } })
 
 
-    const hashedPassword = await bcrypt.hash( user_password_new , 10)
+    const hashedPassword = await bcrypt.hash(user_password_new, 10)
 
-    await user.update({password: hashedPassword})
+    await user.update({ password: hashedPassword })
 
     await user.save()
 
