@@ -1,9 +1,12 @@
 const express = require('express')
 const dotenv = require('dotenv').config()
 const authRoute = require('./routes/authRoutes')
+const formRoute = require('./routes/formRoutes')
 const errorHandler = require('./middleware/errorHandler')
 const cors = require('cors')
 const db = require('./models')
+
+
 /**
  * creating express app 
  */
@@ -15,7 +18,9 @@ const app = express()
  */
 app.use(cors())
 app.use(express.json())
+app.use(express.static(`${__dirname}/data`));
 app.use('/auth', authRoute)
+app.use('/forms', formRoute )
 app.use(errorHandler)
 
 /**
