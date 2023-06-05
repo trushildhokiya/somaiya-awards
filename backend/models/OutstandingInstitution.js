@@ -11,7 +11,7 @@ module.exports = (sequelize,dataTypes)=>{
             allowNull: false
         },
 
-        institutuion_name:{
+        institution_name:{
             type: dataTypes.STRING,
             allowNull : false
         },

@@ -446,7 +446,7 @@ const OutstandingInstForm= [
         title:"Upload Supporting Documents",
         type:"file",
         requiredStatus : true,
-        _name: "uploaded_files",
+        _name: "supportings",
         hasOptions: false,
         page:13,
         fieldsPerLine:1

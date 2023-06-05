@@ -141,7 +141,7 @@ const Field = (props) => {
             name={props.name}
             required={props.required}
             className={`focus:outline-none color-red-400 }`}
-            value={props.value}
+            // value={props.value}
             onChange={handleChange}
           />
         ) : props.type === 'number' ? (

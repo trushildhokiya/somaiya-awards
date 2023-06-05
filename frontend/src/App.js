@@ -12,6 +12,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./container/Pages/Login";
 import ForgotPassword from "./container/Pages/ForgotPassword";
 import ResetPassword from "./container/Pages/ResetPassword";
+import Card from "./container/Pages/Utility/Card";
  
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/forgot-password" element={<ForgotPassword />} />
         <Route path="/auth/:id/:token" element={<ResetPassword />} />
+        <Route path="/forms/cards" element={<Card />} />
         <Route path="/forms/outstanding-institution" element={<OutstandingInstitution />}  />
         <Route path="/forms/sports-star" element={<SportsStar />}  />
         <Route path="/forms/research" element={<Research />}  />

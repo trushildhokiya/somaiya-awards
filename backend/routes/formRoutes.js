@@ -1,8 +1,8 @@
 const express =  require('express')
 const router = express.Router()
-const {sampleFunction} = require('../controllers/formController')
+const {submitForm_01} = require('../controllers/formController')
 const {upload} = require('../middleware/fileUpload')
 
-router.route('/').post(upload.single('file'),sampleFunction)
+router.route('/outstanding-institution').post(upload.single('supportings'), submitForm_01)
 
 module.exports = router

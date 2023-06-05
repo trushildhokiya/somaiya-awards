@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import FormStages from './FormStages';
-import Field,{validator} from './utils/Field';
-
+import Field, { validator } from './utils/Field';
+import axios from 'axios'
+import { useNavigate, createSearchParams } from 'react-router-dom';
 const Forms = (props) => {
 
   /**
@@ -10,10 +11,11 @@ const Forms = (props) => {
 
   const limit = props.pageCount;
   const pageHeaders = props.pageHeadings;
+  const navigate = useNavigate()
 
   const [current, setCurrent] = useState(0);
   const [formData, setFormData] = useState({});
-  const [valid,setValid]  = useState(false);
+
 
   /**
    * functions
@@ -65,36 +67,78 @@ const Forms = (props) => {
   };
 
   const handleFieldChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    if (event.target.type === 'file') {
+
+      const { name } = event.target;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: event.target.files[0],
+
+      }));
+    }
+    else {
+      const { name, value } = event.target;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
+
   };
 
-  const submit_checker = ()=>{
-    
+  const submit_checker = () => {
+
   }
 
   const handleSubmit = () => {
 
-    console.log(formData);
-
     if (props.data.length !== Object.keys(formData).length) {
-
-      console.log(Object.keys(formData).length);
-      alert("You have not filled all require fields Please check and resubmit! ");
-      setFormData({});
-
+      document.getElementById('submit-btn').disabled = true
     }
 
     else {
-      alert("Hurray form submitted")
-      setFormData({})
-      // axios post 
+
+      document.getElementById('submit-btn').disabled = false;
+      alert("Form submitted")
+      // setFormData({})
+
       console.log(formData);
 
+      // axios post 
+
+      axios.post("http://localhost:5001/forms/outstanding-institution", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          
+          navigate({
+            pathname: '/forms/cards',
+            search: createSearchParams({
+              submitted: true,
+              title: "Form submitted Successfully"
+            }).toString()
+
+          })
+        })
+        .catch((err) => {
+
+          navigate({
+            pathname:'/forms/cards',
+            search: createSearchParams({
+                submitted: false,
+                title: "Form submitted Successfully"
+            }).toString()
+        })
+
+          console.log(err);
+        })
+
     }
+
+
   }
 
   const handleFormStageChange = (e) => {
@@ -194,6 +238,7 @@ const Forms = (props) => {
                 ?
                 <button
                   onClick={handleSubmit}
+                  id="submit-btn"
                   className="shadow-md w-28 bg-red-700 text-white text-lg p-3 rounded-xl"
                 >
                   Submit
