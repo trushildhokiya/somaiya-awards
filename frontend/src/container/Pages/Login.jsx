@@ -31,7 +31,17 @@ const Login = () => {
             await axios.post('http://localhost:5001/auth/login', credentials)
                 .then((res) => {
                     console.log(res);
-                    setCredentials({})
+                    if(res.data['authorized']){
+
+                        localStorage.setItem('token',res.data['token'])
+                        localStorage.setItem('user_id',res.data['user_id'])
+                        setCredentials({})
+
+                        navigate('/admin')
+                    }
+                    else{
+                        console.log("Failed to login");
+                    }
                 })
                 .catch((err) => {
                     console.log(err);

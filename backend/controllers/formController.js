@@ -2,6 +2,9 @@ const { OutstandingInstitution } = require('../models')
 
 const asyncHandler = require('express-async-handler')
 
+//@desc handle institution form submission
+//@route POST /forms/outstanding-institution
+//@access private
 const submitForm_01 = asyncHandler(async (req, res) => {
 
     const {

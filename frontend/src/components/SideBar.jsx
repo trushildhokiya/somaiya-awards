@@ -15,13 +15,12 @@ const SideBar = () => {
             <Sidebar backgroundColor='rgb(185,28,28)'>
                 <Menu
                     menuItemStyles={{
-                        button: ({ level, active, disabled }) => {
-                            // only apply styles on first level elements of the tree
-                            if (level === 1)
-                                return {
-                                    color: disabled ? '#f5d9ff' : '#ffffff',
-                                    backgroundColor: active ? 'rgb(180,20,20)' : 'rgb(212, 58, 44)',
-                                };
+                        button: {
+                            backgroundColor: 'rgb(185,28,28)',
+                            '&:hover': {
+                                backgroundColor: '#880808',
+                                color: '#fffff7'
+                            },
                         },
                     }}
                 >

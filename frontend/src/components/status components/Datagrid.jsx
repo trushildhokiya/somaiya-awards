@@ -6,7 +6,7 @@ const Datagrid = () => {
 
     const rows: GridRowsProp = [
         {
-            id:1,
+            id: 1,
             email: "user1@gmail.com",
             efficiency: 4,
             communication: 2,
@@ -14,7 +14,7 @@ const Datagrid = () => {
             inspiring: 3,
         },
         {
-            id:2,
+            id: 2,
             email: "user2@gmail.com",
             efficiency: 3,
             communication: 4,
@@ -22,7 +22,7 @@ const Datagrid = () => {
             inspiring: 5,
         },
         {
-            id:3,
+            id: 3,
             email: "user3@gmail.com",
             efficiency: 5,
             communication: 1,
@@ -30,7 +30,7 @@ const Datagrid = () => {
             inspiring: 2,
         },
         {
-            id:4,
+            id: 4,
             email: "user4@gmail.com",
             efficiency: 2,
             communication: 5,
@@ -49,7 +49,17 @@ const Datagrid = () => {
 
     return (
         <div className='w-[97%] p-2 flex justify-center items-center'>
-            <DataGrid  rows={rows} columns={columns} slots={{ toolbar: GridToolbar }} />
+            <DataGrid
+                rows={rows}
+                columns={columns}
+                slots={{ toolbar: GridToolbar }}
+                slotProps={{
+                    toolbar: {
+                        showQuickFilter: true,
+                        quickFilterProps: { debounceMs: 500 },
+                    },
+                }}
+            />
         </div>
     )
 }
