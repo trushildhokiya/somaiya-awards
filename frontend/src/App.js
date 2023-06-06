@@ -13,6 +13,7 @@ import Login from "./container/Pages/Login";
 import ForgotPassword from "./container/Pages/ForgotPassword";
 import ResetPassword from "./container/Pages/ResetPassword";
 import Card from "./container/Pages/Utility/Card";
+import Admin from "./container/views/admin/Admin";
  
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/auth/forgot-password" element={<ForgotPassword />} />
         <Route path="/auth/:id/:token" element={<ResetPassword />} />
         <Route path="/forms/cards" element={<Card />} />
+        <Route path='/admin' element={<Admin />} />
         <Route path="/forms/outstanding-institution" element={<OutstandingInstitution />}  />
         <Route path="/forms/sports-star" element={<SportsStar />}  />
         <Route path="/forms/research" element={<Research />}  />
