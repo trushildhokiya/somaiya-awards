@@ -224,8 +224,6 @@ const userValidate = asyncHandler( async(req,res)=>{
         throw new Error(" User not found !")
     }
 
-    console.log(user);
-
     const secret = process.env.JWT_SECRET + user.password
 
     const result = jwt.verify(token,secret)
