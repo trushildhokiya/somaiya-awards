@@ -8,6 +8,7 @@ import SportsSoccerRoundedIcon from '@mui/icons-material/SportsSoccerRounded';
 import BookRoundedIcon from '@mui/icons-material/BookRounded';
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
+import { Link } from 'react-router-dom';
 
 const SideBar = () => {
     return (
@@ -30,15 +31,19 @@ const SideBar = () => {
                         </p>
                     </div>
                     <MenuItem
-
-                        icon={<SpaceDashboardIcon />}>Dashboard</MenuItem>
+                        component={<Link to='/admin/dashboard' />}
+                        icon={<SpaceDashboardIcon />}>
+                        Dashboard
+                    </MenuItem>
                     <SubMenu
 
                         icon={<BusinessIcon />} label="Institution">
-                        <MenuItem>
+                        <MenuItem
+                        component={<Link to="/admin/institution/overview" />}
+                        >
                             Overview
                         </MenuItem>
-                        <MenuItem>
+                        <MenuItem component={<Link to="/admin/institution/responses" />}>
                             Responses
                         </MenuItem>
                     </SubMenu>

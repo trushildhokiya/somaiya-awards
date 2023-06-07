@@ -37,7 +37,7 @@ const Login = () => {
                         localStorage.setItem('user_id',res.data['user_id'])
                         setCredentials({})
 
-                        navigate('/admin')
+                        navigate('/admin/dashboard')
                     }
                     else{
                         console.log("Failed to login");
