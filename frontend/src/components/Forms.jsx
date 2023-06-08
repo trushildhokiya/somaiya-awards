@@ -3,6 +3,7 @@ import FormStages from './FormStages';
 import Field, { validator } from './utils/Field';
 import axios from 'axios'
 import { useNavigate, createSearchParams } from 'react-router-dom';
+
 const Forms = (props) => {
 
   /**
@@ -105,8 +106,10 @@ const Forms = (props) => {
       console.log(formData);
 
       // axios post 
+      
+      const postUrl = `http://localhost:5001/forms/${window.location.href.split('/forms/')[1]}`
 
-      axios.post("http://localhost:5001/forms/outstanding-institution", formData, {
+      axios.post(postUrl, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -140,6 +143,7 @@ const Forms = (props) => {
 
 
   }
+
 
   const handleFormStageChange = (e) => {
 
@@ -197,9 +201,12 @@ const Forms = (props) => {
     });
   };
 
+
   /**
    * Return Block
    */
+
+
   return (
     <div className="">
       <FormStages stages={props.stages} onClick={handleFormStageChange} />
