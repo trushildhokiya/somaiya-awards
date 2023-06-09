@@ -37,7 +37,7 @@ const PeerNonTeachingFeedbackForm = [
     },
     {
         title: "Somaiya mail ID",
-        _name: "somaiya_mail",
+        _name: "somaiya_mail_id",
         type: "email",
         requiredStatus : true,
         hasValidations:true,
@@ -83,7 +83,7 @@ const PeerNonTeachingFeedbackForm = [
     },
     {
         title: "He/she has developed cooperative relationships with others by encouraging collaboration among the team",
-        _name: "cooperative_score",
+        _name: "q_01",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -93,7 +93,7 @@ const PeerNonTeachingFeedbackForm = [
     },
     {
         title: "He/she takes inputs from other team members before making any critical decisions and shows genuine concern towards them",
-        _name: "critical_decision_score",
+        _name: "q_02",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -103,7 +103,7 @@ const PeerNonTeachingFeedbackForm = [
     },
     {
         title: "Please rate the performance and the quality of work delivered while working in a team ",
-        _name: "performance_ratings",
+        _name: "q_03",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -113,7 +113,7 @@ const PeerNonTeachingFeedbackForm = [
     },
     {
         title: "He/she handles criticism from others positively and work on improving them instead of arguing or justifying",
-        _name: "criticism_handle_score",
+        _name: "q_04",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -123,7 +123,7 @@ const PeerNonTeachingFeedbackForm = [
     },
     {
         title: "He/she respects other's ideas and perspective and encourage them to express freely. Recognizes individual contribution in the group and works as a good team member",
-        _name: "respect_score",
+        _name: "q_05",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -133,7 +133,7 @@ const PeerNonTeachingFeedbackForm = [
     },
     {
         title: "He/she serves as a role model for continuous improvement *",
-        _name: "role_model_score",
+        _name: "q_06",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -143,7 +143,7 @@ const PeerNonTeachingFeedbackForm = [
     },
     {
         title: "He/she keeps himself/herself updated with the recent trends/changes in the environment and shares work-related knowledge and updates with others",
-        _name: "adaptability_score",
+        _name: "q_07",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -153,7 +153,7 @@ const PeerNonTeachingFeedbackForm = [
     },
     {
         title: "Conflict resolution: He or she uses his/her knowledge and expertise to analyse problems and provide solutions",
-        _name: "conflict_resolution_score",
+        _name: "q_08",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,

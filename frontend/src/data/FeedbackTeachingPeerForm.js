@@ -37,7 +37,7 @@ const FeedbackTeachingPeerForm =[
     },
     {
         title: "Somaiya email id",
-        _name: "somaiya_mail",
+        _name: "somaiya_mail_id",
         type: "text",
         requiredStatus : true,
         hasValidations:true,
@@ -78,7 +78,7 @@ const FeedbackTeachingPeerForm =[
     },
     {
         title: "He/she collaborate with other faculties to contribute towards the field of research and development",
-        _name: "collabration_rnd_score",
+        _name: "q_01",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -88,7 +88,7 @@ const FeedbackTeachingPeerForm =[
     },
     {
         title: "He/she actively participate and gets involved in various school/college committees for the betterment of students and the institution",
-        _name: "active_participation_score",
+        _name: "q_02",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -98,7 +98,7 @@ const FeedbackTeachingPeerForm =[
     },
     {
         title: "Rate the employee on his/her honesty, credibility and integrity while dealing with students and other faculties",
-        _name: "honesty_cr_score",
+        _name: "q_03",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -108,7 +108,7 @@ const FeedbackTeachingPeerForm =[
     },
     {
         title: "He/she accepts suggestions or criticism from co-workers and students gracefully",
-        _name: "accept_criticism_score",
+        _name: "q_04",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -118,7 +118,7 @@ const FeedbackTeachingPeerForm =[
     },
     {
         title: "He/she has developed a good rapport with students as well as with other faculties by treating them respectfully and encouraging their active participation",
-        _name: "student_rapport_score",
+        _name: "q_05",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -128,7 +128,7 @@ const FeedbackTeachingPeerForm =[
     },
     {
         title: "He/she addresses to student's queries in a constructive manner and is available outside the classroom as well",
-        _name: "student_query_score",
+        _name: "q_06",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -138,7 +138,7 @@ const FeedbackTeachingPeerForm =[
     },
     {
         title: "He/she demonstrates problem solving attitude and offers constructive suggestions for improvementy",
-        _name: "problem_solving_score",
+        _name: "q_07",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -148,7 +148,7 @@ const FeedbackTeachingPeerForm =[
     },
     {
         title: "Rate him/her on the effectiveness of his/her teaching methodology",
-        _name: "teaching_metholodgy_score",
+        _name: "q_08",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
@@ -158,7 +158,7 @@ const FeedbackTeachingPeerForm =[
     },
     {
         title: "He/she is dynamic and adapts well to changes in the subject curriculum or any other directives from the university",
-        _name: "subject_change_score",
+        _name: "q_09",
         type: "radio",
         requiredStatus : true,
         hasOptions: true,
