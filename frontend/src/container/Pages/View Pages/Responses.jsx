@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import {useLocation} from 'react-router-dom'
 import SideBar from '../../../components/SideBar';
 import { motion } from 'framer-motion'
 import sampleResponse01 from '../../../data/sample/sampleResponse1';
@@ -14,6 +15,19 @@ const Responses = () => {
   const defaultMaterialTheme = createTheme();
 
   const [data, setData] = useState(sampleResponse01)
+  const [title,setTitle] =useState()
+
+  const location = useLocation()
+
+  useEffect(()=>{
+    
+    let formTitle = location.pathname.split('/')[2]
+
+    formTitle = formTitle.charAt(0).toUpperCase() + formTitle.slice(1)
+    
+    setTitle(formTitle)
+
+  },[location])
 
   const columns = [
     { title: 'ID', field: 'id' },
@@ -65,7 +79,7 @@ const Responses = () => {
     { title: 'Q36', field: 'q_36' },
     { title: 'Q37', field: 'q_37' },
     { title: 'Q38', field: 'q_38' },
-    { title: 'Supportings', field: 'supportings' },
+    { title: 'Supportings', field: 'supportings' ,render: rowData => <a className='bg-red-700 p-2 shadow-lg text-white rounded-lg ' href={rowData.supportings} download={true}>Download</a>},
     { title: 'Filled Date', field: 'createdAt' },
     { title: 'Last Modified', field: 'updatedAt' }
   ];
@@ -90,7 +104,7 @@ const Responses = () => {
           <div className='p-5  h-[43rem] overflow-y-scroll'>
             <ThemeProvider theme={defaultMaterialTheme}>
               <MaterialTable
-                title={'Outstanding Institution Form Responses'}
+                title={`${title} Form Responses`}
                 columns={columns}
                 data={data}
                 options={{

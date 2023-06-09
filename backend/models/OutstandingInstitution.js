@@ -244,7 +244,17 @@ module.exports = (sequelize,dataTypes)=>{
         supportings :{
             type: dataTypes.STRING,
             allowNull: false
-        }
+        },
+
+        ieac_approved :{
+            type: dataTypes.BOOLEAN,
+            defaultValue: false,
+        },
+
+        hr_approved :{
+            type: dataTypes.BOOLEAN,
+            defaultValue: false,
+        },
     })
 
     return OutstandingInstitution;

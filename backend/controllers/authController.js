@@ -41,7 +41,8 @@ const userLogin = asyncHandler(async (req, res) => {
         res.status(200).json({
             token:token,
             user_id: user.id,
-            authorized: result
+            authorized: result,
+            role: user.role,
         })
     }
     else {

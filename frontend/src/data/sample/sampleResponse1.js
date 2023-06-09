@@ -101,7 +101,7 @@ const sampleResponse01 = [
         q_36: 'Random response for Q36',
         q_37: 'Random response for Q37',
         q_38: 'Random response for Q38',
-        supportings: 'Random response for supportings',
+        supportings: 'https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547_1280.jpg',
         createdAt:'20-02-2023',
         updatedAt:'20-02-2023',
     },

@@ -48,39 +48,57 @@ const SideBar = () => {
                         </MenuItem>
                     </SubMenu>
                     <SubMenu icon={<ScienceRoundedIcon />} label="Research">
-                        <MenuItem>
+                        <MenuItem
+                        component={<Link to="/admin/research/overview" />}
+                        >
                             Overview
                         </MenuItem>
-                        <MenuItem>
+                        <MenuItem
+                        component={<Link to="/admin/research/responses" />}
+                        >
                             Responses
                         </MenuItem>
                     </SubMenu>
                     <SubMenu icon={<SportsSoccerRoundedIcon />} label='Sports'>
-                        <MenuItem>
+                        <MenuItem
+                        component={<Link to="/admin/sports/overview" />}
+                        >
                             Overview
                         </MenuItem>
-                        <MenuItem>
+                        <MenuItem
+                        component={<Link to="/admin/sports/responses" />}
+                        >
                             Responses
                         </MenuItem>
                     </SubMenu>
                     <SubMenu icon={<BookRoundedIcon />} label='Teaching'>
-                        <MenuItem>
+                        <MenuItem
+                        component={<Link to="/admin/teaching/overview" />}
+                        >
                             Overview
                         </MenuItem>
-                        <MenuItem>
+                        <MenuItem
+                        component={<Link to="/admin/teaching/responses" />}
+                        >
                             Responses
                         </MenuItem>
                     </SubMenu>
                     <SubMenu icon={<SupervisorAccountRoundedIcon />} label='Non-Teaching'>
-                        <MenuItem>
+                        <MenuItem
+                        component={<Link to="/admin/non-teaching/overview" />}
+                        >
                             Overview
                         </MenuItem>
-                        <MenuItem>
+                        <MenuItem
+                        component={<Link to="/admin/non-teaching/responses" />}
+                        >
                             Responses
                         </MenuItem>
                     </SubMenu>
                     <SubMenu icon={<ChatRoundedIcon />} label='Feedbacks'>
-                        <MenuItem>
+                        <MenuItem
+                        component={<Link to="/admin/feedback/overview" />}
+                        >
                             Overview
                         </MenuItem>
                         <SubMenu label='Teaching'>

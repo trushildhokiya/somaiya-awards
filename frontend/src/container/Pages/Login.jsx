@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 import Wave from 'react-wavify'
 import Field from '../../components/utils/Field'
@@ -19,7 +19,7 @@ const Login = () => {
 
     };
 
-    const handleClick = ()=>{
+    const handleClick = () => {
 
         navigate('/auth/forgot-password')
     }
@@ -31,20 +31,34 @@ const Login = () => {
             await axios.post('http://localhost:5001/auth/login', credentials)
                 .then((res) => {
                     console.log(res);
-                    if(res.data['authorized']){
+                    if (res.data['authorized']) {
 
-                        localStorage.setItem('token',res.data['token'])
-                        localStorage.setItem('user_id',res.data['user_id'])
+                        localStorage.setItem('token', res.data['token'])
+                        localStorage.setItem('user_id', res.data['user_id'])
                         setCredentials({})
 
-                        navigate('/admin/dashboard')
+                        switch (res.data['role']) {
+
+                            case "admin":
+                                navigate('/admin/dashboard')
+                                break;
+
+                            case "ieac_member":
+                                navigate('/ieac/dasboard')
+                                break;
+
+                            case "hoi":
+                                navigate('/hoi/dashboard')
+                                break;
+
+                        }
                     }
-                    else{
+                    else {
                         console.log("Failed to login");
                     }
                 })
                 .catch((err) => {
-                    
+
                     console.log(err);
                     alert("Invalid email Id or password ")
 
