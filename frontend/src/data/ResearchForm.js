@@ -10,7 +10,7 @@ const ResearchForm = [
     },
     {
         title: "Designation",
-        _name: "faculty_designation",
+        _name: "designation",
         type: "text",
         requiredStatus : true,
         hasOptions: false,
@@ -19,7 +19,7 @@ const ResearchForm = [
     },
     {
         title: "Department and Institution",
-        _name: "dep_institution",
+        _name: "department_and_institution",
         type: "text",
         requiredStatus : true,
         hasOptions: false,
@@ -289,7 +289,7 @@ const ResearchForm = [
     },
     {
         title: "Major evidences for the data provided in this form as a single PDF file",
-        _name: "evidence_od_data_provided",
+        _name: "evidence_of_data_provided",
         type: "file",
         requiredStatus : true,
         hasOptions: false,

@@ -75,7 +75,7 @@ const SportsStarForm = [
         title:"HOI assessment PE Teacher Nominee (Scan and Upload) ",
         type:"file",
         requiredStatus:true,
-        _name:"nominee_pe_hoi_assessment",
+        _name:"nominee_teacher_hoi_assessment",
         hasOptions: false,
         page:2,
         fieldsPerLine: 1,

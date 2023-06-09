@@ -70,7 +70,7 @@ const TeachingForm = [
     },
     {
         title: "Somaiya Email ID",
-        _name: "email_somaiya",
+        _name: "somaiya_mail_id",
         type: "email",
         requiredStatus : true,
         hasValidations:true,
@@ -92,7 +92,7 @@ const TeachingForm = [
     },
     {
         title:"Possess a clear knowledge of the content of the subject/s he/she teaches",
-        _name:"clear_knowledge_score",
+        _name:"q_01",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -102,7 +102,7 @@ const TeachingForm = [
     },
     {
         title:"Has received good feedback/scores in standard evaluations (students, peers, supervisors) and other acknowledgments by former students (letters, e-mails, cards, etc)",
-        _name:"evaluation_score",
+        _name:"q_02",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -112,7 +112,7 @@ const TeachingForm = [
     },
     {
         title:"Capability to organize and prepare presentation/ instructional material and information before lectures",
-        _name:"presentation_score",
+        _name:"q_03",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -122,7 +122,7 @@ const TeachingForm = [
     },
     {
         title:"Encourages activities to make students use other resources like libraries, internet etc.",
-        _name:"encouragement_score",
+        _name:"q_04",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -132,7 +132,7 @@ const TeachingForm = [
     },
     {
         title:"Use new and innovative teaching aids and tools (experiments, charts, maps) and integrate Information and Communications Technology (ICT) in the classroom. Eg Google Classrooms, Flipped Classrooms, Group teaching",
-        _name:"new_aid_score",
+        _name:"q_05",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -142,7 +142,7 @@ const TeachingForm = [
     },
     {
         title:"Has recently made a contribution to developing or enhancing curricula in his/her field",
-        _name:"enhancing_curricula_score",
+        _name:"q_06",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -152,7 +152,7 @@ const TeachingForm = [
     },
     {
         title:"Documentation and organizational skills- Maintain documents and records in an organized manner E.g. attendance sheets, progress reports",
-        _name:"organization_skills_score",
+        _name:"q_07",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -162,7 +162,7 @@ const TeachingForm = [
     },
     {
         title:"Is able to identity and device ways to address gaps in student learning",
-        _name:"address_gaps_scores",
+        _name:"q_08",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -172,7 +172,7 @@ const TeachingForm = [
     },
     {
         title:"Cooperate and assist in carrying out functions relating to the educational responsibilities of his/her/their institute/ the University such as: assisting in appraising applications for admission, as well as assisting the conduct of examinations, including supervision, invigilation and evaluation",
-        _name:"coop_assist_score",
+        _name:"q_09",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -182,7 +182,7 @@ const TeachingForm = [
     },
     {
         title:"Ability to communicate clearly and effectively on the subject matter",
-        _name:"communicate_clear_score",
+        _name:"q_10",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -192,7 +192,7 @@ const TeachingForm = [
     },
     {
         title:"Is actively involved in research (group or individual projects)",
-        _name:"active_research_score",
+        _name:"q_11",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -202,7 +202,7 @@ const TeachingForm = [
     },
     {
         title:"Has made a contribution in books, book chapters, lab manuals, journals, magazines",
-        _name:"literature_conrib_score",
+        _name:"q_12",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -212,7 +212,7 @@ const TeachingForm = [
     },
     {
         title:"Is actively involved in student welfare activities, extension, consultancy and other co/extra curricular activities",
-        _name:"extra_activities_score",
+        _name:"q_13",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -222,7 +222,7 @@ const TeachingForm = [
     },
     {
         title:"Is involved in any social service activities and/or engaged community development",
-        _name:"community_development_score",
+        _name:"q_14",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -232,7 +232,7 @@ const TeachingForm = [
     },
     {
         title:"Attended/ organized presentations at seminars and conferences",
-        _name:"attended_seminars_score",
+        _name:"q_15",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -242,7 +242,7 @@ const TeachingForm = [
     },
     {
         title:"Has acquired any additional qualifications (certificates/ diplomas) for his/her/their professional development",
-        _name:"additional_qualification_score",
+        _name:"q_16",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -252,7 +252,7 @@ const TeachingForm = [
     },
     {
         title:"Has received any professional recognition, certificates, awards and honors from his/her institute or from any other organization(s)",
-        _name:"recognition_score",
+        _name:"q_17",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -262,7 +262,7 @@ const TeachingForm = [
     },
     {
         title:"Has been a guide and mentor to students in their projects & research work, soft skills development and making career choices",
-        _name:"guide_mentor_score",
+        _name:"q_18",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -272,7 +272,7 @@ const TeachingForm = [
     },
     {
         title:"Is punctual at work and dependable in delivering work assigned to him/her/they",
-        _name:"punctuality_score",
+        _name:"q_19",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
@@ -282,7 +282,7 @@ const TeachingForm = [
     },
     {
         title:"Score the candidate on his/her/their general impression in terms of honesty, integrity, conduct and ability to get along with the superiors colleagues, students",
-        _name:"honesty_score",
+        _name:"q_20",
         type:"radio",
         requiredStatus:true,
         hasOptions:true,
