@@ -70,7 +70,7 @@ const submitForm_01 = asyncHandler(async (req, res) => {
         q_36: q_36,
         q_37: q_37,
         q_38: q_38,
-        supportings: supportings
+        supportings: supportings,
     })
 
     res.status(200).json({
@@ -188,7 +188,7 @@ const submitFeedback_01 = asyncHandler(async (req, res) => {
         message: "Form submitted successfully",
         submitted: true
     })
-    
+
 })
 
 
@@ -199,6 +199,7 @@ const submitFeedback_01 = asyncHandler(async (req, res) => {
 
 const submitFeedback_02 = asyncHandler(async (req, res) => {
 
+    console.log(req.body);
     const {
         rater_name,
         institute_name,

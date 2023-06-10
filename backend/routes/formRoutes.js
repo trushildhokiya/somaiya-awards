@@ -32,7 +32,11 @@ const {upload01,upload02, upload03, upload04, upload05} = require('../middleware
  *      feeback04 : peer feedback for non teaching staff form
  */
 
-router.route('/outstanding-institution').post(upload01.single('supportings'), submitForm_01)
+router.route('/outstanding-institution').post(
+    upload01.single('supportings'),
+    submitForm_01
+);
+
 router.route('/research').post(
     upload02.fields([
         {name:'file1', maxCount:1},

@@ -111,47 +111,81 @@ const Forms = (props) => {
       })
     }
 
-    else {
+    else{
 
-      document.getElementById('submit-btn').disabled = false;
-    
-      // setFormData({})
 
       console.log(formData);
 
       // axios post 
 
-      const postUrl = `http://localhost:5001/forms/${window.location.href.split('/forms/')[1]}`
+      const formType = window.location.href.split('/forms/')[1]
+      const postUrl = `http://localhost:5001/forms/${formType}`
 
-      axios.post(postUrl, formData, {
-        headers: {
-          "Content-Type": window.location.href.split('/forms/')[1] === "feedback-01" || "feedback-02" || 'feedback-03' || 'feedback-04' ? "application/json" : "multipart/form-data",
-        },
-      })
-        .then((res) => {
-          console.log(res);
+      if (formType === 'feedback-01' || formType === 'feedback-02' || formType === 'feedback-03' || formType === 'feedback-04') {
 
-          navigate({
-            pathname: '/forms/cards',
-            search: createSearchParams({
-              submitted: true,
-              title: "Form submitted Successfully"
-            }).toString()
-
-          })
+        axios.post(postUrl, formData, {
+          headers: {
+            "Content-Type": "application/json",
+          }
         })
-        .catch((err) => {
+          .then((res) => {
+            console.log(res);
 
-          navigate({
-            pathname: '/forms/cards',
-            search: createSearchParams({
-              submitted: false,
-              title: "Form submitted Successfully"
-            }).toString()
+            navigate({
+              pathname: '/forms/cards',
+              search: createSearchParams({
+                submitted: true,
+                title: "Form submitted Successfully"
+              }).toString()
+            })
+          })
+          .catch((err) => {
+
+            navigate({
+              pathname: '/forms/cards',
+              search: createSearchParams({
+                submitted: false,
+                title: "Form submitted Successfully"
+              }).toString()
+            })
+
+            console.log(err);
           })
 
-          console.log(err);
+      } else {
+        
+        axios.post(postUrl, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          }
         })
+          .then((res) => {
+            console.log(res);
+
+            navigate({
+              pathname: '/forms/cards',
+              search: createSearchParams({
+                submitted: true,
+                title: "Form submitted Successfully"
+              }).toString()
+            })
+          })
+          .catch((err) => {
+
+            navigate({
+              pathname: '/forms/cards',
+              search: createSearchParams({
+                submitted: false,
+                title: "Form submitted Successfully"
+              }).toString()
+            })
+
+            console.log(err);
+          })
+
+      }
+
+
 
     }
 
