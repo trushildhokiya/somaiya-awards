@@ -3,6 +3,7 @@ import FormStages from './FormStages';
 import Field, { validator } from './utils/Field';
 import axios from 'axios'
 import { useNavigate, createSearchParams } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 const Forms = (props) => {
 
@@ -94,7 +95,20 @@ const Forms = (props) => {
   const handleSubmit = () => {
 
     if (props.data.length !== Object.keys(formData).length) {
-      document.getElementById('submit-btn').disabled = true
+      
+      Swal.fire({
+        title:"Incomplete Form",
+        text:"Please fill out the form completely",
+        icon:"warning",
+        backdrop:true,
+        background: 'rgba(255,250,250)',
+        iconColor:'rgb(185,28,28)',
+        confirmButtonColor:'rgb(185,28,28)',
+        buttonsStyling: false,
+        customClass:{
+          confirmButton:'gradient-button'
+        }
+      })
     }
 
     else {
@@ -107,37 +121,37 @@ const Forms = (props) => {
 
       // axios post 
       
-      const postUrl = `http://localhost:5001/forms/${window.location.href.split('/forms/')[1]}`
+    //   const postUrl = `http://localhost:5001/forms/${window.location.href.split('/forms/')[1]}`
 
-      axios.post(postUrl, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-        .then((res) => {
-          console.log(res);
+    //   axios.post(postUrl, formData, {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   })
+    //     .then((res) => {
+    //       console.log(res);
           
-          navigate({
-            pathname: '/forms/cards',
-            search: createSearchParams({
-              submitted: true,
-              title: "Form submitted Successfully"
-            }).toString()
+    //       navigate({
+    //         pathname: '/forms/cards',
+    //         search: createSearchParams({
+    //           submitted: true,
+    //           title: "Form submitted Successfully"
+    //         }).toString()
 
-          })
-        })
-        .catch((err) => {
+    //       })
+    //     })
+    //     .catch((err) => {
 
-          navigate({
-            pathname:'/forms/cards',
-            search: createSearchParams({
-                submitted: false,
-                title: "Form submitted Successfully"
-            }).toString()
-        })
+    //       navigate({
+    //         pathname:'/forms/cards',
+    //         search: createSearchParams({
+    //             submitted: false,
+    //             title: "Form submitted Successfully"
+    //         }).toString()
+    //     })
 
-          console.log(err);
-        })
+    //       console.log(err);
+    //     })
 
     }
 

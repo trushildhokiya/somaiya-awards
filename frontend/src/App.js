@@ -29,7 +29,7 @@ function App() {
         <Route path="/admin/:formtype/overview" element={<Overview />} />
         <Route path="/admin/:formtype/responses" element={<Responses />} />
         <Route path="/forms/outstanding-institution" element={<OutstandingInstitution />}  />
-        <Route path="/forms/sports-star" element={<SportsStar />}  />
+        <Route path="/forms/sports" element={<SportsStar />}  />
         <Route path="/forms/research" element={<Research />}  />
         <Route path="/forms/teaching" element={<Teaching />}  />
         <Route path="/forms/non-teaching" element={<NonTeaching />}  />

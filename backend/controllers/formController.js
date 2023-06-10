@@ -74,4 +74,115 @@ const submitForm_01 = asyncHandler(async (req, res) => {
     })
 })
 
-module.exports = { submitForm_01 }
+//@desc handle research form submission
+//@route POST /forms/research
+//@access private
+
+const submitForm_02 = asyncHandler( async(req,res)=>{
+
+    console.log(req.body , req.files);
+})
+
+
+//@desc handle sports form submission
+//@route POST /forms/sports
+//@access private
+
+const submitForm_03 = asyncHandler(async (req,res)=>{
+    
+    console.log(req.body , req.files);
+    res.json({
+        message: 'file uploaded successfully'
+    })
+})
+
+
+//@desc handle teaching / faculty  form submission
+//@route POST /forms/teaching
+//@access private
+
+const submitForm_04 = asyncHandler(async (req,res)=>{
+
+    console.log(req.body , req.files);
+    res.json({
+        message: "File uploaded successfully"
+    })
+})
+
+
+//@desc handle non-teaching/staff  form submission
+//@route POST /forms/non-teaching
+//@access private
+
+const submitForm_05 = asyncHandler( async(req,res)=>{
+    console.log(req.body , req.files);
+
+    res.json({
+        message:'file uploaded successfully'
+    })
+})
+
+
+//@desc handle feedback 01 form submission
+//@route POST /forms/feedback-01
+//@access private
+
+const submitFeedback_01 = asyncHandler(async(req,res)=>{
+
+    res.json({
+        message:'Form submitted successfully'
+    })
+})
+
+
+
+//@desc handle feedback 02 form submission
+//@route POST /forms/feedback-02
+//@access private
+
+const submitFeedback_02 = asyncHandler(async(req,res)=>{
+
+    res.json({
+        message:'Form submitted successfully'
+    })
+})
+
+
+
+//@desc handle feedback03 form submission
+//@route POST /forms/feedback-03
+//@access private
+
+const submitFeedback_03 = asyncHandler(async(req,res)=>{
+
+    res.json({
+        message:'Form submitted successfully'
+    })
+})
+
+
+
+//@desc handle feedback04 form submission
+//@route POST /forms/feedback-04
+//@access private
+
+const submitFeedback_04 = asyncHandler(async(req,res)=>{
+
+    res.json({
+        message:'Form submitted successfully'
+    })
+})
+
+
+
+
+module.exports = { submitForm_01,
+    submitForm_02 ,
+    submitForm_03,
+    submitForm_04,
+    submitForm_05,
+    submitFeedback_01,
+    submitFeedback_02,
+    submitFeedback_03,
+    submitFeedback_04
+}
