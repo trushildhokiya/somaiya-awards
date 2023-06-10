@@ -11,7 +11,7 @@ const Card = (props) => {
     console.log(searchParams);
     useEffect(()=>{
         setTimeout(()=>{
-            navigate('/auth/login')
+            navigate('/')
         },6000)
     },[])
     

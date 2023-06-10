@@ -16,11 +16,13 @@ import Card from "./container/Pages/Utility/Card";
 import Admin from "./container/views/admin/Admin";
 import Overview from "./container/Pages/View Pages/Overview";
 import Responses from "./container/Pages/View Pages/Responses";
+import Home from "./container/Pages/Home";
  
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route index  element={<Home />}  />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/forgot-password" element={<ForgotPassword />} />
         <Route path="/auth/:id/:token" element={<ResetPassword />} />

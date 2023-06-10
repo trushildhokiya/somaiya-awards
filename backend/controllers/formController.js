@@ -1,4 +1,9 @@
-const { OutstandingInstitution } = require('../models')
+const {
+    OutstandingInstitution,
+    FeedbackOne,
+    FeedbackTwo,
+    FeedbackThree,
+    FeedbackFour } = require('../models')
 
 const asyncHandler = require('express-async-handler')
 
@@ -70,7 +75,7 @@ const submitForm_01 = asyncHandler(async (req, res) => {
 
     res.status(200).json({
         message: "Form submitted successfully",
-        submitted:true
+        submitted: true
     })
 })
 
@@ -78,9 +83,9 @@ const submitForm_01 = asyncHandler(async (req, res) => {
 //@route POST /forms/research
 //@access private
 
-const submitForm_02 = asyncHandler( async(req,res)=>{
+const submitForm_02 = asyncHandler(async (req, res) => {
 
-    console.log(req.body , req.files);
+    console.log(req.body, req.files);
 })
 
 
@@ -88,9 +93,9 @@ const submitForm_02 = asyncHandler( async(req,res)=>{
 //@route POST /forms/sports
 //@access private
 
-const submitForm_03 = asyncHandler(async (req,res)=>{
-    
-    console.log(req.body , req.files);
+const submitForm_03 = asyncHandler(async (req, res) => {
+
+    console.log(req.body, req.files);
     res.json({
         message: 'file uploaded successfully'
     })
@@ -101,9 +106,9 @@ const submitForm_03 = asyncHandler(async (req,res)=>{
 //@route POST /forms/teaching
 //@access private
 
-const submitForm_04 = asyncHandler(async (req,res)=>{
+const submitForm_04 = asyncHandler(async (req, res) => {
 
-    console.log(req.body , req.files);
+    console.log(req.body, req.files);
     res.json({
         message: "File uploaded successfully"
     })
@@ -114,11 +119,11 @@ const submitForm_04 = asyncHandler(async (req,res)=>{
 //@route POST /forms/non-teaching
 //@access private
 
-const submitForm_05 = asyncHandler( async(req,res)=>{
-    console.log(req.body , req.files);
+const submitForm_05 = asyncHandler(async (req, res) => {
+    console.log(req.body, req.files);
 
     res.json({
-        message:'file uploaded successfully'
+        message: 'file uploaded successfully'
     })
 })
 
@@ -127,11 +132,63 @@ const submitForm_05 = asyncHandler( async(req,res)=>{
 //@route POST /forms/feedback-01
 //@access private
 
-const submitFeedback_01 = asyncHandler(async(req,res)=>{
+const submitFeedback_01 = asyncHandler(async (req, res) => {
 
-    res.json({
-        message:'Form submitted successfully'
+
+    const {
+        email_id,
+        student_batch_year,
+        student_class_and_division,
+        teacher_name,
+        teacher_designation,
+        teaching_subject,
+        q_01,
+        q_02,
+        q_03,
+        q_04,
+        q_05,
+        q_06,
+        q_07,
+        q_08,
+        q_09,
+        q_10,
+        q_11,
+        nominating_reasons } = req.body;
+
+
+    const result = await FeedbackOne.create({
+        email_id: email_id,
+        student_batch_year: student_batch_year,
+        student_class_and_division: student_class_and_division,
+        teacher_name: teacher_name,
+        teacher_designation: teacher_designation,
+        teaching_subject: teaching_subject,
+        q_01: q_01,
+        q_02: q_02,
+        q_03: q_03,
+        q_04: q_04,
+        q_05: q_05,
+        q_06: q_06,
+        q_07: q_07,
+        q_08: q_08,
+        q_09: q_09,
+        q_10: q_10,
+        q_11: q_11,
+        nominating_reasons: nominating_reasons
     })
+
+    if (!result) {
+
+        // throw error
+        res.status(500)
+        throw new Error("Failed to accept your response")
+    }
+
+    res.status(200).json({
+        message: "Form submitted successfully",
+        submitted: true
+    })
+    
 })
 
 
@@ -140,10 +197,60 @@ const submitFeedback_01 = asyncHandler(async(req,res)=>{
 //@route POST /forms/feedback-02
 //@access private
 
-const submitFeedback_02 = asyncHandler(async(req,res)=>{
+const submitFeedback_02 = asyncHandler(async (req, res) => {
 
-    res.json({
-        message:'Form submitted successfully'
+    const {
+        rater_name,
+        institute_name,
+        department_name,
+        designation,
+        somaiya_mail_id,
+        contact_number,
+        teacher_name,
+        nomination_category,
+        q_01,
+        q_02,
+        q_03,
+        q_04,
+        q_05,
+        q_06,
+        q_07,
+        q_08,
+        q_09,
+        nomination_reason
+    } = req.body;
+
+    const result = await FeedbackTwo.create({
+        rater_name: rater_name,
+        institute_name: institute_name,
+        department_name: department_name,
+        designation: designation,
+        somaiya_mail_id: somaiya_mail_id,
+        contact_number: contact_number,
+        teacher_name: teacher_name,
+        nomination_category: nomination_category,
+        q_01: q_01,
+        q_02: q_02,
+        q_03: q_03,
+        q_04: q_04,
+        q_05: q_05,
+        q_06: q_06,
+        q_07: q_07,
+        q_08: q_08,
+        q_09: q_09,
+        nomination_reason: nomination_reason
+    });
+
+    if (!result) {
+
+        // throw error
+        res.status(500)
+        throw new Error("Failed to accept your response")
+    }
+
+    res.status(200).json({
+        message: "Form submitted successfully",
+        submitted: true
     })
 })
 
@@ -153,11 +260,47 @@ const submitFeedback_02 = asyncHandler(async(req,res)=>{
 //@route POST /forms/feedback-03
 //@access private
 
-const submitFeedback_03 = asyncHandler(async(req,res)=>{
+const submitFeedback_03 = asyncHandler(async (req, res) => {
 
-    res.json({
-        message:'Form submitted successfully'
+    const {
+        email_id,
+        student_batch_year,
+        student_class_and_division,
+        employee_name,
+        employee_designation,
+        q_01,
+        q_02,
+        q_03,
+        q_04,
+        q_05,
+        nomination_reason } = req.body;
+
+    const result = await FeedbackThree.create({
+        email_id: email_id,
+        student_batch_year: student_batch_year,
+        student_class_and_division: student_class_and_division,
+        employee_name: employee_name,
+        employee_designation: employee_designation,
+        q_01: q_01,
+        q_02: q_02,
+        q_03: q_03,
+        q_04: q_04,
+        q_05: q_05,
+        nomination_reason: nomination_reason
     })
+
+    if (!result) {
+
+        // throw error
+        res.status(500)
+        throw new Error("Failed to accept your response")
+    }
+
+    res.status(200).json({
+        message: "Form submitted successfully",
+        submitted: true
+    })
+
 })
 
 
@@ -166,18 +309,68 @@ const submitFeedback_03 = asyncHandler(async(req,res)=>{
 //@route POST /forms/feedback-04
 //@access private
 
-const submitFeedback_04 = asyncHandler(async(req,res)=>{
+const submitFeedback_04 = asyncHandler(async (req, res) => {
 
-    res.json({
-        message:'Form submitted successfully'
+    const {
+        rater_name,
+        institution_name,
+        department,
+        designation,
+        somaiya_mail_id,
+        contact_no,
+        nominee_name,
+        category,
+        q_01,
+        q_02,
+        q_03,
+        q_04,
+        q_05,
+        q_06,
+        q_07,
+        q_08,
+        nomination_reason } = req.body;
+
+
+    const result = await FeedbackFour.create({
+        rater_name: rater_name,
+        institution_name: institution_name,
+        department: department,
+        designation: designation,
+        somaiya_mail_id: somaiya_mail_id,
+        contact_no: contact_no,
+        nominee_name: nominee_name,
+        category: category,
+        q_01: q_01,
+        q_02: q_02,
+        q_03: q_03,
+        q_04: q_04,
+        q_05: q_05,
+        q_06: q_06,
+        q_07: q_07,
+        q_08: q_08,
+        nomination_reason: nomination_reason
     })
+
+    if (!result) {
+
+        // throw error
+        res.status(500)
+        throw new Error("Failed to accept your response")
+    }
+
+    res.status(200).json({
+        message: "Form submitted successfully",
+        submitted: true
+    })
+
 })
 
 
 
 
-module.exports = { submitForm_01,
-    submitForm_02 ,
+module.exports = {
+    submitForm_01,
+    submitForm_02,
     submitForm_03,
     submitForm_04,
     submitForm_05,

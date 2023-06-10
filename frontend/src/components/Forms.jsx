@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FormStages from './FormStages';
-import Field, { validator } from './utils/Field';
+import Field from './utils/Field';
 import axios from 'axios'
 import { useNavigate, createSearchParams } from 'react-router-dom';
 import Swal from 'sweetalert2'
@@ -95,18 +95,18 @@ const Forms = (props) => {
   const handleSubmit = () => {
 
     if (props.data.length !== Object.keys(formData).length) {
-      
+
       Swal.fire({
-        title:"Incomplete Form",
-        text:"Please fill out the form completely",
-        icon:"warning",
-        backdrop:true,
+        title: "Incomplete Form",
+        text: "Please fill out the form completely",
+        icon: "warning",
+        backdrop: true,
         background: 'rgba(255,250,250)',
-        iconColor:'rgb(185,28,28)',
-        confirmButtonColor:'rgb(185,28,28)',
+        iconColor: 'rgb(185,28,28)',
+        confirmButtonColor: 'rgb(185,28,28)',
         buttonsStyling: false,
-        customClass:{
-          confirmButton:'gradient-button'
+        customClass: {
+          confirmButton: 'gradient-button'
         }
       })
     }
@@ -114,44 +114,44 @@ const Forms = (props) => {
     else {
 
       document.getElementById('submit-btn').disabled = false;
-      alert("Form submitted")
+    
       // setFormData({})
 
       console.log(formData);
 
       // axios post 
-      
-    //   const postUrl = `http://localhost:5001/forms/${window.location.href.split('/forms/')[1]}`
 
-    //   axios.post(postUrl, formData, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   })
-    //     .then((res) => {
-    //       console.log(res);
-          
-    //       navigate({
-    //         pathname: '/forms/cards',
-    //         search: createSearchParams({
-    //           submitted: true,
-    //           title: "Form submitted Successfully"
-    //         }).toString()
+      const postUrl = `http://localhost:5001/forms/${window.location.href.split('/forms/')[1]}`
 
-    //       })
-    //     })
-    //     .catch((err) => {
+      axios.post(postUrl, formData, {
+        headers: {
+          "Content-Type": window.location.href.split('/forms/')[1] === "feedback-01" || "feedback-02" || 'feedback-03' || 'feedback-04' ? "application/json" : "multipart/form-data",
+        },
+      })
+        .then((res) => {
+          console.log(res);
 
-    //       navigate({
-    //         pathname:'/forms/cards',
-    //         search: createSearchParams({
-    //             submitted: false,
-    //             title: "Form submitted Successfully"
-    //         }).toString()
-    //     })
+          navigate({
+            pathname: '/forms/cards',
+            search: createSearchParams({
+              submitted: true,
+              title: "Form submitted Successfully"
+            }).toString()
 
-    //       console.log(err);
-    //     })
+          })
+        })
+        .catch((err) => {
+
+          navigate({
+            pathname: '/forms/cards',
+            search: createSearchParams({
+              submitted: false,
+              title: "Form submitted Successfully"
+            }).toString()
+          })
+
+          console.log(err);
+        })
 
     }
 
