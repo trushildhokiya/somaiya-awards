@@ -36,7 +36,7 @@ const SideBar = () => {
                       Forms
                     </MenuItem>
                     <SubMenu
-                    open={true}
+                    defaultOpen={true}
                     label="Analysis"
                     icon={<AssessmentRoundedIcon />}
                     >

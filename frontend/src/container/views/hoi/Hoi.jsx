@@ -4,6 +4,7 @@ import axios from 'axios'
 import { MoonLoader } from 'react-spinners'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
+import FormCards from '../../Pages/View Pages/FormCards'
 const Hoi = () => {
 
   const [loading, setLoading] = useState(true)
@@ -70,7 +71,13 @@ const Hoi = () => {
           authorized
             ?
             <>
-              <SideBar />
+              <div className='flex'>
+                <SideBar />
+                <div className='flex flex-col w-full overflow-y-scroll'>
+
+                  <FormCards />
+                </div>
+              </div>
             </>
             :
             navigate('/auth/login')
