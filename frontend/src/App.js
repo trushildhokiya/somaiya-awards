@@ -17,6 +17,8 @@ import Admin from "./container/views/admin/Admin";
 import Overview from "./container/Pages/View Pages/Overview";
 import Responses from "./container/Pages/View Pages/Responses";
 import Home from "./container/Pages/Home";
+import Hoi from "./container/views/hoi/Hoi";
+import PageNotFound from "./container/Pages/Utility/PageNotFound";
  
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
         <Route path="/auth/forgot-password" element={<ForgotPassword />} />
         <Route path="/auth/:id/:token" element={<ResetPassword />} />
         <Route path="/forms/cards" element={<Card />} />
+        <Route path='/hoi' element={<Hoi />} />
         <Route path='/admin/dashboard' element={<Admin />} />
         <Route path="/admin/:formtype/overview" element={<Overview />} />
         <Route path="/admin/:formtype/responses" element={<Responses />} />
@@ -39,6 +42,7 @@ function App() {
         <Route path="/forms/feedback-02" element={<FeedbackTeachingPR />}  />
         <Route path="/forms/feedback-03" element={<FeedbackNonTeachingST />}  />
         <Route path="/forms/feedback-04" element={<FeedbackNonTeachingPR />}  />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
