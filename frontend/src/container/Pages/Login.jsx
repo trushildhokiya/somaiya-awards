@@ -4,6 +4,7 @@ import Navbar from '../../components/Navbar'
 import Wave from 'react-wavify'
 import Field from '../../components/utils/Field'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const Login = () => {
 
@@ -48,7 +49,7 @@ const Login = () => {
                                 break;
 
                             case "hoi":
-                                navigate('/hoi/dashboard')
+                                navigate('/hoi')
                                 break;
 
                         }
@@ -60,12 +61,23 @@ const Login = () => {
                 .catch((err) => {
 
                     console.log(err);
-                    alert("Invalid email Id or password ")
+                    Swal.fire({
+                        title:"User not Found",
+                        imageUrl:'https://img.freepik.com/premium-vector/male-student-feeling-confused-while-looking-up-with-thoughtful-focused-expression-questioned-thinking-curious-with-question-mark-concept-illustration_270158-365.jpg?w=2000',
+                        imageHeight:'200',
+                        text:"Check your email ID, password and retry",
+                        confirmButtonColor:'rgb(185,28,28)'
+                    })
 
                 })
         }
         else {
-            alert('Fill out the form man! ')
+            Swal.fire({
+                title:'All Fields Required',
+                text:"You may have missed to enter some fields",
+                icon:'info',
+                confirmButtonColor:'rgb(185,28,28)'
+            })
         }
     }
 

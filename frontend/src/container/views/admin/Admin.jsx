@@ -8,6 +8,7 @@ import Piechart from '../../../components/status components/Piechart'
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import axios from 'axios'
 import { MoonLoader } from 'react-spinners'
+import Swal from 'sweetalert2'
 
 const Admin = () => {
 
@@ -30,13 +31,20 @@ const Admin = () => {
         })
             .then((res) => {
 
-                if (res.data['authorized']) {
+                if (res.data['authorized'] && res.data['role'] === 'admin') {
 
                     setAuthorized(res.data['authorized'])
                     setLoading(false)
                 }
                 else {
-                    alert('Failed to login')
+                    Swal.fire({
+                        title:"Failed to Login",
+                        text:"We failed to recognize you! Try relogging",
+                        imageUrl:'https://media.istockphoto.com/id/648691968/vector/website-error-403-forbidden.jpg?s=612x612&w=0&k=20&c=sSc0Cb2as4BKgH0vFq2o5h1U2vUh4xnayaYkuyFPKh8=',
+                        // imageWidth:"150",
+                        imageHeight:'250',
+                        confirmButtonColor:"rgb(185,28,28)"
+                    })
                     navigate('/auth/login')
                 }
             })

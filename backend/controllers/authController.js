@@ -237,7 +237,8 @@ const userValidate = asyncHandler( async(req,res)=>{
     }
 
     res.status(200).json({
-        authorized: true
+        authorized: true,
+        role:user.role
     })
 
 })
