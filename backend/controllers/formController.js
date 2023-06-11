@@ -1,5 +1,9 @@
 const {
     OutstandingInstitution,
+    Research,
+    Sports,
+    Teaching,
+    NonTeaching,
     FeedbackOne,
     FeedbackTwo,
     FeedbackThree,
@@ -21,7 +25,7 @@ const submitForm_01 = asyncHandler(async (req, res) => {
 
     const supportings = req.file.path
 
-    await OutstandingInstitution.create({
+    const result = await OutstandingInstitution.create({
         email_id: email_id,
         nomination_category: nomination_category,
         institution_name: institution_name,
@@ -73,6 +77,13 @@ const submitForm_01 = asyncHandler(async (req, res) => {
         supportings: supportings,
     })
 
+    if (!result) {
+
+        // throw error
+        res.status(500)
+        throw new Error("Failed to accept your response")
+    }
+
     res.status(200).json({
         message: "Form submitted successfully",
         submitted: true
@@ -85,7 +96,91 @@ const submitForm_01 = asyncHandler(async (req, res) => {
 
 const submitForm_02 = asyncHandler(async (req, res) => {
 
-    console.log(req.body, req.files);
+    const { faculty_name,
+        designation,
+        department_and_institution,
+        tenure,
+        org_articles_count,
+        review_papers_count,
+        letters_count,
+        case_studies_count,
+        books_count,
+        chapters_count,
+        presentations_international_count,
+        presentation_national_count,
+        international_seminar_count,
+        national_seminar_count,
+        international_workshops_count,
+        national_workshops_count,
+        completed_minorp_count,
+        ongoing_minorp_count,
+        completed_majorp_count,
+        ongoing_majorp_count,
+        completed_consultancy_count,
+        ongoing_consultancy_count,
+        revenue_from_projects,
+        granted_patents_count,
+        filed_patents_count,
+        granted_copyrights_count,
+        filed_copyrights_count,
+        granted_industrial_designs_count,
+        filed_industrial_designs_count,
+        international_awards_won_count,
+        national_awards_won_count,
+        confirmation_of_trueData } = req.body
+
+    const evidence_of_research = req.files.evidence_of_research[0].path;
+    const evidence_of_data_provided = req.files.evidence_of_data_provided[0].path;
+
+    const result = await Research.create({
+        faculty_name: faculty_name,
+        designation: designation,
+        department_and_institution: department_and_institution,
+        tenure: tenure,
+        org_articles_count: org_articles_count,
+        review_papers_count: review_papers_count,
+        letters_count: letters_count,
+        case_studies_count: case_studies_count,
+        books_count: books_count,
+        chapters_count: chapters_count,
+        presentations_international_count: presentations_international_count,
+        presentation_national_count: presentation_national_count,
+        international_seminar_count: international_seminar_count,
+        national_seminar_count: national_seminar_count,
+        international_workshops_count: international_workshops_count,
+        national_workshops_count: national_workshops_count,
+        completed_minorp_count: completed_minorp_count,
+        ongoing_minorp_count: ongoing_minorp_count,
+        completed_majorp_count: completed_majorp_count,
+        ongoing_majorp_count: ongoing_majorp_count,
+        completed_consultancy_count: completed_consultancy_count,
+        ongoing_consultancy_count: ongoing_consultancy_count,
+        revenue_from_projects: revenue_from_projects,
+        granted_patents_count: granted_patents_count,
+        filed_patents_count: filed_patents_count,
+        granted_copyrights_count: granted_copyrights_count,
+        filed_copyrights_count: filed_copyrights_count,
+        granted_industrial_designs_count: granted_industrial_designs_count,
+        filed_industrial_designs_count: filed_industrial_designs_count,
+        international_awards_won_count: international_awards_won_count,
+        national_awards_won_count: national_awards_won_count,
+        evidence_of_research: evidence_of_research,
+        evidence_of_data_provided: evidence_of_data_provided,
+        confirmation_of_trueData: confirmation_of_trueData,
+    })
+
+    if (!result) {
+
+        // throw error
+        res.status(500)
+        throw new Error("Failed to accept your response")
+    }
+
+    res.status(200).json({
+        message: "Form submitted successfully",
+        submitted: true
+    })
+
 })
 
 
@@ -95,9 +190,55 @@ const submitForm_02 = asyncHandler(async (req, res) => {
 
 const submitForm_03 = asyncHandler(async (req, res) => {
 
-    console.log(req.body, req.files);
-    res.json({
-        message: 'file uploaded successfully'
+    const {
+        email_id,
+        institute_name,
+        nominee_inspiring_teacher,
+
+        nominee_sportsStar_girl,
+        nominee_ss_girl_sport,
+
+        nominee_sportsStar_boy,
+        nominee_ss_boy_sport,
+
+    } = req.body
+
+    const nominee_teacher_photo = req.files.nominee_teacher_photo[0].path
+    const nominee_teacher_hoi_assessment = req.files.nominee_teacher_hoi_assessment[0].path
+
+    const nominee_ss_girl_photo = req.files.nominee_ss_girl_photo[0].path
+    const nominee_ss_girl_hoi_assessment = req.files.nominee_ss_girl_hoi_assessment[0].path
+
+
+    const nominee_ss_boy_photo = req.files.nominee_ss_boy_photo[0].path
+    const nominee_ss_boy_hoi_assessment = req.files.nominee_ss_boy_hoi_assessment[0].path
+
+    const result = await Sports.create({
+        email_id: email_id,
+        institute_name: institute_name,
+        nominee_inspiring_teacher: nominee_inspiring_teacher,
+        nominee_teacher_photo: nominee_teacher_photo,
+        nominee_teacher_hoi_assessment: nominee_teacher_hoi_assessment,
+        nominee_sportsStar_girl: nominee_sportsStar_girl,
+        nominee_ss_girl_sport: nominee_ss_girl_sport,
+        nominee_ss_girl_photo: nominee_ss_girl_photo,
+        nominee_ss_girl_hoi_assessment: nominee_ss_girl_hoi_assessment,
+        nominee_sportsStar_boy: nominee_sportsStar_boy,
+        nominee_ss_boy_sport: nominee_ss_boy_sport,
+        nominee_ss_boy_photo: nominee_ss_boy_photo,
+        nominee_ss_boy_hoi_assessment: nominee_ss_boy_hoi_assessment,
+    });
+
+    if (!result) {
+
+        // throw error
+        res.status(500)
+        throw new Error("Failed to accept your response")
+    }
+
+    res.status(200).json({
+        message: "Form submitted successfully",
+        submitted: true
     })
 })
 
@@ -108,10 +249,87 @@ const submitForm_03 = asyncHandler(async (req, res) => {
 
 const submitForm_04 = asyncHandler(async (req, res) => {
 
-    console.log(req.body, req.files);
-    res.json({
-        message: "File uploaded successfully"
+    const {
+        email_id,
+        faculty_name,
+        awards_category,
+        institute_name,
+        department,
+        designation,
+        date_of_appointment,
+        somaiya_mail_id,
+        contact_number,
+        q_01,
+        q_02,
+        q_03,
+        q_04,
+        q_05,
+        q_06,
+        q_07,
+        q_08,
+        q_09,
+        q_10,
+        q_11,
+        q_12,
+        q_13,
+        q_14,
+        q_15,
+        q_16,
+        q_17,
+        q_18,
+        q_19,
+        q_20 } = req.body
+
+    const data_evidence = req.files.data_evidence[0].path
+    const profile_photograph = req.files.profile_photograph[0].path
+
+    const result = await Teaching.create({
+        email_id: email_id,
+        faculty_name: faculty_name,
+        awards_category: awards_category,
+        institute_name: institute_name,
+        department: department,
+        designation: designation,
+        date_of_appointment: date_of_appointment,
+        somaiya_mail_id: somaiya_mail_id,
+        contact_number: contact_number,
+        q_01: q_01,
+        q_02: q_02,
+        q_03: q_03,
+        q_04: q_04,
+        q_05: q_05,
+        q_06: q_06,
+        q_07: q_07,
+        q_08: q_08,
+        q_09: q_09,
+        q_10: q_10,
+        q_11: q_11,
+        q_12: q_12,
+        q_13: q_13,
+        q_14: q_14,
+        q_15: q_15,
+        q_16: q_16,
+        q_17: q_17,
+        q_18: q_18,
+        q_19: q_19,
+        q_20: q_20,
+        data_evidence: data_evidence,
+        profile_photograph: profile_photograph,
+    });
+
+
+    if (!result) {
+
+        // throw error
+        res.status(500)
+        throw new Error("Failed to accept your response")
+    }
+
+    res.status(200).json({
+        message: "Form submitted successfully",
+        submitted: true
     })
+
 })
 
 
@@ -120,11 +338,95 @@ const submitForm_04 = asyncHandler(async (req, res) => {
 //@access private
 
 const submitForm_05 = asyncHandler(async (req, res) => {
-    console.log(req.body, req.files);
 
-    res.json({
-        message: 'file uploaded successfully'
+    const {
+        email_id,
+        staff_name,
+        award_category,
+        institute_name,
+        department,
+        designation,
+        appointment_date,
+        somaiya_email_id,
+        phone_number,
+        q_01,
+        q_02,
+        q_03,
+        q_04,
+        q_05,
+        q_06,
+        q_07,
+        q_08,
+        q_09,
+        q_10,
+        q_11,
+        q_12,
+        q_13,
+        q_14,
+        q_15,
+        q_16,
+        q_17,
+        q_18,
+        q_19,
+        q_20,
+        q_21,
+        q_22,
+        q_23,
+        q_24, } = req.body
+
+    const proof_docs = req.files.proof_docs[0].path
+    const nominee_photograph = req.files.nominee_photograph[0].path
+
+    const result = await NonTeaching.create({
+        email_id: email_id,
+        staff_name: staff_name,
+        award_category: award_category,
+        institute_name: institute_name,
+        department: department,
+        designation: designation,
+        appointment_date: appointment_date,
+        somaiya_email_id: somaiya_email_id,
+        phone_number: phone_number,
+        q_01: q_01,
+        q_02: q_02,
+        q_03: q_03,
+        q_04: q_04,
+        q_05: q_05,
+        q_06: q_06,
+        q_07: q_07,
+        q_08: q_08,
+        q_09: q_09,
+        q_10: q_10,
+        q_11: q_11,
+        q_12: q_12,
+        q_13: q_13,
+        q_14: q_14,
+        q_15: q_15,
+        q_16: q_16,
+        q_17: q_17,
+        q_18: q_18,
+        q_19: q_19,
+        q_20: q_20,
+        q_21: q_21,
+        q_22: q_22,
+        q_23: q_23,
+        q_24: q_24,
+        proof_docs: proof_docs,
+        nominee_photograph: nominee_photograph,
     })
+
+    if (!result) {
+
+        // throw error
+        res.status(500)
+        throw new Error("Failed to accept your response")
+    }
+
+    res.status(200).json({
+        message: "Form submitted successfully",
+        submitted: true
+    })
+
 })
 
 

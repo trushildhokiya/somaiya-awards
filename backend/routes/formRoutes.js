@@ -39,20 +39,20 @@ router.route('/outstanding-institution').post(
 
 router.route('/research').post(
     upload02.fields([
-        {name:'file1', maxCount:1},
-        {name:'file2', maxCount:1}
+        {name:'evidence_of_research', maxCount:1},
+        {name:'evidence_of_data_provided', maxCount:1}
     ]),
     submitForm_02
 );
 
 router.route('/sports').post(
     upload03.fields([
-        {name:'file1',maxCount:1},
-        {name:'file2',maxCount:1},
-        {name:'file3',maxCount:1},
-        {name:'file4',maxCount:1},
-        {name:'file5',maxCount:1},
-        {name:'file6',maxCount:1},
+        {name:'nominee_teacher_photo',maxCount:1},
+        {name:'nominee_teacher_hoi_assessment',maxCount:1},
+        {name:'nominee_ss_girl_photo',maxCount:1},
+        {name:'nominee_ss_girl_hoi_assessment',maxCount:1},
+        {name:'nominee_ss_boy_photo',maxCount:1},
+        {name:'nominee_ss_boy_hoi_assessment',maxCount:1},
     ]),
     submitForm_03
 );
@@ -60,16 +60,16 @@ router.route('/sports').post(
 
 router.route('/teaching').post(
     upload04.fields([
-        {name: 'file1' , maxCount:1},
-        {name: 'file2' , maxCount:1}
+        {name: 'data_evidence' , maxCount:1},
+        {name: 'profile_photograph' , maxCount:1}
     ]),
     submitForm_04
 );
 
 router.route('/non-teaching').post(
     upload05.fields([
-        {name: 'file1' , maxCount:1},
-        {name: 'file2' , maxCount:1}
+        {name: 'proof_docs' , maxCount:1},
+        {name: 'nominee_photograph' , maxCount:1}
     ]),
     submitForm_05
 );
