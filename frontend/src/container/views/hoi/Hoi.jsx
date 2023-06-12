@@ -73,7 +73,7 @@ const Hoi = () => {
             <>
               <div className='flex'>
                 <SideBar />
-                <div className='flex flex-col w-full overflow-y-scroll'>
+                <div className='flex flex-col w-full overflow-y-scroll bg-[url("https://www.transparenttextures.com/patterns/washi.png")]'>
 
                   <FormCards />
                 </div>

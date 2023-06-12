@@ -8,7 +8,7 @@ import Sports from '../../assests/sports.jpeg'
 
 const FormCards = () => {
     return (
-        <div className='p-5 w-full h-screen bg-[url("https://www.transparenttextures.com/patterns/washi.png")]'>
+        <div className='p-5 w-full h-screen '>
 
             {/* Headers  */}
             <div className='flex flex-col'>
