@@ -1,24 +1,61 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import FormCard from '../../../components/utils/FormCard'
 import Institution from '../../assests/institution.jpeg'
 import Teaching from '../../assests/teaching.jpeg'
 import NonTeaching from '../../assests/non-teaching.jpeg'
 import Research from '../../assests/research.jpeg'
 import Sports from '../../assests/sports.jpeg'
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import Swal from 'sweetalert2'
 
 const FormCards = () => {
+    
+    const navigate = useNavigate()
+    
+    const handleLogout = () => {
+
+        // remove token from local storage
+
+        localStorage.removeItem('token')
+        localStorage.removeItem('user_id')
+
+        Swal.fire({
+            title: 'Successfully Logged Out',
+            icon:'success',
+            confirmButtonColor:'rgb(185,28,28)'
+        })
+
+        // navigate to login page
+        navigate('/auth/login')
+    }
+
+    
+    
     return (
         <div className='p-5 w-full h-screen '>
 
             {/* Headers  */}
-            <div className='flex flex-col'>
-                <div className='text-xl font-Poppins font-semibold'>
-                    <h2> Forms</h2>
+            <div className='flex flex-row items-center justify-between'>
+                <div className='flex flex-col'>
+                    <div className='text-xl font-Poppins font-semibold'>
+                        <h2> Forms</h2>
+                    </div>
+                    <div className='my-1'>
+                        <p className='text-md font-Poppins'>
+                            Forms are shown as per eligibility criteria of Institutions
+                        </p>
+                    </div>
                 </div>
-                <div className='my-1'>
-                    <p className='text-md font-Poppins'>
-                        Forms are shown as per eligibility criteria of Institutions
-                    </p>
+                <div className='flex flex-col text-center'>
+                <div 
+                onClick={handleLogout}
+                className='p-3 cursor-pointer '>
+                    <LogoutRoundedIcon  />
+                </div>
+                <div className='text-md font-Poppins'>
+                    Logout
+                </div>
                 </div>
             </div>
 
