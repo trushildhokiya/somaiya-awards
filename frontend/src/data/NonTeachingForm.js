@@ -94,7 +94,7 @@ const NonTeachingForm = [
     },
 
     {
-        title: "Accepts responsibilities and performs duties above and beyond what is normally expected",
+        title: "Q1. Accepts responsibilities and performs duties above and beyond what is normally expected",
         _name: "q_01",
         type: "radio",
         requiredStatus: true,
@@ -104,7 +104,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Is flexible, responds and adapts well to internal & external changes.",
+        title: "Q2. Is flexible, responds and adapts well to internal & external changes.",
         _name: "q_02",
         type: "radio",
         requiredStatus: true,
@@ -114,7 +114,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Determines broad knowledge and competence in a work related topics",
+        title: "Q3. Determines broad knowledge and competence in a work related topics",
         _name: "q_03",
         type: "radio",
         requiredStatus: true,
@@ -124,7 +124,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Uses knowledge and expertise to solve problems quickly",
+        title: "Q4. Uses knowledge and expertise to solve problems quickly",
         _name: "q_04",
         type: "radio",
         requiredStatus: true,
@@ -134,7 +134,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Handles a large workload effectively and in a timely manner",
+        title: "Q5. Handles a large workload effectively and in a timely manner",
         _name: "q_05",
         type: "radio",
         requiredStatus: true,
@@ -145,7 +145,7 @@ const NonTeachingForm = [
     },
 
     {
-        title: "Brings in best practices from other Departments/ Institutes/ Universities for improvement of his/ her independent work.",
+        title: "Q6. Brings in best practices from other Departments/ Institutes/ Universities for improvement of his/ her independent work.",
         _name: "q_06",
         type: "radio",
         requiredStatus: true,
@@ -155,7 +155,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Has shows outstanding performance which has brought attention and distinction to the Department/ University",
+        title: "Q7. Has shows outstanding performance which has brought attention and distinction to the Department/ University",
         _name: "q_07",
         type: "radio",
         requiredStatus: true,
@@ -166,7 +166,7 @@ const NonTeachingForm = [
     },
 
     {
-        title: "Is a good team player and encourages teamwork",
+        title: "Q8. Is a good team player and encourages teamwork",
         _name: "q_08",
         type: "radio",
         requiredStatus: true,
@@ -176,7 +176,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Manages crises well as well as helps others to get through their crisis",
+        title: "Q9. Manages crises well as well as helps others to get through their crisis",
         _name: "q_09",
         type: "radio",
         requiredStatus: true,
@@ -186,7 +186,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Interacts with others in a positive, enthusiastic and cheerful manner",
+        title: "Q10. Interacts with others in a positive, enthusiastic and cheerful manner",
         _name: "q_10",
         type: "radio",
         requiredStatus: true,
@@ -196,7 +196,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Assists others with both personal and professional challenges that impact work",
+        title: "Q11. Assists others with both personal and professional challenges that impact work",
         _name: "q_11",
         type: "radio",
         requiredStatus: true,
@@ -206,7 +206,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Commands respect of co-workers, supervisor, students and clients alike",
+        title: "Q12. Commands respect of co-workers, supervisor, students and clients alike",
         _name: "q_12",
         type: "radio",
         requiredStatus: true,
@@ -217,7 +217,7 @@ const NonTeachingForm = [
     },
 
     {
-        title: "Suggests and/or develops new work methods which increases productivity and saves time and money",
+        title: "Q13. Suggests and/or develops new work methods which increases productivity and saves time and money",
         _name: "q_13",
         type: "radio",
         requiredStatus: true,
@@ -227,7 +227,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Recognizes work of others to increase effectiveness and identifies / addresses work problems. If any.",
+        title: "Q14. Recognizes work of others to increase effectiveness and identifies / addresses work problems. If any.",
         _name: "q_14",
         type: "radio",
         requiredStatus: true,
@@ -238,7 +238,7 @@ const NonTeachingForm = [
     },
 
     {
-        title: "Takes the initiative to improve individual skills and knowledge.",
+        title: "Q15. Takes the initiative to improve individual skills and knowledge.",
         _name: "q_15",
         type: "radio",
         requiredStatus: true,
@@ -248,7 +248,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Recognizes others special events and/or accomplishments, either publicly or privately.",
+        title: "Q16. Recognizes others special events and/or accomplishments, either publicly or privately.",
         _name: "q_16",
         type: "radio",
         requiredStatus: true,
@@ -258,7 +258,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Helps new employees to settle & adapt to the work environment.",
+        title: "Q17. Helps new employees to settle & adapt to the work environment.",
         _name: "q_17",
         type: "radio",
         requiredStatus: true,
@@ -268,7 +268,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Acts as a mentor to others by providing advice, guidance, feedback and encouragement.",
+        title: "Q18. Acts as a mentor to others by providing advice, guidance, feedback and encouragement.",
         _name: "q_18",
         type: "radio",
         requiredStatus: true,
@@ -278,7 +278,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Shares knowledge and skills with others.",
+        title: "Q19. Shares knowledge and skills with others.",
         _name: "q_19",
         type: "radio",
         requiredStatus: true,
@@ -289,7 +289,7 @@ const NonTeachingForm = [
     },
 
     {
-        title: "Regularity & Punctuality at work",
+        title: "Q20. Regularity & Punctuality at work",
         _name: "q_20",
         type: "radio",
         requiredStatus: true,
@@ -299,7 +299,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Participation in social and community welfare activities",
+        title: "Q21. Participation in social and community welfare activities",
         _name: "q_21",
         type: "radio",
         requiredStatus: true,
@@ -309,7 +309,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Professional Up-gradation",
+        title: "Q22. Professional Up-gradation",
         _name: "q_22",
         type: "radio",
         requiredStatus: true,
@@ -319,7 +319,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Promptness in work clearance",
+        title: "Q23. Promptness in work clearance",
         _name: "q_23",
         type: "radio",
         requiredStatus: true,
@@ -329,7 +329,7 @@ const NonTeachingForm = [
         fieldsPerLine: 1
     },
     {
-        title: "Accuracy & Dependability",
+        title: "Q24. Accuracy & Dependability",
         _name: "q_24",
         type: "radio",
         requiredStatus: true,
