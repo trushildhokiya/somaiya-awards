@@ -32,41 +32,12 @@ const Forms = (props) => {
 
     }
 
-    // color change logic
-
-    const stagesList = (document.querySelectorAll('.stages'));
-
-    for (const stages of stagesList) {
-
-      let stageNumber = Number(stages.innerHTML)
-
-      if (stageNumber < current + 2) {
-
-        stages.classList.add('bg-red-500')
-        stages.classList.remove('bg-white')
-        stages.classList.add('text-white')
-      }
-    }
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };
 
   const handlePrevious = () => {
     if (current > 0) {
       setCurrent(current - 1);
-    }
-
-    // color change logic
-    const stagesList = (document.querySelectorAll('.stages'));
-
-    for (const stages of stagesList) {
-
-      let stageNumber = Number(stages.innerHTML)
-
-      if (stageNumber > current - 1) {
-        stages.classList.remove('bg-red-500')
-        stages.classList.remove('text-white')
-        stages.classList.add('bg-white')
-      }
     }
 
   };
@@ -97,6 +68,20 @@ const Forms = (props) => {
 
   }
 
+  /**
+   * @returns page number of field which is not present in formData state
+   */
+  
+  const missingFieldPage = ()=>{
+ 
+    for( const field of props.data){
+      if(!formData[field._name]){
+        return field.page
+        break;
+      }
+    }
+  }
+
   const handleSubmit = () => {
 
     if (props.data.length !== Object.keys(formData).length) {
@@ -114,6 +99,11 @@ const Forms = (props) => {
           confirmButton: 'gradient-button'
         }
       })
+
+      //call a function which returns page of which field first is missing and set it as current page
+
+      const incompletePageNumber =  missingFieldPage()
+      setCurrent(incompletePageNumber -1 )
     }
 
     else {
@@ -268,6 +258,29 @@ const Forms = (props) => {
     }
 
   }, [])
+
+
+  useEffect(()=>{
+    const stagesList = (document.querySelectorAll('.stages'));
+
+    for (const stages of stagesList) {
+
+      let stageNumber = Number(stages.innerHTML)
+
+      if (stageNumber < current + 1) {
+
+        stages.classList.add('bg-red-500')
+        stages.classList.remove('bg-white')
+        stages.classList.add('text-white')
+      }
+      else{
+        stages.classList.remove('bg-red-500')
+        stages.classList.remove('text-white')
+        stages.classList.add('bg-white')
+      }
+    }
+
+  },[current])
   /**
    * Return Block
    */
