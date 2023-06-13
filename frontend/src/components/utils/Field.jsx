@@ -156,6 +156,8 @@ const Field = (props) => {
             onChange={handleChange}
           ></textarea>
         ) : props.type === 'file' ? (
+          <>
+          {console.log(props.value)}
           <input
             autoComplete='off'
             type={props.type}
@@ -165,6 +167,8 @@ const Field = (props) => {
             // value={props.value}
             onChange={handleChange}
           />
+          <p className='p-2 '> <span className='text-red-700 font-semibold font-Poppins'> selected File : </span> {props.value['name']}</p>
+          </>
         ) : props.type === 'number' ? (
           <input
             autoComplete='off'

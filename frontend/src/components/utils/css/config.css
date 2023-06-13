@@ -16,6 +16,9 @@ input::file-selector-button:hover{
     font-weight:600;
 }
 
+input[type='file'] {
+  color: transparent;
+}
 
 .swal-overlay {
     background-color: rgba(37, 36, 36, 0.603);
