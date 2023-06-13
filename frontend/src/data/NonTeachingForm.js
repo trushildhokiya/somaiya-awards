@@ -100,6 +100,8 @@ const NonTeachingForm = [
         type: "date",
         requiredStatus: true,
         hasOptions: false,
+        hasValidations:true,
+        validationType:'date',
         page: 1,
         fieldsPerLine: 2
     },

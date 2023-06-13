@@ -97,6 +97,8 @@ const TeachingForm = [
         _name: "date_of_appointment",
         type: "date",
         requiredStatus : true,
+        hasValidations:true,
+        validationType:'date',
         hasOptions: false,
         page: 1,
         fieldsPerLine:2

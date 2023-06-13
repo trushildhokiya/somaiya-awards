@@ -97,6 +97,8 @@ const OutstandingInstForm= [
         type: 'date',
         hasOptions : false,
         requiredStatus : true,
+        hasValidations:true,
+        validationType:'date',
         page:1,
         fieldsPerLine:2
     },

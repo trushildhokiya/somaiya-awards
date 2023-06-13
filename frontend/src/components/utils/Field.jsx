@@ -47,6 +47,27 @@ const validator = (props,value) => {
 
     return validatePair
   }
+  
+  if (props.validateType === 'date') {
+    const date1 = new Date(value || new Date());
+    const date2 = new Date(); 
+
+    const validatePair = [];
+  
+    if (date1 >= date2) {
+
+      validatePair.push(true);
+      validatePair.push('Invalid Date');
+
+    } else {
+   
+      validatePair.push(false);
+      validatePair.push("Valid Date")
+
+    }
+  
+    return validatePair;
+  }
 }
 
 
