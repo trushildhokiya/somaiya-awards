@@ -5,16 +5,19 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 const {userAuthenticator } = require('../middleware/userAuthenticator')
+const logger = require('../middleware/logger')
 
 //@desc handle login
 //@route POST /auth/login
 //@access public
 
 const userLogin = asyncHandler(async (req, res) => {
-
+ 
     const { user_email, user_password } = req.body;
 
     if (!user_email || !user_password) {
+
+        logger.error("Email Id or password was not entered")
         res.status(400)
         throw new Error("All field are mandatory")
     }
@@ -23,6 +26,7 @@ const userLogin = asyncHandler(async (req, res) => {
 
     if (!user) {
 
+        logger.error(`User not found request made by IP address ${req.ip}`)
         res.status(401)
         throw new Error("Unauthorized login request")
 
@@ -38,6 +42,7 @@ const userLogin = asyncHandler(async (req, res) => {
 
         const token  = jwt.sign({email_id: user.email_id , id: user.id}, secret , {expiresIn:'2d'});
 
+        logger.info(`${user.email_id} logged in successfully`)
         res.status(200).json({
             token:token,
             user_id: user.id,
@@ -46,7 +51,7 @@ const userLogin = asyncHandler(async (req, res) => {
         })
     }
     else {
-
+        logger.error(`User failed to log in ip ${req.ip}`)
         res.status(401)
         throw new Error("Incorrect Email or password")
     }
@@ -70,7 +75,7 @@ const userLogin = asyncHandler(async (req, res) => {
 
 //     const hashedPassword = await bcrypt.hash(user_password,10);
 
-//     await User.create({email_id:user_email , password: hashedPassword , role:"admin" })
+//     await User.create({email_id:user_email , password: hashedPassword , role:"hoi" })
 
 //     res.status(200).json({
 //         message:"User created successfully"

@@ -5,7 +5,7 @@ const formRoute = require('./routes/formRoutes')
 const errorHandler = require('./middleware/errorHandler')
 const cors = require('cors')
 const db = require('./models')
-
+const logger = require('./middleware/logger')
 
 
 /**
@@ -29,6 +29,7 @@ app.use(errorHandler)
  */
 
 db.sequelize.sync().then((req)=>{
+    logger.info(`Connected to database ${req.config.database}`)
     console.log("connected to mysql database ");
 })
 
@@ -36,5 +37,6 @@ db.sequelize.sync().then((req)=>{
 const PORT =  process.env.PORT || 5000
 
 app.listen(PORT , ()=>{
+    logger.info(`Server started running at port ${PORT}`)
     console.log(`Server started running at port ${PORT}`);
 })
