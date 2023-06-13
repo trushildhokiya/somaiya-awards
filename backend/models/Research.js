@@ -12,7 +12,12 @@ module.exports = (sequelize, dataTypes)=>{
             allowNull: false,
         },
 
-        department_and_institution:{
+        institution:{
+            type:dataTypes.STRING,
+            allowNull: false
+        },
+
+        department:{
             type:dataTypes.STRING,
             allowNull: false
         },

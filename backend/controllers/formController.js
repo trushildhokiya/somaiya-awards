@@ -98,7 +98,8 @@ const submitForm_02 = asyncHandler(async (req, res) => {
 
     const { faculty_name,
         designation,
-        department_and_institution,
+        department,
+        institution,
         tenure,
         org_articles_count,
         review_papers_count,
@@ -135,7 +136,8 @@ const submitForm_02 = asyncHandler(async (req, res) => {
     const result = await Research.create({
         faculty_name: faculty_name,
         designation: designation,
-        department_and_institution: department_and_institution,
+        institution: institution,
+        department: department,
         tenure: tenure,
         org_articles_count: org_articles_count,
         review_papers_count: review_papers_count,
