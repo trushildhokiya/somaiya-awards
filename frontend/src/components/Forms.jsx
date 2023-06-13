@@ -4,6 +4,8 @@ import Field from './utils/Field';
 import axios from 'axios'
 import { useNavigate, createSearchParams } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const Forms = (props) => {
 
@@ -17,6 +19,7 @@ const Forms = (props) => {
 
   const [current, setCurrent] = useState(0);
   const [formData, setFormData] = useState({});
+  const [percentage,setPercentage] = useState(0)
 
 
   /**
@@ -86,7 +89,8 @@ const Forms = (props) => {
       }));
     }
 
-    localStorage.setItem(`${window.location.href.split('/forms/')[1]+"Data"}`,JSON.stringify(formData))
+    setPercentage((Object.keys(formData).length / props.data.length))
+    localStorage.setItem(`${window.location.href.split('/forms/')[1] + "Data"}`, JSON.stringify(formData))
   };
 
   const submit_checker = () => {
@@ -112,7 +116,7 @@ const Forms = (props) => {
       })
     }
 
-    else{
+    else {
 
 
       console.log(formData);
@@ -154,7 +158,7 @@ const Forms = (props) => {
           })
 
       } else {
-        
+
         axios.post(postUrl, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -163,7 +167,7 @@ const Forms = (props) => {
           .then((res) => {
             console.log(res);
 
-            localStorage.removeItem(window.location.href.split('/forms/')[1]+"Data")
+            localStorage.removeItem(window.location.href.split('/forms/')[1] + "Data")
             navigate({
               pathname: '/forms/cards',
               search: createSearchParams({
@@ -252,18 +256,18 @@ const Forms = (props) => {
   };
 
 
-  useEffect(()=>{
+  useEffect(() => {
 
-    const dataName = window.location.href.split('/forms/')[1]+"Data"
+    const dataName = window.location.href.split('/forms/')[1] + "Data"
 
-    if(!localStorage.getItem(dataName)){
+    if (!localStorage.getItem(dataName)) {
       setFormData({})
     }
-    else{
+    else {
       setFormData(JSON.parse(localStorage.getItem(dataName)))
     }
 
-  },[])
+  }, [])
   /**
    * Return Block
    */
@@ -277,6 +281,9 @@ const Forms = (props) => {
 
         <div className='w-full text-black text-center py-5  font-Roboto font-semibold text-2xl'>
           {pageHeaders[current]}
+        </div>
+        <div className='p-5 flex justify-center'>
+          <CircularProgressbar className='w-16 h-16' maxValue={100} value={Math.round(percentage*100)} text={`${Math.round(percentage*100)} %`} />
         </div>
 
         {
