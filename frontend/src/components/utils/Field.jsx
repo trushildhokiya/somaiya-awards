@@ -90,7 +90,7 @@ const Field = (props) => {
           </p>
         ) : null}
 
-        {props.validate !== undefined && validator(props,value)[0] && focused &&
+        {props.validate !== undefined && validator(props,value)[0]  &&
           <p className='font-Poppins text-red-700'>
             {validator(props,value)[1]}
           </p>

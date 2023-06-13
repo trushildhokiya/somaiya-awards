@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 const {userAuthenticator } = require('../middleware/userAuthenticator')
-const logger = require('../middleware/logger')
+const {authLogger} = require('../middleware/logger')
 
 //@desc handle login
 //@route POST /auth/login
@@ -17,7 +17,7 @@ const userLogin = asyncHandler(async (req, res) => {
 
     if (!user_email || !user_password) {
 
-        logger.error("Email Id or password was not entered")
+        authLogger.error("Email Id or password was not entered")
         res.status(400)
         throw new Error("All field are mandatory")
     }
@@ -26,7 +26,7 @@ const userLogin = asyncHandler(async (req, res) => {
 
     if (!user) {
 
-        logger.error(`User not found request made by IP address ${req.ip}`)
+        authLogger.error(`User not found request made by IP address ${req.ip}`)
         res.status(401)
         throw new Error("Unauthorized login request")
 
@@ -42,7 +42,7 @@ const userLogin = asyncHandler(async (req, res) => {
 
         const token  = jwt.sign({email_id: user.email_id , id: user.id}, secret , {expiresIn:'2d'});
 
-        logger.info(`${user.email_id} logged in successfully`)
+        authLogger.info(`${user.email_id} logged in successfully`)
         res.status(200).json({
             token:token,
             user_id: user.id,
@@ -51,7 +51,7 @@ const userLogin = asyncHandler(async (req, res) => {
         })
     }
     else {
-        logger.error(`User failed to log in ip ${req.ip}`)
+        authLogger.error(`User failed to log in ip ${req.ip}`)
         res.status(401)
         throw new Error("Incorrect Email or password")
     }
@@ -95,6 +95,8 @@ const passwordReset = asyncHandler(async (req, res) => {
     const user = await User.findOne({ where: { email_id: user_email } });
 
     if (!user) {
+
+        authLogger.error(`User tried to reset password failed (user not found) IP ${req.ip}`)
         res.status(400)
         throw new Error("User not Found ! Please make sure You have entered valid email address")
     }
@@ -157,6 +159,7 @@ const passwordReset = asyncHandler(async (req, res) => {
 
     console.log(link);
 
+    res.info(`Passord reset mail sent to user : ${user.email_id}`)
     res.status(200).json({
         message: "Link to reset password has been sent to registered mail ID. Please check your mail"
     })
@@ -173,6 +176,8 @@ const verifyForPasswordReset = asyncHandler(async (req, res) => {
     const user = await User.findOne({ where: { id: id } })
 
     if (!user) {
+
+        authLogger.error(`user not found for password reset verification  ID :${id}`)
         res.status(401)
         throw new Error("Unauthorized access !")
     }
@@ -181,12 +186,15 @@ const verifyForPasswordReset = asyncHandler(async (req, res) => {
     const verify = jwt.verify(token, secret)
 
     if (verify) {
+
+        authLogger.info(`User verified for password reset user token ${token} id ${id}`)
         res.status(200).json({
 
             authorized: true
         })
     }
     else {
+        authLogger.info(`Reset password access invalid token id ${id} token recieved ${token}`)
         res.status(401)
         throw new Error(" Unauthorized access !")
     }
@@ -211,6 +219,7 @@ const changePassword = asyncHandler(async (req, res) => {
 
     await user.save()
 
+    authLogger.info(` user ${user.email_id} changed password successfully`)
     res.status(200).json({
         message: "Password changed successfully"
     })
