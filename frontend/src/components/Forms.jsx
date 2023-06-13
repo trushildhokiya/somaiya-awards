@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormStages from './FormStages';
 import Field from './utils/Field';
 import axios from 'axios'
@@ -86,6 +86,7 @@ const Forms = (props) => {
       }));
     }
 
+    localStorage.setItem(`${window.location.href.split('/forms/')[1]+"Data"}`,JSON.stringify(formData))
   };
 
   const submit_checker = () => {
@@ -162,6 +163,7 @@ const Forms = (props) => {
           .then((res) => {
             console.log(res);
 
+            localStorage.removeItem(window.location.href.split('/forms/')[1]+"Data")
             navigate({
               pathname: '/forms/cards',
               search: createSearchParams({
@@ -250,6 +252,18 @@ const Forms = (props) => {
   };
 
 
+  useEffect(()=>{
+
+    const dataName = window.location.href.split('/forms/')[1]+"Data"
+
+    if(!localStorage.getItem(dataName)){
+      setFormData({})
+    }
+    else{
+      setFormData(JSON.parse(localStorage.getItem(dataName)))
+    }
+
+  },[])
   /**
    * Return Block
    */

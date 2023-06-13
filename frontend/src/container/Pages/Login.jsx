@@ -134,7 +134,7 @@ const Login = () => {
             <Wave
                 fill="#b91c1c"
                 paused={false}
-                className='absolute bottom-0'
+                className='absolute bottom-0 -z-10'
                 options={{
                     height: 10,
                     amplitude: 50,
