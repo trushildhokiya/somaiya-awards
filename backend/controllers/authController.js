@@ -83,6 +83,34 @@ const userLogin = asyncHandler(async (req, res) => {
 
 // })
 
+//@desc handle user creation from admin side
+//@route POST /auth/register
+//@access private
+
+const registerUser = asyncHandler( async (req,res)=>{
+
+    const {user_email_id , user_institution , user_password , user_role } = req.body
+
+    const user = await User.findOne({where :{email_id: user_email_id}})
+
+    if (user){
+
+        //throw error
+        authLogger.error(`Failed to create usera as user already exists email ID : ${user_email_id}`)
+        res.status(400)
+        throw new Error("User already exists!")
+    }
+
+    const hashedPassword = await bcrypt.hash(user_password,10)
+
+    await User.create({ email_id: user_email_id , institution: user_institution , role:user_role , password: hashedPassword })
+
+    authLogger.info(`New user created email_id : ${user_email_id}`)
+    res.status(200).json({
+        message: "User created successfully"
+    })
+})
+
 
 //@desc handle password change request
 //@route POST /auth/forgot-password
@@ -267,7 +295,8 @@ module.exports = {
     passwordReset,
     verifyForPasswordReset,
     changePassword,
-    userValidate
+    userValidate,
+    registerUser
 }
 
 /**

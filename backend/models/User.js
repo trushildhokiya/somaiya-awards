@@ -9,6 +9,10 @@ module.exports = (sequelize, dataTypes)=>{
                 notEmpty:true
             }
         },
+        institution:{
+            type: dataTypes.STRING,
+            allowNull:false
+        },
         password:{
             type:dataTypes.STRING,
             allowNull:false

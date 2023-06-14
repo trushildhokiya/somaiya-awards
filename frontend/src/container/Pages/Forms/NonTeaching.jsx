@@ -43,7 +43,7 @@ const NonTeaching = () => {
       })
         .then((res) => {
 
-          if (res.data['authorized'] && res.data['role'] === 'hoi') {
+          if (res.data['authorized'] && res.data['role'] === 'HOI') {
 
             setAuthorized(res.data['authorized'])
             setLoading(false)

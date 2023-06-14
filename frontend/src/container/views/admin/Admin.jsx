@@ -40,7 +40,7 @@ const Admin = () => {
         })
             .then((res) => {
 
-                if (res.data['authorized'] && res.data['role'] === 'admin') {
+                if (res.data['authorized'] && res.data['role'] === 'ADMIN') {
 
                     setAuthorized(res.data['authorized'])
                     setLoading(false)

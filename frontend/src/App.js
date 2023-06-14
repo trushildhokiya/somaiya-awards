@@ -19,6 +19,8 @@ import Responses from "./container/Pages/View Pages/Responses";
 import Home from "./container/Pages/Home";
 import Hoi from "./container/views/hoi/Hoi";
 import PageNotFound from "./container/Pages/Utility/PageNotFound";
+import Ieac from "./container/views/ieac/Ieac";
+import ManageUsers from "./container/Pages/View Pages/ManageUsers";
  
 function App() {
   return (
@@ -30,9 +32,11 @@ function App() {
         <Route path="/auth/:id/:token" element={<ResetPassword />} />
         <Route path="/forms/cards" element={<Card />} />
         <Route path='/hoi' element={<Hoi />} />
+        <Route path="/ieac" element={<Ieac />} />
         <Route path='/admin/dashboard' element={<Admin />} />
         <Route path="/admin/:formtype/overview" element={<Overview />} />
         <Route path="/admin/:formtype/responses" element={<Responses />} />
+        <Route path="/admin/manage-users" element={<ManageUsers />} />
         <Route path="/forms/outstanding-institution" element={<OutstandingInstitution />}  />
         <Route path="/forms/sports" element={<SportsStar />}  />
         <Route path="/forms/research" element={<Research />}  />

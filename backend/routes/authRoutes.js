@@ -4,7 +4,8 @@ const {
     passwordReset,
     verifyForPasswordReset,
     changePassword,
-    userValidate } = require('../controllers/authController')
+    userValidate, 
+    registerUser} = require('../controllers/authController')
     
 const userAuthenticator = require('../middleware/userAuthenticator')
 
@@ -19,6 +20,7 @@ router.route('/forgot-password').post(passwordReset)
 router.route('/:id/:token').get(verifyForPasswordReset)
 router.route('/:id/:token').post(changePassword)
 router.route('/validate').get(userAuthenticator, userValidate)
+router.route('/register').post(registerUser)
 /**
  * Exports
  */

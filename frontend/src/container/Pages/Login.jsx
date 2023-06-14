@@ -40,15 +40,15 @@ const Login = () => {
 
                         switch (res.data['role']) {
 
-                            case "admin":
+                            case "ADMIN":
                                 navigate('/admin/dashboard')
                                 break;
 
-                            case "ieac_member":
+                            case "IEAC":
                                 navigate('/ieac/dasboard')
                                 break;
 
-                            case "hoi":
+                            case "HOI":
                                 navigate('/hoi')
                                 break;
 

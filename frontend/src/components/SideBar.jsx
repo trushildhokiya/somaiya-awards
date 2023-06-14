@@ -9,6 +9,7 @@ import BookRoundedIcon from '@mui/icons-material/BookRounded';
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
 import { Link } from 'react-router-dom';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
 const SideBar = () => {
     return (
@@ -118,6 +119,9 @@ const SideBar = () => {
                             </MenuItem>
                         </SubMenu>
                     </SubMenu>
+                    <MenuItem icon={<GroupAddIcon />} component={<Link to='/admin/manage-users' />}>
+                        Manage Users
+                    </MenuItem>
                 </Menu>
             </Sidebar>
         </div>
