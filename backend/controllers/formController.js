@@ -10,6 +10,7 @@ const {
     FeedbackFour } = require('../models')
 
 const asyncHandler = require('express-async-handler')
+const {formLogger}  = require('../middleware/logger')
 
 //@desc handle institution form submission
 //@route POST /forms/outstanding-institution
@@ -81,8 +82,11 @@ const submitForm_01 = asyncHandler(async (req, res) => {
 
         // throw error
         res.status(500)
+        formLogger.error(`Failed to accept outstanding Institution form response by client ${req.ip}`)
         throw new Error("Failed to accept your response")
     }
+
+    formLogger.info(`Outstanding Institution form filled by client ${req.ip}`)
 
     res.status(200).json({
         message: "Form submitted successfully",
@@ -175,9 +179,11 @@ const submitForm_02 = asyncHandler(async (req, res) => {
 
         // throw error
         res.status(500)
+        formLogger.info(`Failed to save Research form filled by ${req.ip}`)
         throw new Error("Failed to accept your response")
     }
 
+    formLogger.info(`Research form filled by client ${req.ip}`)
     res.status(200).json({
         message: "Form submitted successfully",
         submitted: true
@@ -235,9 +241,11 @@ const submitForm_03 = asyncHandler(async (req, res) => {
 
         // throw error
         res.status(500)
+        formLogger.info(`Failed to save sports form filled by ${req.ip}`)
         throw new Error("Failed to accept your response")
     }
 
+    formLogger.info(`Sports form filled by client ${req.ip}`)
     res.status(200).json({
         message: "Form submitted successfully",
         submitted: true
@@ -324,9 +332,11 @@ const submitForm_04 = asyncHandler(async (req, res) => {
 
         // throw error
         res.status(500)
+        formLogger.info(`Failed to save teaching form filled by client ${req.ip}`)
         throw new Error("Failed to accept your response")
     }
 
+    formLogger.info(`Teaching form filled by client ${req.ip}`)
     res.status(200).json({
         message: "Form submitted successfully",
         submitted: true
@@ -421,9 +431,11 @@ const submitForm_05 = asyncHandler(async (req, res) => {
 
         // throw error
         res.status(500)
+        formLogger.info(`Failed to save Non Teaching form filled by client ${req.ip}`)
         throw new Error("Failed to accept your response")
     }
 
+    formLogger.info(`Non Teaching form filled by client ${req.ip}`)
     res.status(200).json({
         message: "Form submitted successfully",
         submitted: true
@@ -485,8 +497,11 @@ const submitFeedback_01 = asyncHandler(async (req, res) => {
 
         // throw error
         res.status(500)
+        formLogger.info(`Feedback 01 form filled by client ${req.ip} was not accepted`)
         throw new Error("Failed to accept your response")
     }
+
+    formLogger.info(`Feedback 01 form successfully filled by client ${req.ip}`)
 
     res.status(200).json({
         message: "Form submitted successfully",
@@ -550,8 +565,11 @@ const submitFeedback_02 = asyncHandler(async (req, res) => {
 
         // throw error
         res.status(500)
+        formLogger.info(`Feedback 02 form filled by client ${req.ip} was not accepted`)
         throw new Error("Failed to accept your response")
     }
+
+    formLogger.info(`Feedback 02 form successfully filled by client ${req.ip}`)
 
     res.status(200).json({
         message: "Form submitted successfully",
@@ -598,8 +616,11 @@ const submitFeedback_03 = asyncHandler(async (req, res) => {
 
         // throw error
         res.status(500)
+        formLogger.info(`Feedback 03 form filled by client ${req.ip} was not accepted`)
         throw new Error("Failed to accept your response")
     }
+
+    formLogger.info(`Feedback 03 form successfully filled by client ${req.ip}`)
 
     res.status(200).json({
         message: "Form submitted successfully",
@@ -660,9 +681,11 @@ const submitFeedback_04 = asyncHandler(async (req, res) => {
 
         // throw error
         res.status(500)
+        formLogger.info(`Feedback 04 form filled by client ${req.ip} was not accepted`)
         throw new Error("Failed to accept your response")
     }
 
+    formLogger.info(`Feedback 04 form successfully filled by client ${req.ip}`)
     res.status(200).json({
         message: "Form submitted successfully",
         submitted: true
