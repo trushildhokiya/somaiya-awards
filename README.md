@@ -39,14 +39,14 @@ cd frontend
 npm install --force 
 ```
 
-> ⚠**Warning**
+> **Warning**
 > Due to no updations in dependency of Material Table we have to use depreated version MUI 4.0x which causes dependency errors while executing 
 
 ```bash
 npm install
 ```
 
-> so do not use above command insted use --force with npm install 
+> so do not use above command instead use --force with npm install 
 
 Start your frontend React App
 ```bash
@@ -66,7 +66,7 @@ Once you are completed installing dependencies in backend , open config folder a
 "database": "somaiya_awards",
 ```
 
-> ℹ **Note**
+> **Note**
 > You must create a database called somaiya_awards on your database server otherwise your backend server may not be able to connect to the database and throw error
 
 Edit your .env file
@@ -76,7 +76,7 @@ EMAIL_ID = <enter your actual email ID >
 EMAIL_PASSWORD = <Enter your gmail APP key not gmail's password >
 ```
 
-> ℹ **Note**
+> **Note**
 > Not editing the env file may not affect your server startup but may cause errors in actions where email is to be sent via backend server (see mailing section below)
 
 Start your backend server
