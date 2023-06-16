@@ -8,6 +8,7 @@ import SportsSoccerRoundedIcon from '@mui/icons-material/SportsSoccerRounded';
 import BookRoundedIcon from '@mui/icons-material/BookRounded';
 import BusinessIcon from '@mui/icons-material/Business';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
+import {Link} from 'react-router-dom';
 
 const SideBar = () => {
     return (
@@ -32,6 +33,7 @@ const SideBar = () => {
                     
                     <MenuItem
                     icon={<AssignmentRoundedIcon />}
+                    component={<Link to="/hoi" />}
                     >
                       Forms
                     </MenuItem>
@@ -40,19 +42,29 @@ const SideBar = () => {
                     label="Analysis"
                     icon={<AssessmentRoundedIcon />}
                     >
-                      <MenuItem icon={<BusinessIcon />}>
+                      <MenuItem icon={<BusinessIcon />}
+                      component={<Link to='/hoi/analysis/outstanding-institution' />}
+                      >
                         Institution Form
                       </MenuItem>
-                      <MenuItem icon={<ScienceRoundedIcon />}>
+                      <MenuItem icon={<ScienceRoundedIcon />}
+                      component={<Link to='/hoi/analysis/research' />}
+                      >
                         Research Form
                       </MenuItem>
-                      <MenuItem icon={<SportsSoccerRoundedIcon />}>
+                      <MenuItem icon={<SportsSoccerRoundedIcon />}
+                      component={<Link to='/hoi/analysis/sports' />}
+                      >
                         Sports Form
                       </MenuItem>
-                      <MenuItem icon={<BookRoundedIcon />}>
+                      <MenuItem icon={<BookRoundedIcon />}
+                      component={<Link to='/hoi/analysis/teaching' />}
+                      >
                         Teaching Form
                       </MenuItem>
-                      <MenuItem icon={<SupervisorAccountRoundedIcon />}>
+                      <MenuItem icon={<SupervisorAccountRoundedIcon />}
+                      component={<Link to='/hoi/analysis/non-teaching' />}
+                      >
                         Non-Teaching Form
                       </MenuItem>
                     </SubMenu>

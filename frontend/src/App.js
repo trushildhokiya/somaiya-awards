@@ -21,6 +21,7 @@ import Hoi from "./container/views/hoi/Hoi";
 import PageNotFound from "./container/Pages/Utility/PageNotFound";
 import Ieac from "./container/views/ieac/Ieac";
 import ManageUsers from "./container/Pages/View Pages/ManageUsers";
+import Analysis from "./container/Pages/View Pages/Analysis";
  
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/auth/:id/:token" element={<ResetPassword />} />
         <Route path="/forms/cards" element={<Card />} />
         <Route path='/hoi' element={<Hoi />} />
+        <Route path='/hoi/analysis/:form' element={<Analysis />} />
         <Route path="/ieac" element={<Ieac />} />
         <Route path='/admin/dashboard' element={<Admin />} />
         <Route path="/admin/:formtype/overview" element={<Overview />} />
