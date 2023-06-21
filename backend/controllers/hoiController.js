@@ -4,21 +4,24 @@ const {
     Research,
     Sports,
     Teaching,
-    NonTeaching ,
-    User} = require('../models')
+    NonTeaching,
+    User,
+    Sequelize } = require('../models')
+const { Op } = Sequelize;
+
 
 
 //@desc get data of institution forms to hoi
 //@route POST /hoi/data/outstanding-institution
 //@access private
 
-const institutionDataHandler = asyncHandler( async(req, res)=>{
+const institutionDataHandler = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
-    const user = await User.findOne({where: {id: user_id}});
+    const user = await User.findOne({ where: { id: user_id } });
 
-    if(!user){
+    if (!user) {
         //throw error
         res.status(400)
         throw new Error("User Not found")
@@ -26,25 +29,34 @@ const institutionDataHandler = asyncHandler( async(req, res)=>{
 
     const user_institution = user.institution;
 
-    const data = await OutstandingInstitution.findAll({where:{institution_name: user_institution}})
+    const currentYear = new Date().getFullYear();
+
+    const data = await OutstandingInstitution.findAll(
+        {
+            where: Sequelize.and( // raw SQL query using and operator
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`), // match current Year
+                {institution_name: user_institution} 
+            )
+        }
+    )
 
     res.status(200).json({
         data: data,
     })
-    
+
 })
 
 //@desc get data of research forms to hoi
 //@route POST /hoi/data/research
 //@access private
 
-const researchDataHandler = asyncHandler( async(req,res)=>{
+const researchDataHandler = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
-    const user = await User.findOne({where: {id: user_id}});
+    const user = await User.findOne({ where: { id: user_id } });
 
-    if(!user){
+    if (!user) {
         //throw error
         res.status(400)
         throw new Error("User Not found")
@@ -52,7 +64,16 @@ const researchDataHandler = asyncHandler( async(req,res)=>{
 
     const user_institution = user.institution;
 
-    const data = await Research.findAll({where:{institution: user_institution}})
+    const currentYear = new Date().getFullYear();
+    
+    const data = await Research.findAll(
+        {
+            where: Sequelize.and( // raw SQL query using and operator
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`), // match current Year
+                {institution: user_institution} 
+            )
+        }
+    )
 
     res.status(200).json({
         data: data,
@@ -63,13 +84,13 @@ const researchDataHandler = asyncHandler( async(req,res)=>{
 //@route POST /hoi/data/sports
 //@access private
 
-const sportsDataHandler = asyncHandler( async(req,res)=>{
-    
+const sportsDataHandler = asyncHandler(async (req, res) => {
+
     const user_id = res.user_id;
 
-    const user = await User.findOne({where: {id: user_id}});
+    const user = await User.findOne({ where: { id: user_id } });
 
-    if(!user){
+    if (!user) {
         //throw error
         res.status(400)
         throw new Error("User Not found")
@@ -77,7 +98,16 @@ const sportsDataHandler = asyncHandler( async(req,res)=>{
 
     const user_institution = user.institution;
 
-    const data = await Sports.findAll({where:{institute_name: user_institution}})
+    const currentYear = new Date().getFullYear();
+    
+    const data = await Sports.findAll(
+        {
+            where: Sequelize.and( // raw SQL query using and operator
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`), // match current Year
+                {institute_name: user_institution} 
+            )
+        }
+        )
 
     res.status(200).json({
         data: data,
@@ -88,21 +118,30 @@ const sportsDataHandler = asyncHandler( async(req,res)=>{
 //@route POST /hoi/data/teaching
 //@access private
 
-const teachingDataHandler = asyncHandler( async(req,res)=>{
+const teachingDataHandler = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
-    const user = await User.findOne({where: {id: user_id}});
+    const user = await User.findOne({ where: { id: user_id } });
 
-    if(!user){
+    if (!user) {
         //throw error
         res.status(400)
         throw new Error("User Not found")
     }
 
     const user_institution = user.institution;
+    
+    const currentYear = new Date().getFullYear();
 
-    const data = await Teaching.findAll({where:{institute_name: user_institution}})
+    const data = await Teaching.findAll(
+        {
+            where: Sequelize.and( // raw SQL query using and operator
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`), // match current Year
+                {institute_name: user_institution} 
+            )
+        }
+    )
 
     res.status(200).json({
         data: data,
@@ -114,14 +153,14 @@ const teachingDataHandler = asyncHandler( async(req,res)=>{
 //@route POST /hoi/data/non-teaching
 //@access private
 
-const nonTeachingDataHandler = asyncHandler( async(req,res)=>{
+const nonTeachingDataHandler = asyncHandler(async (req, res) => {
 
 
     const user_id = res.user_id;
 
-    const user = await User.findOne({where: {id: user_id}});
+    const user = await User.findOne({ where: { id: user_id } });
 
-    if(!user){
+    if (!user) {
         //throw error
         res.status(400)
         throw new Error("User Not found")
@@ -129,7 +168,16 @@ const nonTeachingDataHandler = asyncHandler( async(req,res)=>{
 
     const user_institution = user.institution;
 
-    const data = await NonTeaching.findAll({where:{institute_name: user_institution}})
+    const currentYear = new Date().getFullYear();
+
+    const data = await NonTeaching.findAll(
+        {
+            where: Sequelize.and( // raw SQL query using and operator
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`), // match current Year
+                {institute_name: user_institution} 
+            )
+        }
+    )
 
     res.status(200).json({
         data: data,
@@ -137,7 +185,7 @@ const nonTeachingDataHandler = asyncHandler( async(req,res)=>{
 
 })
 
-module.exports= {
+module.exports = {
     institutionDataHandler,
     researchDataHandler,
     sportsDataHandler,
