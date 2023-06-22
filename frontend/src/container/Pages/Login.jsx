@@ -46,7 +46,7 @@ const Login = () => {
                                 break;
 
                             case "IEAC":
-                                navigate('/ieac/dasboard')
+                                navigate('/ieac')
                                 break;
 
                             case "HOI":

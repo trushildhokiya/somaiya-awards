@@ -22,6 +22,7 @@ import PageNotFound from "./container/Pages/Utility/PageNotFound";
 import Ieac from "./container/views/ieac/Ieac";
 import ManageUsers from "./container/Pages/View Pages/ManageUsers";
 import Analysis from "./container/Pages/View Pages/Analysis";
+import Review from "./container/views/ieac/ieacPages/Review";
  
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path='/hoi' element={<Hoi />} />
         <Route path='/hoi/analysis/:form' element={<Analysis />} />
         <Route path="/ieac" element={<Ieac />} />
+        <Route path="/ieac/review/:form" element={<Review />} />
         <Route path='/admin/dashboard' element={<Admin />} />
         <Route path="/admin/:formtype/overview" element={<Overview />} />
         <Route path="/admin/:formtype/responses" element={<Responses />} />
