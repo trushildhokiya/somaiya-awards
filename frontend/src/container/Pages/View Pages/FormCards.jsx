@@ -8,11 +8,12 @@ import Research from '../../assests/research.jpeg'
 import Sports from '../../assests/sports.jpeg'
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import Swal from 'sweetalert2'
+import Groups from '../../../data/Institutions/Groups'
 
 const FormCards = () => {
-    
+
     const navigate = useNavigate()
-    
+    const group = Groups[localStorage.getItem('institution')];
     const handleLogout = () => {
 
         // remove token from local storage
@@ -22,19 +23,17 @@ const FormCards = () => {
 
         Swal.fire({
             title: 'Successfully Logged Out',
-            icon:'success',
-            confirmButtonColor:'rgb(185,28,28)'
+            icon: 'success',
+            confirmButtonColor: 'rgb(185,28,28)'
         })
 
         // navigate to login page
         navigate('/auth/login')
     }
 
-    
-    
+
     return (
         <div className='p-5 w-full h-screen '>
-
             {/* Headers  */}
             <div className='flex flex-row items-center justify-between'>
                 <div className='flex flex-col'>
@@ -48,14 +47,14 @@ const FormCards = () => {
                     </div>
                 </div>
                 <div className='flex flex-col text-center'>
-                <div 
-                onClick={handleLogout}
-                className='p-3 cursor-pointer '>
-                    <LogoutRoundedIcon  />
-                </div>
-                <div className='text-md font-Poppins'>
-                    Logout
-                </div>
+                    <div
+                        onClick={handleLogout}
+                        className='p-3 cursor-pointer '>
+                        <LogoutRoundedIcon />
+                    </div>
+                    <div className='text-md font-Poppins'>
+                        Logout
+                    </div>
                 </div>
             </div>
 
@@ -79,14 +78,22 @@ const FormCards = () => {
                         link="/forms/sports"
                     />
                 </div>
-                <div>
-                    <FormCard
-                        image={Research}
-                        title="Excellence in Research"
-                        info="Honoring excellence in research through prestigious and impactful awards."
-                        link="/forms/research"
-                    />
-                </div>
+                {
+                    group.includes(3) || group.includes(4)
+                        ?
+                        <>
+                            <div>
+                                <FormCard
+                                    image={Research}
+                                    title="Excellence in Research"
+                                    info="Honoring excellence in research through prestigious and impactful awards."
+                                    link="/forms/research"
+                                />
+                            </div>
+                        </>
+                        :
+                        null
+                }
                 <div>
                     <FormCard
                         image={Teaching}

@@ -36,6 +36,7 @@ const TeachingForm = [
         title: "Name of the Institute",
         _name: "institute_name",
         type: "dropdown",
+        dropdownHiddenItem:'Select your institute',
         requiredStatus: true,
         hasOptions: true,
         options: [

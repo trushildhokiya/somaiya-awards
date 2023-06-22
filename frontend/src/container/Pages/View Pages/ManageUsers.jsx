@@ -137,6 +137,7 @@ const ManageUsers = () => {
                   type='dropdown'
                   name='user_institution'
                   value={credentials['user_institution'] || ''}
+                  dropdownHiddenItem='Select institution'
                   options={institutionOptions}
                   onChange={handleChange}
                 />
@@ -147,6 +148,7 @@ const ManageUsers = () => {
                   name='user_role'
                   value={credentials['user_role'] || ''}
                   options={["ADMIN","IEAC","HOI"]}
+                  dropdownHiddenItem='Select Role'
                   onChange={handleChange}
                 />
 

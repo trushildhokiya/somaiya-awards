@@ -144,7 +144,7 @@ const Field = (props) => {
             value={props.value}
             className="w-72 p-2 rounded-md shadow-lg active:shadow-2xl hover:w-full transition-all duration-500 outline-none"
           >
-            <option hidden> Choose your Institution </option>
+            <option hidden> {props.dropdownHiddenItem} </option>
             {props.options.map((item) => {
               return <option name={props.name} value={item}>{item}</option>;
             })}

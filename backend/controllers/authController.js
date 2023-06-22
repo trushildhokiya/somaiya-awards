@@ -48,6 +48,7 @@ const userLogin = asyncHandler(async (req, res) => {
             user_id: user.id,
             authorized: result,
             role: user.role,
+            institution:user.institution
         })
     }
     else {

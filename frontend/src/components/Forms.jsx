@@ -232,6 +232,7 @@ const Forms = (props) => {
             required={entry.requiredStatus}
             validate={entry.hasValidations}
             validateType={entry.validationType}
+            dropdownHiddenItem={entry.dropdownHiddenItem}
             options={entry.options}
             value={formData[entry._name] || ''}
             fieldsPerLine={entry.fieldsPerLine}

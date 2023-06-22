@@ -25,6 +25,7 @@ const OutstandingInstForm= [
         _name:"institution_name",
         type: "dropdown",
         requiredStatus: true,
+        dropdownHiddenItem:'Select your institute',
         hasOptions: true,
         options: [
             "The Somaiya School",
