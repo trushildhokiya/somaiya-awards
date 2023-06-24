@@ -4,6 +4,7 @@ import { MoonLoader } from 'react-spinners';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
 const Ieac = () => {
 
@@ -11,6 +12,32 @@ const Ieac = () => {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
+
+  /**
+   * Logout
+   */
+
+  const handleLogout = () => {
+
+    // remove token from local storage
+
+    localStorage.removeItem('token')
+    localStorage.removeItem('user_id')
+
+    Swal.fire({
+      title: 'Successfully Logged Out',
+      icon: 'success',
+      confirmButtonColor: 'rgb(185,28,28)'
+    })
+
+    // navigate to login page
+    navigate('/auth/login')
+  }
+
+
+  /**
+   * Authorization 
+   */
 
   useEffect(() => {
 
@@ -90,11 +117,26 @@ const Ieac = () => {
                 <SideBar />
                 <div className='flex flex-col p-5 font-Poppins w-full'>
 
-                  <div className='text-xl font-semibold'>
-                    Welcome IEAC Member
-                  </div>
-                  <div className='text-sm'>
-                    {localStorage.getItem('institution')}
+                  <div className='flex flex-row items-center justify-between'>
+                    <div className='flex flex-col'>
+                      <div className='text-xl font-semibold'>
+                        Welcome IEAC Member
+                      </div>
+                      <div className='text-sm'>
+                        {localStorage.getItem('institution')}
+                      </div>
+                    </div>
+
+                    <div
+                      onClick={handleLogout}
+                      className='p-5 mr-[2rem] hover:cursor-pointer flex flex-col items-center'>
+                      <div>
+                        <LogoutRoundedIcon />
+                      </div>
+                      <div>
+                        Logout
+                      </div>
+                    </div>
                   </div>
 
                   <div className='mt-[2rem]'>

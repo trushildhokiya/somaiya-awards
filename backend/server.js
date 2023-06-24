@@ -3,6 +3,7 @@ const dotenv = require('dotenv').config()
 const authRoute = require('./routes/authRoutes')
 const formRoute = require('./routes/formRoutes')
 const hoiRoutes = require('./routes/hoiRoutes')
+const ieacRoutes = require('./routes/ieacRoutes')
 const errorHandler = require('./middleware/errorHandler')
 const cors = require('cors')
 const db = require('./models')
@@ -24,6 +25,7 @@ app.use(express.static(`${__dirname}/data`));
 app.use('/auth', authRoute)
 app.use('/forms', formRoute )
 app.use('/hoi/data',hoiRoutes)
+app.use('/ieac/data',ieacRoutes)
 app.use(errorHandler)
 
 /**

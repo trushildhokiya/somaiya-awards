@@ -11,8 +11,8 @@ const { Op } = Sequelize;
 
 
 
-//@desc get data of institution forms to hoi
-//@route GET /hoi/data/outstanding-institution
+//@desc get data of institution forms to ieac 
+//@route GET /ieac/data/outstanding-institution
 //@access private
 
 const institutionDataHandler = asyncHandler(async (req, res) => {
@@ -46,8 +46,8 @@ const institutionDataHandler = asyncHandler(async (req, res) => {
 
 })
 
-//@desc get data of research forms to hoi
-//@route GET /hoi/data/research
+//@desc get data of research forms to ieac
+//@route GET /ieac/data/research
 //@access private
 
 const researchDataHandler = asyncHandler(async (req, res) => {
@@ -80,8 +80,8 @@ const researchDataHandler = asyncHandler(async (req, res) => {
     })
 })
 
-//@desc get data of sports forms to hoi
-//@route GET /hoi/data/sports
+//@desc get data of sports forms to ieac
+//@route GET /ieac/data/sports
 //@access private
 
 const sportsDataHandler = asyncHandler(async (req, res) => {
@@ -114,8 +114,8 @@ const sportsDataHandler = asyncHandler(async (req, res) => {
     })
 })
 
-//@desc get data of teaching forms to hoi
-//@route GET /hoi/data/teaching
+//@desc get data of teaching forms to ieac
+//@route GET /ieac/data/teaching
 //@access private
 
 const teachingDataHandler = asyncHandler(async (req, res) => {
@@ -149,8 +149,8 @@ const teachingDataHandler = asyncHandler(async (req, res) => {
 
 })
 
-//@desc get data of non-teaching forms to hoi
-//@route GET /hoi/data/non-teaching
+//@desc get data of non-teaching forms to ieac
+//@route GET /ieac/data/non-teaching
 //@access private
 
 const nonTeachingDataHandler = asyncHandler(async (req, res) => {

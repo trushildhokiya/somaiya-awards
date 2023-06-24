@@ -29,6 +29,9 @@ const SideBar = () => {
                         <p>
                             Head Of Institution
                         </p>
+                        <p className='text-xs text-center p-1 mt-3'>
+                          {localStorage.getItem('institution')}
+                        </p>
                     </div>
                     
                     <MenuItem

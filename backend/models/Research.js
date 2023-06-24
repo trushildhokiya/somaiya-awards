@@ -184,6 +184,11 @@ module.exports = (sequelize, dataTypes)=>{
             defaultValue: false
         },
 
+        ieacApprovedFile : {
+            type: dataTypes.STRING,
+            allowNull: true,
+        },
+
         hr_approved:{
 
             type: dataTypes.BOOLEAN,
