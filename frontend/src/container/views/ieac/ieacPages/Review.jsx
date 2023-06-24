@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import SideBar from '../ieacComponents/Sidebar'
 import { useLocation } from 'react-router-dom'
-import { DataGrid, GridRowsProp, GridColDef , GridToolbar} from '@mui/x-data-grid';
+import { DataGrid, GridToolbar} from '@mui/x-data-grid';
+import { columns01,columns02, columns03 , columns04 , columns05 } from '../../../../data/AnalysisData/IEAC/structure';
+import axios from 'axios';
 
 const Review = () => {
 
     const [title, setTitle] = useState('');
-
+    const [columns, setColumns] = useState([]);
+    const [rows,setRows] = useState([]);
     const location = useLocation();
 
     useEffect(() => {
@@ -14,33 +17,48 @@ const Review = () => {
         let pathLabel = location.pathname.split('/review/')[1];
         setTitle(pathLabel);
 
+        switch (pathLabel) {
+            case 'outstanding-institution':
+                setColumns(columns01)
+                break;
+            
+            case 'research':
+                setColumns(columns02)
+                break;
+            
+            case 'sports':
+                setColumns(columns03)
+                break;
+            
+            case 'teaching':
+                setColumns(columns04)
+                break;
+            
+            case 'non-teaching':
+                setColumns(columns05)
+                break;
+        }
+
+        const url = `http://localhost:5001/hoi/data/${pathLabel}`;
+
+        axios.get(url,{
+            headers:{
+                'user_id':localStorage.getItem('user_id'),
+                'x-access-token': localStorage.getItem('token')
+            }
+        })
+        .then((res)=>{
+            console.log(res.data.data);
+            if(res.data){
+                setRows(res.data.data);
+                console.log(rows);
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+
     }, [location])
-
-    const rows: GridRowsProp = [
-        { id: 1, col1: 'Hello', col2: 'World' },
-        { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-        { id: 3, col1: 'MUI', col2: 'is Amazing' },
-    ];
-
-    const columns: GridColDef[] = [
-        { field: 'col1', headerName: 'Column 1', width: 150 },
-        { field: 'col2', headerName: 'Column 2', width: 150 },
-    ];
 
 
     return (

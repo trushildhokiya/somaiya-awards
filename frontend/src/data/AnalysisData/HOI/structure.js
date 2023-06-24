@@ -12,6 +12,9 @@
  */
 
 import { GridColDef } from "@mui/x-data-grid";
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
+
 
 const columns01: GridColDef[] = [
   { field: 'email_id', headerName: 'Email ID', width: 150 },
@@ -67,8 +70,28 @@ const columns01: GridColDef[] = [
       return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
     }
   },
-  { field: 'ieac_approved', headerName: 'IEAC Approved', width: 150 },
-  { field: 'hr_approved', headerName: 'HR Approved', width: 150 },
+  {
+    field: 'ieac_approved', headerName: 'IEAC Approved', width: 150, renderCell: (params) => {
+      return params.value ?
+        (
+          <CheckRoundedIcon style={{ color: '#15803d' }} />
+        ) :
+        (
+          <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
+        )
+    },
+  },
+  {
+    field: 'hr_approved', headerName: 'HR Approved', width: 150, renderCell: (params) => {
+      return params.value ?
+        (
+          <CheckRoundedIcon style={{ color: '#15803d' }} />
+        ) :
+        (
+          <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
+        )
+    },
+  },
 ];
 
 const columns02: GridColDef[] = [
@@ -114,9 +137,29 @@ const columns02: GridColDef[] = [
       return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
     }
   },
-  {field: 'confirmation_of_trueData', headerName: 'Confirmation of True Data', width: 200,},
-  { field: 'ieacApproved', headerName: 'IEAC Approved', type: 'boolean', width: 150 },
-  { field: 'hr_approved', headerName: 'HR Approved', type: 'boolean', width: 150 },
+  { field: 'confirmation_of_trueData', headerName: 'Confirmation of True Data', width: 200, },
+  {
+    field: 'ieacApproved', headerName: 'IEAC Approved', type: 'boolean', width: 150, renderCell: (params) => {
+      return params.value ?
+        (
+          <CheckRoundedIcon style={{ color: '#15803d' }} />
+        ) :
+        (
+          <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
+        )
+    },
+  },
+  {
+    field: 'hr_approved', headerName: 'HR Approved', type: 'boolean', width: 150, renderCell: (params) => {
+      return params.value ?
+        (
+          <CheckRoundedIcon style={{ color: '#15803d' }} />
+        ) :
+        (
+          <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
+        )
+    },
+  },
 ];
 
 const columns03: GridColDef[] = [
@@ -157,8 +200,28 @@ const columns03: GridColDef[] = [
       return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
     }
   },
-  { field: 'ieacApproved', headerName: 'IEAC Approved', type: 'boolean', width: 150 },
-  { field: 'hr_approved', headerName: 'HR Approved', type: 'boolean', width: 150 },
+  {
+    field: 'ieacApproved', headerName: 'IEAC Approved', type: 'boolean', width: 150, renderCell: (params) => {
+      return params.value ?
+        (
+          <CheckRoundedIcon style={{ color: '#15803d' }} />
+        ) :
+        (
+          <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
+        )
+    },
+  },
+  {
+    field: 'hr_approved', headerName: 'HR Approved', type: 'boolean', width: 150, renderCell: (params) => {
+      return params.value ?
+        (
+          <CheckRoundedIcon style={{ color: '#15803d' }} />
+        ) :
+        (
+          <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
+        )
+    },
+  },
 ];
 
 const columns04: GridColDef[] = [
@@ -201,8 +264,28 @@ const columns04: GridColDef[] = [
       return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
     }
   },
-  { field: 'ieacApproved', headerName: 'IEAC Approved', type: 'boolean', width: 150 },
-  { field: 'hr_approved', headerName: 'HR Approved', type: 'boolean', width: 150 },
+  {
+    field: 'ieacApproved', headerName: 'IEAC Approved', type: 'boolean', width: 150, renderCell: (params) => {
+      return params.value ?
+        (
+          <CheckRoundedIcon style={{ color: '#15803d' }} />
+        ) :
+        (
+          <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
+        )
+    },
+  },
+  {
+    field: 'hr_approved', headerName: 'HR Approved', type: 'boolean', width: 150, renderCell: (params) => {
+      return params.value ?
+        (
+          <CheckRoundedIcon style={{ color: '#15803d' }} />
+        ) :
+        (
+          <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
+        )
+    },
+  },
 ];
 
 const columns05: GridColDef[] = [
@@ -249,8 +332,28 @@ const columns05: GridColDef[] = [
       return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
     }
   },
-  { field: 'ieacApproved', headerName: 'IEAC Approved', type: 'boolean', width: 150 },
-  { field: 'hr_approved', headerName: 'HR Approved', type: 'boolean', width: 150 },
+  {
+    field: 'ieacApproved', headerName: 'IEAC Approved', type: 'boolean', width: 150, renderCell: (params) => {
+      return params.value ?
+        (
+          <CheckRoundedIcon style={{ color: '#15803d' }} />
+        ) :
+        (
+          <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
+        )
+    },
+  },
+  {
+    field: 'hr_approved', headerName: 'HR Approved', type: 'boolean', width: 150, renderCell: (params) => {
+      return params.value ?
+        (
+          <CheckRoundedIcon style={{ color: '#15803d' }} />
+        ) :
+        (
+          <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
+        )
+    },
+  },
 ];
 
 
