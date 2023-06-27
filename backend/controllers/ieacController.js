@@ -183,12 +183,72 @@ const nonTeachingDataHandler = asyncHandler(async (req, res) => {
         data: data,
     })
 
-})
+});
+
+
+//@desc update institution form
+//@route PUT /ieac/data/outstanding-institution
+//@access private
+
+const institutionDataUpdater = asyncHandler( async (req,res)=>{
+    res.status(200).json({
+        message: 'API works',
+    })
+});
+
+//@desc update research form
+//@route PUT /ieac/data/research
+//@access private
+
+const researchDataUpdater = asyncHandler( async (req,res)=>{
+    console.log(res.user_id);
+    res.status(200).json({
+        message: 'API works',
+    })
+});
+
+//@desc update sports
+//@route PUT /ieac/data/sports
+//@access private
+
+const sportsDataUpdater = asyncHandler( async (req,res)=>{
+    res.status(200).json({
+        message: 'API works',
+    })
+});
+
+
+//@desc update teaching forms
+//@route PUT /ieac/data/teaching
+//@access private
+
+const teachingDataUpdater = asyncHandler( async (req,res)=>{
+    res.status(200).json({
+        message: 'API works',
+    })
+});
+
+
+//@desc update non-teaching forms
+//@route PUT /ieac/data/non-teaching
+//@access private
+
+const nonTeachingDataUpdater = asyncHandler( async (req,res)=>{
+    res.status(200).json({
+        message: 'API works',
+    })
+});
+
 
 module.exports = {
     institutionDataHandler,
     researchDataHandler,
     sportsDataHandler,
     teachingDataHandler,
-    nonTeachingDataHandler
+    nonTeachingDataHandler,
+    institutionDataUpdater,
+    researchDataUpdater,
+    sportsDataUpdater,
+    teachingDataUpdater,
+    nonTeachingDataUpdater,
 }

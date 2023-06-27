@@ -17,8 +17,44 @@
 import { GridColDef } from "@mui/x-data-grid";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
+import Swal from 'sweetalert2';
+
+/**
+ * Handlers
+ */
+
+const handleChange = (params,event, name)=>{
+    const file = event.target.files[0];
+    const approvedNomineeName = params.row[name];
+    const application_id = params.row['id'];
+
+    let confirmed = false;
+
+    Swal.fire({
+        title:'Confirmation',
+        icon:'question',
+        text:`Do you to confirm your decision to approve ${approvedNomineeName} ?`,
+        showDenyButton: true,
+        confirmButtonText:"Confirm",
+        denyButtonText:'Deny',
+        confirmButtonColor:'#4bb543',
+        
+    })
+    .then((res)=>{
+        
+        if(res.isConfirmed==true){
+            console.log('Im working');
+        }
+
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+
+}
 
 const columns01: GridColDef[] = [
+    {field:'id', headerName:'Application ID', width:150},
     { field: 'email_id', headerName: 'Email ID', width: 150 },
     { field: 'nomination_category', headerName: 'Nomination Category', width: 200 },
     { field: 'institution_name', headerName: 'Institution Name', width: 200 },
@@ -97,6 +133,7 @@ const columns01: GridColDef[] = [
 ];
 
 const columns02: GridColDef[] = [
+    {field:'id', headerName:'Application ID', width:150},
     { field: 'faculty_name', headerName: 'Faculty Name', width: 150 },
     { field: 'designation', headerName: 'Designation', width: 150 },
     { field: 'institution', headerName: 'Institution', width: 150 },
@@ -153,7 +190,7 @@ const columns02: GridColDef[] = [
     },
     {
         field: 'ieacApprovedFile', headerName: 'Approved Reason File', width: 200, renderCell: (params) => {
-            return <input type="file"></input>
+            return <input name="approvalFile" type="file" onChange={(event)=> handleChange(params,event,"faculty_name")}></input>
         }
     },
     {
@@ -170,6 +207,7 @@ const columns02: GridColDef[] = [
 ];
 
 const columns03: GridColDef[] = [
+    {field:'id', headerName:'Application ID', width:150},
     { field: 'email_id', headerName: 'Email ID', width: 150 },
     { field: 'institute_name', headerName: 'Institute Name', width: 150 },
     { field: 'nominee_inspiring_teacher', headerName: 'Nominee Inspiring Teacher', width: 200 },
@@ -237,6 +275,7 @@ const columns03: GridColDef[] = [
 ];
 
 const columns04: GridColDef[] = [
+    {field:'id', headerName:'Application ID', width:150},
     { field: 'email_id', headerName: 'Email ID', width: 150 },
     { field: 'faculty_name', headerName: 'Faculty Name', width: 150 },
     { field: 'awards_category', headerName: 'Awards Category', width: 150 },
@@ -306,6 +345,7 @@ const columns04: GridColDef[] = [
 ];
 
 const columns05: GridColDef[] = [
+    {field:'id', headerName:'Application ID', width:150},
     { field: 'email_id', headerName: 'Email ID', width: 150 },
     { field: 'staff_name', headerName: 'Staff Name', width: 150 },
     { field: 'award_category', headerName: 'Award Category', width: 150 },

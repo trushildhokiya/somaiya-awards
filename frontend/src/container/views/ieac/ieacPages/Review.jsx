@@ -48,10 +48,8 @@ const Review = () => {
             }
         })
         .then((res)=>{
-            console.log(res.data.data);
             if(res.data){
                 setRows(res.data.data);
-                console.log(rows);
             }
         })
         .catch((err)=>{
@@ -75,6 +73,7 @@ const Review = () => {
                         <DataGrid
                             rows={rows}
                             columns={columns}
+                            density='comfortable'
                             slots={{ toolbar: GridToolbar }}
                             slotProps={{
                                 toolbar: {
