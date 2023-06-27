@@ -18,17 +18,22 @@ import { GridColDef } from "@mui/x-data-grid";
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import Swal from 'sweetalert2';
+import axios from "axios";
 
 /**
  * Handlers
  */
 
 const handleChange = (params,event, name)=>{
-    const file = event.target.files[0];
-    const approvedNomineeName = params.row[name];
-    const application_id = params.row['id'];
 
-    let confirmed = false;
+    const approvedNomineeName = params.row[name];
+
+    const data={
+        approvalFile : event.target.files[0],
+        applicationID : params.row['id'],
+    };
+
+    const path =window.location.href.split('/review/')[1];
 
     Swal.fire({
         title:'Confirmation',
@@ -43,7 +48,27 @@ const handleChange = (params,event, name)=>{
     .then((res)=>{
         
         if(res.isConfirmed==true){
-            console.log('Im working');
+            
+            axios.put(`http://localhost:5001/ieac/data/${path}`,data,{
+                headers:{
+                    'Content-Type': 'multipart/form-data',
+                    'user_id':localStorage.getItem('user_id'),
+                    'x-access-token': localStorage.getItem('token'),
+                }
+            } )
+            .then((res)=>{
+                Swal.fire({
+                    title:'Successfully Updated',
+                    icon:'success',
+                    confirmButtonColor:'rgb(185,28,28)'
+                })
+                .then((res)=>{
+                    window.location.reload();
+                })
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
         }
 
     })

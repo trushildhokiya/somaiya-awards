@@ -201,10 +201,34 @@ const institutionDataUpdater = asyncHandler( async (req,res)=>{
 //@access private
 
 const researchDataUpdater = asyncHandler( async (req,res)=>{
-    console.log(res.user_id);
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({where: {id: user_id} });
+    
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+    
+    // checks role is IEAC or not
+    if(user.role!= 'IEAC'){
+        res.status(403)
+        throw new Error("Forbidden access to resource")
+    }
+
+    const approvalFile = req.file.path;
+    const {applicationID} = req.body;
+
+    const applicationForm  = await Research.findOne({where: {id: applicationID}});
+
+    await applicationForm.update({ieacApproved: true , ieacApprovedFile: approvalFile});
+
     res.status(200).json({
-        message: 'API works',
-    })
+        message:'Update Sucessful'
+    });
+    
 });
 
 //@desc update sports

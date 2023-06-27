@@ -1,7 +1,14 @@
 const multer = require('multer')
 const path = require('path')
 
+/**
+ * NOTE: Uploads , storage 01-05 are used for form filling not for approvals
+ * from 06- onwards they are approval handlers
+ */
 
+/**
+ * SECTION FORM FILE UPLOAD HANDLER
+ */
 
 // file upload for outstanding institution form
 
@@ -85,10 +92,28 @@ const storage05 = multer.diskStorage({
 const upload05 = multer({ storage: storage05 })
 
 
+
+/**
+ * SECTION : IEAC FILE UPLOAD HANDLER
+ */
+
+// research form approval file handler
+const storage06 = multer.diskStorage({
+    destination : (req,file,cb)=>{
+        cb(null,'data/approvals/IEAC/research');
+    },
+    filename:(req,file,cb)=>{
+        cb(null,Date.now()+path.extname(file.originalname))
+    }
+})
+
+const upload06 = multer({storage: storage06});
+
 module.exports = {
     upload01,
     upload02,
     upload03,
     upload04,
-    upload05
+    upload05,
+    upload06
 }
