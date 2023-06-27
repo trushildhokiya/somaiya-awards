@@ -2,7 +2,7 @@
 
 ## Progress Report
 
-![Progress Bar](https://progress-bar.dev/60/)
+![Progress Bar](https://progress-bar.dev/70/)
 
 #### Form Section
 - [x] Forms Designing and Implementation
