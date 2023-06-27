@@ -215,7 +215,12 @@ const columns02: GridColDef[] = [
     },
     {
         field: 'ieacApprovedFile', headerName: 'Approved Reason File', width: 200, renderCell: (params) => {
-            return <input name="approvalFile" type="file" onChange={(event)=> handleChange(params,event,"faculty_name")}></input>
+            if(!params.row['ieacApproved']){
+                return <input name="approvalFile" type="file" onChange={(event)=> handleChange(params,event,"faculty_name")}></input>
+            }
+            else{
+                return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+            }
         }
     },
     {

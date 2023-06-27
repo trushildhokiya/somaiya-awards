@@ -248,7 +248,7 @@ module.exports = (sequelize,dataTypes)=>{
 
         ieac_approved :{
             type: dataTypes.BOOLEAN,
-            defaultValue: false,
+            defaultValue: true,
         },
 
         hr_approved :{
