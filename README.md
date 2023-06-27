@@ -14,13 +14,13 @@
 - [x] HOI View and Security
 - [x] Forms Analysis and Responses
 - [x] Download PDF and CSV
-- [x] 🚧 Responses URL Security and Authentication - ![Progress Bar](https://progress-bar.dev/0/)
+- [x] 🚧 Responses URL Security and Authentication - ![Progress Bar](https://progress-bar.dev/95/)
 
 #### IEAC Section
 - [x] Implementation and Security
 - [x] Responses View with Export
-- [x] 🚧 Approval and File Upload - ![Progress Bar](https://progress-bar.dev/67/)
-- [x] 🚧 Review URL Security and Authentication - ![Progress Bar](https://progress-bar.dev/0/)
+- [x] Approval and File Upload
+- [x] 🚧 Review URL Security and Authentication - ![Progress Bar](https://progress-bar.dev/87/)
 
 #### HR Section
 - [x] Design and Implementation
