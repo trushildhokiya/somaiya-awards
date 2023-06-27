@@ -98,6 +98,7 @@ const upload05 = multer({ storage: storage05 })
  */
 
 // research form approval file handler
+
 const storage06 = multer.diskStorage({
     destination : (req,file,cb)=>{
         cb(null,'data/approvals/IEAC/research');
@@ -109,11 +110,57 @@ const storage06 = multer.diskStorage({
 
 const upload06 = multer({storage: storage06});
 
+
+// sports form approval file handler
+
+const storage07 = multer.diskStorage({
+    destination : (req,file,cb)=>{
+        cb(null,'data/approvals/IEAC/sports');
+    },
+    filename:(req,file,cb)=>{
+        cb(null,Date.now()+path.extname(file.originalname))
+    }
+})
+
+const upload07 = multer({storage: storage07});
+
+
+
+// teaching form approval file handler
+
+const storage08 = multer.diskStorage({
+    destination : (req,file,cb)=>{
+        cb(null,'data/approvals/IEAC/teaching');
+    },
+    filename:(req,file,cb)=>{
+        cb(null,Date.now()+path.extname(file.originalname))
+    }
+})
+
+const upload08 = multer({storage: storage08});
+
+
+
+// Non Teaching form approval file handler
+const storage09 = multer.diskStorage({
+    destination : (req,file,cb)=>{
+        cb(null,'data/approvals/IEAC/support');
+    },
+    filename:(req,file,cb)=>{
+        cb(null,Date.now()+path.extname(file.originalname))
+    }
+})
+
+const upload09 = multer({storage: storage09});
+
 module.exports = {
     upload01,
     upload02,
     upload03,
     upload04,
     upload05,
-    upload06
+    upload06,
+    upload07,
+    upload08,
+    upload09,
 }

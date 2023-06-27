@@ -189,16 +189,17 @@ const nonTeachingDataHandler = asyncHandler(async (req, res) => {
 //@desc update institution form
 //@route PUT /ieac/data/outstanding-institution
 //@access private
-
+/**@deprecated : no longer required */
 const institutionDataUpdater = asyncHandler( async (req,res)=>{
     res.status(200).json({
         message: 'API works',
     })
 });
 
-//@desc update research form
-//@route PUT /ieac/data/research
-//@access private
+// @desc update research form
+// @route PUT /ieac/data/research
+// @access private
+
 
 const researchDataUpdater = asyncHandler( async (req,res)=>{
 
@@ -215,7 +216,7 @@ const researchDataUpdater = asyncHandler( async (req,res)=>{
     // checks role is IEAC or not
     if(user.role!= 'IEAC'){
         res.status(403)
-        throw new Error("Forbidden access to resource")
+        throw new Error("FORBIDDEN RESOURCE REQUESTED")
     }
 
     const approvalFile = req.file.path;
@@ -226,7 +227,7 @@ const researchDataUpdater = asyncHandler( async (req,res)=>{
     await applicationForm.update({ieacApproved: true , ieacApprovedFile: approvalFile});
 
     res.status(200).json({
-        message:'Update Sucessful'
+        message:'Update Successful'
     });
     
 });
@@ -236,9 +237,34 @@ const researchDataUpdater = asyncHandler( async (req,res)=>{
 //@access private
 
 const sportsDataUpdater = asyncHandler( async (req,res)=>{
+    
+    const user_id = res.user_id;
+
+    const user = await User.findOne({where: {id: user_id} });
+    
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+    
+    // checks role is IEAC or not
+    if(user.role!= 'IEAC'){
+        res.status(403)
+        throw new Error("FORBIDDEN RESOURCE REQUESTED")
+    }
+
+    const approvalFile = req.file.path;
+    const {applicationID} = req.body;
+
+    const applicationForm  = await Sports.findOne({where: {id: applicationID}});
+
+    await applicationForm.update({ieacApproved: true , ieacApprovedFile: approvalFile});
+
     res.status(200).json({
-        message: 'API works',
-    })
+        message:'Update Successful'
+    });
+
 });
 
 
@@ -247,9 +273,34 @@ const sportsDataUpdater = asyncHandler( async (req,res)=>{
 //@access private
 
 const teachingDataUpdater = asyncHandler( async (req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({where: {id: user_id} });
+    
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+    
+    // checks role is IEAC or not
+    if(user.role!= 'IEAC'){
+        res.status(403)
+        throw new Error("FORBIDDEN RESOURCE REQUESTED")
+    }
+
+    const approvalFile = req.file.path;
+    const {applicationID} = req.body;
+
+    const applicationForm  = await Teaching.findOne({where: {id: applicationID}});
+
+    await applicationForm.update({ieacApproved: true , ieacApprovedFile: approvalFile});
+
     res.status(200).json({
-        message: 'API works',
-    })
+        message:'Update Successful'
+    });
+
 });
 
 
@@ -258,9 +309,34 @@ const teachingDataUpdater = asyncHandler( async (req,res)=>{
 //@access private
 
 const nonTeachingDataUpdater = asyncHandler( async (req,res)=>{
+    
+    const user_id = res.user_id;
+
+    const user = await User.findOne({where: {id: user_id} });
+    
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+    
+    // checks role is IEAC or not
+    if(user.role!= 'IEAC'){
+        res.status(403)
+        throw new Error("FORBIDDEN RESOURCE REQUESTED")
+    }
+
+    const approvalFile = req.file.path;
+    const {applicationID} = req.body;
+
+    const applicationForm  = await NonTeaching.findOne({where: {id: applicationID}});
+
+    await applicationForm.update({ieacApproved: true , ieacApprovedFile: approvalFile});
+
     res.status(200).json({
-        message: 'API works',
-    })
+        message:'Update Successful'
+    });
+
 });
 
 
