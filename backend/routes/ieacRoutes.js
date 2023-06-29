@@ -9,7 +9,8 @@ const {
     researchDataUpdater,
     sportsDataUpdater,
     teachingDataUpdater,
-    nonTeachingDataUpdater} = require('../controllers/ieacController');
+    nonTeachingDataUpdater,
+    researchRecFileHandler} = require('../controllers/ieacController');
 const {upload06, upload07, upload08, upload09} =require('../middleware/fileUpload');
 const userAuthenticator = require('../middleware/userAuthenticator');
 
@@ -22,9 +23,14 @@ router.route('/non-teaching').get(userAuthenticator,nonTeachingDataHandler);
 
 /**PUT Routes */
 
-router.route('/research').put(userAuthenticator,upload06.single('approvalFile'),researchDataUpdater);
-router.route('/sports').put(userAuthenticator,upload07.single('approvalFile'),sportsDataUpdater);
-router.route('/teaching').put(userAuthenticator,upload08.single('approvalFile'),teachingDataUpdater);
-router.route('/non-teaching').put(userAuthenticator,upload09.single('approvalFile'),nonTeachingDataUpdater);
+router.route('/research').put(userAuthenticator,researchDataUpdater);
+router.route('/sports').put(userAuthenticator,sportsDataUpdater);
+router.route('/teaching').put(userAuthenticator,teachingDataUpdater);
+router.route('/non-teaching').put(userAuthenticator,nonTeachingDataUpdater);
+
+
+/**POST Routes */
+
+router.route('/research').post(userAuthenticator,upload06.single('approvalFile'),researchRecFileHandler)
 
 module.exports = router

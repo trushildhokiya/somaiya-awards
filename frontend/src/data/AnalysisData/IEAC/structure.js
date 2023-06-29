@@ -19,67 +19,120 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import Swal from 'sweetalert2';
 import axios from "axios";
-
+import Dialog from '@mui/material/Dialog'
 /**
  * Handlers
  */
 
-const handleChange = (params,event, name)=>{
+// const handleChange = (params,event, name)=>{
 
-    const approvedNomineeName = params.row[name];
+//     const approvedNomineeName = params.row[name];
 
-    const data={
-        approvalFile : event.target.files[0],
-        applicationID : params.row['id'],
-    };
+//     const data={
+//         approvalFile : event.target.files[0],
+//         applicationID : params.row['id'],
+//     };
 
-    const path =window.location.href.split('/review/')[1];
+//     const path =window.location.href.split('/review/')[1];
 
-    Swal.fire({
-        title:'Confirmation',
-        icon:'question',
-        text:`Do you to confirm your decision to approve ${approvedNomineeName} ?`,
-        showDenyButton: true,
-        confirmButtonText:"Confirm",
-        denyButtonText:'Deny',
-        confirmButtonColor:'#4bb543',
-        
-    })
-    .then((res)=>{
-        
-        if(res.isConfirmed==true){
-            
-            axios.put(`http://localhost:5001/ieac/data/${path}`,data,{
-                headers:{
-                    'Content-Type': 'multipart/form-data',
-                    'user_id':localStorage.getItem('user_id'),
-                    'x-access-token': localStorage.getItem('token'),
-                }
-            } )
-            .then((res)=>{
-                Swal.fire({
-                    title:'Successfully Updated',
-                    icon:'success',
-                    confirmButtonColor:'rgb(185,28,28)'
-                })
-                .then((res)=>{
-                    window.location.reload();
-                })
-            })
-            .catch((err)=>{
-                console.log(err);
-            })
-        }
+//     Swal.fire({
+//         title:'Confirmation',
+//         icon:'question',
+//         text:`Do you to confirm your decision to approve ${approvedNomineeName} ?`,
+//         showDenyButton: true,
+//         confirmButtonText:"Confirm",
+//         denyButtonText:'Deny',
+//         confirmButtonColor:'#4bb543',
 
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
+//     })
+//     .then((res)=>{
+
+//         if(res.isConfirmed==true){
+
+//             axios.put(`http://localhost:5001/ieac/data/${path}`,data,{
+//                 headers:{
+//                     'Content-Type': 'multipart/form-data',
+//                     'user_id':localStorage.getItem('user_id'),
+//                     'x-access-token': localStorage.getItem('token'),
+//                 }
+//             } )
+//             .then((res)=>{
+//                 Swal.fire({
+//                     title:'Successfully Updated',
+//                     icon:'success',
+//                     confirmButtonColor:'rgb(185,28,28)'
+//                 })
+//                 .then((res)=>{
+//                     window.location.reload();
+//                 })
+//             })
+//             .catch((err)=>{
+//                 console.log(err);
+//             })
+//         }
+
+//     })
+//     .catch((err)=>{
+//         console.log(err);
+//     })
+
+// }
+
+const handleChange = () => {
 
 }
 
+
+const handleResearchChange = (params, event) => {
+    if (event.target.checked == true) {
+
+        const approvedNomineeName = params.row['faculty_name'];
+
+        const data = {
+            applicationID: params.row['id'],
+        };
+
+        const path = window.location.href.split('/review/')[1];
+
+        Swal.fire({
+            title: 'Confirmation',
+            icon: 'question',
+            text: `Do you to confirm your decision to approve ${approvedNomineeName} ?`,
+            showDenyButton: true,
+            confirmButtonText: "Confirm",
+            denyButtonText: 'Deny',
+            confirmButtonColor: '#4bb543',
+
+        })
+            .then((res) => {
+                if (res.isConfirmed == true) {
+                    //axios put
+                    axios.put(`http://localhost:5001/ieac/data/${path}`, data, {
+                        headers: {
+                            'user_id': localStorage.getItem('user_id'),
+                            'x-access-token': localStorage.getItem('token'),
+                        }
+                    })
+                        .then((res) => {
+                            console.log(res);
+                            window.location.reload();
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+                else {
+                    event.target.checked = false;
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+}
+
 const columns01: GridColDef[] = [
-    {field:'id', headerName:'Application ID', width:150},
+    { field: 'id', headerName: 'Application ID', width: 150 },
     { field: 'email_id', headerName: 'Email ID', width: 150 },
     { field: 'nomination_category', headerName: 'Nomination Category', width: 200 },
     { field: 'institution_name', headerName: 'Institution Name', width: 200 },
@@ -158,7 +211,7 @@ const columns01: GridColDef[] = [
 ];
 
 const columns02: GridColDef[] = [
-    {field:'id', headerName:'Application ID', width:150},
+    { field: 'id', headerName: 'Application ID', width: 150 },
     { field: 'faculty_name', headerName: 'Faculty Name', width: 150 },
     { field: 'designation', headerName: 'Designation', width: 150 },
     { field: 'institution', headerName: 'Institution', width: 150 },
@@ -214,13 +267,21 @@ const columns02: GridColDef[] = [
         },
     },
     {
-        field: 'ieacApprovedFile', headerName: 'Approved Reason File', width: 200, renderCell: (params) => {
-            if(!params.row['ieacApproved']){
-                return <input name="approvalFile" type="file" onChange={(event)=> handleChange(params,event,"faculty_name")}></input>
-            }
-            else{
-                return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
-            }
+        field: 'recommended', headerName: 'Recommended', width: 150, align: 'center', renderCell: (params) => {
+            return params.row['ieacApproved']
+                ?
+                <a 
+                className="p-2 bg-red-700 rounded-xl shadow-red-100 text-white"
+                href={`http://localhost:5001/${params.row['ieacApprovedFile'].split('data')[1]}`}>
+                    Download
+                </a>
+                :
+                <input
+                    type="checkbox"
+                    onChange={(event) => handleResearchChange(params, event)}
+                >
+
+                </input>
         }
     },
     {
@@ -237,7 +298,7 @@ const columns02: GridColDef[] = [
 ];
 
 const columns03: GridColDef[] = [
-    {field:'id', headerName:'Application ID', width:150},
+    { field: 'id', headerName: 'Application ID', width: 150 },
     { field: 'email_id', headerName: 'Email ID', width: 150 },
     { field: 'institute_name', headerName: 'Institute Name', width: 150 },
     { field: 'nominee_inspiring_teacher', headerName: 'Nominee Inspiring Teacher', width: 200 },
@@ -277,10 +338,10 @@ const columns03: GridColDef[] = [
     },
     {
         field: 'ieacApprovedFile', headerName: 'Approved Reason File', width: 200, renderCell: (params) => {
-            if(!params.row['ieacApproved']){
-                return <input name="approvalFile" type="file" onChange={(event)=> handleChange(params,event,"faculty_name")}></input>
+            if (!params.row['ieacApproved']) {
+                return <input name="approvalFile" type="file" onChange={(event) => handleChange(params, event, "faculty_name")}></input>
             }
-            else{
+            else {
                 return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
             }
         }
@@ -310,7 +371,7 @@ const columns03: GridColDef[] = [
 ];
 
 const columns04: GridColDef[] = [
-    {field:'id', headerName:'Application ID', width:150},
+    { field: 'id', headerName: 'Application ID', width: 150 },
     { field: 'email_id', headerName: 'Email ID', width: 150 },
     { field: 'faculty_name', headerName: 'Faculty Name', width: 150 },
     { field: 'awards_category', headerName: 'Awards Category', width: 150 },
@@ -352,10 +413,10 @@ const columns04: GridColDef[] = [
     },
     {
         field: 'ieacApprovedFile', headerName: 'Approved Reason File', width: 200, renderCell: (params) => {
-            if(!params.row['ieacApproved']){
-                return <input name="approvalFile" type="file" onChange={(event)=> handleChange(params,event,"faculty_name")}></input>
+            if (!params.row['ieacApproved']) {
+                return <input name="approvalFile" type="file" onChange={(event) => handleChange(params, event, "faculty_name")}></input>
             }
-            else{
+            else {
                 return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
             }
         }
@@ -385,7 +446,7 @@ const columns04: GridColDef[] = [
 ];
 
 const columns05: GridColDef[] = [
-    {field:'id', headerName:'Application ID', width:150},
+    { field: 'id', headerName: 'Application ID', width: 150 },
     { field: 'email_id', headerName: 'Email ID', width: 150 },
     { field: 'staff_name', headerName: 'Staff Name', width: 150 },
     { field: 'award_category', headerName: 'Award Category', width: 150 },
@@ -431,10 +492,10 @@ const columns05: GridColDef[] = [
     },
     {
         field: 'ieacApprovedFile', headerName: 'Approved Reason File', width: 200, renderCell: (params) => {
-            if(!params.row['ieacApproved']){
-                return <input name="approvalFile" type="file" onChange={(event)=> handleChange(params,event,"faculty_name")}></input>
+            if (!params.row['ieacApproved']) {
+                return <input name="approvalFile" type="file" onChange={(event) => handleChange(params, event, "faculty_name")}></input>
             }
-            else{
+            else {
                 return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
             }
         }
