@@ -19,64 +19,11 @@ import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import Swal from 'sweetalert2';
 import axios from "axios";
-import Dialog from '@mui/material/Dialog'
+
 /**
  * Handlers
  */
 
-// const handleChange = (params,event, name)=>{
-
-//     const approvedNomineeName = params.row[name];
-
-//     const data={
-//         approvalFile : event.target.files[0],
-//         applicationID : params.row['id'],
-//     };
-
-//     const path =window.location.href.split('/review/')[1];
-
-//     Swal.fire({
-//         title:'Confirmation',
-//         icon:'question',
-//         text:`Do you to confirm your decision to approve ${approvedNomineeName} ?`,
-//         showDenyButton: true,
-//         confirmButtonText:"Confirm",
-//         denyButtonText:'Deny',
-//         confirmButtonColor:'#4bb543',
-
-//     })
-//     .then((res)=>{
-
-//         if(res.isConfirmed==true){
-
-//             axios.put(`http://localhost:5001/ieac/data/${path}`,data,{
-//                 headers:{
-//                     'Content-Type': 'multipart/form-data',
-//                     'user_id':localStorage.getItem('user_id'),
-//                     'x-access-token': localStorage.getItem('token'),
-//                 }
-//             } )
-//             .then((res)=>{
-//                 Swal.fire({
-//                     title:'Successfully Updated',
-//                     icon:'success',
-//                     confirmButtonColor:'rgb(185,28,28)'
-//                 })
-//                 .then((res)=>{
-//                     window.location.reload();
-//                 })
-//             })
-//             .catch((err)=>{
-//                 console.log(err);
-//             })
-//         }
-
-//     })
-//     .catch((err)=>{
-//         console.log(err);
-//     })
-
-// }
 
 const handleChange = () => {
 
@@ -128,6 +75,186 @@ const handleResearchChange = (params, event) => {
             .catch((err) => {
                 console.log(err);
             })
+    }
+}
+
+/**Teaching Handles */
+
+const handleTeachRecommend = (params, event) => {
+
+    if (event.target.checked == true) {
+        Swal.fire({
+            title: "Score for Recommeded",
+            confirmButtonText: 'Confirm',
+            confirmButtonColor: 'rgb(185,28,28)',
+            html:
+                `
+            <div>
+                <div class='my-3 text-center text-xl text-red-700 font-Poppins font-semibold'>
+                    <h2>
+                        ${params.row['faculty_name']}'s Score
+                    </h2>
+                </div>
+                <div class='text-sm text-left font-Poppins text-red-700 my-2'>
+                    <p> A. Padagogical Competence Score </p>
+                </div>
+                <div class="flex justify-start my-1">
+                    <input type='number' class='border-2 font-Poppins border-black shadow-lg rounded-xl p-2' id='score-A'></input>
+                </div>
+                <div class='text-sm text-left font-Poppins text-red-700 my-2'>
+                    <p>B.Beyond the classroom </p>
+                </div>
+                <div class="flex justify-start my-1">
+                    <input type='number' class='border-2 font-Poppins border-black shadow-lg rounded-xl p-2' id='score-B'></input>
+                </div>
+                <div class='text-sm text-left font-Poppins text-red-700 my-2'>
+                    <p> C. Self and professional development </p>
+                </div>
+                <div class="flex justify-start my-1">
+                    <input type='number' class='border-2 font-Poppins border-black shadow-lg rounded-xl p-2' id='score-C'></input>
+                </div>
+            </div>
+            `,
+            preConfirm:() => {
+                const scoreA = Swal.getPopup().querySelector('#score-A').value
+                const scoreB = Swal.getPopup().querySelector('#score-B').value
+                const scoreC = Swal.getPopup().querySelector('#score-C').value
+                if (!scoreA || !scoreB || !scoreC) {
+                  Swal.showValidationMessage(`Please enter all fields !`)
+                }
+                return { scoreA:scoreA, scoreB:scoreB , scoreC: scoreC }
+            },
+        })
+        .then((res)=>{
+            if(res.isConfirmed == true){
+
+                // creata a payload to pass
+                const data = {
+                    scoreA: res.value.scoreA,
+                    scoreB: res.value.scoreB,
+                    scoreC: res.value.scoreC,
+                    recommended:true,
+                    applicationID: params.row['id'],
+                }
+
+                // make a put request axios
+                const path = window.location.href.split('/review/')[1]; 
+                axios.put(`http://localhost:5001/ieac/data/${path}`,data,{
+                    headers:{
+                        'x-access-token':localStorage.getItem('token'),
+                        'user_id': localStorage.getItem('user_id')
+                    }
+                })
+                .then((res)=>{
+                    
+                    Swal.fire({
+                        title:'Update Successful',
+                        icon:'success',
+                        confirmButtonColor:'rgb(185,28,28)',
+                        confirmButtonText:'Okay'
+                    })
+                    .then((res)=>{
+                        window.location.reload()
+                    })
+                })
+                .catch((err)=>{
+                    console.log(err);
+                })
+
+            }
+            else{
+                event.target.checked=false;
+            }
+        })
+    }
+}
+
+const handleTeachNotRecommend = (params, event) => {
+    if (event.target.checked == true) {
+        Swal.fire({
+            title: 'Score for Not Recommended',
+            confirmButtonText: 'Confirm',
+            confirmButtonColor: 'rgb(185,28,28)',
+            html:
+                `
+            <div>
+                <div class='my-3 text-center text-xl text-red-700 font-Poppins font-semibold'>
+                    <h2>
+                        ${params.row['faculty_name']}'s Score
+                    </h2>
+                </div>
+                <div class='text-sm text-left font-Poppins text-red-700 my-2'>
+                    <p> A. Padagogical Competence Score </p>
+                </div>
+                <div class="flex justify-start my-1">
+                    <input type='number' class='border-2 font-Poppins border-black shadow-lg rounded-xl p-2' id='score-A'></input>
+                </div>
+                <div class='text-sm text-left font-Poppins text-red-700 my-2'>
+                    <p>B.Beyond the classroom </p>
+                </div>
+                <div class="flex justify-start my-1">
+                    <input type='number' class='border-2 font-Poppins border-black shadow-lg rounded-xl p-2' id='score-B'></input>
+                </div>
+                <div class='text-sm text-left font-Poppins text-red-700 my-2'>
+                    <p> C. Self and professional development </p>
+                </div>
+                <div class="flex justify-start my-1">
+                    <input type='number' class='border-2 font-Poppins border-black shadow-lg rounded-xl p-2' id='score-C'></input>
+                </div>
+            </div>
+            `,
+            preConfirm:() => {
+                const scoreA = Swal.getPopup().querySelector('#score-A').value
+                const scoreB = Swal.getPopup().querySelector('#score-B').value
+                const scoreC = Swal.getPopup().querySelector('#score-C').value
+                if (!scoreA || !scoreB || !scoreC) {
+                  Swal.showValidationMessage(`Please enter all fields !`)
+                }
+                return { scoreA:scoreA, scoreB:scoreB , scoreC: scoreC }
+            },
+        })
+        .then((res)=>{
+            
+            if(res.isConfirmed == true){
+                
+                 // creata a payload to pass
+                 const data = {
+                    scoreA: res.value.scoreA,
+                    scoreB: res.value.scoreB,
+                    scoreC: res.value.scoreC,
+                    recommended:false,
+                    applicationID: params.row['id'],
+                }
+
+                // make a put request axios
+                const path = window.location.href.split('/review/')[1]; 
+                axios.put(`http://localhost:5001/ieac/data/${path}`,data,{
+                    headers:{
+                        'x-access-token':localStorage.getItem('token'),
+                        'user_id': localStorage.getItem('user_id')
+                    }
+                })
+                .then((res)=>{
+                    
+                    Swal.fire({
+                        title:'Update Successful',
+                        icon:'success',
+                        confirmButtonColor:'rgb(185,28,28)',
+                        confirmButtonText:'Okay'
+                    })
+                    .then((res)=>{
+                        window.location.reload()
+                    })
+                })
+                .catch((err)=>{
+                    console.log(err);
+                })
+
+            }
+            else{
+                event.target.checked = false;
+            }
+        })
     }
 }
 
@@ -270,9 +397,9 @@ const columns02: GridColDef[] = [
         field: 'recommended', headerName: 'Recommended', width: 150, align: 'center', renderCell: (params) => {
             return params.row['ieacApproved']
                 ?
-                <a 
-                className="p-2 bg-red-700 rounded-xl shadow-red-100 text-white"
-                href={`http://localhost:5001/${params.row['ieacApprovedFile'].split('data')[1]}`}>
+                <a
+                    className="p-2 bg-red-700 rounded-xl shadow-red-100 text-white"
+                    href={`http://localhost:5001/${params.row['ieacApprovedFile'].split('data')[1]}`}>
                     Download
                 </a>
                 :
@@ -412,9 +539,26 @@ const columns04: GridColDef[] = [
         }
     },
     {
+        field: 'recommended', headerName: 'Recommended', width: 150, align: 'center', renderCell: (params) => {
+            return params.row['ieac_scoreA']==null
+            ?
+            <input type="checkbox" name="recommend" onChange={(event) => handleTeachRecommend(params, event)}></input>
+            :
+            'Completed'
+        }
+    },
+    {
+        field: 'not-recommended', headerName: 'Not Recommended', width: 150, align: 'center', renderCell: (params) => {
+            return params.row['ieac_scoreA']== null ?
+             <input type="checkbox" name="not-recommend" onChange={(event) => handleTeachNotRecommend(params, event)}></input>
+            :
+            'Completed'
+        }
+    },
+    {
         field: 'ieacApprovedFile', headerName: 'Approved Reason File', width: 200, renderCell: (params) => {
-            if (!params.row['ieacApproved']) {
-                return <input name="approvalFile" type="file" onChange={(event) => handleChange(params, event, "faculty_name")}></input>
+            if (!params.row['ieacApprovedFile']) {
+                return "Upload Pending ..."
             }
             else {
                 return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;

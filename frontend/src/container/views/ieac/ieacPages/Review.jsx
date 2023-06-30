@@ -89,7 +89,9 @@ const Review = () => {
                                 icon: 'success',
                                 title: 'File Uploaded Successfully'
                             })
-                            console.log(res);
+                            .then((res)=>{
+                                window.location.reload();
+                            })
                         })
                         .catch((err) => {
                             console.log(err);

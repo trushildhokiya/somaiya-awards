@@ -289,12 +289,16 @@ const teachingDataUpdater = asyncHandler( async (req,res)=>{
         throw new Error("FORBIDDEN RESOURCE REQUESTED")
     }
 
-    const approvalFile = req.file.path;
-    const {applicationID} = req.body;
+    const {scoreA,scoreB,scoreC,recommended,applicationID} = req.body;
 
-    const applicationForm  = await Teaching.findOne({where: {id: applicationID}});
+    const applicationForm = await Teaching.findOne({where: {id: applicationID}});
 
-    await applicationForm.update({ieacApproved: true , ieacApprovedFile: approvalFile});
+    await applicationForm.update({
+        ieac_scoreA:scoreA,
+        ieac_scoreB:scoreB,
+        ieac_scoreC:scoreC,
+        ieacApproved:recommended
+    });
 
     res.status(200).json({
         message:'Update Successful'
@@ -378,6 +382,43 @@ const researchRecFileHandler = asyncHandler( async( req, res)=>{
     })
 })
 
+
+const teachingRecFileHandler = asyncHandler( async(req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({where : {id: user_id}});
+
+    if(!user){
+
+        // throw error
+        res.status(400)
+        throw new Error('User not found')
+    }
+
+    // checks role is IEAC or not
+    if(user.role!= 'IEAC'){
+        res.status(403)
+        throw new Error("FORBIDDEN RESOURCE REQUESTED")
+    }
+    
+
+    const ieacApprovedFile  = req.file.path;
+
+    const currentYear = new Date().getFullYear();
+
+    await Teaching.update(
+        { ieacApprovedFile: ieacApprovedFile },
+        { where: sequelize.literal(`YEAR(createdAt) = ${currentYear}`) }
+    );
+
+    res.status(200).json({
+        file:ieacApprovedFile,
+        message:'File uploaded sucessfully! '
+    })
+
+});
+
 module.exports = {
     institutionDataHandler,
     researchDataHandler,
@@ -390,4 +431,5 @@ module.exports = {
     teachingDataUpdater,
     nonTeachingDataUpdater,
     researchRecFileHandler,
+    teachingRecFileHandler,
 }

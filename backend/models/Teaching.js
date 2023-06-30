@@ -166,7 +166,18 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING,
             allowNull: true,
         },
-
+        ieac_scoreA:{
+            type: dataTypes.DECIMAL(10,5),
+            allowNull: true,
+        },
+        ieac_scoreB:{
+            type: dataTypes.DECIMAL(10,5),
+            allowNull: true,
+        },
+        ieac_scoreC:{
+            type: dataTypes.DECIMAL(10,5),
+            allowNull: true,
+        },
         hr_approved: {
 
             type: dataTypes.BOOLEAN,
