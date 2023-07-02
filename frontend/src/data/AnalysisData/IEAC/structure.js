@@ -78,6 +78,56 @@ const handleResearchChange = (params, event) => {
     }
 }
 
+/**Sports Handler */
+
+const handleSportsChange = (params,event)=>{
+
+    if (event.target.checked == true) {
+
+        const data = {
+            applicationID: params.row['id'],
+        };
+
+        const path = window.location.href.split('/review/')[1];
+
+        Swal.fire({
+            title: 'Confirmation',
+            icon: 'question',
+            text: `Do you to confirm your decision to approve ?`,
+            showDenyButton: true,
+            confirmButtonText: "Confirm",
+            denyButtonText: 'Deny',
+            confirmButtonColor: '#4bb543',
+
+        })
+            .then((res) => {
+                if (res.isConfirmed == true) {
+                    //axios put
+                    axios.put(`http://localhost:5001/ieac/data/${path}`, data, {
+                        headers: {
+                            'user_id': localStorage.getItem('user_id'),
+                            'x-access-token': localStorage.getItem('token'),
+                        }
+                    })
+                        .then((res) => {
+                            console.log(res);
+                            window.location.reload();
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+                else {
+                    event.target.checked = false;
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+}
+
 /**Teaching Handles */
 
 const handleTeachRecommend = (params, event) => {
@@ -636,13 +686,25 @@ const columns03: GridColDef[] = [
         }
     },
     {
-        field: 'ieacApprovedFile', headerName: 'Approved Reason File', width: 200, renderCell: (params) => {
-            if (!params.row['ieacApproved']) {
-                return <input name="approvalFile" type="file" onChange={(event) => handleChange(params, event, "faculty_name")}></input>
-            }
-            else {
-                return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
-            }
+        field: 'recommended', headerName: 'Recommended', width: 150, align: 'center', renderCell: (params) => {
+            return params.row['ieacApproved']
+                ?
+                 params.row['ieacApprovedFile']== null
+                 ?
+                 'Upload Pending'
+                 :
+                 <a
+                    className="p-2 bg-red-700 rounded-xl shadow-red-100 text-white"
+                    href={`http://localhost:5001/${params.row['ieacApprovedFile'].split('data')[1]}`}>
+                    Download
+                </a>
+                :
+                <input
+                    type="checkbox"
+                    onChange={(event) => handleSportsChange(params, event)}
+                >
+
+                </input>
         }
     },
     {

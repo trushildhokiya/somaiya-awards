@@ -253,12 +253,11 @@ const sportsDataUpdater = asyncHandler( async (req,res)=>{
         throw new Error("FORBIDDEN RESOURCE REQUESTED")
     }
 
-    const approvalFile = req.file.path;
     const {applicationID} = req.body;
 
     const applicationForm  = await Sports.findOne({where: {id: applicationID}});
 
-    await applicationForm.update({ieacApproved: true , ieacApprovedFile: approvalFile});
+    await applicationForm.update({ieacApproved: true});
 
     res.status(200).json({
         message:'Update Successful'
@@ -395,6 +394,51 @@ const researchRecFileHandler = asyncHandler( async( req, res)=>{
     })
 })
 
+const sportsRecFileHandler = asyncHandler(async( req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({where : {id: user_id}});
+
+    if(!user){
+
+        // throw error
+        res.status(400)
+        throw new Error('User not found')
+    }
+
+    // checks role is IEAC or not
+    if(user.role!= 'IEAC'){
+        res.status(403)
+        throw new Error("FORBIDDEN RESOURCE REQUESTED")
+    }
+    
+
+    const ieacApprovedFile  = req.file.path;
+
+    const currentYear = new Date().getFullYear();
+    await Sports.update(
+        { 
+            ieacApprovedFile : ieacApprovedFile
+        },
+        {
+          where: {
+            createdAt: {
+              [Op.and]: [
+                sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+              ]
+            },
+            institute_name: user.institution,
+          }
+        }
+    );
+
+    res.status(200).json({
+        file:ieacApprovedFile,
+        message:'File uploaded sucessfully! '
+    })
+
+})
 
 const teachingRecFileHandler = asyncHandler( async(req,res)=>{
 
@@ -507,5 +551,6 @@ module.exports = {
     nonTeachingDataUpdater,
     researchRecFileHandler,
     teachingRecFileHandler,
-    nonTeachingRecFileHandler
+    nonTeachingRecFileHandler,
+    sportsRecFileHandler
 }
