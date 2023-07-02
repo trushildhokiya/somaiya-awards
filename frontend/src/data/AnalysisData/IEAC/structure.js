@@ -373,12 +373,12 @@ const columns02: GridColDef[] = [
     { field: 'national_awards_won_count', headerName: 'National Awards Won Count', width: 250 },
     {
         field: 'evidence_of_research', headerName: 'Evidence of Research', width: 200, renderCell: (params) => {
-            return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+            return <a href={`http://localhost:5001/${params.value!=null ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
         }
     },
     {
         field: 'evidence_of_data_provided', headerName: 'Evidence of Data Provided', width: 200, renderCell: (params) => {
-            return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+            return <a href={`http://localhost:5001/${params.value!= null ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
         }
     },
     { field: 'confirmation_of_trueData', headerName: 'Confirmation of True Data', width: 200, },
@@ -397,7 +397,11 @@ const columns02: GridColDef[] = [
         field: 'recommended', headerName: 'Recommended', width: 150, align: 'center', renderCell: (params) => {
             return params.row['ieacApproved']
                 ?
-                <a
+                 params.row['ieacApprovedFile']== null
+                 ?
+                 'Upload Pending'
+                 :
+                 <a
                     className="p-2 bg-red-700 rounded-xl shadow-red-100 text-white"
                     href={`http://localhost:5001/${params.row['ieacApprovedFile'].split('data')[1]}`}>
                     Download

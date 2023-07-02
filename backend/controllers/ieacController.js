@@ -370,10 +370,20 @@ const researchRecFileHandler = asyncHandler( async( req, res)=>{
     const ieacApprovedFile  = req.file.path;
 
     const currentYear = new Date().getFullYear();
-
     await Research.update(
-        { ieacApprovedFile: ieacApprovedFile },
-        { where: sequelize.literal(`YEAR(createdAt) = ${currentYear}`) }
+        { 
+            ieacApprovedFile : ieacApprovedFile
+        },
+        {
+          where: {
+            createdAt: {
+              [Op.and]: [
+                sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+              ]
+            },
+            institution: user.institution,
+          }
+        }
     );
 
     res.status(200).json({
@@ -407,10 +417,23 @@ const teachingRecFileHandler = asyncHandler( async(req,res)=>{
 
     const currentYear = new Date().getFullYear();
 
+ 
     await Teaching.update(
-        { ieacApprovedFile: ieacApprovedFile },
-        { where: sequelize.literal(`YEAR(createdAt) = ${currentYear}`) }
+        { 
+            ieacApprovedFile : ieacApprovedFile
+        },
+        {
+          where: {
+            createdAt: {
+              [Op.and]: [
+                sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+              ]
+            },
+            institute_name: user.institution,
+          }
+        }
     );
+
 
     res.status(200).json({
         file:ieacApprovedFile,
