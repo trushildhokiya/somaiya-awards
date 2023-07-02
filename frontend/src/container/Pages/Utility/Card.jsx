@@ -11,7 +11,13 @@ const Card = (props) => {
     console.log(searchParams);
     useEffect(()=>{
         setTimeout(()=>{
-            navigate('/')
+            switch(localStorage.getItem('role')){
+                case 'HOI': 
+                    navigate('/hoi')
+                    break;
+
+                default: navigate('/')
+            }
         },6000)
     },[])
     

@@ -183,6 +183,16 @@ module.exports= (sequelize,dataTypes)=>{
             defaultValue: false
         },
 
+        ieac_scoreA:{
+            type: dataTypes.DECIMAL(10,5),
+            allowNull: true,
+        },
+
+        ieac_scoreB:{
+            type: dataTypes.DECIMAL(10,5),
+            allowNull: true,
+        },
+
         ieacApprovedFile:{
             type: dataTypes.STRING,
             allowNull: true,

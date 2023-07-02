@@ -37,6 +37,7 @@ const Login = () => {
                         localStorage.setItem('token', res.data['token'])
                         localStorage.setItem('user_id', res.data['user_id'])
                         localStorage.setItem('institution',res.data['institution'])
+                        localStorage.setItem('role',res.data['role'])
                         setCredentials({})
 
                         switch (res.data['role']) {

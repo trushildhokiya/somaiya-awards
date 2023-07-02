@@ -11,7 +11,8 @@ const {
     teachingDataUpdater,
     nonTeachingDataUpdater,
     researchRecFileHandler,
-    teachingRecFileHandler} = require('../controllers/ieacController');
+    teachingRecFileHandler,
+    nonTeachingRecFileHandler} = require('../controllers/ieacController');
 const {upload06, upload07, upload08, upload09} =require('../middleware/fileUpload');
 const userAuthenticator = require('../middleware/userAuthenticator');
 
@@ -34,5 +35,6 @@ router.route('/non-teaching').put(userAuthenticator,nonTeachingDataUpdater);
 
 router.route('/research').post(userAuthenticator,upload06.single('approvalFile'),researchRecFileHandler)
 router.route('/teaching').post(userAuthenticator,upload08.single('approvalFile'),teachingRecFileHandler)
+router.route('/non-teaching').post(userAuthenticator,upload08.single('approvalFile'),nonTeachingRecFileHandler)
 
 module.exports = router
