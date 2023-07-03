@@ -65,17 +65,8 @@ Setting Up Frontend
 
 ```bash
 cd frontend
-npm install --force 
+npm install 
 ```
-
-> **Warning**
-> Due to no updations in dependency of Material Table we have to use depreated version MUI 4.0x which causes dependency errors while executing 
-
-```bash
-npm install
-```
-
-> so do not use above command instead use --force with npm install 
 
 Start your frontend React App
 ```bash
@@ -106,7 +97,7 @@ EMAIL_PASSWORD = <Enter your gmail APP key not gmail's password >
 ```
 
 > **Note**
-> Not editing the env file may not affect your server startup but may cause errors in actions where email is to be sent via backend server (see mailing section below)<br>This video might help you to create App Key if you dont know [Link](https://www.youtube.com/watch?v=hXiPshHn9Pw)
+> Not editing the env file may not affect your server startup but may cause errors in actions where email is to be sent via backend server (see mailing section below)<br>This video might help you to create App Key if you dont know [Link to Youtube Video](https://www.youtube.com/watch?v=hXiPshHn9Pw)
 
 
 Start your backend server
