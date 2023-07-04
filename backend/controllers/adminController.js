@@ -13,13 +13,67 @@ const {
     Sequelize } = require('../models')
 const { Op } = Sequelize;
 const sequelize = require('sequelize');
+const { v4: uuidv4 } = require('uuid');
 
+
+/**Global Info */
+const institutionArray =  [
+    "The Somaiya School",
+    "S. K. Somaiya Prathmik Shala",
+    "S K Somaiya Vinay Mandir High School",
+    "Somaiya Vidyamandir- Sakarwadi",
+    "Shri Sharda English Medium School Kopargaon",
+    "Somaiya Vidya Mandir- Laxmiwadi",
+    "Somaiya Shishu Niketan Primary School- Sameerwadi",
+    "Somaiya Vinaymandir High School- Sameerwadi",
+    "KJ Somaiya English Medium School Sameerwadi",
+    "Nareshwadi Learning Centre- Dahanu",
+    "SK Somaiya Vinay Mandir High School, Mumbai",
+    "KJ Somaiya Junior College of Arts, Commerce and Science",
+    "SK Somaiya Vinay Mandir Junior College, Mumbai",
+    "KJ Somaiya Private Industrial Training Institute",
+    "Smt. Sakarben Somaiya Junior College of Education (DEd)",
+    "KJ Somaiya Institute of Engineering and Information Technology, Ayurvihar",
+    "KJ Somaiya College of Engineering",
+    "KJ Somaiya Institute of Management",
+    "KJ Somaiya Polytechnic College",
+    "KJ Somaiya College of Arts and Commerce",
+    "KJ Somaiya College of Science and Commerce",
+    "K.J Somaiya College of Comprehensive College of Education , Training and Research",
+    "KJ Somaiya Bhartiya Sanskriti Peetham",
+    "KJ Somaiya Centre for Buddhish Studies",
+    "KJ Somaiya Centre for Studies in Jainism",
+    "KJ Somaiya Medical College and Research Centre",
+    "KJ Somaiya College of Physiotherapy",
+    "KJ Somaiya School and College of Nursing",
+    "Somaiya Sports Academy",
+    "SK Somaiya College (SVU)",
+    "SK Somaiya College of Arts, Science and Commerce (MU)"
+];
 
 //@desc get counts of all forms
-//@route GET admin/data/counts
+//@route GET admin/data/count/all
 //@access Private
 
 const getCounts = asyncHandler( async(req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
 
     let countData = {};
 
@@ -106,10 +160,28 @@ const getCounts = asyncHandler( async(req,res)=>{
 
 
 //@desc get last 15 days count total datewise
-//@route GET admin/data/fcount-15
+//@route GET admin/data/count/15
 //@access private
 
 const getDaysCount = asyncHandler( async(req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
 
     const currentYear = new Date().getFullYear();
 
@@ -227,14 +299,198 @@ const getDaysCount = asyncHandler( async(req,res)=>{
 
     res.status(200).json({
         message:'Api works',
-        count: pastDataCount
+        data: pastDataCount
     })
 
 });
 
 
-// custom functions which will be used in API controllers
+//@desc get institution wise all forms count
+//@route GET admin/data/count/institution-wise
+//@access Private 
 
+const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const currentYear = new Date().getFullYear();
+
+    //get institution data
+    const institutionData = await OutstandingInstitution.findAll(
+        {
+            where: Sequelize.and( 
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`), 
+            )
+        }
+    )
+
+    //get research data
+    const researchData = await Research.findAll(
+        {
+            where: Sequelize.and( 
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            )
+        }
+    )
+
+
+    //get sports data
+    const sportsData = await Sports.findAll(
+        {
+            where: Sequelize.and( 
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            )
+        }
+    )
+
+    //get teaching data
+    const teachingData = await Teaching.findAll(
+        {
+            where: Sequelize.and( 
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            )
+        }
+    )
+
+    //get Non Teaching Data
+    const nonTeachingData = await NonTeaching.findAll(
+        {
+            where: Sequelize.and( 
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            )
+        }
+    )
+
+
+    const institutionWiseCount= [];
+  
+    // create a array of object with nstitution name and count (default 0 )
+
+    for (const institution of institutionArray){
+
+        institutionWiseCount.push(
+            {
+                id: uuidv4(),
+                institute: institution ,
+                institution_form: 0,
+                research_form:0,
+                sports_form:0,
+                teaching_form:0,
+                non_teaching_form:0,
+            }
+        )
+    }
+
+    // institution Form Counter
+
+    for( const data of institutionData){
+
+        const institute = data.institution_name;
+
+        institutionWiseCount.find( (object, index)=>{
+            if(object.institute === institute){
+                object.institution_form = object.institution_form + 1
+            }
+        })
+
+    }
+
+
+    // research form Counter
+
+    for( const data of researchData){
+
+        const institute = data.institution;
+
+        institutionWiseCount.find( (object, index)=>{
+            if(object.institute === institute){
+                object.research_form = object.research_form + 1
+            }
+        })
+
+    }
+
+
+    // sports form Counter
+
+    for( const data of sportsData){
+
+        const institute = data.institute_name;
+
+        institutionWiseCount.find( (object, index)=>{
+            if(object.institute === institute){
+                object.sports_form = object.sports_form + 1
+            }
+        })
+
+    }
+
+
+    // teaching form Counter
+
+    for( const data of teachingData){
+
+        const institute = data.institute_name;
+
+        institutionWiseCount.find( (object, index)=>{
+            if(object.institute === institute){
+                object.teaching_form = object.teaching_form + 1
+            }
+        })
+
+    }  
+
+
+    // non teaching form Counter
+
+    for( const data of nonTeachingData){
+
+        const institute = data.institute_name;
+
+        institutionWiseCount.find( (object, index)=>{
+            if(object.institute === institute){
+                object.non_teaching_form = object.non_teaching_form + 1
+            }
+        })
+
+    } 
+
+
+
+    res.status(200).json({
+        message:'Request Successful',
+        data:institutionWiseCount
+    })
+})
+
+
+// @desc : group Wise Count
+// @ route GET admin/data/count/group
+// @access Private 
+
+// TODO: complete the controller
+
+
+
+// custom functions which will be used in Admin Controllers
+
+// @desc: extracts date from data 
+// @accepts Array
 const dataFormatter = (data)=>{
 
     const formattedData=[];
@@ -248,36 +504,47 @@ const dataFormatter = (data)=>{
     return formattedData;
 }
 
-const getDateCounts = (array)=>{
 
+// @ desc get occurance of each date in formatted data
+// @accepts Array
+const getDateCounts = (array) => {
     let currentDate = new Date();
-    
-    let dateCounts = {};
-
+    let dateCounts = [];
+  
     for (let i = 0; i < 15; i++) {
-
-      let date = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - i).toISOString().split('T')[0];
-      
+      let date = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        currentDate.getDate() - i
+      ).toISOString().split('T')[0];
+  
       // Set the initial count to 0
-      dateCounts[date] = 0;
+      let dateCount = {
+        date: date,
+        formsFilled: 0
+      };
+  
+      dateCounts.push(dateCount);
     }
-    
-   
+  
     for (let j = 0; j < array.length; j++) {
       let arrayDate = new Date(array[j].date).toISOString().split('T')[0];
-      
+  
       // Check if the date is within the last 15 days
-      if (dateCounts.hasOwnProperty(arrayDate)) {
-        dateCounts[arrayDate]++;
+      let foundDate = dateCounts.find(dateCount => dateCount.date === arrayDate);
+      if (foundDate) {
+        foundDate.formsFilled++;
       }
     }
-
+  
     return dateCounts;
-}
+  };
+  
 
 
   
 module.exports={
     getCounts,
-    getDaysCount
+    getDaysCount,
+    getInstitutionWiseCount
 }

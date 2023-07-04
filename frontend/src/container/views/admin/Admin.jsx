@@ -14,19 +14,28 @@ const Admin = () => {
 
     const [authorized, setAuthorized] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [counts, setCounts] = useState('');
+    const [pastData, setPastData] = useState('');
+    const [rows, setRows] = useState('');
 
     const navigate = useNavigate()
 
     useEffect(() => {
 
-        if(!localStorage.getItem('token') || !localStorage.getItem('user_id')){
+        // first load all data
+        loadDashboardData()
+
+
+        // check user authentication
+
+        if (!localStorage.getItem('token') || !localStorage.getItem('user_id')) {
             Swal.fire({
-                title:"Failed to Login",
-                text:"We failed to recognize you! Try relogging",
-                imageUrl:'https://media.istockphoto.com/id/648691968/vector/website-error-403-forbidden.jpg?s=612x612&w=0&k=20&c=sSc0Cb2as4BKgH0vFq2o5h1U2vUh4xnayaYkuyFPKh8=',
+                title: "Failed to Login",
+                text: "We failed to recognize you! Try relogging",
+                imageUrl: 'https://media.istockphoto.com/id/648691968/vector/website-error-403-forbidden.jpg?s=612x612&w=0&k=20&c=sSc0Cb2as4BKgH0vFq2o5h1U2vUh4xnayaYkuyFPKh8=',
                 // imageWidth:"150",
-                imageHeight:'250',
-                confirmButtonColor:"rgb(185,28,28)"
+                imageHeight: '250',
+                confirmButtonColor: "rgb(185,28,28)"
             })
             navigate('/auth/login')
             navigate('/auth/login')
@@ -43,16 +52,16 @@ const Admin = () => {
                 if (res.data['authorized'] && res.data['role'] === 'ADMIN') {
 
                     setAuthorized(res.data['authorized'])
-                    setLoading(false)
+                    setLoading(false);
                 }
                 else {
                     Swal.fire({
-                        title:"Failed to Login",
-                        text:"We failed to recognize you! Try relogging",
-                        imageUrl:'https://media.istockphoto.com/id/648691968/vector/website-error-403-forbidden.jpg?s=612x612&w=0&k=20&c=sSc0Cb2as4BKgH0vFq2o5h1U2vUh4xnayaYkuyFPKh8=',
+                        title: "Failed to Login",
+                        text: "We failed to recognize you! Try relogging",
+                        imageUrl: 'https://media.istockphoto.com/id/648691968/vector/website-error-403-forbidden.jpg?s=612x612&w=0&k=20&c=sSc0Cb2as4BKgH0vFq2o5h1U2vUh4xnayaYkuyFPKh8=',
                         // imageWidth:"150",
-                        imageHeight:'250',
-                        confirmButtonColor:"rgb(185,28,28)"
+                        imageHeight: '250',
+                        confirmButtonColor: "rgb(185,28,28)"
                     })
                     navigate('/auth/login')
                 }
@@ -60,18 +69,66 @@ const Admin = () => {
             .catch((err) => {
                 console.log(err);
                 Swal.fire({
-                    title:"Failed to Login",
-                    text:"We failed to recognize you! Try relogging",
-                    imageUrl:'https://media.istockphoto.com/id/648691968/vector/website-error-403-forbidden.jpg?s=612x612&w=0&k=20&c=sSc0Cb2as4BKgH0vFq2o5h1U2vUh4xnayaYkuyFPKh8=',
+                    title: "Failed to Login",
+                    text: "We failed to recognize you! Try relogging",
+                    imageUrl: 'https://media.istockphoto.com/id/648691968/vector/website-error-403-forbidden.jpg?s=612x612&w=0&k=20&c=sSc0Cb2as4BKgH0vFq2o5h1U2vUh4xnayaYkuyFPKh8=',
                     // imageWidth:"150",
-                    imageHeight:'250',
-                    confirmButtonColor:"rgb(185,28,28)"
+                    imageHeight: '250',
+                    confirmButtonColor: "rgb(185,28,28)"
                 })
                 navigate('/auth/login')
                 navigate('/auth/login')
             })
 
     }, [])
+
+    const loadDashboardData = () => {
+
+        // all Counts
+        axios.get('http://localhost:5001/admin/data/count/all', {
+            headers: {
+                'user_id': localStorage.getItem('user_id'),
+                'x-access-token': localStorage.getItem('token'),
+            }
+        })
+            .then((res) => {
+                setCounts(res.data.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+        // 15 days Count
+        axios.get('http://localhost:5001/admin/data/count/15', {
+            headers: {
+                'user_id': localStorage.getItem('user_id'),
+                'x-access-token': localStorage.getItem('token'),
+            }
+        })
+            .then((res) => {
+                setPastData(res.data.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+        // institution Wise count 
+        axios.get('http://localhost:5001/admin/data/count/institution-wise', {
+            headers: {
+                'user_id': localStorage.getItem('user_id'),
+                'x-access-token': localStorage.getItem('token'),
+            }
+        })
+            .then((res) => {
+                console.log(res.data.data);
+                setRows(res.data.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+
+    }
 
     /**
      * Logout Feature
@@ -86,8 +143,8 @@ const Admin = () => {
 
         Swal.fire({
             title: 'Successfully Logged Out',
-            icon:'success',
-            confirmButtonColor:'rgb(185,28,28)'
+            icon: 'success',
+            confirmButtonColor: 'rgb(185,28,28)'
         })
         // navigate to login page
         navigate('/auth/login')
@@ -95,7 +152,7 @@ const Admin = () => {
 
 
     return (
-        <div className=''>
+        <div className='adminPage'>
 
             {
                 loading
@@ -103,9 +160,9 @@ const Admin = () => {
                     <>
                         <div className='w-full h-screen flex justify-center items-center'>
                             <MoonLoader
-                            loading={loading}
-                            size={50}
-                            color="rgb(185,28,28"
+                                loading={loading}
+                                size={50}
+                                color="rgb(185,28,28"
                             />
                         </div>
                     </>
@@ -144,25 +201,40 @@ const Admin = () => {
                                         {/* count section  */}
                                         <div className='flex flex-row w-[30%]'>
                                             <div>
-                                                <Box title="Research Forms" count={10} />
-                                                <Box title="Sports Forms" count={150} />
+                                                <Box title="Research Forms" count={counts.researchFormCount} />
+                                                <Box title="Non Teaching Forms" count={counts.nonTeachingFormCount} />
                                             </div>
                                             <div>
-                                                <Box title="Institution Forms" count={72} />
-                                                <Box title="Total Forms Filled" count={771} />
+                                                <Box title="Teaching Forms" count={counts.teachingFormCount} />
+                                                <Box
+                                                    title="Total Forms Filled"
+                                                    count={
+                                                        counts.institutionFormCount +
+                                                        counts.researchFormCount +
+                                                        counts.sportsFormCount +
+                                                        counts.teachingFormCount +
+                                                        counts.nonTeachingFormCount +
+                                                        counts.feedbackOneFormCount +
+                                                        counts.feedbackTwoFormCount +
+                                                        counts.feedbackThreeFormCount +
+                                                        counts.feedbackFourFormCount
+                                                    }
+                                                />
                                             </div>
                                         </div>
 
                                         {/* graph section  */}
                                         <div className='w-[70%]'>
-                                            <LineGraph />
+                                            <LineGraph data={pastData} />
                                         </div>
                                     </div>
 
                                     {/* flex row containing table and piechart  */}
                                     <div className='flex flex-row text-black p-5 h-full'>
-                                        <div className='w-[70%] bg-[#FFFAFA] rounded-lg p-4'>
-                                            <Datagrid />
+                                        <div className='w-[70%] custom-scroll bg-[#FFFAFA] rounded-lg p-4 h-[25rem] overflow-y-scroll'>
+                                            <Datagrid
+                                                rows={rows}
+                                            />
                                         </div>
                                         <div className='w-[30%]'>
                                             <Piechart />
