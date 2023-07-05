@@ -4,6 +4,7 @@ import SideBar from '../../../components/SideBar';
 import { motion } from 'framer-motion'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { columns01, columns02, columns03, columns04, columns05, columns06, columns07, columns08, columns09 } from '../../../data/AnalysisData/ADMIN/structure';
+import axios from 'axios';
 
 
 const Responses = () => {
@@ -70,6 +71,20 @@ const Responses = () => {
 
     }
 
+    axios.get(`http://localhost:5001/admin/data/forms/${path}`,{
+      headers:{
+        'user_id': localStorage.getItem('user_id'),
+        'x-access-token': localStorage.getItem('token'),
+      }
+    })
+    .then((res)=>{
+      console.log(res);
+      setRows(res.data.data)
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+
 
   }, [location]);
 
@@ -96,7 +111,7 @@ const Responses = () => {
             <div className='my-5'>
 
               <DataGrid
-                rows={[]}
+                rows={rows}
                 columns={columns}
                 density='comfortable'
                 slots={{
