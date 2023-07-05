@@ -51,6 +51,10 @@ const institutionArray =  [
     "SK Somaiya College of Arts, Science and Commerce (MU)"
 ];
 
+/**
+ * DASHBOARD SECTION 
+ * 
+ */
 //@desc get counts of all forms
 //@route GET admin/data/count/all
 //@access Private
@@ -487,6 +491,377 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
 
 
 
+/**
+ * RESPONSES SECTION
+ */
+
+
+//@desc get records of institution form of current Year
+//@route admin/data/forms/outstanding-institution
+//@access Private
+
+const getInstitutionData = asyncHandler( async (req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const currentYear = new Date().getFullYear();
+
+    const data = await OutstandingInstitution.findAll({
+        where: sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
+    });
+
+    res.status(200).json({
+        message:'Request Successful',
+        data: data
+    })
+
+})
+
+
+
+//@desc get records of ieac approved research form of current Year
+//@route admin/data/forms/research
+//@access Private
+
+const getResearchData = asyncHandler( async (req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const currentYear = new Date().getFullYear();
+
+    const data = await Research.findAll({
+        where: {
+          [Op.and]: [
+            sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+            { ieacApproved: true }
+          ]
+        }
+      });
+
+    res.status(200).json({
+        message: 'Request Successful',
+        data: data
+    })
+})
+
+
+
+
+//@desc get records of ieac approved Sports form of current Year
+//@route admin/data/forms/sports
+//@access Private
+
+const getSportsData = asyncHandler( async (req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const currentYear = new Date().getFullYear();
+
+    const data = await Sports.findAll({
+        where: {
+          [Op.and]: [
+            sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+            { ieacApproved: true }
+          ]
+        }
+    });
+
+    res.status(200).json({
+        message:'Request Successful',
+        data: data
+    })
+
+})
+
+
+
+
+//@desc get records ieac approved teaching form of current Year
+//@route admin/data/forms/teaching
+//@access Private
+
+const getTeachingData = asyncHandler( async (req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const currentYear = new Date().getFullYear();
+
+    const data = await Teaching.findAll({
+        where: {
+          [Op.and]: [
+            sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+            { ieacApproved: true }
+          ]
+        }
+    });
+
+    res.status(200).json({
+        message: 'Request Successful',
+        data: data
+    })
+
+})
+
+
+//@desc get records of ieac approved non teaching form of current Year
+//@route admin/data/forms/non-teaching
+//@access Private
+
+const getNonTeachingData = asyncHandler( async (req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const currentYear = new Date().getFullYear();
+
+    const data = await NonTeaching.findAll({
+        where: {
+          [Op.and]: [
+            sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+            { ieacApproved: true }
+          ]
+        }
+    });
+
+    res.status(200).json({
+        message: 'Request Successful',
+        data: data
+    })
+
+})
+
+
+//@desc get records of feedback-01 form of current Year
+//@route admin/data/forms/feedback-01
+//@access Private
+
+const getFeedback01Data = asyncHandler( async (req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const currentYear = new Date().getFullYear()
+
+    const data = FeedbackOne.findAll(
+        {
+            where : sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
+        }
+    )
+
+    res.status(200).json({
+        message:'Request Successful',
+        data: data
+    })
+
+})
+
+
+//@desc get records feedback-02 form of current Year
+//@route admin/data/forms/feedback-02
+//@access Private
+
+const getFeedback02Data = asyncHandler( async (req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const currentYear = new Date().getFullYear()
+
+    const data = FeedbackTwo.findAll(
+        {
+            where : sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
+        }
+    )
+
+    res.status(200).json({
+        message:'Request Successful',
+        data: data
+    })
+
+})
+
+
+//@desc get records of feedback-03 form of current Year
+//@route admin/data/forms/feedback-03
+//@access Private
+
+const getFeedback03Data = asyncHandler( async (req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const currentYear = new Date().getFullYear()
+
+    const data = FeedbackThree.findAll(
+        {
+            where : sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
+        }
+    )
+
+    res.status(200).json({
+        message:'Request Successful',
+        data: data
+    })
+
+})
+
+
+//@desc get records of feedback04 of current Year
+//@route admin/data/forms/feedback-04
+//@access Private
+
+const getFeedback04Data = asyncHandler( async (req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+    
+    const currentYear = new Date().getFullYear()
+
+    const data = FeedbackFour.findAll(
+        {
+            where : sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
+        }
+    )
+
+    res.status(200).json({
+        message:'Request Successful',
+        data: data
+    })
+
+})
+
+
+
 // custom functions which will be used in Admin Controllers
 
 // @desc: extracts date from data 
@@ -546,5 +921,14 @@ const getDateCounts = (array) => {
 module.exports={
     getCounts,
     getDaysCount,
-    getInstitutionWiseCount
+    getInstitutionWiseCount,
+    getInstitutionData,
+    getSportsData,
+    getResearchData,
+    getTeachingData,
+    getNonTeachingData,
+    getFeedback01Data,
+    getFeedback02Data,
+    getFeedback03Data,
+    getFeedback04Data
 }

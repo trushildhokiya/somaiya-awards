@@ -14,7 +14,6 @@ import ForgotPassword from "./container/Pages/ForgotPassword";
 import ResetPassword from "./container/Pages/ResetPassword";
 import Card from "./container/Pages/Utility/Card";
 import Admin from "./container/views/admin/Admin";
-import Overview from "./container/Pages/View Pages/Overview";
 import Responses from "./container/Pages/View Pages/Responses";
 import Home from "./container/Pages/Home";
 import Hoi from "./container/views/hoi/Hoi";
@@ -38,7 +37,6 @@ function App() {
         <Route path="/ieac" element={<Ieac />} />
         <Route path="/ieac/review/:form" element={<Review />} />
         <Route path='/admin/dashboard' element={<Admin />} />
-        <Route path="/admin/:formtype/overview" element={<Overview />} />
         <Route path="/admin/:formtype/responses" element={<Responses />} />
         <Route path="/admin/manage-users" element={<ManageUsers />} />
         <Route path="/forms/outstanding-institution" element={<OutstandingInstitution />}  />

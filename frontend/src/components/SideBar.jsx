@@ -39,21 +39,11 @@ const SideBar = () => {
                     <SubMenu
 
                         icon={<BusinessIcon />} label="Institution">
-                        <MenuItem
-                        component={<Link to="/admin/institution/overview" />}
-                        >
-                            Overview
-                        </MenuItem>
                         <MenuItem component={<Link to="/admin/institution/responses" />}>
                             Responses
                         </MenuItem>
                     </SubMenu>
                     <SubMenu icon={<ScienceRoundedIcon />} label="Research">
-                        <MenuItem
-                        component={<Link to="/admin/research/overview" />}
-                        >
-                            Overview
-                        </MenuItem>
                         <MenuItem
                         component={<Link to="/admin/research/responses" />}
                         >
@@ -62,22 +52,12 @@ const SideBar = () => {
                     </SubMenu>
                     <SubMenu icon={<SportsSoccerRoundedIcon />} label='Sports'>
                         <MenuItem
-                        component={<Link to="/admin/sports/overview" />}
-                        >
-                            Overview
-                        </MenuItem>
-                        <MenuItem
                         component={<Link to="/admin/sports/responses" />}
                         >
                             Responses
                         </MenuItem>
                     </SubMenu>
                     <SubMenu icon={<BookRoundedIcon />} label='Teaching'>
-                        <MenuItem
-                        component={<Link to="/admin/teaching/overview" />}
-                        >
-                            Overview
-                        </MenuItem>
                         <MenuItem
                         component={<Link to="/admin/teaching/responses" />}
                         >
@@ -86,22 +66,12 @@ const SideBar = () => {
                     </SubMenu>
                     <SubMenu icon={<SupervisorAccountRoundedIcon />} label='Non-Teaching'>
                         <MenuItem
-                        component={<Link to="/admin/non-teaching/overview" />}
-                        >
-                            Overview
-                        </MenuItem>
-                        <MenuItem
                         component={<Link to="/admin/non-teaching/responses" />}
                         >
                             Responses
                         </MenuItem>
                     </SubMenu>
                     <SubMenu icon={<ChatRoundedIcon />} label='Feedbacks'>
-                        <MenuItem
-                        component={<Link to="/admin/feedback/overview" />}
-                        >
-                            Overview
-                        </MenuItem>
                         <SubMenu label='Teaching'>
                             <MenuItem>
                                 Students
