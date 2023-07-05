@@ -89,9 +89,9 @@ const Review = () => {
                                 icon: 'success',
                                 title: 'File Uploaded Successfully'
                             })
-                            .then((res)=>{
-                                window.location.reload();
-                            })
+                                .then((res) => {
+                                    window.location.reload();
+                                })
                         })
                         .catch((err) => {
                             console.log(err);
@@ -121,6 +121,10 @@ const Review = () => {
                                     showQuickFilter: true,
                                     quickFilterProps: { debounceMs: 500 },
                                 },
+                            }}
+                            sx={{
+                                boxShadow: 2,
+                                padding: 2
                             }}
                         />
 

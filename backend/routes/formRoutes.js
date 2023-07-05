@@ -24,10 +24,10 @@ const {upload01,upload02, upload03, upload04, upload05} = require('../middleware
  * 
  *      All forms form with submitForm_(num)> 05 are feedback forms 
  *     
- *      feedback numbering and meaninfg
+ *      feedback numbering and meaning
  *  
  *      feeback01 : student feedback for teaching staff form
- *      feeback02 : peers feedbck for teaching staff form
+ *      feeback02 : peers feedback for teaching staff form
  *      feeback03 : students feedback for non teaching staff form
  *      feeback04 : peer feedback for non teaching staff form
  */

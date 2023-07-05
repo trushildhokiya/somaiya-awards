@@ -120,7 +120,6 @@ const Admin = () => {
             }
         })
             .then((res) => {
-                console.log(res.data.data);
                 setRows(res.data.data)
             })
             .catch((err) => {

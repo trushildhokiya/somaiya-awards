@@ -37,7 +37,7 @@ function App() {
         <Route path="/ieac" element={<Ieac />} />
         <Route path="/ieac/review/:form" element={<Review />} />
         <Route path='/admin/dashboard' element={<Admin />} />
-        <Route path="/admin/:formtype/responses" element={<Responses />} />
+        <Route path="/admin/responses/:formType" element={<Responses />} />
         <Route path="/admin/manage-users" element={<ManageUsers />} />
         <Route path="/forms/outstanding-institution" element={<OutstandingInstitution />}  />
         <Route path="/forms/sports" element={<SportsStar />}  />
