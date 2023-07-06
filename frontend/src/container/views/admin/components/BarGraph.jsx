@@ -12,9 +12,13 @@ const BarGraph = () => {
             AvgScore:'4.82',
         } ,
         {
-            name:'Feedback',
+            name:'Students',
             AvgScore:'1.12',
-        }        
+        },
+        {
+            name: 'Peers',
+            AvgScore: '0.5'
+        }       
     ]
 
     return (
@@ -27,7 +31,7 @@ const BarGraph = () => {
                     <YAxis dataKey='AvgScore'/>
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="AvgScore" fill="#8884d8" />
+                    <Bar barSize={20} dataKey="AvgScore" fill="#8884d8" />
                 </BarChart>
             </ResponsiveContainer>
 

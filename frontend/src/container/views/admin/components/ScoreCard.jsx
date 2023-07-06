@@ -14,10 +14,10 @@ const ScoreCard = () => {
         const cardElement = cardRef.current;
 
         html2canvas(cardElement, {
-            scale: 2, // Increase scale for higher resolution
-            backgroundColor: null, // Remove default white background
-            logging: false, // Disable logging (optional)
-            useCORS: true, // Enable CORS if needed for external images
+            scale: 2,
+            backgroundColor: null,
+            logging: false, 
+            useCORS: true, 
         }).then((canvas) => {
             const link = document.createElement('a');
             link.href = canvas.toDataURL('image/png');
@@ -102,7 +102,12 @@ const ScoreCard = () => {
                                     </h3>
 
                                     <h3 className='text-sm my-1'>
-                                        <span className='text-red-800 font-semibold'> Average Feedback Score : </span>
+                                        <span className='text-red-800 font-semibold'> Average Feedback Students : </span>
+                                        <span> {null || <Skeleton width={70} />}</span>
+                                    </h3>
+
+                                    <h3 className='text-sm my-1'>
+                                        <span className='text-red-800 font-semibold'> Average Feedback Peers : </span>
                                         <span> {null || <Skeleton width={70} />}</span>
                                     </h3>
 
@@ -110,6 +115,7 @@ const ScoreCard = () => {
                                         <span className='text-red-800 font-semibold'> Final Score : </span>
                                         <span> {null || <Skeleton width={170} />}</span>
                                     </h3>
+
                                 </div>
 
                             </div>

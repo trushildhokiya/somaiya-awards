@@ -125,7 +125,7 @@ const Forms = (props) => {
         })
           .then((res) => {
             console.log(res);
-
+            localStorage.removeItem(window.location.href.split('/forms/')[1] + "Data")
             navigate({
               pathname: '/forms/cards',
               search: createSearchParams({

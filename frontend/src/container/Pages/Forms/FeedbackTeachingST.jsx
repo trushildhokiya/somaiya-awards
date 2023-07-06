@@ -10,11 +10,13 @@ const FeedbackTeachingST = () => {
   const headings = ["Student Details", "Details of the teacher to be evaluated" , "Your Feedback about the Teacher","Review"]
   const limit = headings.length -1;
   const message = "In Feedback Section of Teaching Staff 1 represents lowest marks and 5 is considered as highest"
+  const aboutForm= "The feedback form is essential for students to share their thoughts and suggestions, allowing the teaching staff to continuously improve their performance. By providing feedback, students help the teaching staff understand their needs better, fostering a collaborative and supportive learning environment. This form promotes open communication and enables the teaching staff to assess their teaching methods, ensuring high-quality education for students.";
   return (
     <div>
       <Navbar /> 
       <FormInfo
         title="Student's Feedback- Teaching Staff"
+        info={aboutForm}
       />
       
       <Forms
