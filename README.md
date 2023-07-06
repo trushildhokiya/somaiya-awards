@@ -2,7 +2,7 @@
 
 ## Progress Report
 
-![Progress Bar](https://progress-bar.dev/70/)
+![Progress Bar](https://progress-bar.dev/90/)
 
 #### Form Section
 - [x] Forms Designing and Implementation
@@ -24,9 +24,9 @@
 
 #### HR Section
 - [x] Design and Implementation
-- [x] 🚧 Correct Responses of Approved Applications - ![Progress Bar](https://progress-bar.dev/0/)
-- [x] 🚧 OverView and Dashboard Corrections - ![Progress Bar](https://progress-bar.dev/0/)
-- [x] 🚧 Feedback Avg Score Integration - ![Progress Bar](https://progress-bar.dev/0/)
+- [x] Correct Responses of Approved Applications
+- [x] OverView and Dashboard Correction
+- [x] 🚧 Feedback Avg Score Integration - ![Progress Bar](https://progress-bar.dev/38/)
 
 ___
 ### Documentation
