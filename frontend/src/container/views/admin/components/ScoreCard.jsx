@@ -1,13 +1,18 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import html2canvas from 'html2canvas';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import BarGraph from './BarGraph';
+import axios from 'axios';
+
 const ScoreCard = () => {
 
 
     const cardRef = useRef(null);
+    const [apiData, setApiData] = useState({})
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true)
 
     const handleDownload = () => {
 
@@ -16,8 +21,8 @@ const ScoreCard = () => {
         html2canvas(cardElement, {
             scale: 2,
             backgroundColor: null,
-            logging: false, 
-            useCORS: true, 
+            logging: false,
+            useCORS: true,
         }).then((canvas) => {
             const link = document.createElement('a');
             link.href = canvas.toDataURL('image/png');
@@ -27,14 +32,57 @@ const ScoreCard = () => {
 
     }
 
+    useEffect(() => {
 
+
+        if (window.location.href.split('/')[4] === 'teaching') {
+
+            axios.get('http://localhost:5001/admin/data/teaching/scorecard', {
+                headers: {
+                    'user_id': localStorage.getItem('user_id'),
+                    'x-access-token': localStorage.getItem('token'),
+                    'applicationid': window.location.href.split('/scorecard/')[1],
+                }
+            })
+                .then((res) => {
+                    setApiData(res.data);
+                    setLoading(false)
+
+                    setData([
+                        {
+                            name: 'HOI',
+                            AvgScore: res.data.hoi_avg,
+                        },
+                        {
+                            name: 'IEAC',
+                            AvgScore: res.data.ieac_avg,
+                        },
+                        {
+                            name: 'Students',
+                            AvgScore: res.data.student_avg,
+                        },
+                        {
+                            name: 'Peers',
+                            AvgScore: res.data.peers_avg
+                        }
+                    ])
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+
+        }
+
+
+    }, [])
 
     return (
         <div className='w-full flex items-center justify-center h-screen font-Poppins'>
 
-            <div className='w-[50%] flex justify-center'>
+            <div className='w-[60%] flex justify-center'>
 
-                <div ref={cardRef} className=' h-96 w-[80%] shadow-xl bg-[#ffffff] rounded-md'>
+                <div ref={cardRef} className=' h-[28rem] w-[80%] shadow-xl bg-[#ffffff] rounded-md'>
 
                     <div className='flex p-1 items-center '>
 
@@ -60,23 +108,23 @@ const ScoreCard = () => {
                         </div>
                     </div>
 
-                    <div className='my-1 p-1 flex'>
+                    <div className='my-1 mt-5 p-1 flex'>
 
                         <div className='mx-3 w-full'>
 
                             <h3 className='my-1 text-sm'>
                                 <span className='text-red-800 font-semibold'> Name : </span>
-                                <span> {null || <Skeleton width={200} />}</span>
+                                <span> {loading ? <Skeleton width={200} /> : apiData.name}</span>
                             </h3>
 
-                            <h3 className='my-1 text-sm'>
+                            <h3 className='my-1 text-xs'>
                                 <span className='text-red-800 font-semibold'> Institute : </span>
-                                <span> {null || <Skeleton width={200} />}</span>
+                                <span> {loading ? <Skeleton width={200} /> : apiData.institute}</span>
                             </h3>
 
-                            <h3 className='my-1 text-sm'>
+                            <h3 className='my-1 text-xs'>
                                 <span className='text-red-800 font-semibold'> Award Type : </span>
-                                <span> {null || <Skeleton width={170} />}</span>
+                                <span> {loading ? <Skeleton width={200} /> : apiData.category}</span>
                             </h3>
 
                             <div className='mt-5'>
@@ -88,32 +136,27 @@ const ScoreCard = () => {
 
                                     <h3 className='text-sm my-1'>
                                         <span className='text-red-800 font-semibold'> Score A : </span>
-                                        <span> {null || <Skeleton width={170} />}</span>
+                                        <span> {loading ? <Skeleton width={200} /> : apiData.scoreA}</span>
                                     </h3>
-
+                                    {console.log(apiData)}
                                     <h3 className='text-sm my-1'>
                                         <span className='text-red-800 font-semibold'> Score B : </span>
-                                        <span> {null || <Skeleton width={170} />}</span>
+                                        <span> {loading ? <Skeleton width={200} /> : apiData.scoreB}</span>
                                     </h3>
 
                                     <h3 className='text-sm my-1'>
                                         <span className='text-red-800 font-semibold'> Score C : </span>
-                                        <span> {null || <Skeleton width={170} />}</span>
+                                        <span> {loading ? <Skeleton width={200} /> : apiData.scoreC}</span>
                                     </h3>
 
                                     <h3 className='text-sm my-1'>
                                         <span className='text-red-800 font-semibold'> Average Feedback Students : </span>
-                                        <span> {null || <Skeleton width={70} />}</span>
+                                        <span> {loading ? <Skeleton width={200} /> : apiData.student_avg}</span>
                                     </h3>
 
                                     <h3 className='text-sm my-1'>
                                         <span className='text-red-800 font-semibold'> Average Feedback Peers : </span>
-                                        <span> {null || <Skeleton width={70} />}</span>
-                                    </h3>
-
-                                    <h3 className='text-sm my-1'>
-                                        <span className='text-red-800 font-semibold'> Final Score : </span>
-                                        <span> {null || <Skeleton width={170} />}</span>
+                                        <span> {loading ? <Skeleton width={200} /> : apiData.peers_avg}</span>
                                     </h3>
 
                                 </div>
@@ -121,8 +164,10 @@ const ScoreCard = () => {
                             </div>
                         </div>
 
-                        <div className='w-full'>
-                        <BarGraph />
+                        <div className='w-full justify-center items-center'>
+                            <BarGraph
+                                data= {data}
+                             />
                         </div>
                     </div>
                 </div>

@@ -860,6 +860,151 @@ const getFeedback04Data = asyncHandler( async (req,res)=>{
 
 })
 
+/**
+ * Score Card Data API methods
+ */
+
+
+//@desc get necessary Data for Teaching Scorecard
+//@route GET admin/data/teaching/scorecard/
+const getTeachingScoreCardData = asyncHandler( async(req,res)=>{
+
+    const currentYear = new Date().getFullYear();
+    const studentsValidFeedbacks = [];
+    const peersValidFeedbacks = [];
+
+    let hoiScore =0 
+    let ieacScore =0 
+    const applicationID = req.headers.applicationid;
+
+    const applicationData = await Teaching.findOne({where: {id: applicationID}});
+
+    const facultyName = applicationData.faculty_name;
+
+    const studentFeedbackData = await FeedbackOne.findAll({
+        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+    })
+
+
+    const peerFeedbackData = await FeedbackTwo.findAll({
+        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+    })
+
+
+
+    // calculate hoi score avg 
+
+    hoiScore = (
+        applicationData.q_01 +
+        applicationData.q_02 +
+        applicationData.q_03 +
+        applicationData.q_04 +
+        applicationData.q_05 +
+        applicationData.q_06 +
+        applicationData.q_07 +
+        applicationData.q_08 +
+        applicationData.q_09 +
+        applicationData.q_10 +
+        applicationData.q_11 +
+        applicationData.q_12 +
+        applicationData.q_13 +
+        applicationData.q_14 +
+        applicationData.q_15 +
+        applicationData.q_16 +
+        applicationData.q_17 +
+        applicationData.q_18 +
+        applicationData.q_19 +
+        applicationData.q_20 
+    )
+
+
+    const hoiAverageScore = Number( (hoiScore/ 20).toFixed(2))
+
+
+    // calculate ieac score avg
+
+    const ieacAverageScore = Number(( ( 
+        Number(applicationData.ieac_scoreA) + 
+        Number(applicationData.ieac_scoreB) + 
+        Number(applicationData.ieac_scoreC) ) /3 ).toFixed(2));
+    
+    // filter feedback  current faculty
+
+    for (const feedback of studentFeedbackData){
+        if (feedback.teacher_name.trim().toLowerCase() === facultyName.trim().toLowerCase()){
+            studentsValidFeedbacks.push(feedback)
+        }
+    }
+
+    for ( const feedback of peerFeedbackData){
+        if( feedback.teacher_name.trim().toLowerCase() === facultyName.trim().toLowerCase()){
+            peersValidFeedbacks.push(feedback)
+        }
+    }
+
+
+    // calculate feedback sum for each
+    
+    let studentFeedbackScoreSum = 0;
+    let peersFeedbackScoreSum = 0;
+
+    for( const feedback of studentsValidFeedbacks){
+
+        studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_01)
+        studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_02)
+        studentFeedbackScoreSum = studentFeedbackScoreSum + feedback.q_03
+        studentFeedbackScoreSum = studentFeedbackScoreSum + feedback.q_04
+        studentFeedbackScoreSum = studentFeedbackScoreSum + feedback.q_05
+        studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_06)
+        studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_07)
+        studentFeedbackScoreSum = studentFeedbackScoreSum + feedback.q_08
+        studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_09)
+        studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_11)
+
+    }
+
+    for ( const feedback of peersValidFeedbacks ){
+
+        peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_01)
+        peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_02)
+        peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_03)
+        peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_04)
+        peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_05)
+        peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_06)
+        peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_07)
+        peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_08)
+        peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_09)
+
+    }
+
+
+    // calculate average
+
+    const studentsFeedbackAverageScore = Number( (studentFeedbackScoreSum / (10 * studentsValidFeedbacks.length)).toFixed(2) )
+    const peersFeedbackAverageScore = Number( (peersFeedbackScoreSum / ( peersValidFeedbacks.length * 9 )).toFixed(2) )
+
+    // other required Data
+
+    const categoryOfAward = applicationData.awards_category;
+    const institute = applicationData.institute_name
+    const scoreA = Number (applicationData.ieac_scoreA)
+    const scoreB = Number (applicationData.ieac_scoreB)
+    const scoreC = Number (applicationData.ieac_scoreC)
+
+    res.status(200).json({
+        message:'Request Successful',
+        name: facultyName,
+        category: categoryOfAward,
+        institute: institute,
+        scoreA:scoreA,
+        scoreB:scoreB,
+        scoreC:scoreC,
+        hoi_avg: hoiAverageScore,
+        ieac_avg:ieacAverageScore,
+        student_avg: studentsFeedbackAverageScore,
+        peers_avg: peersFeedbackAverageScore,
+    })
+})
 
 
 // custom functions which will be used in Admin Controllers
@@ -886,7 +1031,7 @@ const getDateCounts = (array) => {
     let currentDate = new Date();
     let dateCounts = [];
   
-    for (let i = 0; i < 15; i++) {
+    for (let i = 14; i >= 0; i--) {
       let date = new Date(
         currentDate.getFullYear(),
         currentDate.getMonth(),
@@ -899,7 +1044,14 @@ const getDateCounts = (array) => {
         formsFilled: 0
       };
   
-      dateCounts.push(dateCount);
+      dateCounts.unshift(dateCount); 
+    }
+  
+    // Add today's date if it's not already present
+    let today = new Date().toISOString().split('T')[0];
+    let foundToday = dateCounts.find(dateCount => dateCount.date === today);
+    if (!foundToday) {
+      dateCounts.unshift({ date: today, formsFilled: 0 }); 
     }
   
     for (let j = 0; j < array.length; j++) {
@@ -916,6 +1068,42 @@ const getDateCounts = (array) => {
   };
   
 
+const textToScore = (text)=>{
+
+    let score;
+
+    switch (text) {
+        case 'Strongly Agree':
+        case 'Outstanding':
+          score = 5;
+          break;
+      
+        case 'Agree':
+        case 'Excellent':
+        case 'Very Good':
+          score = 4;
+          break;
+      
+        case 'Sometimes':
+        case 'Good':
+          score = 3;
+          break;
+      
+        case 'Disagree':
+        case 'Average':
+          score = 2;
+          break;
+      
+        case 'Poor':
+        case 'Strongly Disagree':
+          score = 1;
+          break;
+      }
+      
+
+    return score
+  
+}
 
   
 module.exports={
@@ -930,5 +1118,6 @@ module.exports={
     getFeedback01Data,
     getFeedback02Data,
     getFeedback03Data,
-    getFeedback04Data
+    getFeedback04Data,
+    getTeachingScoreCardData
 }

@@ -1,39 +1,37 @@
 import React from 'react'
-import { BarChart, ResponsiveContainer, XAxis , YAxis , Legend , Tooltip, Bar } from 'recharts'
-const BarGraph = () => {
+import { BarChart, ResponsiveContainer, XAxis, YAxis, Legend, Tooltip, Bar } from 'recharts'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
-    const data =[
-        {
-            name:'HOI',
-            AvgScore:'4.12',
-        },
-        {
-            name:'IEAC',
-            AvgScore:'4.82',
-        } ,
-        {
-            name:'Students',
-            AvgScore:'1.12',
-        },
-        {
-            name: 'Peers',
-            AvgScore: '0.5'
-        }       
-    ]
+
+const BarGraph = (props) => {
 
     return (
 
-        <div>
+        <div className='mt-5'>
 
-            <ResponsiveContainer width={300} height={250}>
-                <BarChart width={300} height={250} data={data}>
-                    <XAxis dataKey="name" />
-                    <YAxis dataKey='AvgScore'/>
-                    <Tooltip />
-                    <Legend />
-                    <Bar barSize={20} dataKey="AvgScore" fill="#8884d8" />
-                </BarChart>
-            </ResponsiveContainer>
+            {
+                props.data
+                    ?
+                    <>
+                        <ResponsiveContainer width={300} height={250}>
+                            <BarChart data={props.data}>
+                                <XAxis dataKey="name" />
+                                <YAxis dataKey='AvgScore' />
+                                <Tooltip />
+                                <Legend />
+                                <Bar barSize={20} dataKey="AvgScore" fill="#8884d8" />
+                            </BarChart>
+                        </ResponsiveContainer>
+                    </>
+                    :
+                    <>
+
+                        <Skeleton height={250} width={300} />
+                    </>
+
+
+            }
 
         </div>
     )

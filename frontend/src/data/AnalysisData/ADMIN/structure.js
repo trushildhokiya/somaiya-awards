@@ -17,7 +17,7 @@
 import { GridColDef } from '@mui/x-data-grid';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
-
+import {Link} from 'react-router-dom'
 
 // outstanding Institution 
 
@@ -268,9 +268,11 @@ const columns04: GridColDef[] = [
         field:'scorecard', headerName:'ScoreCard' , width:200 , renderCell: (params)=>{
 
             return (
-                <a className='p-3 bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
+                <Link to={`/admin/teaching/scorecard/${params.id}`}>
+                    <a className='p-2 cursor-pointer bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
                     Download ScoreCard
-                </a>
+                    </a>
+                </Link>
             )
         }
     },

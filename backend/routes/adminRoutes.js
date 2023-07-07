@@ -13,7 +13,8 @@ const {
         getFeedback01Data,
         getFeedback02Data,
         getFeedback03Data,
-        getFeedback04Data
+        getFeedback04Data,
+        getTeachingScoreCardData
     } = require('../controllers/adminController')
 
 /** GET ROUTES */
@@ -34,5 +35,9 @@ router.route('/forms/feedback-02').get(userAuthenticator, getFeedback02Data)
 router.route('/forms/feedback-03').get(userAuthenticator, getFeedback03Data)
 router.route('/forms/feedback-04').get(userAuthenticator, getFeedback04Data)
 
+
+// scorecard
+
+router.route('/teaching/scorecard').get(userAuthenticator, getTeachingScoreCardData);
 
 module.exports = router;
