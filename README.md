@@ -2,7 +2,7 @@
 
 ## Progress Report
 
-![Progress Bar](https://progress-bar.dev/90/)
+![Progress Bar](https://progress-bar.dev/95/)
 
 #### Form Section
 - [x] Forms Designing and Implementation
@@ -20,14 +20,14 @@
 - [x] Implementation and Security
 - [x] Responses View with Export
 - [x] Approval and File Upload
-- [x] 🚧 Review URL Security and Authentication - ![Progress Bar](https://progress-bar.dev/87/)
+- [x] 🚧 Review URL Security and Authentication - ![Progress Bar](https://progress-bar.dev/95/)
 
 #### HR Section
 - [x] Design and Implementation
 - [x] Correct Responses of Approved Applications
 - [x] OverView and Dashboard Correction
-- [x] 🚧 Feedback Avg Score Integration - ![Progress Bar](https://progress-bar.dev/38/)
-
+- [x] Feedback Avg Score Integration
+- [x] URL Security and Authentication - ![Progress Bar](https://progress-bar.dev/95/)
 ___
 ### Documentation
 ____
