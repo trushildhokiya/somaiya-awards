@@ -730,7 +730,7 @@ const getFeedback01Data = asyncHandler( async (req,res)=>{
 
     const currentYear = new Date().getFullYear()
 
-    const data = FeedbackOne.findAll(
+    const data = await FeedbackOne.findAll(
         {
             where : sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
         }
@@ -769,7 +769,7 @@ const getFeedback02Data = asyncHandler( async (req,res)=>{
 
     const currentYear = new Date().getFullYear()
 
-    const data = FeedbackTwo.findAll(
+    const data = await FeedbackTwo.findAll(
         {
             where : sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
         }
@@ -808,7 +808,7 @@ const getFeedback03Data = asyncHandler( async (req,res)=>{
 
     const currentYear = new Date().getFullYear()
 
-    const data = FeedbackThree.findAll(
+    const data = await FeedbackThree.findAll(
         {
             where : sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
         }
@@ -847,7 +847,7 @@ const getFeedback04Data = asyncHandler( async (req,res)=>{
     
     const currentYear = new Date().getFullYear()
 
-    const data = FeedbackFour.findAll(
+    const data = await FeedbackFour.findAll(
         {
             where : sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
         }
@@ -866,8 +866,26 @@ const getFeedback04Data = asyncHandler( async (req,res)=>{
 
 
 //@desc get necessary Data for Teaching Scorecard
-//@route GET admin/data/teaching/scorecard/
+//@route GET admin/data/teaching/scorecard/:id
+//@acess Private
 const getTeachingScoreCardData = asyncHandler( async(req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
 
     const currentYear = new Date().getFullYear();
     const studentsValidFeedbacks = [];
@@ -1007,6 +1025,170 @@ const getTeachingScoreCardData = asyncHandler( async(req,res)=>{
 })
 
 
+//@desc get scorecard Data for non teaching entries
+//@route GET admin/data/teaching/scorecard/:id
+//@access Private
+
+const getNonTeachingScoreCardData = asyncHandler( async(req,res)=>{
+
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if(user.role != 'ADMIN'){
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+    
+    const currentYear = new Date().getFullYear();
+
+    const studentValidFeedbacks= [];
+    const peerValidFeedbacks= [];
+
+    const applicationID = req.headers.applicationid;
+
+    // get data from db
+
+    const studentFeedbacks = await FeedbackThree.findAll({
+        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+    })
+
+    const peersFeedback = await FeedbackFour.findAll({
+        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+    });
+
+
+    // find application Data
+
+    const applicationData = await NonTeaching.findOne({
+        where: {id: applicationID}
+    })
+
+    // find feedbacks of requested staff
+
+    for ( const feedback of studentFeedbacks){
+
+        if(applicationData.staff_name.trim().toLowerCase() === feedback.employee_name.trim().toLowerCase()){
+            
+            studentValidFeedbacks.push(feedback)
+        }
+    }
+
+
+    for( const feedback of peersFeedback){
+
+        if(applicationData.staff_name.trim().toLowerCase() === feedback.nominee_name.trim().toLowerCase()){
+
+            peerValidFeedbacks.push(feedback)
+        }
+    }
+
+    // calculate hoi_avg
+
+    const hoi_avg = Number (((
+        applicationData.q_01 +
+        applicationData.q_02 +
+        applicationData.q_03 +
+        applicationData.q_04 +
+        applicationData.q_05 +
+        applicationData.q_06 +
+        applicationData.q_07 +
+        applicationData.q_08 +
+        applicationData.q_09 +
+        applicationData.q_10 +
+        applicationData.q_11 +
+        applicationData.q_12 +
+        applicationData.q_13 +
+        applicationData.q_14 +
+        applicationData.q_15 +
+        applicationData.q_16 +
+        applicationData.q_17 +
+        applicationData.q_18 +
+        applicationData.q_19 +
+        applicationData.q_20 +
+        applicationData.q_21 +
+        applicationData.q_22 +
+        applicationData.q_23 +
+        applicationData.q_24 
+    ) / 24).toFixed(2))
+
+    // calculate ieac_avg
+
+    const ieac_avg = Number(((
+        Number(applicationData.ieac_scoreA)+
+        Number(applicationData.ieac_scoreB)
+    ) / 2).toFixed(2))
+
+    // calculate student avg
+
+    let studentsfeedbackSum = 0
+
+    for( const feedback of studentValidFeedbacks){
+
+        studentsfeedbackSum = (
+            studentsfeedbackSum+
+            textToScore(feedback.q_01)+
+            textToScore(feedback.q_02)+
+            textToScore(feedback.q_03)+
+            textToScore(feedback.q_04)+
+            textToScore(feedback.q_05)
+        )
+    }
+
+    const student_avg = Number((studentsfeedbackSum / (5*studentValidFeedbacks.length) ).toFixed(2))
+
+    // calculate peers avg
+
+    let peerFeedbackSum = 0 
+
+    for ( const feedback of peerValidFeedbacks ){
+
+        peerFeedbackSum = (
+            peerFeedbackSum+
+            textToScore(feedback.q_01)+
+            textToScore(feedback.q_02)+
+            textToScore(feedback.q_03)+
+            textToScore(feedback.q_04)+
+            textToScore(feedback.q_05)+
+            textToScore(feedback.q_06)+
+            textToScore(feedback.q_07)+
+            textToScore(feedback.q_08)
+        )
+    }
+
+    const peers_avg = Number(((peerFeedbackSum)/ (8* peerValidFeedbacks.length) ).toFixed(2))
+
+    // get necessary data
+
+    const name = applicationData.staff_name
+    const category = applicationData.award_category  
+    const institute = applicationData.institute_name
+    const scoreA = applicationData.ieac_scoreA
+    const scoreB = applicationData.ieac_scoreB
+
+    res.status(200).json({
+        message: 'Request Successful',
+        name: name,
+        category: category,
+        institute: institute,
+        scoreA: scoreA,
+        scoreB: scoreB,
+        hoi_avg:hoi_avg,
+        ieac_avg: ieac_avg,
+        student_avg: student_avg,
+        peers_avg: peers_avg
+    })
+})
+
 // custom functions which will be used in Admin Controllers
 
 // @desc: extracts date from data 
@@ -1119,5 +1301,6 @@ module.exports={
     getFeedback02Data,
     getFeedback03Data,
     getFeedback04Data,
-    getTeachingScoreCardData
+    getTeachingScoreCardData,
+    getNonTeachingScoreCardData,
 }

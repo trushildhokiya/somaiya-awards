@@ -347,9 +347,11 @@ const columns05: GridColDef[] = [
         field:'scorecard', headerName:'ScoreCard' , width:200 , renderCell: (params)=>{
 
             return (
-                <a className='p-3 bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
+                <Link to={`/admin/non-teaching/scorecard/${params.id}`}>
+                    <a className='p-2 cursor-pointer bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
                     Download ScoreCard
-                </a>
+                    </a>
+                </Link>
             )
         }
     },

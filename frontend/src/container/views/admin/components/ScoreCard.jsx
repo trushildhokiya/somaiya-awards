@@ -74,6 +74,45 @@ const ScoreCard = () => {
 
         }
 
+        else {
+
+            axios.get('http://localhost:5001/admin/data/non-teaching/scorecard', {
+                headers: {
+                    'user_id': localStorage.getItem('user_id'),
+                    'x-access-token': localStorage.getItem('token'),
+                    'applicationid': window.location.href.split('/scorecard/')[1],
+                }
+            })
+                .then((res) => {
+                    setApiData(res.data);
+                    setLoading(false)
+
+                    setData([
+                        {
+                            name: 'HOI',
+                            AvgScore: res.data.hoi_avg,
+                        },
+                        {
+                            name: 'IEAC',
+                            AvgScore: res.data.ieac_avg,
+                        },
+                        {
+                            name: 'Students',
+                            AvgScore: res.data.student_avg,
+                        },
+                        {
+                            name: 'Peers',
+                            AvgScore: res.data.peers_avg
+                        }
+                    ])
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+
+        }
+
 
     }, [])
 
@@ -143,11 +182,18 @@ const ScoreCard = () => {
                                         <span className='text-red-800 font-semibold'> Score B : </span>
                                         <span> {loading ? <Skeleton width={200} /> : apiData.scoreB}</span>
                                     </h3>
-
-                                    <h3 className='text-sm my-1'>
-                                        <span className='text-red-800 font-semibold'> Score C : </span>
-                                        <span> {loading ? <Skeleton width={200} /> : apiData.scoreC}</span>
-                                    </h3>
+                                    {
+                                        (window.location.href.split('/')[4] === 'teaching')
+                                            ?
+                                            <>
+                                                <h3 className='text-sm my-1'>
+                                                    <span className='text-red-800 font-semibold'> Score C : </span>
+                                                    <span> {loading ? <Skeleton width={200} /> : apiData.scoreC}</span>
+                                                </h3>
+                                            </>
+                                            :
+                                            null
+                                    }
 
                                     <h3 className='text-sm my-1'>
                                         <span className='text-red-800 font-semibold'> Average Feedback Students : </span>
@@ -159,6 +205,11 @@ const ScoreCard = () => {
                                         <span> {loading ? <Skeleton width={200} /> : apiData.peers_avg}</span>
                                     </h3>
 
+                                    <h3 className='text-sm my-1'>
+                                        <span className='text-red-800 font-semibold'> Final Score : </span>
+                                        <span> {loading ? <Skeleton width={200} /> : 0.6*((apiData.student_avg+ apiData.peers_avg)/2) + 0.4*(apiData.ieac_avg) }</span>
+                                    </h3>
+
                                 </div>
 
                             </div>
@@ -166,8 +217,8 @@ const ScoreCard = () => {
 
                         <div className='w-full justify-center items-center'>
                             <BarGraph
-                                data= {data}
-                             />
+                                data={data}
+                            />
                         </div>
                     </div>
                 </div>

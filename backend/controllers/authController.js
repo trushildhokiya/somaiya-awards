@@ -305,4 +305,4 @@ module.exports = {
  */
 
 // email_id : admin@gmail.com
-//password: Admin@123 (db SHA-256 10 salts crypted )
+//password: Admin@123 (db BlowFish Encrypt 10  128b salts crypted )
