@@ -5,6 +5,13 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import Tile from './ieacComponents/Tile';
+import Inst1 from '../../assests/inst1.png'
+import Inst2 from '../../assests/inst2.png'
+import Inst3 from '../../assests/inst3.png'
+import Inst4 from '../../assests/inst4.png'
+import Inst5 from '../../assests/inst5.png'
+
 
 const Ieac = () => {
 
@@ -96,7 +103,7 @@ const Ieac = () => {
   }, [])
 
   return (
-    <div>
+    <div className='h-screen w-full'>
       {
         loading
           ?
@@ -115,7 +122,7 @@ const Ieac = () => {
             <>
               <div className='flex'>
                 <SideBar />
-                <div className='flex flex-col p-5 font-Poppins w-full'>
+                <div className='flex flex-col p-5 font-Poppins w-full overflow-y-scroll h-screen'>
 
                   <div className='flex flex-row items-center justify-between'>
                     <div className='flex flex-col'>
@@ -144,20 +151,40 @@ const Ieac = () => {
                       Instructions
                     </h2>
                     <div className='p-2 ml-[2rem] mt-3'>
-                      <ul className=''>
-                        <ul>
-                          <li class="my-4">Step 1: Preheat the oven to 350°F.</li>
-                          <li class="my-4">Step 2: Grease a baking dish with butter.</li>
-                          <li class="my-4">Step 3: In a mixing bowl, combine flour, sugar, and salt.</li>
-                          <li class="my-4">Step 4: Add eggs, milk, and vanilla extract to the bowl. Mix well.</li>
-                          <li class="my-4">Step 5: Pour the batter into the greased baking dish.</li>
-                          <li class="my-4">Step 6: Bake for 30 minutes or until golden brown.</li>
-                          <li class="my-4">Step 7: Remove from the oven and let it cool for a few minutes.</li>
-                          <li class="my-4">Step 8: Dust with powdered sugar for decoration.</li>
-                          <li class="my-4">Step 9: Cut into slices and serve.</li>
-                          <li class="my-4">Step 10: Enjoy your delicious homemade cake!</li>
-                        </ul>
-                      </ul>
+
+                      <div>
+
+                        <Tile
+                          title="1. Navigate to Recommended / Not Recommeded Columns"
+                          info="In each form responses there is a column name recommended to recommend a nominee to futher rounds. In case some category of awards there is a not recommeded column which is mandatory for marking the nominees"
+                          image={Inst1}
+                        />
+
+                        <Tile
+                          title="2. Click on checkbox to Recommned"
+                          info="Click on the checkbox in front of the nominee to Recommend him/her"
+                          image={Inst2}
+                        />
+
+                        <Tile
+                          title="3a. Confirm your decision"
+                          info="Click on confirm if you confirm your decision to recommend the nominee else click deny or anywhere else on screen"
+                          image={Inst3}
+                        />
+
+                        <Tile
+                          title="3b. Enter your score and confirm"
+                          info="In case of teaching and non- teaching category of awards IAEC Member are required to enter their score of each nominee wheter he/she is recommended or not  and confirm "
+                          image={Inst4}
+                        />
+                        
+                        <Tile
+                          title="4. Upload Recommendation File"
+                          info="At last after confirming all the decision and marking recommeded and not recommended ones upload the recommendation file and confirm it "
+                          image={Inst5}
+                        />
+
+                      </div>
                     </div>
                   </div>
                 </div>
