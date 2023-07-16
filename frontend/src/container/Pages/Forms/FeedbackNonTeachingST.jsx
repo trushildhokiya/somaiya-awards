@@ -3,7 +3,7 @@ import Navbar from '../../../components/Navbar';
 import FormInfo from '../../../components/FormInfo'
 import Forms from '../../../components/Forms';
 import StudentNonTeachingFeedback from '../../../components/utils/data/StudentNonTeachingFeedback';
-import StudentNonTeachingFeedbackForm from '../../../data/StudentNonTeachingFeedbackForm';
+import StudentNonTeachingFeedbackForm from '../../../data/Forms/StudentNonTeachingFeedbackForm';
 
 const FeedbackNonTeachingST = () => {
 

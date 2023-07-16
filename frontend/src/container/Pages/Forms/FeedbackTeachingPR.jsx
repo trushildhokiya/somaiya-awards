@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../../../components/Navbar'
 import FormInfo from '../../../components/FormInfo'
 import Forms from '../../../components/Forms'
-import FeedbackTeachingPeerForm from '../../../data/FeedbackTeachingPeerForm'
+import FeedbackTeachingPeerForm from '../../../data/Forms/FeedbackTeachingPeerForm'
 import FeedbackPeerTeaching from '../../../components/utils/data/FeedbackPeerTeaching'
 
 const FeedbackTeachingPR = () => {

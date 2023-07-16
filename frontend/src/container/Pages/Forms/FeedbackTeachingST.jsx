@@ -3,7 +3,7 @@ import Navbar from '../../../components/Navbar';
 import FormInfo from '../../../components/FormInfo'
 import Forms from '../../../components/Forms';
 import StudentTeachingFeedback from '../../../components/utils/data/StudentTeachingFeedback';
-import StudentTeachingFeedbackForm from '../../../data/StudentTeachingFeedbackForm';
+import StudentTeachingFeedbackForm from '../../../data/Forms/StudentTeachingFeedbackForm';
 
 const FeedbackTeachingST = () => {
 
