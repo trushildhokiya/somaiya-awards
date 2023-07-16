@@ -153,6 +153,22 @@ const storage09 = multer.diskStorage({
 
 const upload09 = multer({storage: storage09});
 
+
+/**
+ * Awards FORM STORAGE ( STUDENTS )
+ */
+
+const storage10 = multer.diskStorage({
+    destination: (req,file,cb)=>{
+        cb(null, 'data/students');
+    },
+    filename:(req,file,cb)=>{
+        cb(null, Date.now()+path.extname(file.originalname))
+    }
+})
+
+const upload10 = multer({storage: storage10});
+
 module.exports = {
     upload01,
     upload02,
@@ -163,4 +179,5 @@ module.exports = {
     upload07,
     upload08,
     upload09,
+    upload10,
 }

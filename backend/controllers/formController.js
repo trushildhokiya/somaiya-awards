@@ -4,13 +4,14 @@ const {
     Sports,
     Teaching,
     NonTeaching,
+    Students,
     FeedbackOne,
     FeedbackTwo,
     FeedbackThree,
     FeedbackFour } = require('../models')
 
 const asyncHandler = require('express-async-handler')
-const {formLogger}  = require('../middleware/logger')
+const { formLogger } = require('../middleware/logger')
 
 //@desc handle institution form submission
 //@route POST /forms/outstanding-institution
@@ -444,6 +445,55 @@ const submitForm_05 = asyncHandler(async (req, res) => {
 })
 
 
+//@desc handle research form submission
+//@route POST /forms/research
+//@access private
+
+const submitForm_10 = asyncHandler(async (req, res) => {
+
+    const {
+        course,
+        email_id,
+        institution_name,
+        nomination_category,
+        recommendation_note,
+        student_name,
+        students_class,
+    } = req.body;
+
+    const supportings = req.file.path;
+
+    const result = await  Students.create({
+        email_id: email_id,
+        student_name: student_name,
+        students_class: students_class,
+        course: course,
+        institution_name: institution_name,
+        nomination_category: nomination_category,
+        recommendation_note: recommendation_note,
+        supportings: supportings
+    })
+
+  
+    if (!result) {
+
+        // throw error
+        res.status(500)
+        formLogger.info(`Failed to save Non Teaching form filled by client ${req.ip}`)
+        throw new Error("Failed to accept your response")
+    }
+
+    formLogger.info(`Students form filled by client ${req.ip}`)
+
+    res.status(200).json({
+        message: "Form submitted successfully",
+        submitted: true
+    })
+
+})
+
+
+
 //@desc handle feedback 01 form submission
 //@route POST /forms/feedback-01
 //@access private
@@ -705,5 +755,6 @@ module.exports = {
     submitFeedback_01,
     submitFeedback_02,
     submitFeedback_03,
-    submitFeedback_04
+    submitFeedback_04,
+    submitForm_10
 }

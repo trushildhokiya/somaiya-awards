@@ -6,11 +6,12 @@ const {
     submitForm_03,
     submitForm_04,
     submitForm_05,
+    submitForm_10,
     submitFeedback_01,
     submitFeedback_02,
     submitFeedback_03,
     submitFeedback_04} = require('../controllers/formController')
-const {upload01,upload02, upload03, upload04, upload05} = require('../middleware/fileUpload')
+const {upload01,upload02, upload03, upload04, upload05, upload10} = require('../middleware/fileUpload')
 
 /**
  * Support note:
@@ -30,6 +31,11 @@ const {upload01,upload02, upload03, upload04, upload05} = require('../middleware
  *      feeback02 : peers feedback for teaching staff form
  *      feeback03 : students feedback for non teaching staff form
  *      feeback04 : peer feedback for non teaching staff form
+ * 
+ *  // update JULY 2023
+ * 
+ * __%10 : refers to students forms 
+ * 
  */
 
 router.route('/outstanding-institution').post(
@@ -73,6 +79,11 @@ router.route('/non-teaching').post(
     ]),
     submitForm_05
 );
+
+router.route('/students').post(
+    upload10.single('supportings'),
+    submitForm_10
+)
 
 router.route('/feedback-01').post(submitFeedback_01)
 

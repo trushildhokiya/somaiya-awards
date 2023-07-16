@@ -21,7 +21,7 @@ const StudentsFormData = [
     },
     {
         title: "Class",
-        _name: "class",
+        _name: "students_class",
         type: "text",
         requiredStatus : true,
         hasOptions: false,
