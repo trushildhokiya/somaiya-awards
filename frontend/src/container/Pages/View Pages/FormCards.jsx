@@ -6,6 +6,7 @@ import Teaching from '../../assests/teaching.jpeg'
 import NonTeaching from '../../assests/non-teaching.jpeg'
 import Research from '../../assests/research.jpeg'
 import Sports from '../../assests/sports.jpeg'
+import Students from '../../assests/students.png'
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import Swal from 'sweetalert2'
 import Groups from '../../../data/Institutions/Groups'
@@ -108,6 +109,15 @@ const FormCards = () => {
                         title="Non Teaching"
                         info="Commending administrative and staff excellence, driving institutional success and growth."
                         link="/forms/non-teaching"
+                    />
+                </div>
+
+                <div>
+                    <FormCard
+                        image={Students}
+                        title="Students"
+                        info="Honoring students for their academic and overall achievements"
+                        link="/forms/students"
                     />
                 </div>
             </div>

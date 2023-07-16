@@ -23,6 +23,7 @@ import ManageUsers from "./container/Pages/View Pages/ManageUsers";
 import Analysis from "./container/Pages/View Pages/Analysis";
 import Review from "./container/views/ieac/ieacPages/Review";
 import ScoreCard from "./container/views/admin/components/ScoreCard";
+import Students from "./container/Pages/Forms/Students";
  
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/forms/research" element={<Research />}  />
         <Route path="/forms/teaching" element={<Teaching />}  />
         <Route path="/forms/non-teaching" element={<NonTeaching />}  />
+        <Route path="/forms/students" element={<Students />}  />
         <Route path="/forms/feedback-01" element={<FeedbackTeachingST />}  />
         <Route path="/forms/feedback-02" element={<FeedbackTeachingPR />}  />
         <Route path="/forms/feedback-03" element={<FeedbackNonTeachingST />}  />
