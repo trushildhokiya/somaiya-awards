@@ -50,7 +50,7 @@ const ManageUsers = () => {
     console.log(credentials);
   }
 
-  const handleSubmit = async()=>{
+  const handleSubmit = async () => {
 
     if (Object.keys(credentials).length < 3) {
 
@@ -69,38 +69,38 @@ const ManageUsers = () => {
     else {
       console.log(credentials);
 
-      await axios.post('http://localhost:5001/auth/register',credentials)
-      .then((res)=>{
-        console.log(res);
-        setCredentials({})
-        toast.success('User created successfully', {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+      await axios.post('http://localhost:5001/auth/register', credentials)
+        .then((res) => {
+          console.log(res);
+          setCredentials({})
+          toast.success('User created successfully', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
 
-      })
-      .catch((err)=>{
-        console.log(err);
+        })
+        .catch((err) => {
+          console.log(err);
 
-        toast.error('Failed to create User', {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+          toast.error('Failed to create User', {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
 
-      })
-      
+        })
+
     }
   }
 
@@ -132,25 +132,35 @@ const ManageUsers = () => {
                   onChange={handleChange}
                 />
 
-                <Field
-                  title='Institution'
-                  type='dropdown'
-                  name='user_institution'
-                  value={credentials['user_institution'] || ''}
-                  dropdownHiddenItem='Select institution'
-                  options={institutionOptions}
-                  onChange={handleChange}
-                />
 
                 <Field
                   title='Role'
                   type='dropdown'
                   name='user_role'
                   value={credentials['user_role'] || ''}
-                  options={["ADMIN","IEAC","HOI"]}
+                  options={["ADMIN", "IEAC", "HOI", "SPORTS ADMIN", "STUDENTS ADMIN"]}
                   dropdownHiddenItem='Select Role'
                   onChange={handleChange}
                 />
+
+                {
+                  credentials.user_role === "ADMIN" || credentials.user_role === "SPORTS ADMIN" || credentials.user_role === "STUDENTS ADMIN"
+                    ?
+                    null
+                    :
+                    <>
+                      <Field
+                        title='Institution'
+                        type='dropdown'
+                        name='user_institution'
+                        value={credentials['user_institution'] || ''}
+                        dropdownHiddenItem='Select institution'
+                        options={institutionOptions}
+                        onChange={handleChange}
+                      />
+                    </>
+                }
+
 
                 <Field
                   title='Password'
