@@ -36,8 +36,8 @@ const Login = () => {
 
                         localStorage.setItem('token', res.data['token'])
                         localStorage.setItem('user_id', res.data['user_id'])
-                        localStorage.setItem('institution',res.data['institution'])
-                        localStorage.setItem('role',res.data['role'])
+                        localStorage.setItem('institution', res.data['institution'])
+                        localStorage.setItem('role', res.data['role'])
                         setCredentials({})
 
                         switch (res.data['role']) {
@@ -54,6 +54,14 @@ const Login = () => {
                                 navigate('/hoi')
                                 break;
 
+                            case "STUDENTS ADMIN":
+                                navigate('/students-admin')
+                                break;
+
+                            case "SPORTS ADMIN":
+                                navigate('/sports-admin')
+                                break;
+
                         }
                     }
                     else {
@@ -64,21 +72,21 @@ const Login = () => {
 
                     console.log(err);
                     Swal.fire({
-                        title:"User not Found",
-                        imageUrl:'https://img.freepik.com/premium-vector/male-student-feeling-confused-while-looking-up-with-thoughtful-focused-expression-questioned-thinking-curious-with-question-mark-concept-illustration_270158-365.jpg?w=2000',
-                        imageHeight:'200',
-                        text:"Check your email ID, password and retry",
-                        confirmButtonColor:'rgb(185,28,28)'
+                        title: "User not Found",
+                        imageUrl: 'https://img.freepik.com/premium-vector/male-student-feeling-confused-while-looking-up-with-thoughtful-focused-expression-questioned-thinking-curious-with-question-mark-concept-illustration_270158-365.jpg?w=2000',
+                        imageHeight: '200',
+                        text: "Check your email ID, password and retry",
+                        confirmButtonColor: 'rgb(185,28,28)'
                     })
 
                 })
         }
         else {
             Swal.fire({
-                title:'All Fields Required',
-                text:"You may have missed to enter some fields",
-                icon:'info',
-                confirmButtonColor:'rgb(185,28,28)'
+                title: 'All Fields Required',
+                text: "You may have missed to enter some fields",
+                icon: 'info',
+                confirmButtonColor: 'rgb(185,28,28)'
             })
         }
     }

@@ -24,6 +24,8 @@ import Analysis from "./container/Pages/View Pages/Analysis";
 import Review from "./container/views/ieac/ieacPages/Review";
 import ScoreCard from "./container/views/admin/components/ScoreCard";
 import Students from "./container/Pages/Forms/Students";
+import StudentsAdmin from "./container/views/studentsAdmin/StudentsAdmin";
+import SportsAdmin from "./container/views/sportsAdmin/SportsAdmin";
  
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
         <Route path="/admin/responses/:formType" element={<Responses />} />
         <Route path="/admin/:formType/scorecard/:id" element={<ScoreCard />} />
         <Route path="/admin/manage-users" element={<ManageUsers />} />
+        <Route path="/students-admin" element={<StudentsAdmin />} />
+        <Route path="/sports-admin" element={<SportsAdmin />} />
         <Route path="/forms/outstanding-institution" element={<OutstandingInstitution />}  />
         <Route path="/forms/sports" element={<SportsStar />}  />
         <Route path="/forms/research" element={<Research />}  />
