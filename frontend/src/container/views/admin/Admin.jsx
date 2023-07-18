@@ -216,7 +216,8 @@ const Admin = () => {
                                                         counts.feedbackOneFormCount +
                                                         counts.feedbackTwoFormCount +
                                                         counts.feedbackThreeFormCount +
-                                                        counts.feedbackFourFormCount
+                                                        counts.feedbackFourFormCount+
+                                                        counts.studentsFormCount
                                                     }
                                                 />
                                             </div>

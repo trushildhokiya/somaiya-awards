@@ -13,6 +13,7 @@ const Datagrid = (props) => {
         { field: 'sports_form', headerName: 'Sports Form', width: 150 },
         { field: 'teaching_form', headerName: 'Teaching Form', width: 150 },
         { field: 'non_teaching_form', headerName: 'Non-Teaching Form', width: 170 },
+        { field: 'students_form', headerName: 'Students Form', width: 170 },
     ];
 
     return (

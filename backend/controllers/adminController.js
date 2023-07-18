@@ -5,6 +5,7 @@ const {
     Sports,
     Teaching,
     NonTeaching,
+    Students,
     User,
     FeedbackOne,
     FeedbackTwo,
@@ -155,6 +156,14 @@ const getCounts = asyncHandler( async(req,res)=>{
         }
     )
 
+    // students form count
+
+    countData.studentsFormCount = await Students.count(
+        {
+            where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+        }
+    )
+
 
     res.status(200).json({
         message:'Request Successful',
@@ -275,6 +284,16 @@ const getDaysCount = asyncHandler( async(req,res)=>{
         }
     )
 
+    // get students form data
+
+    const studentsData = await Students.findAll(
+        {
+            where: Sequelize.and( 
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            )
+        }
+    )
+
     //process th data to extract just dates
     const institutionFormattedData = dataFormatter(institutionData);
     const researchFormattedData = dataFormatter(researchData);
@@ -285,6 +304,7 @@ const getDaysCount = asyncHandler( async(req,res)=>{
     const feedbackTwoFormattedData = dataFormatter(feedbackTwoData)
     const feedbackThreeFormattedData = dataFormatter(feedbackThreeData)
     const feedbackFourFormattedData = dataFormatter(feedbackFourData)
+    const studentsFormattedData = dataFormatter(studentsData)
 
     // put extracted data into a single array
     let processedData = [
@@ -297,6 +317,7 @@ const getDaysCount = asyncHandler( async(req,res)=>{
         ...feedbackTwoFormattedData,
         ...feedbackThreeFormattedData,
         ...feedbackFourFormattedData,
+        ...studentsFormattedData
     ];
 
     const pastDataCount = getDateCounts(processedData)
@@ -380,6 +401,16 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
         }
     )
 
+    // get Students Data
+
+    const studentsData = await Students.findAll(
+        {
+            where: Sequelize.and( 
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            )
+        }
+    )
+
 
     const institutionWiseCount= [];
   
@@ -396,6 +427,7 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
                 sports_form:0,
                 teaching_form:0,
                 non_teaching_form:0,
+                students_form:0
             }
         )
     }
@@ -474,6 +506,19 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
 
     } 
 
+    // students form counter
+
+    for( const data of studentsData ){
+
+        const institute = data.institution_name;
+
+        institutionWiseCount.find((object,index)=>{
+
+            if(object.institute === institute ){
+                object.students_form = object.students_form + 1;
+            }
+        })
+    }
 
 
     res.status(200).json({
