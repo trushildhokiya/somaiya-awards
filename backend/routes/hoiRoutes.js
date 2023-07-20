@@ -5,7 +5,8 @@ const {institutionDataHandler,
     researchDataHandler,
     sportsDataHandler,
     teachingDataHandler,
-    nonTeachingDataHandler} = require('../controllers/hoiController');
+    nonTeachingDataHandler,
+    studentsDataHandler} = require('../controllers/hoiController');
 
 // all hoi accessible routes;
 
@@ -28,6 +29,10 @@ router.route('/teaching').get( userAuthenticator , teachingDataHandler);
 //get non-teaching form data
 
 router.route('/non-teaching').get( userAuthenticator , nonTeachingDataHandler);
+
+//get non-teaching form data
+
+router.route('/students').get( userAuthenticator , studentsDataHandler);
 
 
 

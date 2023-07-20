@@ -357,10 +357,62 @@ const columns05: GridColDef[] = [
 ];
 
 
+const columns06: GridColDef[] = [
+  {
+    field: 'id',
+    headerName: 'ID',
+    width: 150,
+  },
+  {
+    field: 'email_id',
+    headerName: 'Email ID',
+    width: 150,
+  },
+  {
+    field: 'student_name',
+    headerName: 'Student Name',
+    width: 150,
+  },
+  {
+    field: 'students_class',
+    headerName: "Student's Class",
+    width: 150,
+  },
+  {
+    field: 'course',
+    headerName: 'Course',
+    width: 150,
+  },
+  {
+    field: 'institution_name',
+    headerName: 'Institution Name',
+    width: 450,
+  },
+  {
+    field: 'nomination_category',
+    headerName: 'Nomination Category',
+    width: 150,
+  },
+  {
+    field: 'recommendation_note',
+    headerName: 'Recommendation Note',
+    width: 150,
+  },
+  {
+    field: 'supportings',
+    headerName: 'Supportings',
+    width: 150,
+    renderCell: (params) => {
+      return <a target="_blank" href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+    }
+  },
+]
+
 export {
   columns01,
   columns02,
   columns03,
   columns04,
-  columns05
+  columns05,
+  columns06
 };

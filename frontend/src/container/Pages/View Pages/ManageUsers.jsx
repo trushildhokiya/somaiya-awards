@@ -48,12 +48,12 @@ const ManageUsers = () => {
   const schema = new PasswordValidator()
 
   schema
-    .is().min(8)                                    // Minimum length 8
-    .is().max(20)                                  // Maximum length 100
-    .has().uppercase()                              // Must have uppercase letters
-    .has().lowercase()                              // Must have lowercase letters
-    .has().digits(2)                                // Must have at least 2 digits
-    .has().not().spaces()                           // Should not have spaces
+    .is().min(8)                                 
+    .is().max(20)                                
+    .has().uppercase()                           
+    .has().lowercase()                              
+    .has().digits(2)                                
+    .has().not().spaces()
     .is().not().oneOf(['qwerty', 'password', '123456']);
 
   const [credentials, setCredentials] = useState({})

@@ -8,6 +8,7 @@ import SportsSoccerRoundedIcon from '@mui/icons-material/SportsSoccerRounded';
 import BookRoundedIcon from '@mui/icons-material/BookRounded';
 import BusinessIcon from '@mui/icons-material/Business';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
+import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
 import {Link} from 'react-router-dom';
 
 const SideBar = () => {
@@ -70,6 +71,13 @@ const SideBar = () => {
                       >
                         Non-Teaching Form
                       </MenuItem>
+
+                      <MenuItem icon={<SchoolRoundedIcon />}
+                      component={<Link to='/hoi/analysis/students' />}
+                      >
+                        Students Form
+                      </MenuItem>
+
                     </SubMenu>
                 </Menu>
             </Sidebar>

@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import { useLocation } from 'react-router-dom';
 import SideBar from '../../../components/hoi_components/SideBar'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { columns01 , columns02 , columns03 , columns04 , columns05 } from '../../../data/AnalysisData/HOI/structure';
+import { columns01 , columns02 , columns03 , columns04 , columns05, columns06 } from '../../../data/AnalysisData/HOI/structure';
 import axios from 'axios';
 
 
@@ -37,6 +37,9 @@ const Analysis = () => {
             case 'non-teaching':
                 setColumns(columns05)
                 break;
+            
+            case 'students':
+                setColumns(columns06)
         }
 
         const url = `http://localhost:5001/hoi/data/${formTitle}`;
@@ -87,6 +90,7 @@ const Analysis = () => {
                         <div className=''>
 
                             <DataGrid
+                            autoHeight
                                 columns={columns}
                                 rows={rows}
                                 slots={{
