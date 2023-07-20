@@ -4,6 +4,8 @@ import Field from '../../../components/utils/Field'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
+import PasswordValidator from 'password-validator'
+import Swal from 'sweetalert2';
 
 const ManageUsers = () => {
 
@@ -41,13 +43,25 @@ const ManageUsers = () => {
     "SK Somaiya College of Arts, Science and Commerce (MU)"
   ];
 
+  // for password checks
+
+  const schema = new PasswordValidator()
+
+  schema
+    .is().min(8)                                    // Minimum length 8
+    .is().max(20)                                  // Maximum length 100
+    .has().uppercase()                              // Must have uppercase letters
+    .has().lowercase()                              // Must have lowercase letters
+    .has().digits(2)                                // Must have at least 2 digits
+    .has().not().spaces()                           // Should not have spaces
+    .is().not().oneOf(['qwerty', 'password', '123456']);
+
   const [credentials, setCredentials] = useState({})
 
   const handleChange = (event) => {
 
     const { name, value } = event.target
     setCredentials({ ...credentials, [name]: value })
-    console.log(credentials);
   }
 
   const handleSubmit = async () => {
@@ -67,39 +81,58 @@ const ManageUsers = () => {
 
     }
     else {
+
+
       console.log(credentials);
 
-      await axios.post('http://localhost:5001/auth/register', credentials)
-        .then((res) => {
-          console.log(res);
-          setCredentials({})
-          toast.success('User created successfully', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+      if (!schema.validate(credentials.user_password)) {
 
+        const messages = schema.validate(credentials.user_password, { details: true })
+
+        const errorMessages = messages.map((item) => `<p class='text-sm text-justify font-Poppins text-red-800'>${item.message}</p>`);
+
+        Swal.fire({
+          icon: 'error',
+          html: errorMessages.join(''),
+          confirmButtonColor:'rgb(185,28,28)'
         })
-        .catch((err) => {
-          console.log(err);
 
-          toast.error('Failed to create User', {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
+      }
+      else {
 
-        })
+        await axios.post('http://localhost:5001/auth/register', credentials)
+          .then((res) => {
+            console.log(res);
+            setCredentials({})
+            toast.success('User created successfully', {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+
+          })
+          .catch((err) => {
+            console.log(err);
+
+            toast.error('Failed to create User', {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+
+          })
+      }
+
 
     }
   }
