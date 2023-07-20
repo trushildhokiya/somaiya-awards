@@ -154,7 +154,7 @@ const passwordReset = asyncHandler(async (req, res) => {
 
     let message = {
         from: '"Somaiya Awards Server" <somaiya_awards@somaiya.edu>',
-        to: "<recievers email address>",
+        to: `{ ${user_email}}`,
         subject: "Testing",
         text: `${link}`,
         html: `
