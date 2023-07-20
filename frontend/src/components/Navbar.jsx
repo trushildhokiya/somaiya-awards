@@ -5,7 +5,7 @@ const Navbar = () => {
 
 
     return (
-        <div className='p-1'>
+        <div className='p-1 bg-white'>
             <div className='flex font-Poppins'>
 
                 {/* Image  */}

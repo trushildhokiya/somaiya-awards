@@ -6,6 +6,9 @@ const Results = () => {
   return (
     <div>
       <Navbar />
+      <div className='h-[45rem] w-full bg-white'>
+       <p className='text-xl text-center'> Results Yet To Be Announced ...</p>
+      </div>
       <Footer />
     </div>
   )
