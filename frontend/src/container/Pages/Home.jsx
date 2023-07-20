@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { Model } from '../../components/Scene';
 import { OrbitControls, Environment } from '@react-three/drei';
 import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
 const Home = () => {
 
@@ -32,7 +33,7 @@ const Home = () => {
             <ambientLight intensity={0.5} color="#ffffff" />
 
             {/* Environment Map  */}
-            <Environment preset='studio' intensity={2} />
+            <Environment preset='sunset' intensity={2} />
 
             <Model />
           </Canvas>
@@ -67,35 +68,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* SECTION FOOTER  */}
-
-      <div className='flex w-full font-Poppins py-3 px-2 bg-gray-300'>
-
-        <div className='p-3 w-[30%] ml-10'>
-
-        <h2 className='font-semibold my-4 '> Quick Links</h2>
-        <ul>
-          <li className='t text-slate-800 shadow-sm '>Home</li>
-          <li className='t text-slate-800 shadow-sm '>Login</li>
-          <li className='t text-slate-800 shadow-sm '>Results</li>
-          <li className='t text-slate-800 shadow-sm '>Guidelines</li>
-        </ul>
-        </div>
-
-        <div className='w-[70%]'>
-          <div className='w-full text-center flex flex-col items-center '>
-
-          <img src='https://kjsit.somaiya.edu.in/assets/kjsieit/images/Logo/kjsieit-logo.svg' />
-             <h2 className='mt-5'>
-             Designed and Developed by
-             </h2>
-             <h2>
-              K.J Somaiya Institute of Technology
-             </h2>
-          </div>
-        </div>
-
-      </div>
+      <Footer />
     </div >
   );
 };

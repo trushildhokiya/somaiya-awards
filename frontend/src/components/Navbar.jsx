@@ -1,6 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
+
+
     return (
         <div className='p-1'>
             <div className='flex font-Poppins'>
@@ -12,22 +15,38 @@ const Navbar = () => {
 
                 {/* Links */}
                 <div className='flex items-center' >
-                    <div className=' p-2 mx-4'>
-                        <p>
-                            Applications
-                        </p>
-                    </div>
 
-                    <div className='p-2 mx-4'>
+                    <Link to={'/guidelines'}>
+                    <div className=' cursor-pointer p-2 mx-4 hover:scale-105 transition-all duration-300'>
                         <p>
-                            Brochure
+                            Guidelines
                         </p>
                     </div>
-                    <div className='p-2 mx-4'>
+                    </Link>
+
+                    <Link to={'/groups'}>
+                    <div className='p-2 mx-4 cursor-pointer hover:scale-105 transition-all duration-300'>
+                        <p>
+                            Groups
+                        </p>
+                    </div>
+                    </Link>
+
+                    <Link to='/results'>
+                    <div className='p-2 mx-4 cursor-pointer hover:scale-105 transition-all duration-300'>
                         <p>
                             Results
                         </p>
                     </div>
+                    </Link>
+
+                    <Link to='/about'>
+                    <div className='p-2 mx-4 cursor-pointer hover:scale-105 transition-all duration-300'>
+                        <p>
+                            About
+                        </p>
+                    </div>
+                    </Link>
                 </div>
 
                 {/* Profile  */}

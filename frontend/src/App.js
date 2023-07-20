@@ -26,12 +26,20 @@ import ScoreCard from "./container/views/admin/components/ScoreCard";
 import Students from "./container/Pages/Forms/Students";
 import StudentsAdmin from "./container/views/studentsAdmin/StudentsAdmin";
 import SportsAdmin from "./container/views/sportsAdmin/SportsAdmin";
+import Results from "./container/Pages/Results";
+import Groups from "./container/Pages/Groups";
+import Guidelines from "./container/Pages/Guidelines";
+import About from "./container/Pages/About";
  
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route index  element={<Home />}  />
+        <Route path="/results" element={<Results />} />
+        <Route path="/groups" element={<Groups />} />
+        <Route path="/guidelines" element={<Guidelines />} />
+        <Route path="/about" element={<About />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/forgot-password" element={<ForgotPassword />} />
         <Route path="/auth/:id/:token" element={<ResetPassword />} />
