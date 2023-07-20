@@ -1,47 +1,102 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { Canvas } from '@react-three/fiber';
+import { Model } from '../../components/Scene';
+import { OrbitControls, Environment } from '@react-three/drei';
+import Navbar from '../../components/Navbar';
 
 const Home = () => {
+
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/auth/login')
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-5 bg-gray-200">
-      <h1 className="text-4xl font-bold text-gray-800 mb-8">
-        Somaiya Awards {new Date().getFullYear()}
-      </h1>
-      
-      <Link to="/auth/login">
-      <button className="bg-blue-500 m-5 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-        Login
-      </button>
-      
-      </Link>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div className="bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Card 1</h2>
-          <p className="text-gray-600">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel faucibus leo. 
-            Vivamus vestibulum pharetra magna nec ultrices.
-          </p>
+    <div className='w-full h-screen'>
+      <Navbar />
+
+      {/* SECTION BANNER  */}
+      <div className='w-full flex bg-red-800 h-[650px]'>
+
+        <div className=''>
+          <Canvas camera={{ position: [0, 0, 7], near: 0.1, far: 100 }}>
+            <OrbitControls />
+
+            {/* Lights  */}
+            <pointLight position={[0, 10, 0]} intensity={2.0} color="#ffffff" />
+            <spotLight position={[0, 10, 5]} intensity={5.0} angle={Math.PI / 6} penumbra={0.1} color="#ff9900" />
+            <directionalLight position={[-10, 5, -5]} intensity={1.5} color="#00ccff" />
+            <ambientLight intensity={0.5} color="#ffffff" />
+
+            {/* Environment Map  */}
+            <Environment preset='studio' intensity={2} />
+
+            <Model />
+          </Canvas>
         </div>
-        <div className="bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Card 2</h2>
-          <p className="text-gray-600">
-            Nunc et mauris vitae eros pellentesque laoreet. Nulla cursus massa non odio ultrices 
-            ultrices. Vestibulum convallis ultricies lorem et elementum.
-          </p>
+
+        <div className='w-full text-center '>
+
+          <div className='h-[100%] justify-center flex flex-col items-center'>
+
+            <h2 className='text-white font-Roboto text-5xl'>
+              SOMAIYA AWARDS
+            </h2>
+
+            <h3 className='text-white font-Roboto text-4xl mt-3'>
+              {new Date().getFullYear()}
+            </h3>
+
+            <div
+              onClick={handleClick}
+              className='mt-10 bg-red-600 shadow-md p-5 rounded-full w-72 cursor-pointer'>
+
+              <p className='font-Poppins text-2xl text-white '>
+                Login
+              </p>
+            </div>
+
+          </div>
         </div>
-        <div className="bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">Card 3</h2>
-          <p className="text-gray-600">
-            Proin in metus eu mauris fringilla dapibus. Integer at quam non elit lacinia faucibus 
-            eu sed felis. In in ipsum sed ante venenatis rutrum at sed velit.
-          </p>
+
+        <div className='h-[100%] bg-red-700 w-[150px]'>
+
         </div>
       </div>
-      
-      <footer className="mt-12 text-center text-gray-600">
-        &copy; {new Date().getFullYear()} Somaiya Awards | All rights reserved
-      </footer>
-    </div>
+
+      {/* SECTION FOOTER  */}
+
+      <div className='flex w-full font-Poppins py-3 px-2 bg-gray-300'>
+
+        <div className='p-3 w-[30%] ml-10'>
+
+        <h2 className='font-semibold my-4 '> Quick Links</h2>
+        <ul>
+          <li className='t text-slate-800 shadow-sm '>Home</li>
+          <li className='t text-slate-800 shadow-sm '>Login</li>
+          <li className='t text-slate-800 shadow-sm '>Results</li>
+          <li className='t text-slate-800 shadow-sm '>Guidelines</li>
+        </ul>
+        </div>
+
+        <div className='w-[70%]'>
+          <div className='w-full text-center flex flex-col items-center '>
+
+          <img src='https://kjsit.somaiya.edu.in/assets/kjsieit/images/Logo/kjsieit-logo.svg' />
+             <h2 className='mt-5'>
+             Designed and Developed by
+             </h2>
+             <h2>
+              K.J Somaiya Institute of Technology
+             </h2>
+          </div>
+        </div>
+
+      </div>
+    </div >
   );
 };
 
