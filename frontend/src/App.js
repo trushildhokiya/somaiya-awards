@@ -30,6 +30,8 @@ import Results from "./container/Pages/Results";
 import Groups from "./container/Pages/Groups";
 import Guidelines from "./container/Pages/Guidelines";
 import About from "./container/Pages/About";
+import Student from "./container/views/students/Student";
+import Peers from "./container/views/peers/Peers";
  
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
         <Route path="/groups" element={<Groups />} />
         <Route path="/guidelines" element={<Guidelines />} />
         <Route path="/about" element={<About />} />
+        <Route path="/students" element={<Student />} />
+        <Route path="/peers" element={<Peers />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/forgot-password" element={<ForgotPassword />} />
         <Route path="/auth/:id/:token" element={<ResetPassword />} />

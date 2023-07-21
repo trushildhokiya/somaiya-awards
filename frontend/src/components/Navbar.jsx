@@ -9,7 +9,7 @@ const Navbar = () => {
             <div className='flex font-Poppins'>
 
                 {/* Image  */}
-                <Link>
+                <Link to='/'>
                     <div className='m-3'>
                         <img src="https://kjsit.somaiya.edu.in/assets/kjsieit/images/Logo/kjsieit-logo.svg" alt='kjsit-logo' className='scale-100' />
                     </div>

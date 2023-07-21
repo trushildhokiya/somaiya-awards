@@ -11,22 +11,22 @@ const Footer = () => {
 
                 <h2 className='font-semibold my-4 '> Quick Links</h2>
                 <ul>
-                    <li className='text-slate-800 shadow-sm '>
+                    <li className='text-slate-800 hover:scale-105 transition-all duration-500 '>
                         <Link to={'/'}>
                             Home
                         </Link>
                     </li>
-                    <li className='text-slate-800 shadow-sm '>
+                    <li className='text-slate-800 hover:scale-105 transition-all duration-500 '>
                         <Link to={'/auth/login'}>
                             Login
                         </Link>
                     </li>
-                    <li className='text-slate-800 shadow-sm '>
+                    <li className='text-slate-800 hover:scale-105 transition-all duration-500 '>
                         <Link to={'/results'}>
                             Results
                         </Link>
                     </li>
-                    <li className='text-slate-800 shadow-sm '>
+                    <li className='text-slate-800 hover:scale-105 transition-all duration-500 '>
                         <Link to={'/guidelines'}>
                             Guidelines
                         </Link>

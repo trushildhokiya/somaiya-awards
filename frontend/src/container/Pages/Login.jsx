@@ -62,6 +62,14 @@ const Login = () => {
                                 navigate('/sports-admin')
                                 break;
 
+                            case "STUDENT":
+                                navigate('/students')
+                                break;
+
+                            case "PEER":
+                                navigate('/peers')
+                                break;
+
                         }
                     }
                     else {
