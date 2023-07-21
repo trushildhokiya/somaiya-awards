@@ -71,10 +71,6 @@ const Analysis = () => {
     return (
         <div>
 
-            <link
-                rel="stylesheet"
-                href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            />
             <div className='flex'>
                 <SideBar />
 

@@ -47,6 +47,7 @@ const SideBar = () => {
 
                         <MenuItem
                         icon={<GirlRoundedIcon />}
+                        component={<Link to='/students-admin/responses/somaiya-star-girl' />}
                         >
                             <p className='text-sm'>
                                 Somaiya Star - Girl
@@ -55,6 +56,7 @@ const SideBar = () => {
 
                         <MenuItem
                         icon={<BoyRoundedIcon />}
+                        component={<Link to='/students-admin/responses/somaiya-star-boy' />}
                         >
                             <p className='text-sm'>
                                 Somaiya Star - Boy
@@ -63,6 +65,7 @@ const SideBar = () => {
 
                         <MenuItem
                         icon={<DesignServicesRoundedIcon />}
+                        component={<Link to='/students-admin/responses/somaiya-star-innovator' />}
                         >
                             <p className='text-sm'>
                                 Somaiya Star Innovator
@@ -71,6 +74,7 @@ const SideBar = () => {
 
                         <MenuItem
                         icon={<VerifiedRoundedIcon />}
+                        component={<Link to='/students-admin/responses/somaiya-star-citizen' />}
                         >
                             <p className='text-sm'>
                                 Somaiya Star Citizen
@@ -79,6 +83,7 @@ const SideBar = () => {
 
                         <MenuItem
                         icon={<ForestRoundedIcon />}
+                        component={<Link to='/students-admin/responses/somaiya-green-star' />}
                         >
                             <p className='text-sm'>
                                 Somaiya Green Star
