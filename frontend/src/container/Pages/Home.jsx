@@ -5,6 +5,10 @@ import { Model } from '../../components/Scene';
 import { OrbitControls, Environment } from '@react-three/drei';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import Lottie from 'lottie-react'
+import CertificateData from '../assests/certificate.json'
+import TrophyData from '../assests/trophy.json'
+import MoneyData from '../assests/money.json'
 
 const Home = () => {
 
@@ -22,8 +26,8 @@ const Home = () => {
       {/* SECTION BANNER  */}
       <div className='w-full flex bg-red-800 h-[650px]'>
 
-        <div className=''>
-          <Canvas camera={{ position: [0, 0, 7], near: 0.1, far: 100 }}>
+        <div className='w-[40%]'>
+          <Canvas camera={{ position: [-1, 0, 4.5], near: 0.1, far: 100 }}>
             <OrbitControls />
 
             {/* Lights  */}
@@ -53,7 +57,7 @@ const Home = () => {
 
             <div
               onClick={handleClick}
-              className='mt-10 bg-red-600 shadow-md p-5 rounded-full w-72 cursor-pointer'>
+              className='mt-10 bg-red-600 shadow-md p-5 rounded-full w-72 cursor-pointer hover:bg-red-500'>
 
               <p className='font-Poppins text-2xl text-white '>
                 Login
@@ -67,6 +71,51 @@ const Home = () => {
 
         </div>
       </div>
+
+      {/* SECTION OVERVIEW  */}
+      <div className='p-8'>
+        <h2 className='text-red-800 font-Roboto text-2xl font-semibold'>
+          Overview
+          <hr className='w-[4%] border-slate-300 border-2' />
+        </h2>
+
+        <p className='my-3 text-md font-Poppins text-slate-950'>
+          The Somaiya Vidyavihar Awards have been instituted to recognise and honor the outstanding
+          contributions and commitment of its Faculty and Staff towards the achievement of the Mission
+          and Vision of the Institute.
+        </p>
+      </div>
+
+      {/* SECTION Awards Prizes  */}
+      <div className='p-8'>
+        <h2 className='text-red-800 font-Roboto text-2xl font-semibold'>
+          Awards Prizes
+          <hr className='w-[4%] border-slate-300 border-2' />
+        </h2>
+
+        <div className='flex my-7 justify-evenly p-6'>
+          <div style={{ width: '200px', height: '200px' }}>
+            <Lottie animationData={CertificateData} />
+            <p className='text-center font-Poppins text-sm text-red-800'>
+              Certficate of Participation
+            </p>
+          </div>
+          <div style={{ width: '200px', height: '200px' }}>
+            <Lottie animationData={TrophyData} />
+            <p className='text-center font-Poppins text-sm text-red-800'>
+              Souvenir trophy
+            </p>
+
+          </div>
+          <div style={{ width: '200px', height: '200px' }}>
+            <Lottie animationData={MoneyData} />
+            <p  className='text-center font-Poppins text-sm text-red-800'>
+             Symbolic financial reward
+            </p>
+          </div>
+        </div>
+      </div>
+
 
       <Footer />
     </div >

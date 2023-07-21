@@ -41,9 +41,12 @@ const Footer = () => {
                     <h2 className='mt-5'>
                         Designed and Developed by
                     </h2>
-                    <h2>
+                    <h2 className='font-semibold'>
                         K.J Somaiya Institute of Technology
                     </h2>
+                    <p className='mt-4 text-sm'>
+                        All Rights Reserved | {new Date().getFullYear()}
+                    </p>
                 </div>
             </div>
 

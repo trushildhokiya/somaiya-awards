@@ -3,6 +3,9 @@ import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 
 export function Model(props) {
+
+  useGLTF.preload('/scene.gltf')
+
   const { nodes, materials } = useGLTF('/scene.gltf');
 
   const groupRef = useRef();
@@ -11,13 +14,14 @@ export function Model(props) {
 
   useFrame((state, delta) => {
 
-    groupRef.current.position.y = -1
+    groupRef.current.position.y = -2.7
     
     setRotationY((rotationY) => rotationY + 0.2 * delta);
     if (groupRef.current) {
       groupRef.current.rotation.y = rotationY;
     }
   });
+  
 
   return (
     <group ref={groupRef} {...props} dispose={null}>
