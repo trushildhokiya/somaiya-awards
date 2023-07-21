@@ -38,10 +38,13 @@ const Footer = () => {
                 <div className='w-full text-center flex flex-col items-center '>
 
                     <img src='https://kjsit.somaiya.edu.in/assets/kjsieit/images/Logo/kjsieit-logo.svg' />
-                    <h2 className='mt-5'>
+                    <h2 className='mt-5 text-sm'>
                         Designed and Developed by
                     </h2>
-                    <h2 className='font-semibold'>
+                    <h2 className='font-Poppins text-xs mt-2'>
+                        Department Of Computer Engineering 
+                    </h2>
+                    <h2 className='font-semibold text-sm'>
                         K.J Somaiya Institute of Technology
                     </h2>
                     <p className='mt-4 text-sm'>
