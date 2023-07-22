@@ -46,7 +46,7 @@ const About = () => {
               </p>
             </div>
             <div>
-              <ParallaxLayer offset={0.2} speed={2}>
+              <ParallaxLayer offset={0.2} speed={1.1}>
                 <div className='flex h-[70%] -mr-[6rem] w-auto items-center justify-end'>
                   <svg id="10015.io" viewBox="0 0 480 480" width={700} height={700} xmlns="http://www.w3.org/2000/svg" >
                     <defs>
@@ -73,7 +73,7 @@ const About = () => {
           </div>
         </ParallaxLayer>
 
-        <ParallaxLayer offset={1.2} speed={0.2}>
+        <ParallaxLayer offset={1.4} speed={0.2}>
 
           <div className='flex p-10 w-full'>
             <div className='w-[50%]'>

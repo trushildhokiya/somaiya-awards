@@ -50,13 +50,6 @@ const SideBar = () => {
                             Responses
                         </MenuItem>
                     </SubMenu>
-                    <SubMenu icon={<SportsSoccerRoundedIcon />} label='Sports'>
-                        <MenuItem
-                        component={<Link to="/admin/responses/sports" />}
-                        >
-                            Responses
-                        </MenuItem>
-                    </SubMenu>
                     <SubMenu icon={<BookRoundedIcon />} label='Teaching'>
                         <MenuItem
                         component={<Link to="/admin/responses/teaching" />}
