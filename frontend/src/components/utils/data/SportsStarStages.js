@@ -16,6 +16,23 @@ const SportsStarStages = [
         _id : 4,
         value: 4
     },
+    {
+        _id : 5,
+        value: 5
+    },
+    
+    {
+        _id : 6,
+        value: 6
+    },
+    {
+        _id : 7,
+        value: 7
+    },
+    {
+        _id : 8,
+        value: 8
+    },
 ]
 
 export default SportsStarStages

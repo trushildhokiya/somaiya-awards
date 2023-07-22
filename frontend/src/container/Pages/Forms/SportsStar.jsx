@@ -78,9 +78,9 @@ const SportsStar = () => {
   const titleOfAward = "Somaiya Sports Star Awards"
   const awardInfo = `The Foundation Day celebration of our organization is when we celebrate, encourage and honour our trusted faculty members, proactive staff members and enthusiastic students who together strive to make Somaiya Vidyavihar an ideal knowledge eco-system. The Human Resources team have been organizing annually the Awards under four categories (Faculty, Staff, Students, Research & Institution) This form is specific to the award category- SPORTS category`
 
-  const limit = 3
-  const headings = ["Basic Information", "Nominee Inspiring P.E Teacher ", "Nominee Sports Star - Girl", "Nominee Sports Star - Boy"]
-  const message = "Please fill all the fields correctly as per your knowledge. Upload files under 10MB"
+  const limit = 7
+  const headings = ["Basic Information", "Nominee Inspiring P.E Teacher ","Assesment Of Competencies (PART A)" , "Assesment Of Compitencies (PART B)", "Nominee Sports Star - Girl", "Nominee Ratings (GIRL) " , "Nominee Sports Star - Boy","Nominee Ratings (BOY)"]
+  const message = "Please fill all the fields correctly as per your knowledge. Upload a single file under each field of maximum 10MB"
 
 
   return (
