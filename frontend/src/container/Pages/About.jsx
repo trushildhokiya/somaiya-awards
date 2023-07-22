@@ -8,12 +8,12 @@ const About = () => {
     <div className='font-Poppins bg-gray-200 h-screen'>
       <Parallax pages={3} style={{ top: '0', left: '0' }}>
 
-        {/* NAVBAR PARALLAX  */}
+        {/* NAVBAR PARALLAX */}
         <ParallaxLayer sticky={{ start: 0, end: 0 }}>
           <Navbar />
         </ParallaxLayer>
 
-        {/* PARALLAX ABOUT KJSIT  */}
+        {/* PARALLAX ABOUT KJSIT */}
         <ParallaxLayer offset={0.1} speed={0.5}>
           <div className='w-full h-[70rem] bg-red-800'>
 
@@ -38,11 +38,11 @@ const About = () => {
               </p>
 
               <p className='text-sm mt-5 w-[50%] text-justify text-white font-Poppins'>
-                dditionally, an undergraduate engineering program - Artificial Intelligence and Data Science - has been offered by KJSIT from the academic year 2020-21 with the intake capacity of 60 seats leading the total intake increased to 360. KJSIT is constantly identifying and developing latest and nascent technologies such as Artificial Intelligence, Machine Learning, Deep Learning and Block Chain Technology, etc. for enhancing student learning and growth.
+                Additionally, an undergraduate engineering program - Artificial Intelligence and Data Science - has been offered by KJSIT from the academic year 2020-21 with the intake capacity of 60 seats leading the total intake increased to 360. KJSIT is constantly identifying and developing latest and nascent technologies such as Artificial Intelligence, Machine Learning, Deep Learning and Blockchain Technology, etc. for enhancing student learning and growth.
               </p>
 
               <p className='text-sm mt-5 w-[50%] text-justify text-white font-Poppins'>
-                University Grants Commission has conferred Autonomous Status to, K J Somaiya Institute of Technology, for a period of 10 years from the A.Y. 2021- 22 to A.Y. 2030-31 as per the provisions of Clause 3.13 and Clause 6.4 (i) of UGC Regulations dated 12.02.2018, whereby the Degree will be awarded by the University of Mumbai.
+                University Grants Commission has conferred Autonomous Status to K J Somaiya Institute of Technology, for a period of 10 years from the A.Y. 2021-22 to A.Y. 2030-31 as per the provisions of Clause 3.13 and Clause 6.4 (i) of UGC Regulations dated 12.02.2018, whereby the Degree will be awarded by the University of Mumbai.
               </p>
             </div>
             <div>
@@ -66,7 +66,7 @@ const About = () => {
 
 
 
-        {/* PARALLAX DEPT COMP ENGG  */}
+        {/* PARALLAX DEPT COMP ENGG */}
         <ParallaxLayer offset={1.2} speed={0}>
           <div className='w-full bg-gray-200 h-[60rem] '>
 
@@ -95,7 +95,7 @@ const About = () => {
                 About Department Of Computer Engineering
               </h2>
               <p className='text-sm text-slate-900 my-3 mt-10 text-justify'>
-                The Computer Engineering department was established in the year 2001 to impart quality education. The department has well qualified and motivated faculty members and support staff. The laboratories are adequately equipped with state-of-the-art facilities. The students are members of various professional bodies like IET, CSI, IEEE, NSS etc. Various platforms are available for students, like project competition, technical & cultural festivals, international conference, etc. to showcase their talent. It is a regular practice of the department to organize industrial visits, expert talks, workshops and internship in addition to the latest certification courses for students in the field of Computer engineering. Student have won prizes in various national and international level paper presentation, competitions, project exhibition etc. As the department has good industry interaction and alumni support, students get several opportunities of internship, project guidance, placement and many more.
+                The Computer Engineering department was established in the year 2001 to impart quality education. The department has well-qualified and motivated faculty members and support staff. The laboratories are adequately equipped with state-of-the-art facilities. The students are members of various professional bodies like IET, CSI, IEEE, NSS etc. Various platforms are available for students, like project competition, technical & cultural festivals, international conference, etc. to showcase their talent. It is a regular practice of the department to organize industrial visits, expert talks, workshops and internships in addition to the latest certification courses for students in the field of Computer engineering. Students have won prizes in various national and international level paper presentations, competitions, project exhibitions, etc. As the department has good industry interaction and alumni support, students get several opportunities for internships, project guidance, placement, and many more.
               </p>
 
               <h2 className='font-Poppins text-md my-3 mt-10 text-red-800 font-semibold'>
@@ -117,7 +117,7 @@ const About = () => {
                     To promote scientific temper and research culture through interdisciplinary and industrial collaboration.
                   </li>
                   <li className=''>
-                    To prepare industry ready professionals, having ethical values and social commitment.
+                    To prepare industry-ready professionals, having ethical values and social commitment.
                   </li>
                 </ul>
               </p>
@@ -126,7 +126,7 @@ const About = () => {
         </ParallaxLayer>
 
 
-        {/* Page 3 FOOTER  */}
+        {/* Page 3 FOOTER */}
         <ParallaxLayer offset={2.7} speed={0.2}>
           <div className='h-[60rem]'>
             <Footer />

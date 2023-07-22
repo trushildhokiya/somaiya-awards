@@ -1,20 +1,20 @@
-import React from 'react'
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
+import React from 'react';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
 const Guidelines = () => {
   return (
     <div>
       <Navbar />
 
-      <div className='p-4  mx-5 my-3 font-Poppins'>
+      <div className='p-4 mx-5 my-3 font-Poppins'>
 
         <div className='my-4'>
           <h2 className='text-lg text-red-800 font-semibold'>
             Overview
           </h2>
           <p className='text-md mt-4'>
-            The Somaiya Vidyavihar Awards have been instituted to recognise and honor the outstanding
+            The Somaiya Vidyavihar Awards have been instituted to recognize and honor the outstanding
             contributions and commitment of its Faculty and Staff towards the achievement of the Mission
             and Vision of the Institute.
           </p>
@@ -52,7 +52,7 @@ const Guidelines = () => {
           <h2 className='text-lg text-red-800 font-semibold'>
             Eligibility
           </h2>
-          <p className='text-md  mt-4 ml-[5rem] '>
+          <p className='text-md mt-4 ml-[5rem]'>
 
             <ol>
               <li style={{ listStyle: 'circle' }}>
@@ -69,9 +69,9 @@ const Guidelines = () => {
 
         <div className='my-4'>
           <h2 className='text-lg text-red-800 font-semibold'>
-            Who can Nominate ?
+            Who can Nominate?
           </h2>
-          <p className='text-md mt-4 ml-[5rem] '>
+          <p className='text-md mt-4 ml-[5rem]'>
 
             <ol>
               <li style={{ listStyle: 'circle' }}>
@@ -96,12 +96,12 @@ const Guidelines = () => {
           <h2 className='text-lg text-red-800 font-semibold'>
             Some Basic Rules
           </h2>
-          <p className='text-md mt-4 ml-[5rem] '>
+          <p className='text-md mt-4 ml-[5rem]'>
 
             <ol>
               <li style={{ listStyle: 'circle' }}>
-                The nomination and selection process for these awards is for all full time faculty members,
-                all full time non-teaching staff members and students.
+                The nomination and selection process for these awards is for all full-time faculty members,
+                all full-time non-teaching staff members, and students.
               </li>
               <li style={{ listStyle: 'circle' }}>
                 Awards Committee/HOI/HOD are requested to avoid nominating past winners for the
@@ -123,12 +123,10 @@ const Guidelines = () => {
           </p>
         </div>
 
-
-
       </div>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Guidelines
+export default Guidelines;
