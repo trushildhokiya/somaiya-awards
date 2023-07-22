@@ -2,7 +2,7 @@
 
 ## Progress Report
 
-![Progress Bar](https://progress-bar.dev/95/)
+![Progress Bar](https://progress-bar.dev/98/)
 
 #### Form Section
 - [x] Forms Designing and Implementation
@@ -14,20 +14,39 @@
 - [x] HOI View and Security
 - [x] Forms Analysis and Responses
 - [x] Download PDF and CSV
-- [x] 🚧 Responses URL Security and Authentication - ![Progress Bar](https://progress-bar.dev/95/)
+- [x] Responses URL Security and Authentication
 
 #### IEAC Section
 - [x] Implementation and Security
 - [x] Responses View with Export
 - [x] Approval and File Upload
-- [x] 🚧 Review URL Security and Authentication - ![Progress Bar](https://progress-bar.dev/95/)
+- [x] Review URL Security and Authentication
+
+#### STUDENTS SECTION
+- [x] Implementation and Security
+- [x] Related Forms Filling 
+
+#### PEERS SECTION
+- [x] Implementation and Security
+- [x] Related Forms Filling 
+
+#### STUDENTS ADMIN
+- [x] Implementation and Security
+- [x] Responses View with Export of Students Form
+- [x] Review URL Security and Authentication
+
+#### SPORTS ADMIN
+- [x] Implementation and Security
+- [x] Responses View with Export of Sports Form ![Progress Bar](https://progress-bar.dev/2/)
+- [x] Review URL Security and Authentication
 
 #### HR Section
 - [x] Design and Implementation
 - [x] Correct Responses of Approved Applications
 - [x] OverView and Dashboard Correction
 - [x] Feedback Avg Score Integration
-- [x] URL Security and Authentication - ![Progress Bar](https://progress-bar.dev/95/)
+- [x] Managing Users Access 
+- [x] URL Security and Authentication - ![Progress Bar](https://progress-bar.dev/99/)
 ___
 ### Documentation
 ____
@@ -85,9 +104,6 @@ Once you are completed installing dependencies in backend , open config folder a
 "password": "<password>",
 "database": "somaiya_awards",
 ```
-
-> **Note**
-> You must create a database called somaiya_awards on your database server otherwise your backend server may not be able to connect to the database and throw error
 
 Edit your .env file
 
