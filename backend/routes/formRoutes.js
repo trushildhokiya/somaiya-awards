@@ -53,12 +53,12 @@ router.route('/research').post(
 
 router.route('/sports').post(
     upload03.fields([
-        {name:'nominee_teacher_photo',maxCount:1},
-        {name:'nominee_teacher_hoi_assessment',maxCount:1},
+        {name:'nominee_coach_photo',maxCount:1},
+        {name:'nominee_coach_supportings',maxCount:1},
         {name:'nominee_ss_girl_photo',maxCount:1},
-        {name:'nominee_ss_girl_hoi_assessment',maxCount:1},
+        {name:'nominee_ss_girl_supportings',maxCount:1},
         {name:'nominee_ss_boy_photo',maxCount:1},
-        {name:'nominee_ss_boy_hoi_assessment',maxCount:1},
+        {name:'nominee_ss_boy_supportings',maxCount:1},
     ]),
     submitForm_03
 );

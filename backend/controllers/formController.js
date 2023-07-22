@@ -202,40 +202,100 @@ const submitForm_03 = asyncHandler(async (req, res) => {
     const {
         email_id,
         institute_name,
-        nominee_inspiring_teacher,
+        nominee_inspiring_coach,
+        nominee_coach_comments,
+        q_01,
+        q_02,
+        q_03,
+        q_04,
+        q_05,
+        q_06,
+        q_07,
+        q_08,
+        q_09,
+        q_10,
+        q_11,
+        q_12,
+        q_13,
+        q_14,
+        q_15,
+        q_16,
+        q_17,
+        q_18,
+        q_19,
+        q_20,
 
-        nominee_sportsStar_girl,
+        nominee_ss_girl,
         nominee_ss_girl_sport,
+        q_21,
+        q_22,
+        q_23,
+        q_24,
 
-        nominee_sportsStar_boy,
+        nominee_ss_boy,
         nominee_ss_boy_sport,
+        q_25,
+        q_26,
+        q_27,
+        q_28,
 
     } = req.body
 
-    const nominee_teacher_photo = req.files.nominee_teacher_photo[0].path
-    const nominee_teacher_hoi_assessment = req.files.nominee_teacher_hoi_assessment[0].path
+    const nominee_coach_photo = req.files.nominee_coach_photo[0].path
+    const nominee_coach_supportings = req.files.nominee_coach_supportings[0].path
 
     const nominee_ss_girl_photo = req.files.nominee_ss_girl_photo[0].path
-    const nominee_ss_girl_hoi_assessment = req.files.nominee_ss_girl_hoi_assessment[0].path
+    const nominee_ss_girl_supportings = req.files.nominee_ss_girl_supportings[0].path
 
 
     const nominee_ss_boy_photo = req.files.nominee_ss_boy_photo[0].path
-    const nominee_ss_boy_hoi_assessment = req.files.nominee_ss_boy_hoi_assessment[0].path
+    const nominee_ss_boy_supportings = req.files.nominee_ss_boy_supportings[0].path
 
     const result = await Sports.create({
         email_id: email_id,
         institute_name: institute_name,
-        nominee_inspiring_teacher: nominee_inspiring_teacher,
-        nominee_teacher_photo: nominee_teacher_photo,
-        nominee_teacher_hoi_assessment: nominee_teacher_hoi_assessment,
-        nominee_sportsStar_girl: nominee_sportsStar_girl,
+        nominee_inspiring_coach: nominee_inspiring_coach,
+        nominee_coach_comments: nominee_coach_comments,
+        nominee_coach_photo: nominee_coach_photo,
+        nominee_coach_supportings: nominee_coach_supportings,
+        q_01:q_01,
+        q_02:q_02,
+        q_03:q_03,
+        q_04:q_04,
+        q_05:q_05,
+        q_06:q_06,
+        q_07:q_07,
+        q_08:q_08,
+        q_09:q_09,
+        q_10:q_10,
+        q_11:q_11,
+        q_12:q_12,
+        q_13:q_13,
+        q_14:q_14,
+        q_15:q_15,
+        q_16:q_16,
+        q_17:q_17,
+        q_18:q_18,
+        q_19:q_19,
+        q_20:q_20,
+
+        nominee_ss_girl: nominee_ss_girl,
         nominee_ss_girl_sport: nominee_ss_girl_sport,
         nominee_ss_girl_photo: nominee_ss_girl_photo,
-        nominee_ss_girl_hoi_assessment: nominee_ss_girl_hoi_assessment,
-        nominee_sportsStar_boy: nominee_sportsStar_boy,
+        nominee_ss_girl_supportings: nominee_ss_girl_supportings,
+        q_21:q_21,
+        q_22:q_22,
+        q_23:q_23,
+        q_24:q_24,
+
+        nominee_ss_boy: nominee_ss_boy,
         nominee_ss_boy_sport: nominee_ss_boy_sport,
         nominee_ss_boy_photo: nominee_ss_boy_photo,
-        nominee_ss_boy_hoi_assessment: nominee_ss_boy_hoi_assessment,
+        nominee_ss_boy_supportings: nominee_ss_boy_supportings,
+        q_25:q_25,
+        q_26:q_26,
+        q_27:q_27,
+        q_28:q_28,
     });
 
     if (!result) {
