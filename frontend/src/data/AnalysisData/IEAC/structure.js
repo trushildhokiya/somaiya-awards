@@ -79,6 +79,7 @@ const handleResearchChange = (params, event) => {
 }
 
 /**Sports Handler */
+/**@deprecated : IAEC Approval Removed */
 
 const handleSportsChange = (params,event)=>{
 
@@ -646,6 +647,7 @@ const columns02: GridColDef[] = [
     },
 ];
 
+/**@deprecated : Permanently Moved to SPORTS ADMIN */
 const columns03: GridColDef[] = [
     { field: 'id', headerName: 'Application ID', width: 150 },
     { field: 'email_id', headerName: 'Email ID', width: 150 },
@@ -923,7 +925,7 @@ const columns05: GridColDef[] = [
 export {
     columns01,
     columns02,
-    columns03,
+    // columns03,
     columns04,
     columns05
 };

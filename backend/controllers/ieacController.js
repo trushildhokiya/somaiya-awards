@@ -83,7 +83,7 @@ const researchDataHandler = asyncHandler(async (req, res) => {
 //@desc get data of sports forms to ieac
 //@route GET /ieac/data/sports
 //@access private
-
+/**@deprecated : Shifted Permanently to Sports Admin */
 const sportsDataHandler = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
@@ -234,7 +234,7 @@ const researchDataUpdater = asyncHandler( async (req,res)=>{
 //@desc update sports
 //@route PUT /ieac/data/sports
 //@access private
-
+/**@deprecated : No need For IAEC Approval */
 const sportsDataUpdater = asyncHandler( async (req,res)=>{
     
     const user_id = res.user_id;
@@ -394,6 +394,7 @@ const researchRecFileHandler = asyncHandler( async( req, res)=>{
     })
 })
 
+/**@deprecated : No Need for IAEC to approve */
 const sportsRecFileHandler = asyncHandler(async( req,res)=>{
 
     const user_id = res.user_id;

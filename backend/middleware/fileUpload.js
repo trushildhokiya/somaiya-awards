@@ -112,6 +112,7 @@ const upload06 = multer({storage: storage06});
 
 
 // sports form approval file handler
+/**@deprecated : IAEC Approval removed  */
 
 const storage07 = multer.diskStorage({
     destination : (req,file,cb)=>{

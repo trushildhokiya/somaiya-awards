@@ -7,6 +7,7 @@ import columns01 from '../../../../data/AnalysisData/STUDENTS ADMIN/structure';
 import axios from 'axios'
 import Swal from 'sweetalert2';
 import { MoonLoader } from 'react-spinners';
+
 const StudentResponses = () => {
 
   const [loading, setLoading] = useState(true)

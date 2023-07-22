@@ -2,7 +2,6 @@ import React from 'react'
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import AssessmentRoundedIcon from '@mui/icons-material/AssessmentRounded';
 import ScienceRoundedIcon from '@mui/icons-material/ScienceRounded';
-import SportsSoccerRoundedIcon from '@mui/icons-material/SportsSoccerRounded';
 import BookRoundedIcon from '@mui/icons-material/BookRounded';
 import BusinessIcon from '@mui/icons-material/Business';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
@@ -54,12 +53,7 @@ const SideBar = () => {
             >
               Research Form
             </MenuItem>
-            <MenuItem
-              icon={<SportsSoccerRoundedIcon />}
-              component={<Link to='/ieac/review/sports' />}
-            >
-              Sports Form
-            </MenuItem>
+            
             <MenuItem
               icon={<BookRoundedIcon />}
               component={<Link to='/ieac/review/teaching' />}

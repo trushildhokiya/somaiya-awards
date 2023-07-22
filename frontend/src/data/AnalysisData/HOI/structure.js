@@ -165,18 +165,40 @@ const columns02: GridColDef[] = [
 const columns03: GridColDef[] = [
   { field: 'email_id', headerName: 'Email ID', width: 150 },
   { field: 'institute_name', headerName: 'Institute Name', width: 150 },
-  { field: 'nominee_inspiring_teacher', headerName: 'Nominee Inspiring Teacher', width: 200 },
+  { field: 'nominee_inspiring_coach', headerName: 'Nominee Inspiring Coach', width: 200 },
+  { field: 'nominee_coach_comments', headerName: 'Nominee Coach Comments', width: 200 },
   {
     field: 'nominee_teacher_photo', headerName: 'Nominee Teacher Photo', width: 200, renderCell: (params) => {
       return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
     }
   },
   {
-    field: 'nominee_teacher_hoi_assessment', headerName: 'Nominee Teacher HOI Assessment', width: 250, renderCell: (params) => {
+    field: 'nominee_teacher_supportings', headerName: 'Nominee Teacher Supportings', width: 250, renderCell: (params) => {
       return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
     }
   },
-  { field: 'nominee_sportsStar_girl', headerName: 'Nominee Sports Star (Girl)', width: 200 },
+  { field: 'q_01', headerName: 'Q01', width: 100 },
+  { field: 'q_02', headerName: 'Q02', width: 100 },
+  { field: 'q_03', headerName: 'Q03', width: 100 },
+  { field: 'q_04', headerName: 'Q04', width: 100 },
+  { field: 'q_05', headerName: 'Q05', width: 100 },
+  { field: 'q_06', headerName: 'Q06', width: 100 },
+  { field: 'q_07', headerName: 'Q07', width: 100 },
+  { field: 'q_08', headerName: 'Q08', width: 100 },
+  { field: 'q_09', headerName: 'Q09', width: 100 },
+  { field: 'q_10', headerName: 'Q10', width: 100 },
+  { field: 'q_11', headerName: 'Q11', width: 100 },
+  { field: 'q_12', headerName: 'Q12', width: 100 },
+  { field: 'q_13', headerName: 'Q13', width: 100 },
+  { field: 'q_14', headerName: 'Q14', width: 100 },
+  { field: 'q_15', headerName: 'Q15', width: 100 },
+  { field: 'q_16', headerName: 'Q16', width: 100 },
+  { field: 'q_17', headerName: 'Q17', width: 100 },
+  { field: 'q_18', headerName: 'Q18', width: 100 },
+  { field: 'q_19', headerName: 'Q19', width: 100 },
+  { field: 'q_20', headerName: 'Q20', width: 100 },
+  
+  { field: 'nominee_ss_girl', headerName: 'Nominee Sports Star (Girl)', width: 200 },
   { field: 'nominee_ss_girl_sport', headerName: 'Nominee SS Girl Sport', width: 200 },
   {
     field: 'nominee_ss_girl_photo', headerName: 'Nominee SS Girl Photo', width: 200, renderCell: (params) => {
@@ -184,11 +206,16 @@ const columns03: GridColDef[] = [
     }
   },
   {
-    field: 'nominee_ss_girl_hoi_assessment', headerName: 'Nominee SS Girl HOI Assessment', width: 250, renderCell: (params) => {
+    field: 'nominee_ss_girl_supportings', headerName: 'Nominee SS Girl Supportings', width: 250, renderCell: (params) => {
       return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
     }
   },
-  { field: 'nominee_sportsStar_boy', headerName: 'Nominee Sports Star (Boy)', width: 200 },
+  { field: 'q_21', headerName: 'Q21', width: 100 },
+  { field: 'q_22', headerName: 'Q22', width: 100 },
+  { field: 'q_23', headerName: 'Q23', width: 100 },
+  { field: 'q_24', headerName: 'Q24', width: 100 },
+
+  { field: 'nominee_ss_boy', headerName: 'Nominee Sports Star (Boy)', width: 200 },
   { field: 'nominee_ss_boy_sport', headerName: 'Nominee SS Boy Sport', width: 200 },
   {
     field: 'nominee_ss_boy_photo', headerName: 'Nominee SS Boy Photo', width: 200, renderCell: (params) => {
@@ -196,32 +223,15 @@ const columns03: GridColDef[] = [
     }
   },
   {
-    field: 'nominee_ss_boy_hoi_assessment', headerName: 'Nominee SS Boy HOI Assessment', width: 250, renderCell: (params) => {
+    field: 'nominee_ss_boy_supportings', headerName: 'Nominee SS Boy Supportings', width: 250, renderCell: (params) => {
       return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
     }
   },
-  {
-    field: 'ieacApproved', headerName: 'IEAC Approved', type: 'boolean', width: 150, renderCell: (params) => {
-      return params.value ?
-        (
-          <CheckRoundedIcon style={{ color: '#15803d' }} />
-        ) :
-        (
-          <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
-        )
-    },
-  },
-  {
-    field: 'hr_approved', headerName: 'HR Approved', type: 'boolean', width: 150, renderCell: (params) => {
-      return params.value ?
-        (
-          <CheckRoundedIcon style={{ color: '#15803d' }} />
-        ) :
-        (
-          <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
-        )
-    },
-  },
+  { field: 'q_25', headerName: 'Q25', width: 100 },
+  { field: 'q_26', headerName: 'Q26', width: 100 },
+  { field: 'q_27', headerName: 'Q27', width: 100 },
+  { field: 'q_28', headerName: 'Q28', width: 100 },
+  
 ];
 
 const columns04: GridColDef[] = [

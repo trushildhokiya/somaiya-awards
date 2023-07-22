@@ -20,14 +20,14 @@ const userAuthenticator = require('../middleware/userAuthenticator');
 /**GET Routes */
 router.route('/outstanding-institution').get(userAuthenticator, institutionDataHandler);
 router.route('/research').get(userAuthenticator, researchDataHandler);
-router.route('/sports').get(userAuthenticator,sportsDataHandler);
+// router.route('/sports').get(userAuthenticator,sportsDataHandler);
 router.route('/teaching').get(userAuthenticator,teachingDataHandler);
 router.route('/non-teaching').get(userAuthenticator,nonTeachingDataHandler);
 
 /**PUT Routes */
 
 router.route('/research').put(userAuthenticator,researchDataUpdater);
-router.route('/sports').put(userAuthenticator,sportsDataUpdater);
+// router.route('/sports').put(userAuthenticator,sportsDataUpdater);
 router.route('/teaching').put(userAuthenticator,teachingDataUpdater);
 router.route('/non-teaching').put(userAuthenticator,nonTeachingDataUpdater);
 
@@ -37,5 +37,5 @@ router.route('/non-teaching').put(userAuthenticator,nonTeachingDataUpdater);
 router.route('/research').post(userAuthenticator,upload06.single('approvalFile'),researchRecFileHandler)
 router.route('/teaching').post(userAuthenticator,upload08.single('approvalFile'),teachingRecFileHandler)
 router.route('/non-teaching').post(userAuthenticator,upload09.single('approvalFile'),nonTeachingRecFileHandler)
-router.route('/sports').post(userAuthenticator,upload07.single('approvalFile'),sportsRecFileHandler)
+// router.route('/sports').post(userAuthenticator,upload07.single('approvalFile'),sportsRecFileHandler)
 module.exports = router

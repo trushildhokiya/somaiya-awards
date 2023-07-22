@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import SideBar from '../ieacComponents/Sidebar'
 import { useLocation } from 'react-router-dom'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { columns01, columns02, columns03, columns04, columns05 } from '../../../../data/AnalysisData/IEAC/structure';
+import { columns01, columns02, columns04, columns05 } from '../../../../data/AnalysisData/IEAC/structure';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { MoonLoader } from 'react-spinners';
 
 const Review = () => {
 
@@ -12,8 +14,64 @@ const Review = () => {
     const [columns, setColumns] = useState([]);
     const [rows, setRows] = useState([]);
     const location = useLocation();
+    const [loading, setLoading] = useState(true)
+    const [authorized, setAuthorized] = useState(false)
+    const navigate = useNavigate();
 
     useEffect(() => {
+
+        if (!localStorage.getItem('token') || !localStorage.getItem('user_id')) {
+            Swal.fire({
+                title: "Failed to Login",
+                text: "We failed to recognize you! Try relogging",
+                imageUrl: 'https://media.istockphoto.com/id/648691968/vector/website-error-403-forbidden.jpg?s=612x612&w=0&k=20&c=sSc0Cb2as4BKgH0vFq2o5h1U2vUh4xnayaYkuyFPKh8=',
+                // imageWidth:"150",
+                imageHeight: '250',
+                confirmButtonColor: "rgb(185,28,28)"
+            })
+            navigate('/auth/login')
+        }
+        else {
+
+            axios.get('http://localhost:5001/auth/validate', {
+                headers: {
+                    'x-access-token': localStorage.getItem('token'),
+                    'user_id': localStorage.getItem('user_id')
+                }
+            })
+                .then((res) => {
+
+                    if (res.data['authorized'] && res.data['role'] === 'IEAC') {
+
+                        setAuthorized(res.data['authorized'])
+                        setLoading(false)
+                    }
+                    else {
+
+                        Swal.fire({
+                            title: "Failed to Login",
+                            text: "We failed to recognize you! Try relogging",
+                            imageUrl: 'https://media.istockphoto.com/id/648691968/vector/website-error-403-forbidden.jpg?s=612x612&w=0&k=20&c=sSc0Cb2as4BKgH0vFq2o5h1U2vUh4xnayaYkuyFPKh8=',
+                            // imageWidth:"150",
+                            imageHeight: '250',
+                            confirmButtonColor: "rgb(185,28,28)"
+                        })
+                        navigate('/auth/login')
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    Swal.fire({
+                        title: "Failed to Login",
+                        text: "We failed to recognize you! Try relogging",
+                        imageUrl: 'https://media.istockphoto.com/id/648691968/vector/website-error-403-forbidden.jpg?s=612x612&w=0&k=20&c=sSc0Cb2as4BKgH0vFq2o5h1U2vUh4xnayaYkuyFPKh8=',
+                        // imageWidth:"150",
+                        imageHeight: '250',
+                        confirmButtonColor: "rgb(185,28,28)"
+                    })
+                    navigate('/auth/login')
+                })
+        }
 
         let pathLabel = location.pathname.split('/review/')[1];
         setTitle(pathLabel);
@@ -27,10 +85,6 @@ const Review = () => {
                 setColumns(columns02)
                 break;
 
-            case 'sports':
-                setColumns(columns03)
-                break;
-
             case 'teaching':
                 setColumns(columns04)
                 break;
@@ -38,6 +92,9 @@ const Review = () => {
             case 'non-teaching':
                 setColumns(columns05)
                 break;
+
+            default:
+                navigate('/ieac')
         }
 
         const url = `http://localhost:5001/hoi/data/${pathLabel}`;
@@ -102,50 +159,71 @@ const Review = () => {
 
     return (
         <div>
-            <div className='flex h-screen'>
-                <SideBar />
+            {
+                loading
+                    ?
+                    <>
+                        <div className='w-full h-screen flex justify-center items-center'>
+                            <MoonLoader
+                                loading={loading}
+                                size={50}
+                                color="rgb(185,28,28"
+                            />
+                        </div>
+                    </>
+                    :
+                    authorized
+                        ?
+                        <>
+                            <div className='flex h-screen'>
+                                <SideBar />
 
-                <div className='flex p-5 flex-col w-full font-Poppins overflow-y-scroll'>
-                    <h2 className='text-xl font-semibold'>
-                        {title.toUpperCase()} Form Responses
-                    </h2>
-                    <div className='mt-[3rem] p-2'>
+                                <div className='flex p-5 flex-col w-full font-Poppins overflow-y-scroll'>
+                                    <h2 className='text-xl font-semibold'>
+                                        {title.toUpperCase()} Form Responses
+                                    </h2>
+                                    <div className='mt-[3rem] p-2'>
 
-                        <DataGrid
-                            rows={rows}
-                            columns={columns}
-                            density='comfortable'
-                            slots={{ toolbar: GridToolbar }}
-                            slotProps={{
-                                toolbar: {
-                                    showQuickFilter: true,
-                                    quickFilterProps: { debounceMs: 500 },
-                                },
-                            }}
-                            sx={{
-                                boxShadow: 2,
-                                padding: 2
-                            }}
-                        />
+                                        <DataGrid
+                                            rows={rows}
+                                            columns={columns}
+                                            density='comfortable'
+                                            slots={{ toolbar: GridToolbar }}
+                                            slotProps={{
+                                                toolbar: {
+                                                    showQuickFilter: true,
+                                                    quickFilterProps: { debounceMs: 500 },
+                                                },
+                                            }}
+                                            sx={{
+                                                boxShadow: 2,
+                                                padding: 2
+                                            }}
+                                        />
 
-                    </div>
-                    {
-                        rows[0]
-                            ?
-                            rows[0].ieacApprovedFile != null
-                                ?
-                                null
-                                :
-                                <div>
-                                    <input type='file' name='approvalFile' onChange={handleFileChange}></input>
+                                    </div>
+                                    {
+                                        rows[0]
+                                            ?
+                                            rows[0].ieacApprovedFile != null
+                                                ?
+                                                null
+                                                :
+                                                <div>
+                                                    <input type='file' name='approvalFile' onChange={handleFileChange}></input>
+                                                </div>
+                                            :
+                                            <div>
+                                                <input type='file' name='approvalFile' onChange={handleFileChange}></input>
+                                            </div>
+                                    }
                                 </div>
-                            :
-                            <div>
-                                <input type='file' name='approvalFile' onChange={handleFileChange}></input>
                             </div>
-                    }
-                </div>
-            </div>
+                        </>
+                        :
+                        navigate('/auth/login')
+            }
+
         </div>
     )
 }
