@@ -2,7 +2,7 @@
 
 ## Progress Report
 
-![Progress Bar](https://progress-bar.dev/98/)
+![Progress Bar](https://progress-bar.dev/99/)
 
 #### Form Section
 - [x] Forms Designing and Implementation
@@ -37,7 +37,7 @@
 
 #### SPORTS ADMIN
 - [x] Implementation and Security
-- [x] Responses View with Export of Sports Form ![Progress Bar](https://progress-bar.dev/2/)
+- [x] Responses View with Export of Sports Form
 - [x] Review URL Security and Authentication
 
 #### HR Section

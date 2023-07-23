@@ -7,6 +7,7 @@ const {
     NonTeaching,
     Students,
     User,
+    Result,
     FeedbackOne,
     FeedbackTwo,
     FeedbackThree,
@@ -1234,6 +1235,60 @@ const getNonTeachingScoreCardData = asyncHandler( async(req,res)=>{
     })
 })
 
+
+//@desc POST results file
+//@route POST admin/data/announce-results
+//@access Private
+
+const resultsDataHandler = asyncHandler( async(req,res)=>{
+
+    const result  = await Result.create({
+        result:req.file.path
+    });
+
+    res.status(200).json({
+        message:'Request Successful',
+    })
+})
+
+
+//@desc POST results file
+//@route POST admin/data/announce-results
+//@access Private
+
+const getResultsData = asyncHandler( async(req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if (user.role != 'ADMIN') {
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const currentYear = new Date().getFullYear();
+
+    const result  = await Result.findAll(
+        {
+            where: sequelize.where( sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+        }
+    )
+
+    res.status(200).json({
+        message:'Request Successful',
+        data:result
+    })
+})
+
 // custom functions which will be used in Admin Controllers
 
 // @desc: extracts date from data 
@@ -1348,4 +1403,6 @@ module.exports={
     getFeedback04Data,
     getTeachingScoreCardData,
     getNonTeachingScoreCardData,
+    resultsDataHandler,
+    getResultsData
 }

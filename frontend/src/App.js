@@ -34,6 +34,7 @@ import Student from "./container/views/students/Student";
 import Peers from "./container/views/peers/Peers";
 import StudentResponses from "./container/views/studentsAdmin/components/StudentResponses";
 import SportsResponses from "./container/views/sportsAdmin/pages/SportsResponses";
+import Announce from "./container/views/admin/pages/Announce";
  
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
         <Route path="/admin/responses/:formType" element={<Responses />} />
         <Route path="/admin/:formType/scorecard/:id" element={<ScoreCard />} />
         <Route path="/admin/manage-users" element={<ManageUsers />} />
+        <Route path="/admin/announce-result" element={<Announce />} />
         <Route path="/students-admin" element={<StudentsAdmin />} />
         <Route path="/students-admin/responses/:formType" element={<StudentResponses />} />
         <Route path="/sports-admin" element={<SportsAdmin />} />

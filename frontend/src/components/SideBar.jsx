@@ -4,7 +4,7 @@ import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import SpaceDashboardIcon from '@mui/icons-material/SpaceDashboard';
 import BusinessIcon from '@mui/icons-material/Business';
 import ScienceRoundedIcon from '@mui/icons-material/ScienceRounded';
-import SportsSoccerRoundedIcon from '@mui/icons-material/SportsSoccerRounded';
+import CampaignRoundedIcon from '@mui/icons-material/CampaignRounded';
 import BookRoundedIcon from '@mui/icons-material/BookRounded';
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
@@ -92,6 +92,9 @@ const SideBar = () => {
                     </SubMenu>
                     <MenuItem icon={<GroupAddIcon />} component={<Link to='/admin/manage-users' />}>
                         Manage Users
+                    </MenuItem>
+                    <MenuItem icon={<CampaignRoundedIcon />} component={<Link to='/admin/announce-result' />}>
+                        Announce
                     </MenuItem>
                 </Menu>
             </Sidebar>

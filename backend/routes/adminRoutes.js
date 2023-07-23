@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const userAuthenticator = require('../middleware/userAuthenticator');
+const {upload11}  = require('../middleware/fileUpload')
 const {
         getCounts,
         getDaysCount,
@@ -15,7 +16,9 @@ const {
         getFeedback03Data,
         getFeedback04Data,
         getTeachingScoreCardData,
-        getNonTeachingScoreCardData
+        getNonTeachingScoreCardData,
+        resultsDataHandler,
+        getResultsData
     } = require('../controllers/adminController')
 
 /** GET ROUTES */
@@ -41,5 +44,13 @@ router.route('/forms/feedback-04').get(userAuthenticator, getFeedback04Data)
 
 router.route('/teaching/scorecard').get(userAuthenticator, getTeachingScoreCardData);
 router.route('/non-teaching/scorecard').get(userAuthenticator, getNonTeachingScoreCardData);
+
+// Announce Results
+
+router.route('/announce-results').post(upload11.single('result'),resultsDataHandler);
+
+// GET RESULTS
+
+router.route('/results').get(userAuthenticator,getResultsData);
 
 module.exports = router;
