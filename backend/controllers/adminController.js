@@ -1,4 +1,4 @@
-const asyncHandler =  require('express-async-handler');
+const asyncHandler = require('express-async-handler');
 const {
     OutstandingInstitution,
     Research,
@@ -11,7 +11,7 @@ const {
     FeedbackOne,
     FeedbackTwo,
     FeedbackThree,
-    FeedbackFour ,
+    FeedbackFour,
     Sequelize } = require('../models')
 const { Op } = Sequelize;
 const sequelize = require('sequelize');
@@ -19,7 +19,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 /**Global Info */
-const institutionArray =  [
+const institutionArray = [
     "The Somaiya School",
     "S. K. Somaiya Prathmik Shala",
     "S K Somaiya Vinay Mandir High School",
@@ -53,6 +53,40 @@ const institutionArray =  [
     "SK Somaiya College of Arts, Science and Commerce (MU)"
 ];
 
+const grouping = {
+    "The Somaiya School": [1, 2],
+    "S. K. Somaiya Prathmik Shala": [1],
+    "S K Somaiya Vinay Mandir High School": [1, 2],
+    "Somaiya Vidyamandir- Sakarwadi": [1, 2],
+    "Shri Sharda English Medium School Kopargaon": [1, 2],
+    "Somaiya Vidya Mandir- Laxmiwadi": [1, 2],
+    "Somaiya Shishu Niketan Primary School- Sameerwadi": [1],
+    "Somaiya Vinaymandir High School- Sameerwadi": [1, 2],
+    "KJ Somaiya English Medium School Sameerwadi": [1, 2],
+    "Nareshwadi Learning Centre- Dahanu": [1, 2],
+    "SK Somaiya Vinay Mandir High School, Mumbai": [1, 2],
+    "KJ Somaiya Junior College of Arts, Commerce and Science": [2],
+    "SK Somaiya Vinay Mandir Junior College, Mumbai": [2],
+    "KJ Somaiya Private Industrial Training Institute": [2],
+    "Smt. Sakarben Somaiya Junior College of Education (DEd)": [2],
+    "KJ Somaiya Institute of Engineering and Information Technology, Ayurvihar": [3],
+    "KJ Somaiya College of Engineering": [3],
+    "KJ Somaiya Institute of Management": [3],
+    "KJ Somaiya Polytechnic College": [3],
+    "KJ Somaiya College of Arts and Commerce": [3],
+    "KJ Somaiya College of Science and Commerce": [3],
+    "K.J Somaiya College of Comprehensive College of Education, Training and Research": [3],
+    "KJ Somaiya Bhartiya Sanskriti Peetham": [3],
+    "KJ Somaiya Centre for Buddhish Studies": [3],
+    "KJ Somaiya Centre for Studies in Jainism": 1,
+    "KJ Somaiya Medical College and Research Centre": [4],
+    "KJ Somaiya College of Physiotherapy": [4],
+    "KJ Somaiya School and College of Nursing": [4],
+    "Somaiya Sports Academy": [3],
+    "SK Somaiya College (SVU)": [3],
+    "SK Somaiya College of Arts, Science and Commerce (MU)": [3]
+}
+
 /**
  * DASHBOARD SECTION 
  * 
@@ -61,7 +95,7 @@ const institutionArray =  [
 //@route GET admin/data/count/all
 //@access Private
 
-const getCounts = asyncHandler( async(req,res)=>{
+const getCounts = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -73,7 +107,7 @@ const getCounts = asyncHandler( async(req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
@@ -167,8 +201,8 @@ const getCounts = asyncHandler( async(req,res)=>{
 
 
     res.status(200).json({
-        message:'Request Successful',
-        data:countData
+        message: 'Request Successful',
+        data: countData
     })
 })
 
@@ -177,7 +211,7 @@ const getCounts = asyncHandler( async(req,res)=>{
 //@route GET admin/data/count/15
 //@access private
 
-const getDaysCount = asyncHandler( async(req,res)=>{
+const getDaysCount = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -189,7 +223,7 @@ const getDaysCount = asyncHandler( async(req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
@@ -202,8 +236,8 @@ const getDaysCount = asyncHandler( async(req,res)=>{
     //get institution data
     const institutionData = await OutstandingInstitution.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`), 
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -211,8 +245,8 @@ const getDaysCount = asyncHandler( async(req,res)=>{
     //get research data
     const researchData = await Research.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -221,8 +255,8 @@ const getDaysCount = asyncHandler( async(req,res)=>{
     //get sports data
     const sportsData = await Sports.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -230,8 +264,8 @@ const getDaysCount = asyncHandler( async(req,res)=>{
     //get teaching data
     const teachingData = await Teaching.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -239,8 +273,8 @@ const getDaysCount = asyncHandler( async(req,res)=>{
     //get Non Teaching Data
     const nonTeachingData = await NonTeaching.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -249,18 +283,18 @@ const getDaysCount = asyncHandler( async(req,res)=>{
     // get feedback One Data
     const feedbackOneData = await FeedbackOne.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
 
     // get feedback two data
 
-    const feedbackTwoData = await  FeedbackTwo.findAll(
+    const feedbackTwoData = await FeedbackTwo.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -269,8 +303,8 @@ const getDaysCount = asyncHandler( async(req,res)=>{
 
     const feedbackThreeData = await FeedbackThree.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -279,8 +313,8 @@ const getDaysCount = asyncHandler( async(req,res)=>{
 
     const feedbackFourData = await FeedbackFour.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -289,8 +323,8 @@ const getDaysCount = asyncHandler( async(req,res)=>{
 
     const studentsData = await Students.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -324,7 +358,7 @@ const getDaysCount = asyncHandler( async(req,res)=>{
     const pastDataCount = getDateCounts(processedData)
 
     res.status(200).json({
-        message:'Api works',
+        message: 'Api works',
         data: pastDataCount
     })
 
@@ -335,7 +369,7 @@ const getDaysCount = asyncHandler( async(req,res)=>{
 //@route GET admin/data/count/institution-wise
 //@access Private 
 
-const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
+const getInstitutionWiseCount = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -347,7 +381,7 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
@@ -359,8 +393,8 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
     //get institution data
     const institutionData = await OutstandingInstitution.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`), 
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -368,8 +402,8 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
     //get research data
     const researchData = await Research.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -378,8 +412,8 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
     //get sports data
     const sportsData = await Sports.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -387,8 +421,8 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
     //get teaching data
     const teachingData = await Teaching.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -396,8 +430,8 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
     //get Non Teaching Data
     const nonTeachingData = await NonTeaching.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
@@ -406,41 +440,41 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
 
     const studentsData = await Students.findAll(
         {
-            where: Sequelize.and( 
-                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),  
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
             )
         }
     )
 
 
-    const institutionWiseCount= [];
-  
+    const institutionWiseCount = [];
+
     // create a array of object with nstitution name and count (default 0 )
 
-    for (const institution of institutionArray){
+    for (const institution of institutionArray) {
 
         institutionWiseCount.push(
             {
                 id: uuidv4(),
-                institute: institution ,
+                institute: institution,
                 institution_form: 0,
-                research_form:0,
-                sports_form:0,
-                teaching_form:0,
-                non_teaching_form:0,
-                students_form:0
+                research_form: 0,
+                sports_form: 0,
+                teaching_form: 0,
+                non_teaching_form: 0,
+                students_form: 0
             }
         )
     }
 
     // institution Form Counter
 
-    for( const data of institutionData){
+    for (const data of institutionData) {
 
         const institute = data.institution_name;
 
-        institutionWiseCount.find( (object, index)=>{
-            if(object.institute === institute){
+        institutionWiseCount.find((object, index) => {
+            if (object.institute === institute) {
                 object.institution_form = object.institution_form + 1
             }
         })
@@ -450,12 +484,12 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
 
     // research form Counter
 
-    for( const data of researchData){
+    for (const data of researchData) {
 
         const institute = data.institution;
 
-        institutionWiseCount.find( (object, index)=>{
-            if(object.institute === institute){
+        institutionWiseCount.find((object, index) => {
+            if (object.institute === institute) {
                 object.research_form = object.research_form + 1
             }
         })
@@ -465,12 +499,12 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
 
     // sports form Counter
 
-    for( const data of sportsData){
+    for (const data of sportsData) {
 
         const institute = data.institute_name;
 
-        institutionWiseCount.find( (object, index)=>{
-            if(object.institute === institute){
+        institutionWiseCount.find((object, index) => {
+            if (object.institute === institute) {
                 object.sports_form = object.sports_form + 1
             }
         })
@@ -480,42 +514,42 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
 
     // teaching form Counter
 
-    for( const data of teachingData){
+    for (const data of teachingData) {
 
         const institute = data.institute_name;
 
-        institutionWiseCount.find( (object, index)=>{
-            if(object.institute === institute){
+        institutionWiseCount.find((object, index) => {
+            if (object.institute === institute) {
                 object.teaching_form = object.teaching_form + 1
             }
         })
 
-    }  
+    }
 
 
     // non teaching form Counter
 
-    for( const data of nonTeachingData){
+    for (const data of nonTeachingData) {
 
         const institute = data.institute_name;
 
-        institutionWiseCount.find( (object, index)=>{
-            if(object.institute === institute){
+        institutionWiseCount.find((object, index) => {
+            if (object.institute === institute) {
                 object.non_teaching_form = object.non_teaching_form + 1
             }
         })
 
-    } 
+    }
 
     // students form counter
 
-    for( const data of studentsData ){
+    for (const data of studentsData) {
 
         const institute = data.institution_name;
 
-        institutionWiseCount.find((object,index)=>{
+        institutionWiseCount.find((object, index) => {
 
-            if(object.institute === institute ){
+            if (object.institute === institute) {
                 object.students_form = object.students_form + 1;
             }
         })
@@ -523,8 +557,8 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
 
 
     res.status(200).json({
-        message:'Request Successful',
-        data:institutionWiseCount
+        message: 'Request Successful',
+        data: institutionWiseCount
     })
 })
 
@@ -534,7 +568,287 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
 // @access Private 
 
 // TODO: complete the controller
+const getGroupWiseCount = asyncHandler(async (req, res) => {
 
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if (user.role != 'ADMIN') {
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const currentYear = new Date().getFullYear();
+
+    //get institution data
+    const institutionData = await OutstandingInstitution.findAll(
+        {
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
+            )
+        }
+    )
+
+    //get research data
+    const researchData = await Research.findAll(
+        {
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
+            )
+        }
+    )
+
+
+    //get sports data
+    const sportsData = await Sports.findAll(
+        {
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
+            )
+        }
+    )
+
+    //get teaching data
+    const teachingData = await Teaching.findAll(
+        {
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
+            )
+        }
+    )
+
+    //get Non Teaching Data
+    const nonTeachingData = await NonTeaching.findAll(
+        {
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
+            )
+        }
+    )
+
+
+    const studentsData = await Students.findAll(
+        {
+            where: Sequelize.and(
+                Sequelize.literal(`YEAR(createdAt) = ${currentYear}`),
+            )
+        }
+    )
+
+    //group count logic 
+
+    const groupCount = [
+        {
+            group: 'A',
+            formsFilled: 0,
+        },
+        {
+            group: 'B',
+            formsFilled: 0,
+        },
+        {
+            group: 'C',
+            formsFilled: 0,
+        },
+        {
+            group: 'D',
+            formsFilled: 0,
+        },
+    ]
+
+    // institute forms
+
+    for (const response of institutionData) {
+
+        const validGroups = grouping[response.institution_name];
+
+        for (group of validGroups) {
+
+            switch (group) {
+                case 1:
+                    groupCount[0].formsFilled = groupCount[0].formsFilled + 1;
+                    break;
+
+                case 2:
+                    groupCount[1].formsFilled = groupCount[1].formsFilled + 1;
+                    break;
+
+                case 3:
+                    groupCount[2].formsFilled = groupCount[2].formsFilled + 1;
+                    break;
+
+                case 4:
+                    groupCount[3].formsFilled = groupCount[3].formsFilled + 1;
+                    break;
+            }
+        }
+
+    }
+
+    //sports
+
+    for (const response of sportsData) {
+
+        const validGroups = grouping[response.institute_name];
+
+        for (group of validGroups) {
+
+            switch (group) {
+                case 1:
+                    groupCount[0].formsFilled = groupCount[0].formsFilled + 1;
+                    break;
+
+                case 2:
+                    groupCount[1].formsFilled = groupCount[1].formsFilled + 1;
+                    break;
+
+                case 3:
+                    groupCount[2].formsFilled = groupCount[2].formsFilled + 1;
+                    break;
+
+                case 4:
+                    groupCount[3].formsFilled = groupCount[3].formsFilled + 1;
+                    break;
+            }
+        }
+
+    }
+
+    //research
+
+    for (const response of researchData) {
+
+        const validGroups = grouping[response.institution];
+
+        for (group of validGroups) {
+
+            switch (group) {
+                case 1:
+                    groupCount[0].formsFilled = groupCount[0].formsFilled + 1;
+                    break;
+
+                case 2:
+                    groupCount[1].formsFilled = groupCount[1].formsFilled + 1;
+                    break;
+
+                case 3:
+                    groupCount[2].formsFilled = groupCount[2].formsFilled + 1;
+                    break;
+
+                case 4:
+                    groupCount[3].formsFilled = groupCount[3].formsFilled + 1;
+                    break;
+            }
+        }
+
+    }
+
+    //teaching
+
+    for (const response of teachingData) {
+
+        const validGroups = grouping[response.institute_name];
+
+        for (group of validGroups) {
+
+            switch (group) {
+                case 1:
+                    groupCount[0].formsFilled = groupCount[0].formsFilled + 1;
+                    break;
+
+                case 2:
+                    groupCount[1].formsFilled = groupCount[1].formsFilled + 1;
+                    break;
+
+                case 3:
+                    groupCount[2].formsFilled = groupCount[2].formsFilled + 1;
+                    break;
+
+                case 4:
+                    groupCount[3].formsFilled = groupCount[3].formsFilled + 1;
+                    break;
+            }
+        }
+
+    }
+
+
+    //non teaching 
+
+    for (const response of nonTeachingData) {
+
+        const validGroups = grouping[response.institute_name];
+
+        for (group of validGroups) {
+
+            switch (group) {
+                case 1:
+                    groupCount[0].formsFilled = groupCount[0].formsFilled + 1;
+                    break;
+
+                case 2:
+                    groupCount[1].formsFilled = groupCount[1].formsFilled + 1;
+                    break;
+
+                case 3:
+                    groupCount[2].formsFilled = groupCount[2].formsFilled + 1;
+                    break;
+
+                case 4:
+                    groupCount[3].formsFilled = groupCount[3].formsFilled + 1;
+                    break;
+            }
+        }
+
+    }
+
+
+    // students
+
+    for (const response of studentsData) {
+
+        const validGroups = grouping[response.institution_name];
+
+        for (group of validGroups) {
+
+            switch (group) {
+                case 1:
+                    groupCount[0].formsFilled = groupCount[0].formsFilled + 1;
+                    break;
+
+                case 2:
+                    groupCount[1].formsFilled = groupCount[1].formsFilled + 1;
+                    break;
+
+                case 3:
+                    groupCount[2].formsFilled = groupCount[2].formsFilled + 1;
+                    break;
+
+                case 4:
+                    groupCount[3].formsFilled = groupCount[3].formsFilled + 1;
+                    break;
+            }
+        }
+
+    }
+
+
+
+
+    res.status(200).json({
+        message: "Request Successful",
+        data: groupCount
+    })
+})
 
 
 /**
@@ -546,7 +860,7 @@ const getInstitutionWiseCount = asyncHandler(async(req,res)=>{
 //@route admin/data/forms/outstanding-institution
 //@access Private
 
-const getInstitutionData = asyncHandler( async (req,res)=>{
+const getInstitutionData = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -558,7 +872,7 @@ const getInstitutionData = asyncHandler( async (req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
@@ -568,11 +882,11 @@ const getInstitutionData = asyncHandler( async (req,res)=>{
     const currentYear = new Date().getFullYear();
 
     const data = await OutstandingInstitution.findAll({
-        where: sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
+        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
     });
 
     res.status(200).json({
-        message:'Request Successful',
+        message: 'Request Successful',
         data: data
     })
 
@@ -584,7 +898,7 @@ const getInstitutionData = asyncHandler( async (req,res)=>{
 //@route admin/data/forms/research
 //@access Private
 
-const getResearchData = asyncHandler( async (req,res)=>{
+const getResearchData = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -596,7 +910,7 @@ const getResearchData = asyncHandler( async (req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
@@ -607,12 +921,12 @@ const getResearchData = asyncHandler( async (req,res)=>{
 
     const data = await Research.findAll({
         where: {
-          [Op.and]: [
-            sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
-            { ieacApproved: true }
-          ]
+            [Op.and]: [
+                sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+                { ieacApproved: true }
+            ]
         }
-      });
+    });
 
     res.status(200).json({
         message: 'Request Successful',
@@ -627,7 +941,7 @@ const getResearchData = asyncHandler( async (req,res)=>{
 //@route admin/data/forms/sports
 //@access Private
 
-const getSportsData = asyncHandler( async (req,res)=>{
+const getSportsData = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -639,7 +953,7 @@ const getSportsData = asyncHandler( async (req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
@@ -650,15 +964,15 @@ const getSportsData = asyncHandler( async (req,res)=>{
 
     const data = await Sports.findAll({
         where: {
-          [Op.and]: [
-            sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
-            { ieacApproved: true }
-          ]
+            [Op.and]: [
+                sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+                { ieacApproved: true }
+            ]
         }
     });
 
     res.status(200).json({
-        message:'Request Successful',
+        message: 'Request Successful',
         data: data
     })
 
@@ -671,7 +985,7 @@ const getSportsData = asyncHandler( async (req,res)=>{
 //@route admin/data/forms/teaching
 //@access Private
 
-const getTeachingData = asyncHandler( async (req,res)=>{
+const getTeachingData = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -683,7 +997,7 @@ const getTeachingData = asyncHandler( async (req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
@@ -694,10 +1008,10 @@ const getTeachingData = asyncHandler( async (req,res)=>{
 
     const data = await Teaching.findAll({
         where: {
-          [Op.and]: [
-            sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
-            { ieacApproved: true }
-          ]
+            [Op.and]: [
+                sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+                { ieacApproved: true }
+            ]
         }
     });
 
@@ -713,7 +1027,7 @@ const getTeachingData = asyncHandler( async (req,res)=>{
 //@route admin/data/forms/non-teaching
 //@access Private
 
-const getNonTeachingData = asyncHandler( async (req,res)=>{
+const getNonTeachingData = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -725,7 +1039,7 @@ const getNonTeachingData = asyncHandler( async (req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
@@ -736,10 +1050,10 @@ const getNonTeachingData = asyncHandler( async (req,res)=>{
 
     const data = await NonTeaching.findAll({
         where: {
-          [Op.and]: [
-            sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
-            { ieacApproved: true }
-          ]
+            [Op.and]: [
+                sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+                { ieacApproved: true }
+            ]
         }
     });
 
@@ -755,7 +1069,7 @@ const getNonTeachingData = asyncHandler( async (req,res)=>{
 //@route admin/data/forms/feedback-01
 //@access Private
 
-const getFeedback01Data = asyncHandler( async (req,res)=>{
+const getFeedback01Data = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -767,7 +1081,7 @@ const getFeedback01Data = asyncHandler( async (req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
@@ -778,12 +1092,12 @@ const getFeedback01Data = asyncHandler( async (req,res)=>{
 
     const data = await FeedbackOne.findAll(
         {
-            where : sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
+            where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
         }
     )
 
     res.status(200).json({
-        message:'Request Successful',
+        message: 'Request Successful',
         data: data
     })
 
@@ -794,7 +1108,7 @@ const getFeedback01Data = asyncHandler( async (req,res)=>{
 //@route admin/data/forms/feedback-02
 //@access Private
 
-const getFeedback02Data = asyncHandler( async (req,res)=>{
+const getFeedback02Data = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -806,7 +1120,7 @@ const getFeedback02Data = asyncHandler( async (req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
@@ -817,12 +1131,12 @@ const getFeedback02Data = asyncHandler( async (req,res)=>{
 
     const data = await FeedbackTwo.findAll(
         {
-            where : sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
+            where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
         }
     )
 
     res.status(200).json({
-        message:'Request Successful',
+        message: 'Request Successful',
         data: data
     })
 
@@ -833,7 +1147,7 @@ const getFeedback02Data = asyncHandler( async (req,res)=>{
 //@route admin/data/forms/feedback-03
 //@access Private
 
-const getFeedback03Data = asyncHandler( async (req,res)=>{
+const getFeedback03Data = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -845,7 +1159,7 @@ const getFeedback03Data = asyncHandler( async (req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
@@ -856,12 +1170,12 @@ const getFeedback03Data = asyncHandler( async (req,res)=>{
 
     const data = await FeedbackThree.findAll(
         {
-            where : sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
+            where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
         }
     )
 
     res.status(200).json({
-        message:'Request Successful',
+        message: 'Request Successful',
         data: data
     })
 
@@ -872,7 +1186,7 @@ const getFeedback03Data = asyncHandler( async (req,res)=>{
 //@route admin/data/forms/feedback-04
 //@access Private
 
-const getFeedback04Data = asyncHandler( async (req,res)=>{
+const getFeedback04Data = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -884,23 +1198,23 @@ const getFeedback04Data = asyncHandler( async (req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
         throw new Error("FORBIDDEN ACCESS TO RESOURCE")
     }
-    
+
     const currentYear = new Date().getFullYear()
 
     const data = await FeedbackFour.findAll(
         {
-            where : sequelize.where(sequelize.fn('YEAR' , sequelize.col('createdAt')), currentYear)
+            where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
         }
     )
 
     res.status(200).json({
-        message:'Request Successful',
+        message: 'Request Successful',
         data: data
     })
 
@@ -914,7 +1228,7 @@ const getFeedback04Data = asyncHandler( async (req,res)=>{
 //@desc get necessary Data for Teaching Scorecard
 //@route GET admin/data/teaching/scorecard/:id
 //@acess Private
-const getTeachingScoreCardData = asyncHandler( async(req,res)=>{
+const getTeachingScoreCardData = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -926,7 +1240,7 @@ const getTeachingScoreCardData = asyncHandler( async(req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
@@ -937,11 +1251,11 @@ const getTeachingScoreCardData = asyncHandler( async(req,res)=>{
     const studentsValidFeedbacks = [];
     const peersValidFeedbacks = [];
 
-    let hoiScore =0 
-    let ieacScore =0 
+    let hoiScore = 0
+    let ieacScore = 0
     const applicationID = req.headers.applicationid;
 
-    const applicationData = await Teaching.findOne({where: {id: applicationID}});
+    const applicationData = await Teaching.findOne({ where: { id: applicationID } });
 
     const facultyName = applicationData.faculty_name;
 
@@ -978,41 +1292,41 @@ const getTeachingScoreCardData = asyncHandler( async(req,res)=>{
         applicationData.q_17 +
         applicationData.q_18 +
         applicationData.q_19 +
-        applicationData.q_20 
+        applicationData.q_20
     )
 
 
-    const hoiAverageScore = Number( (hoiScore/ 20).toFixed(2))
+    const hoiAverageScore = Number((hoiScore / 20).toFixed(2))
 
 
     // calculate ieac score avg
 
-    const ieacAverageScore = Number(( ( 
-        Number(applicationData.ieac_scoreA) + 
-        Number(applicationData.ieac_scoreB) + 
-        Number(applicationData.ieac_scoreC) ) /3 ).toFixed(2));
-    
+    const ieacAverageScore = Number(((
+        Number(applicationData.ieac_scoreA) +
+        Number(applicationData.ieac_scoreB) +
+        Number(applicationData.ieac_scoreC)) / 3).toFixed(2));
+
     // filter feedback  current faculty
 
-    for (const feedback of studentFeedbackData){
-        if (feedback.teacher_name.trim().toLowerCase() === facultyName.trim().toLowerCase()){
+    for (const feedback of studentFeedbackData) {
+        if (feedback.teacher_name.trim().toLowerCase() === facultyName.trim().toLowerCase()) {
             studentsValidFeedbacks.push(feedback)
         }
     }
 
-    for ( const feedback of peerFeedbackData){
-        if( feedback.teacher_name.trim().toLowerCase() === facultyName.trim().toLowerCase()){
+    for (const feedback of peerFeedbackData) {
+        if (feedback.teacher_name.trim().toLowerCase() === facultyName.trim().toLowerCase()) {
             peersValidFeedbacks.push(feedback)
         }
     }
 
 
     // calculate feedback sum for each
-    
+
     let studentFeedbackScoreSum = 0;
     let peersFeedbackScoreSum = 0;
 
-    for( const feedback of studentsValidFeedbacks){
+    for (const feedback of studentsValidFeedbacks) {
 
         studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_01)
         studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_02)
@@ -1027,7 +1341,7 @@ const getTeachingScoreCardData = asyncHandler( async(req,res)=>{
 
     }
 
-    for ( const feedback of peersValidFeedbacks ){
+    for (const feedback of peersValidFeedbacks) {
 
         peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_01)
         peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_02)
@@ -1044,27 +1358,27 @@ const getTeachingScoreCardData = asyncHandler( async(req,res)=>{
 
     // calculate average
 
-    const studentsFeedbackAverageScore = Number( (studentFeedbackScoreSum / (10 * studentsValidFeedbacks.length)).toFixed(2) )
-    const peersFeedbackAverageScore = Number( (peersFeedbackScoreSum / ( peersValidFeedbacks.length * 9 )).toFixed(2) )
+    const studentsFeedbackAverageScore = Number((studentFeedbackScoreSum / (10 * studentsValidFeedbacks.length)).toFixed(2))
+    const peersFeedbackAverageScore = Number((peersFeedbackScoreSum / (peersValidFeedbacks.length * 9)).toFixed(2))
 
     // other required Data
 
     const categoryOfAward = applicationData.awards_category;
     const institute = applicationData.institute_name
-    const scoreA = Number (applicationData.ieac_scoreA)
-    const scoreB = Number (applicationData.ieac_scoreB)
-    const scoreC = Number (applicationData.ieac_scoreC)
+    const scoreA = Number(applicationData.ieac_scoreA)
+    const scoreB = Number(applicationData.ieac_scoreB)
+    const scoreC = Number(applicationData.ieac_scoreC)
 
     res.status(200).json({
-        message:'Request Successful',
+        message: 'Request Successful',
         name: facultyName,
         category: categoryOfAward,
         institute: institute,
-        scoreA:scoreA,
-        scoreB:scoreB,
-        scoreC:scoreC,
+        scoreA: scoreA,
+        scoreB: scoreB,
+        scoreC: scoreC,
         hoi_avg: hoiAverageScore,
-        ieac_avg:ieacAverageScore,
+        ieac_avg: ieacAverageScore,
         student_avg: studentsFeedbackAverageScore,
         peers_avg: peersFeedbackAverageScore,
     })
@@ -1075,7 +1389,7 @@ const getTeachingScoreCardData = asyncHandler( async(req,res)=>{
 //@route GET admin/data/teaching/scorecard/:id
 //@access Private
 
-const getNonTeachingScoreCardData = asyncHandler( async(req,res)=>{
+const getNonTeachingScoreCardData = asyncHandler(async (req, res) => {
 
 
     const user_id = res.user_id;
@@ -1088,17 +1402,17 @@ const getNonTeachingScoreCardData = asyncHandler( async(req,res)=>{
         throw new Error("User Not found")
     }
 
-    if(user.role != 'ADMIN'){
+    if (user.role != 'ADMIN') {
 
         //throw error
         res.status(403)
         throw new Error("FORBIDDEN ACCESS TO RESOURCE")
     }
-    
+
     const currentYear = new Date().getFullYear();
 
-    const studentValidFeedbacks= [];
-    const peerValidFeedbacks= [];
+    const studentValidFeedbacks = [];
+    const peerValidFeedbacks = [];
 
     const applicationID = req.headers.applicationid;
 
@@ -1116,23 +1430,23 @@ const getNonTeachingScoreCardData = asyncHandler( async(req,res)=>{
     // find application Data
 
     const applicationData = await NonTeaching.findOne({
-        where: {id: applicationID}
+        where: { id: applicationID }
     })
 
     // find feedbacks of requested staff
 
-    for ( const feedback of studentFeedbacks){
+    for (const feedback of studentFeedbacks) {
 
-        if(applicationData.staff_name.trim().toLowerCase() === feedback.employee_name.trim().toLowerCase()){
-            
+        if (applicationData.staff_name.trim().toLowerCase() === feedback.employee_name.trim().toLowerCase()) {
+
             studentValidFeedbacks.push(feedback)
         }
     }
 
 
-    for( const feedback of peersFeedback){
+    for (const feedback of peersFeedback) {
 
-        if(applicationData.staff_name.trim().toLowerCase() === feedback.nominee_name.trim().toLowerCase()){
+        if (applicationData.staff_name.trim().toLowerCase() === feedback.nominee_name.trim().toLowerCase()) {
 
             peerValidFeedbacks.push(feedback)
         }
@@ -1140,7 +1454,7 @@ const getNonTeachingScoreCardData = asyncHandler( async(req,res)=>{
 
     // calculate hoi_avg
 
-    const hoi_avg = Number (((
+    const hoi_avg = Number(((
         applicationData.q_01 +
         applicationData.q_02 +
         applicationData.q_03 +
@@ -1164,13 +1478,13 @@ const getNonTeachingScoreCardData = asyncHandler( async(req,res)=>{
         applicationData.q_21 +
         applicationData.q_22 +
         applicationData.q_23 +
-        applicationData.q_24 
+        applicationData.q_24
     ) / 24).toFixed(2))
 
     // calculate ieac_avg
 
     const ieac_avg = Number(((
-        Number(applicationData.ieac_scoreA)+
+        Number(applicationData.ieac_scoreA) +
         Number(applicationData.ieac_scoreB)
     ) / 2).toFixed(2))
 
@@ -1178,45 +1492,45 @@ const getNonTeachingScoreCardData = asyncHandler( async(req,res)=>{
 
     let studentsfeedbackSum = 0
 
-    for( const feedback of studentValidFeedbacks){
+    for (const feedback of studentValidFeedbacks) {
 
         studentsfeedbackSum = (
-            studentsfeedbackSum+
-            textToScore(feedback.q_01)+
-            textToScore(feedback.q_02)+
-            textToScore(feedback.q_03)+
-            textToScore(feedback.q_04)+
+            studentsfeedbackSum +
+            textToScore(feedback.q_01) +
+            textToScore(feedback.q_02) +
+            textToScore(feedback.q_03) +
+            textToScore(feedback.q_04) +
             textToScore(feedback.q_05)
         )
     }
 
-    const student_avg = Number((studentsfeedbackSum / (5*studentValidFeedbacks.length) ).toFixed(2))
+    const student_avg = Number((studentsfeedbackSum / (5 * studentValidFeedbacks.length)).toFixed(2))
 
     // calculate peers avg
 
-    let peerFeedbackSum = 0 
+    let peerFeedbackSum = 0
 
-    for ( const feedback of peerValidFeedbacks ){
+    for (const feedback of peerValidFeedbacks) {
 
         peerFeedbackSum = (
-            peerFeedbackSum+
-            textToScore(feedback.q_01)+
-            textToScore(feedback.q_02)+
-            textToScore(feedback.q_03)+
-            textToScore(feedback.q_04)+
-            textToScore(feedback.q_05)+
-            textToScore(feedback.q_06)+
-            textToScore(feedback.q_07)+
+            peerFeedbackSum +
+            textToScore(feedback.q_01) +
+            textToScore(feedback.q_02) +
+            textToScore(feedback.q_03) +
+            textToScore(feedback.q_04) +
+            textToScore(feedback.q_05) +
+            textToScore(feedback.q_06) +
+            textToScore(feedback.q_07) +
             textToScore(feedback.q_08)
         )
     }
 
-    const peers_avg = Number(((peerFeedbackSum)/ (8* peerValidFeedbacks.length) ).toFixed(2))
+    const peers_avg = Number(((peerFeedbackSum) / (8 * peerValidFeedbacks.length)).toFixed(2))
 
     // get necessary data
 
     const name = applicationData.staff_name
-    const category = applicationData.award_category  
+    const category = applicationData.award_category
     const institute = applicationData.institute_name
     const scoreA = applicationData.ieac_scoreA
     const scoreB = applicationData.ieac_scoreB
@@ -1228,7 +1542,7 @@ const getNonTeachingScoreCardData = asyncHandler( async(req,res)=>{
         institute: institute,
         scoreA: scoreA,
         scoreB: scoreB,
-        hoi_avg:hoi_avg,
+        hoi_avg: hoi_avg,
         ieac_avg: ieac_avg,
         student_avg: student_avg,
         peers_avg: peers_avg
@@ -1240,14 +1554,14 @@ const getNonTeachingScoreCardData = asyncHandler( async(req,res)=>{
 //@route POST admin/data/announce-results
 //@access Private
 
-const resultsDataHandler = asyncHandler( async(req,res)=>{
+const resultsDataHandler = asyncHandler(async (req, res) => {
 
-    const result  = await Result.create({
-        result:req.file.path
+    const result = await Result.create({
+        result: req.file.path
     });
 
     res.status(200).json({
-        message:'Request Successful',
+        message: 'Request Successful',
     })
 })
 
@@ -1256,19 +1570,19 @@ const resultsDataHandler = asyncHandler( async(req,res)=>{
 //@route POST admin/data/announce-results
 //@access Private
 
-const getResultsData = asyncHandler( async(req,res)=>{
+const getResultsData = asyncHandler(async (req, res) => {
 
     const currentYear = new Date().getFullYear();
 
-    const result  = await Result.findAll(
+    const result = await Result.findAll(
         {
-            where: sequelize.where( sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+            where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
         }
     )
 
     res.status(200).json({
-        message:'Request Successful',
-        data:result
+        message: 'Request Successful',
+        data: result
     })
 })
 
@@ -1276,13 +1590,13 @@ const getResultsData = asyncHandler( async(req,res)=>{
 
 // @desc: extracts date from data 
 // @accepts Array
-const dataFormatter = (data)=>{
+const dataFormatter = (data) => {
 
-    const formattedData=[];
+    const formattedData = [];
 
-    for(const record of data){
+    for (const record of data) {
 
-        const x = {date:record.createdAt};
+        const x = { date: record.createdAt };
         formattedData.push(x);
     }
 
@@ -1295,83 +1609,83 @@ const dataFormatter = (data)=>{
 const getDateCounts = (array) => {
     let currentDate = new Date();
     let dateCounts = [];
-  
+
     for (let i = 14; i >= 0; i--) {
-      let date = new Date(
-        currentDate.getFullYear(),
-        currentDate.getMonth(),
-        currentDate.getDate() - i
-      ).toISOString().split('T')[0];
-  
-      // Set the initial count to 0
-      let dateCount = {
-        date: date,
-        formsFilled: 0
-      };
-  
-      dateCounts.unshift(dateCount); 
+        let date = new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            currentDate.getDate() - i
+        ).toISOString().split('T')[0];
+
+        // Set the initial count to 0
+        let dateCount = {
+            date: date,
+            formsFilled: 0
+        };
+
+        dateCounts.unshift(dateCount);
     }
-  
+
     // Add today's date if it's not already present
     let today = new Date().toISOString().split('T')[0];
     let foundToday = dateCounts.find(dateCount => dateCount.date === today);
     if (!foundToday) {
-      dateCounts.unshift({ date: today, formsFilled: 0 }); 
+        dateCounts.unshift({ date: today, formsFilled: 0 });
     }
-  
-    for (let j = 0; j < array.length; j++) {
-      let arrayDate = new Date(array[j].date).toISOString().split('T')[0];
-  
-      // Check if the date is within the last 15 days
-      let foundDate = dateCounts.find(dateCount => dateCount.date === arrayDate);
-      if (foundDate) {
-        foundDate.formsFilled++;
-      }
-    }
-  
-    return dateCounts;
-  };
-  
 
-const textToScore = (text)=>{
+    for (let j = 0; j < array.length; j++) {
+        let arrayDate = new Date(array[j].date).toISOString().split('T')[0];
+
+        // Check if the date is within the last 15 days
+        let foundDate = dateCounts.find(dateCount => dateCount.date === arrayDate);
+        if (foundDate) {
+            foundDate.formsFilled++;
+        }
+    }
+
+    return dateCounts;
+};
+
+
+const textToScore = (text) => {
 
     let score;
 
     switch (text) {
         case 'Strongly Agree':
         case 'Outstanding':
-          score = 5;
-          break;
-      
+            score = 5;
+            break;
+
         case 'Agree':
         case 'Excellent':
         case 'Very Good':
-          score = 4;
-          break;
-      
+            score = 4;
+            break;
+
         case 'Sometimes':
         case 'Good':
-          score = 3;
-          break;
-      
+            score = 3;
+            break;
+
         case 'Disagree':
         case 'Average':
-          score = 2;
-          break;
-      
+            score = 2;
+            break;
+
         case 'Poor':
         case 'Strongly Disagree':
-          score = 1;
-          break;
-      }
-      
+            score = 1;
+            break;
+    }
+
 
     return score
-  
+
 }
 
-  
-module.exports={
+
+module.exports = {
     getCounts,
     getDaysCount,
     getInstitutionWiseCount,
@@ -1387,5 +1701,6 @@ module.exports={
     getTeachingScoreCardData,
     getNonTeachingScoreCardData,
     resultsDataHandler,
-    getResultsData
+    getResultsData,
+    getGroupWiseCount
 }

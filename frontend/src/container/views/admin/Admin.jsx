@@ -17,6 +17,7 @@ const Admin = () => {
     const [counts, setCounts] = useState('');
     const [pastData, setPastData] = useState('');
     const [rows, setRows] = useState('');
+    const [pieData,setPieData] = useState([]);
 
     const navigate = useNavigate()
 
@@ -121,6 +122,21 @@ const Admin = () => {
         })
             .then((res) => {
                 setRows(res.data.data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+         // group Wise count
+
+         axios.get('http://localhost:5001/admin/data/count/group', {
+            headers: {
+                'user_id': localStorage.getItem('user_id'),
+                'x-access-token': localStorage.getItem('token'),
+            }
+        })
+            .then((res) => {
+                setPieData(res.data.data)
             })
             .catch((err) => {
                 console.log(err);
@@ -237,7 +253,7 @@ const Admin = () => {
                                             />
                                         </div>
                                         <div className='w-[30%]'>
-                                            <Piechart />
+                                            <Piechart data={pieData} />
                                         </div>
                                     </div>
                                 </div>
