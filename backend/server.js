@@ -13,6 +13,7 @@ const errorHandler = require('./middleware/errorHandler');
 const cors = require('cors');
 const db = require('./models');
 const { serverLogger } = require('./middleware/logger');
+const bcrypt = require('bcrypt')
 
 const numCPUs = os.cpus().length;
 
@@ -26,9 +27,10 @@ if (cluster.isMaster) {
 
   cluster.on('exit', (worker, code, signal) => {
     console.log(`Worker ${worker.process.pid} died`);
-    cluster.fork()
+    cluster.fork();
   });
-} else {
+}
+else {
 
   // creating express app
   const app = express();
@@ -47,15 +49,33 @@ if (cluster.isMaster) {
   app.use(errorHandler);
 
   // server listen and database configuration
-  db.sequelize.sync().then((req) => {
-    serverLogger.info(`Connected to database ${req.config.database}`);
-    console.log('Connected to MySQL database');
-  });
+  db.sequelize.sync().then(async (req) => {
+    try {
+      
+      const userCount = await db.User.count();
 
-  const PORT = process.env.PORT || 5000;
+      if (userCount === 0) {
+        
+        await db.User.create({
+          email_id: 'sas.tech@somaiya.edu',
+          password: await bcrypt.hash('Sas@1234', 10),
+          role:"ADMIN"
+        });
 
-  app.listen(PORT, () => {
-    serverLogger.info(`Server started running at port ${PORT}`);
-    console.log(`Server started running at port ${PORT}`);
+        console.log('Default user created successfully!');
+      }
+
+      serverLogger.info(`Connected to database ${req.config.database}`);
+      console.log('Connected to MySQL database');
+    } catch (error) {
+      console.error('Error creating default user: OR User already exists');
+    }
+
+    const PORT = process.env.PORT || 5000;
+
+    app.listen(PORT, () => {
+      serverLogger.info(`Server started running at port ${PORT}`);
+      console.log(`Server started running at port ${PORT}`);
+    });
   });
 }

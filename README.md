@@ -2,7 +2,7 @@
 
 ## Progress Report
 
-![Progress Bar](https://progress-bar.dev/99/)
+![Progress Bar](https://progress-bar.dev/100/)
 
 #### Form Section
 - [x] Forms Designing and Implementation
@@ -46,7 +46,7 @@
 - [x] OverView and Dashboard Correction
 - [x] Feedback Avg Score Integration
 - [x] Managing Users Access 
-- [x] URL Security and Authentication - ![Progress Bar](https://progress-bar.dev/99/)
+- [x] URL Security and Authentication
 ___
 ### Documentation
 ____
