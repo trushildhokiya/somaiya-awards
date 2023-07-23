@@ -10,8 +10,13 @@ import { GridColDef } from "@mui/x-data-grid";
 
 const columns01: GridColDef[] = [
     {
+        field: 'id',
+        headerName: 'ID',
+        width: 200,
+    },
+    {
         field: 'email_id',
-        headerName: 'Email ID',
+        headerName: 'HOI Email ID',
         width: 200,
     },
     {
@@ -58,15 +63,27 @@ const columns01: GridColDef[] = [
 
     },
     {
+        field: 'final_score',
+        headerName: 'Final Score (out of 5) ',
+        width: 100,
+
+    },
+    {
         field: 'nominee_ss_girl_photo',
         headerName: 'Nominee Photo',
         width: 200,
+        renderCell: (params) => {
+            return <a target="_blank" href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+        }
 
     },
     {
         field: 'nominee_ss_girl_supportings',
         headerName: 'Nominee Supportings',
         width: 200,
+        renderCell: (params) => {
+            return <a target="_blank" href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+        }
 
     },
 
@@ -74,8 +91,13 @@ const columns01: GridColDef[] = [
 
 const columns02: GridColDef[] = [
     {
+        field: 'id',
+        headerName: 'ID',
+        width: 200,
+    },
+    {
         field: 'email_id',
-        headerName: 'Email ID',
+        headerName: 'HOI Email ID',
         width: 200,
 
     },
@@ -122,23 +144,40 @@ const columns02: GridColDef[] = [
 
     },
     {
+        field: 'final_score',
+        headerName: 'Final Score (out of 5) ',
+        width: 100,
+
+    },
+    {
         field: 'nominee_ss_boy_photo',
         headerName: 'Nominee Photo',
         width: 200,
+        renderCell: (params) => {
+            return <a target="_blank" href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+        }
 
     },
     {
         field: 'nominee_ss_boy_supportings',
         headerName: 'Nominee Supportings',
         width: 200,
+        renderCell: (params) => {
+            return <a target="_blank" href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+        }
 
     },
 ]
 
 const columns03: GridColDef[] = [
     {
+        field: 'id',
+        headerName: 'ID',
+        width: 200,
+    },
+    {
         field: 'email_id',
-        headerName: 'Email ID',
+        headerName: 'HOI Email ID',
         width: 200,
 
     },
@@ -282,15 +321,27 @@ const columns03: GridColDef[] = [
 
     },
     {
+        field: 'final_score',
+        headerName: 'Final Score Percentage',
+        width: 100,
+
+    },
+    {
         field: 'nominee_coach_photo',
         headerName: 'Nominee Photo',
         width: 200,
+        renderCell: (params) => {
+            return <a target="_blank" href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+        }
 
     },
     {
         field: 'nominee_coach_supportings',
         headerName: 'Nominee Supportings',
         width: 300,
+        renderCell: (params) => {
+            return <a target="_blank" href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+        }
 
     },
 ]

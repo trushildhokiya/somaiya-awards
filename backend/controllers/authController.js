@@ -4,15 +4,15 @@ const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
-const {userAuthenticator } = require('../middleware/userAuthenticator')
-const {authLogger} = require('../middleware/logger')
+const { userAuthenticator } = require('../middleware/userAuthenticator')
+const { authLogger } = require('../middleware/logger')
 
 //@desc handle login
 //@route POST /auth/login
 //@access public
 
 const userLogin = asyncHandler(async (req, res) => {
- 
+
     const { user_email, user_password } = req.body;
 
     if (!user_email || !user_password) {
@@ -40,15 +40,15 @@ const userLogin = asyncHandler(async (req, res) => {
 
         const secret = process.env.JWT_SECRET + user.password
 
-        const token  = jwt.sign({email_id: user.email_id , id: user.id}, secret , {expiresIn:'2d'});
+        const token = jwt.sign({ email_id: user.email_id, id: user.id }, secret, { expiresIn: '2d' });
 
         authLogger.info(`${user.email_id} logged in successfully`)
         res.status(200).json({
-            token:token,
+            token: token,
             user_id: user.id,
             authorized: result,
             role: user.role,
-            institution:user.institution
+            institution: user.institution
         })
     }
     else {
@@ -88,13 +88,13 @@ const userLogin = asyncHandler(async (req, res) => {
 //@route POST /auth/register
 //@access private
 
-const registerUser = asyncHandler( async (req,res)=>{
+const registerUser = asyncHandler(async (req, res) => {
 
-    const {user_email_id , user_institution , user_password , user_role } = req.body
+    const { user_email_id, user_institution, user_password, user_role } = req.body
 
-    const user = await User.findOne({where :{email_id: user_email_id}})
+    const user = await User.findOne({ where: { email_id: user_email_id } })
 
-    if (user){
+    if (user) {
 
         //throw error
         authLogger.error(`Failed to create usera as user already exists email ID : ${user_email_id}`)
@@ -102,9 +102,9 @@ const registerUser = asyncHandler( async (req,res)=>{
         throw new Error("User already exists!")
     }
 
-    const hashedPassword = await bcrypt.hash(user_password,10)
+    const hashedPassword = await bcrypt.hash(user_password, 10)
 
-    await User.create({ email_id: user_email_id , institution: user_institution , role:user_role , password: hashedPassword })
+    await User.create({ email_id: user_email_id, institution: user_institution, role: user_role, password: hashedPassword })
 
     authLogger.info(`New user created email_id : ${user_email_id}`)
     res.status(200).json({
@@ -255,34 +255,41 @@ const changePassword = asyncHandler(async (req, res) => {
 })
 
 
-const userValidate = asyncHandler( async(req,res)=>{
-    
-    const token  = res.token
-    const user_id  = res.user_id
+const userValidate = asyncHandler(async (req, res) => {
 
-    const user = await User.findOne({where: {id:user_id}})
+    const token = res.token
+    const user_id = res.user_id
 
-    if(!user){
-        // throw error
-        res.status(404)
-        throw new Error(" User not found !")
+    try {
+        const user = await User.findOne({ where: { id: user_id } })
+
+        if (!user) {
+            // throw error
+            res.status(404)
+            throw new Error(" User not found !")
+        }
+
+        const secret = process.env.JWT_SECRET + user.password
+
+        const result = jwt.verify(token, secret)
+
+        if (!result) {
+            //throw error
+
+            res.status(401)
+            throw new Error("User token invalid. Try logging again")
+        }
+
+        res.status(200).json({
+            authorized: true,
+            role: user.role
+        })
     }
-
-    const secret = process.env.JWT_SECRET + user.password
-
-    const result = jwt.verify(token,secret)
-
-    if(!result){
-        //throw error
-
+    catch (err) {
         res.status(401)
+
         throw new Error("User token invalid. Try logging again")
     }
-
-    res.status(200).json({
-        authorized: true,
-        role:user.role
-    })
 
 })
 
