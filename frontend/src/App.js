@@ -33,6 +33,7 @@ import About from "./container/Pages/About";
 import Student from "./container/views/students/Student";
 import Peers from "./container/views/peers/Peers";
 import StudentResponses from "./container/views/studentsAdmin/components/StudentResponses";
+import SportsResponses from "./container/views/sportsAdmin/pages/SportsResponses";
  
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
         <Route path="/students-admin" element={<StudentsAdmin />} />
         <Route path="/students-admin/responses/:formType" element={<StudentResponses />} />
         <Route path="/sports-admin" element={<SportsAdmin />} />
+        <Route path="/sports-admin/responses/:formType" element={<SportsResponses />} />
         <Route path="/forms/outstanding-institution" element={<OutstandingInstitution />}  />
         <Route path="/forms/sports" element={<SportsStar />}  />
         <Route path="/forms/research" element={<Research />}  />

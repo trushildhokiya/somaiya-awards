@@ -159,7 +159,7 @@ const ManageUsers = () => {
                 <Field
                   title='Email ID'
                   type='email'
-                  placeholder="anurag@somaiya.edu"
+                  placeholder="trushil.d@somaiya.edu"
                   name='user_email_id'
                   value={credentials['user_email_id'] || ''}
                   onChange={handleChange}
