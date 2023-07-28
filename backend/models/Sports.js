@@ -133,6 +133,12 @@ module.exports = (sequelize , dataTypes)=>{
             allowNull: false,
         },
 
+        isApprovedCoach: {
+
+            type: dataTypes.BOOLEAN,
+            defaultValue: false
+        },
+
         nominee_ss_girl:{
             type: dataTypes.STRING,
             allowNull: false,
@@ -171,6 +177,12 @@ module.exports = (sequelize , dataTypes)=>{
         q_24:{
             type: dataTypes.INTEGER,
             allowNull: false,
+        },
+
+        isApprovedSportsGirl: {
+
+            type: dataTypes.BOOLEAN,
+            defaultValue: false
         },
 
         nominee_ss_boy:{
@@ -212,22 +224,13 @@ module.exports = (sequelize , dataTypes)=>{
             type: dataTypes.INTEGER,
             allowNull: false,
         },
-        ieacApproved: {
+
+        isApprovedSportsBoy: {
 
             type: dataTypes.BOOLEAN,
             defaultValue: false
         },
 
-        ieacApprovedFile: {
-            type: dataTypes.STRING,
-            allowNull: true,
-        },
-
-        hr_approved:{
-
-            type: dataTypes.BOOLEAN,
-            defaultValue: false,
-        }
 
     })
 

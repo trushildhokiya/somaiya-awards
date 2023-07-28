@@ -46,6 +46,37 @@ const researchDataHandler = asyncHandler(async (req, res) => {
 })
 
 
+const researchDataUpdater = asyncHandler( async(req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if (user.role !='RESEARCH ADMIN') {
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const {applicationID} = req.body;
+
+    const applicationForm  = await Research.findOne({where: {id: applicationID}});
+
+    await applicationForm.update({approved: true});
+
+    res.status(200).json({
+        message:'Update Successful'
+    });
+
+})
+
 module.exports = {
-    researchDataHandler
+    researchDataHandler,
+    researchDataUpdater
 }

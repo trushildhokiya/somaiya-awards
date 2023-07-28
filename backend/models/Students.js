@@ -40,8 +40,13 @@ module.exports = (sequelize , dataTypes)=>{
         supportings:{
             type: dataTypes.STRING,
             allowNull: false,
-        }
-        
+        },
+
+        approved: {
+
+            type: dataTypes.BOOLEAN,
+            defaultValue: false
+        },
     })
 
     return Students;
