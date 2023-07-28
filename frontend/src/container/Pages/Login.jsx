@@ -70,6 +70,10 @@ const Login = () => {
                                 navigate('/peers')
                                 break;
 
+                            case "RESEARCH ADMIN":
+                                navigate('/research-admin')
+                                break;
+
                         }
                     }
                     else {

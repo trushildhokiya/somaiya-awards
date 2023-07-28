@@ -48,11 +48,6 @@ const SideBar = () => {
             >
               Institution Form
             </MenuItem>
-            <MenuItem icon={<ScienceRoundedIcon />}
-              component={<Link to='/ieac/review/research' />}
-            >
-              Research Form
-            </MenuItem>
             
             <MenuItem
               icon={<BookRoundedIcon />}

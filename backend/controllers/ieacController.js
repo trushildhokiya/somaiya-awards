@@ -49,7 +49,9 @@ const institutionDataHandler = asyncHandler(async (req, res) => {
 //@desc get data of research forms to ieac
 //@route GET /ieac/data/research
 //@access private
-
+/**
+ * @deprecated : Permanently moved to research Admin
+ */
 const researchDataHandler = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
@@ -199,7 +201,9 @@ const institutionDataUpdater = asyncHandler( async (req,res)=>{
 // @desc update research form
 // @route PUT /ieac/data/research
 // @access private
-
+/**
+ * @deprecated permanently moved to research Admin
+ */
 
 const researchDataUpdater = asyncHandler( async (req,res)=>{
 
@@ -348,7 +352,7 @@ const nonTeachingDataUpdater = asyncHandler( async (req,res)=>{
 /**
  * File handlers
  */
-
+/**@deprecated : No longer required */
 const researchRecFileHandler = asyncHandler( async( req, res)=>{
     
     const user_id = res.user_id;

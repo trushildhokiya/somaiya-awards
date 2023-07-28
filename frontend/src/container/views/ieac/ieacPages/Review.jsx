@@ -81,10 +81,6 @@ const Review = () => {
                 setColumns(columns01)
                 break;
 
-            case 'research':
-                setColumns(columns02)
-                break;
-
             case 'teaching':
                 setColumns(columns04)
                 break;

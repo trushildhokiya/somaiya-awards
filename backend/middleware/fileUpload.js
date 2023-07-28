@@ -98,7 +98,7 @@ const upload05 = multer({ storage: storage05 })
  */
 
 // research form approval file handler
-
+/**@deprecated : IAEC Approval removed  */
 const storage06 = multer.diskStorage({
     destination : (req,file,cb)=>{
         cb(null,'data/approvals/IEAC/research');

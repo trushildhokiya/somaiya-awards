@@ -9,6 +9,7 @@ const ieacRoutes = require('./routes/ieacRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const studentAdminRoutes = require('./routes/studentAdminRoutes');
 const sportsAdminRoutes = require('./routes/sportsAdminRoutes');
+const researchRoutes = require('./routes/researchAdminRoutes')
 const errorHandler = require('./middleware/errorHandler');
 const cors = require('cors');
 const db = require('./models');
@@ -46,6 +47,7 @@ else {
   app.use('/admin/data', adminRoutes);
   app.use('/students-admin/data', studentAdminRoutes);
   app.use('/sports-admin/data', sportsAdminRoutes);
+  app.use('/research-admin/data', researchRoutes);
   app.use(errorHandler);
 
   // server listen and database configuration

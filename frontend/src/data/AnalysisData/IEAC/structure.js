@@ -29,7 +29,9 @@ const handleChange = () => {
 
 }
 
-
+/**
+ * @deprecated : Permanently moved to Research Admin
+ */
 const handleResearchChange = (params, event) => {
     if (event.target.checked == true) {
 
@@ -556,6 +558,9 @@ const columns01: GridColDef[] = [
     },
 ];
 
+/**
+ * @deprecated : permanently moved to research Admin
+ */
 const columns02: GridColDef[] = [
     { field: 'id', headerName: 'Application ID', width: 150 },
     { field: 'faculty_name', headerName: 'Faculty Name', width: 150 },

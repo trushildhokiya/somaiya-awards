@@ -254,13 +254,13 @@ const ManageUsers = () => {
                           type='dropdown'
                           name='user_role'
                           value={credentials['user_role'] || ''}
-                          options={["ADMIN", "IEAC", "HOI", "SPORTS ADMIN", "STUDENTS ADMIN", "STUDENT", "PEER"]}
+                          options={["ADMIN", "IEAC", "HOI", "SPORTS ADMIN", "STUDENTS ADMIN", "RESEARCH ADMIN","STUDENT", "PEER"]}
                           dropdownHiddenItem='Select Role'
                           onChange={handleChange}
                         />
 
                         {
-                          credentials.user_role === "ADMIN" || credentials.user_role === "SPORTS ADMIN" || credentials.user_role === "STUDENTS ADMIN"
+                          credentials.user_role === "ADMIN" || credentials.user_role === "SPORTS ADMIN" || credentials.user_role === "STUDENTS ADMIN" || credentials.user_role === "RESEARCH ADMIN"
                             ?
                             null
                             :

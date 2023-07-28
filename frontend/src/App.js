@@ -35,6 +35,8 @@ import Peers from "./container/views/peers/Peers";
 import StudentResponses from "./container/views/studentsAdmin/components/StudentResponses";
 import SportsResponses from "./container/views/sportsAdmin/pages/SportsResponses";
 import Announce from "./container/views/admin/pages/Announce";
+import ResearchAdmin from "./container/views/researchAdmin/ResearchAdmin";
+import ResearchResponses from "./container/views/researchAdmin/pages/ResearchResponses";
  
 function App() {
   return (
@@ -64,6 +66,8 @@ function App() {
         <Route path="/students-admin/responses/:formType" element={<StudentResponses />} />
         <Route path="/sports-admin" element={<SportsAdmin />} />
         <Route path="/sports-admin/responses/:formType" element={<SportsResponses />} />
+        <Route path="/research-admin" element={<ResearchAdmin />} />
+        <Route path="/research-admin/responses/research" element={<ResearchResponses />} />
         <Route path="/forms/outstanding-institution" element={<OutstandingInstitution />}  />
         <Route path="/forms/sports" element={<SportsStar />}  />
         <Route path="/forms/research" element={<Research />}  />
