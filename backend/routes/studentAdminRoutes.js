@@ -5,7 +5,8 @@ const {
     somaiyaStarBoyDataHandler,
     somaiyaStarInnovatorDataHandler,
     somaiyaStarCitizenDataHandler,
-    somaiyaGreenStarDataHandler
+    somaiyaGreenStarDataHandler,
+    studentsDataUpdater
 } = require('../controllers/studentAdminController')
 const router = express.Router()
 
@@ -18,5 +19,11 @@ router.route('/somaiya-star-boy').get(userAuthenticator, somaiyaStarBoyDataHandl
 router.route('/somaiya-star-innovator').get(userAuthenticator, somaiyaStarInnovatorDataHandler)
 router.route('/somaiya-star-citizen').get(userAuthenticator, somaiyaStarCitizenDataHandler)
 router.route('/somaiya-green-star').get(userAuthenticator, somaiyaGreenStarDataHandler)
+
+/**
+ * Put REQUEST
+ */
+
+router.route('/update').put(userAuthenticator, studentsDataUpdater)
 
 module.exports = router

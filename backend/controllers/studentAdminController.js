@@ -224,11 +224,46 @@ const somaiyaGreenStarDataHandler = asyncHandler(async (req, res) => {
 
 })
 
+//@desc get somaiya Green star form data of current Year
+//@route PUT students-admin/data/update
+//@access PRIVATE
+
+const studentsDataUpdater = asyncHandler( async(req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if (user.role !='STUDENTS ADMIN') {
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const {applicationID} = req.body;
+
+    const applicationForm  = await Students.findOne({where: {id: applicationID}});
+
+    await applicationForm.update({approved: true});
+
+    res.status(200).json({
+        message:'Update Successful'
+    });
+
+})
+
 
 module.exports = {
     somaiyaStarGirlDataHandler,
     somaiyaStarBoyDataHandler,
     somaiyaStarInnovatorDataHandler,
     somaiyaStarCitizenDataHandler,
-    somaiyaGreenStarDataHandler
+    somaiyaGreenStarDataHandler,
+    studentsDataUpdater
 }

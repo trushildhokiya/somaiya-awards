@@ -9,7 +9,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 //@desc get data of research forms to Research Admin
-//@route GET /ieac/data/research
+//@route GET /research-admin/data/research
 //@access private
 
 const researchDataHandler = asyncHandler(async (req, res) => {
@@ -45,7 +45,9 @@ const researchDataHandler = asyncHandler(async (req, res) => {
     })
 })
 
-
+//@desc get data of research forms to Research Admin
+//@route PUT /research-admin/data/update
+//@access private
 const researchDataUpdater = asyncHandler( async(req,res)=>{
 
     const user_id = res.user_id;

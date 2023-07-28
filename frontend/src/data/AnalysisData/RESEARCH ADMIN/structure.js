@@ -27,7 +27,7 @@ const handleResearchChange = (params, event) => {
             .then((res) => {
                 if (res.isConfirmed == true) {
                     //axios put
-                    axios.put(`http://localhost:5001/research-admin/data/research`, data, {
+                    axios.put(`http://localhost:5001/research-admin/data/update`, data, {
                         headers: {
                             'user_id': localStorage.getItem('user_id'),
                             'x-access-token': localStorage.getItem('token'),

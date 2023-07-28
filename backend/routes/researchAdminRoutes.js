@@ -9,6 +9,6 @@ router.route('/research').get(userAuthenticator,researchDataHandler)
 
 // PUT METHOD ROUTES
 
-router.route('/research').put(userAuthenticator,researchDataUpdater)
+router.route('/update').put(userAuthenticator,researchDataUpdater)
 
 module.exports = router
