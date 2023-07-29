@@ -2,6 +2,7 @@ import React from 'react'
 import Gif from '../../assests/404.gif'
 import { Link } from 'react-router-dom'
 const PageNotFound = () => {
+
   return (
     <div className='w-full h-screen  bg-[#fcfcff]'>
 

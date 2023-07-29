@@ -278,7 +278,7 @@ const sportsDataUpdater = asyncHandler( async(req,res)=>{
             break;
 
         case 'sports star girl':
-            await applicationForm.update({isApprovedSportGirl : true})
+            await applicationForm.update({isApprovedSportsGirl : true})
             break;
         
         case 'inspiring coach':

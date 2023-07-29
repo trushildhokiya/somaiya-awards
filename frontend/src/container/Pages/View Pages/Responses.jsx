@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import SideBar from '../../../components/SideBar';
 import { motion } from 'framer-motion'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { columns01, columns02, columns03, columns04, columns05, columns06, columns07, columns08, columns09 } from '../../../data/AnalysisData/ADMIN/structure';
+import { columns01, columns02, columns03, columns04, columns05, columns06, columns07, columns08, columns09, columns10, columns11, columns12 } from '../../../data/AnalysisData/ADMIN/structure';
 import axios from 'axios';
 import { MoonLoader } from 'react-spinners';
 import Swal from 'sweetalert2';
@@ -86,6 +86,8 @@ const Responses = () => {
 
     let path = location.pathname.split('/responses/')[1];
 
+    console.log(path);
+
     switch (path) {
       case 'outstanding-institution':
         setTitle('Outstanding Institution')
@@ -100,6 +102,21 @@ const Responses = () => {
       case 'students':
         setTitle('Students')
         setColumns(columns03);
+        break;
+
+      case 'sports-boy':
+        setTitle('Sports Star Boy')
+        setColumns(columns11);
+        break;
+
+      case 'sports-girl':
+        setTitle('Sports Star Girl')
+        setColumns(columns10);
+        break;
+
+      case 'sports-coach':
+        setTitle('Inspiring Coach')
+        setColumns(columns12);
         break;
 
       case 'teaching':
@@ -187,7 +204,7 @@ const Responses = () => {
                   <div className='flex flex-col w-full p-5'>
 
                     <h2 className='text-xl font-Poppins font-semibold'>
-                      {title} 
+                      {title}
                     </h2>
 
                     <div className='my-5'>

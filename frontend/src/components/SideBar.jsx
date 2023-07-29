@@ -11,6 +11,7 @@ import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountR
 import { Link } from 'react-router-dom';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
+import SportsHandballRoundedIcon from '@mui/icons-material/SportsHandballRounded';
 
 const SideBar = () => {
     return (
@@ -56,6 +57,23 @@ const SideBar = () => {
                         component={<Link to="/admin/responses/students" />}
                         >
                             Responses
+                        </MenuItem>
+                    </SubMenu>
+                    <SubMenu icon={<SportsHandballRoundedIcon />} label='Sports'>
+                        <MenuItem
+                        component={<Link to="/admin/responses/sports-boy" />}
+                        >
+                            Sports Star Boy
+                        </MenuItem>
+                        <MenuItem
+                        component={<Link to="/admin/responses/sports-girl" />}
+                        >
+                            Sports Star Girl
+                        </MenuItem>
+                        <MenuItem
+                        component={<Link to="/admin/responses/sports-coach" />}
+                        >
+                            Inspiring Coach
                         </MenuItem>
                     </SubMenu>
                     <SubMenu icon={<BookRoundedIcon />} label='Teaching'>
