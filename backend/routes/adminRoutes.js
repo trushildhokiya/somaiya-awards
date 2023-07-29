@@ -19,7 +19,8 @@ const {
         getNonTeachingScoreCardData,
         resultsDataHandler,
         getResultsData,
-        getGroupWiseCount
+        getGroupWiseCount,
+        getStudentsData
     } = require('../controllers/adminController')
 
 /** GET ROUTES */
@@ -34,6 +35,7 @@ router.route('/count/group').get(userAuthenticator,getGroupWiseCount)
 router.route('/forms/outstanding-institution').get(userAuthenticator, getInstitutionData)
 router.route('/forms/research').get(userAuthenticator, getResearchData)
 router.route('/forms/sports').get(userAuthenticator, getSportsData)
+router.route('/forms/students').get(userAuthenticator, getStudentsData)
 router.route('/forms/teaching').get(userAuthenticator, getTeachingData)
 router.route('/forms/non-teaching').get(userAuthenticator, getNonTeachingData)
 router.route('/forms/feedback-01').get(userAuthenticator, getFeedback01Data)

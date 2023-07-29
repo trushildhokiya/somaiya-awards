@@ -10,6 +10,7 @@ import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
 import SupervisorAccountRoundedIcon from '@mui/icons-material/SupervisorAccountRounded';
 import { Link } from 'react-router-dom';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
 
 const SideBar = () => {
     return (
@@ -46,6 +47,13 @@ const SideBar = () => {
                     <SubMenu icon={<ScienceRoundedIcon />} label="Research">
                         <MenuItem
                         component={<Link to="/admin/responses/research" />}
+                        >
+                            Responses
+                        </MenuItem>
+                    </SubMenu>
+                    <SubMenu icon={<SchoolRoundedIcon />} label='Students'>
+                        <MenuItem
+                        component={<Link to="/admin/responses/students" />}
                         >
                             Responses
                         </MenuItem>

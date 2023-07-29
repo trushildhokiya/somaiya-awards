@@ -5,19 +5,20 @@
  * 
  * -01 - column structure for outstanding institution form  
  * -02 - column structure for research  form 
- * -03 - column structure for sports form 
+ * -03 - column structure for students form 
  * -04 - column structure for teaching form 
  * -05 - column structure for non-teaching form 
  * -06 - column structure for feedback-01 form 
  * -07 - column structure for feedback-02 form 
  * -08 - column structure for feedback-02 form 
  * -09 - column structure for feedback-04 form 
+ * 
  */
 
 import { GridColDef } from '@mui/x-data-grid';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 // outstanding Institution 
 
@@ -128,7 +129,7 @@ const columns02: GridColDef[] = [
     },
     { field: 'confirmation_of_trueData', headerName: 'Confirmation of True Data', width: 200 },
     {
-        field: 'ieacApproved', headerName: 'IEAC Approved', align: 'center', width: 200, type: 'boolean', width: 150, renderCell: (params) => {
+        field: 'approved', headerName: 'Research Admin Approved', align: 'center', width: 200, type: 'boolean', width: 150, renderCell: (params) => {
             return params.value ?
                 (
                     <CheckRoundedIcon style={{ color: '#15803d' }} />
@@ -138,57 +139,21 @@ const columns02: GridColDef[] = [
                 )
         },
     },
-    {
-        field: 'ieacApprovedFile', headerName: 'IEAC Approved File', width: 200, renderCell: (params) => {
-            return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
-        }
-    },
-
 ];
 
 // Sports
 
 const columns03: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'email_id', headerName: 'Email ID', width: 200 },
-    { field: 'institute_name', headerName: 'Institute Name', width: 200 },
-    { field: 'nominee_inspiring_teacher', headerName: 'Nominee Inspiring Teacher', width: 200 },
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'email_id', headerName: 'Email', width: 200 },
+    { field: 'student_name', headerName: 'Student Name', width: 200 },
+    { field: 'students_class', headerName: 'Class', width: 150 },
+    { field: 'course', headerName: 'Course', width: 200 },
+    { field: 'institution_name', headerName: 'Institution', width: 200 },
+    { field: 'nomination_category', headerName: 'Nomination Category', width: 200 },
+    { field: 'recommendation_note', headerName: 'Recommendation Note', width: 300 },
     {
-        field: 'nominee_teacher_photo', headerName: 'Nominee Teacher Photo', width: 200, renderCell: (params) => {
-            return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
-        }
-    },
-    {
-        field: 'nominee_teacher_hoi_assessment', headerName: 'Nominee Teacher HOI Assessment', width: 200, renderCell: (params) => {
-            return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
-        }
-    },
-    { field: 'nominee_sportsStar_girl', headerName: 'Nominee Sports Star (Girl)', width: 200 },
-    { field: 'nominee_ss_girl_sport', headerName: 'Nominee SS Girl Sport', width: 200 },
-    {
-        field: 'nominee_ss_girl_photo', headerName: 'Nominee SS Girl Photo', width: 200, renderCell: (params) => {
-            return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
-        }
-    },
-    {
-        field: 'nominee_ss_girl_hoi_assessment', headerName: 'Nominee SS Girl HOI Assessment', width: 200, renderCell: (params) => {
-            return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
-        }
-    },
-    { field: 'nominee_sportsStar_boy', headerName: 'Nominee Sports Star (Boy)', width: 200 },
-    { field: 'nominee_ss_boy_sport', headerName: 'Nominee SS Boy Sport', width: 200 },
-    {
-        field: 'nominee_ss_boy_photo', headerName: 'Nominee SS Boy Photo', width: 200, renderCell: (params) => {
-            return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
-        }
-    },
-    {
-        field: 'nominee_ss_boy_hoi_assessment', headerName: 'Nominee SS Boy HOI Assessment', width: 200, renderCell: (params) => {
-            return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
-        }
-    },
-    {
-        field: 'ieacApproved', headerName: 'IEAC Approved', align: 'center', width: 200, type: 'boolean', width: 150, renderCell: (params) => {
+        field: 'approved', headerName: 'Approval Status', type: 'boolean', width: 150, renderCell: (params) => {
             return params.value ?
                 (
                     <CheckRoundedIcon style={{ color: '#15803d' }} />
@@ -196,11 +161,12 @@ const columns03: GridColDef[] = [
                 (
                     <CloseRoundedIcon style={{ color: 'rgb(185,28,28)' }} />
                 )
+
         },
     },
     {
-        field: 'ieacApprovedFile', headerName: 'IEAC Approved File', width: 200, renderCell: (params) => {
-            return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+        field: 'supportings', headerName: 'Supportings', width: 200, renderCell: (params) => {
+            return <a target="_blank" href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
         }
     },
 ];
@@ -265,12 +231,12 @@ const columns04: GridColDef[] = [
     { field: 'ieac_scoreB', headerName: 'IEAC Score B', width: 200 },
     { field: 'ieac_scoreC', headerName: 'IEAC Score C', width: 200 },
     {
-        field:'scorecard', headerName:'ScoreCard' , width:200 , renderCell: (params)=>{
+        field: 'scorecard', headerName: 'ScoreCard', width: 200, renderCell: (params) => {
 
             return (
                 <Link to={`/admin/teaching/scorecard/${params.id}`}>
                     <a className='p-2 cursor-pointer bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
-                    Download ScoreCard
+                        Download ScoreCard
                     </a>
                 </Link>
             )
@@ -344,12 +310,12 @@ const columns05: GridColDef[] = [
     { field: 'ieac_scoreA', headerName: 'IEAC Score A', width: 200 },
     { field: 'ieac_scoreB', headerName: 'IEAC Score B', width: 200 },
     {
-        field:'scorecard', headerName:'ScoreCard' , width:200 , renderCell: (params)=>{
+        field: 'scorecard', headerName: 'ScoreCard', width: 200, renderCell: (params) => {
 
             return (
                 <Link to={`/admin/non-teaching/scorecard/${params.id}`}>
                     <a className='p-2 cursor-pointer bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
-                    Download ScoreCard
+                        Download ScoreCard
                     </a>
                 </Link>
             )

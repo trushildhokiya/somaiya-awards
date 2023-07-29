@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import SideBar from '../../../components/SideBar';
 import { motion } from 'framer-motion'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { columns01, columns02, columns04, columns05, columns06, columns07, columns08, columns09 } from '../../../data/AnalysisData/ADMIN/structure';
+import { columns01, columns02, columns03, columns04, columns05, columns06, columns07, columns08, columns09 } from '../../../data/AnalysisData/ADMIN/structure';
 import axios from 'axios';
 import { MoonLoader } from 'react-spinners';
 import Swal from 'sweetalert2';
@@ -97,6 +97,11 @@ const Responses = () => {
         setColumns(columns02);
         break;
 
+      case 'students':
+        setTitle('Students')
+        setColumns(columns03);
+        break;
+
       case 'teaching':
         setTitle('Teaching')
         setColumns(columns04);
@@ -126,7 +131,7 @@ const Responses = () => {
         setTitle('Non Teaching Peers Feedback')
         setColumns(columns09);
         break;
-      
+
       default:
         navigate('/admin/dashboard')
 
@@ -182,7 +187,7 @@ const Responses = () => {
                   <div className='flex flex-col w-full p-5'>
 
                     <h2 className='text-xl font-Poppins font-semibold'>
-                      {title}
+                      {title} 
                     </h2>
 
                     <div className='my-5'>

@@ -923,7 +923,7 @@ const getResearchData = asyncHandler(async (req, res) => {
         where: {
             [Op.and]: [
                 sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
-                { ieacApproved: true }
+                { approved: true }
             ]
         }
     });
@@ -979,6 +979,45 @@ const getSportsData = asyncHandler(async (req, res) => {
 })
 
 
+//@desc get records of students admin approved form of current Year
+//@route admin/data/forms/students
+//@access Private
+
+const getStudentsData = asyncHandler(async (req, res) => {
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if (user.role != 'ADMIN') {
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const currentYear = new Date().getFullYear();
+
+    const data = await Students.findAll({
+        where: {
+            [Op.and]: [
+                sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+                { approved: true }
+            ]
+        }
+    });
+
+    res.status(200).json({
+        message: 'Request Successful',
+        data: data
+    })
+})
 
 
 //@desc get records ieac approved teaching form of current Year
@@ -1702,5 +1741,6 @@ module.exports = {
     getNonTeachingScoreCardData,
     resultsDataHandler,
     getResultsData,
-    getGroupWiseCount
+    getGroupWiseCount,
+    getStudentsData
 }
