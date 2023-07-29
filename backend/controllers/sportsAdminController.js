@@ -50,6 +50,7 @@ const sportsStarGirlDataHandler = asyncHandler(async (req, res) => {
             nominee_ss_girl_sport: response.nominee_ss_girl_sport,
             nominee_ss_girl_photo: response.nominee_ss_girl_photo,
             nominee_ss_girl_supportings: response.nominee_ss_girl_supportings,
+            isApprovedSportsGirl: response.isApprovedSportsGirl,
             q_21: response.q_21,
             q_22: response.q_22,
             q_23: response.q_23,
@@ -117,6 +118,7 @@ const sportsStarBoyDataHandler = asyncHandler(async (req, res) => {
             nominee_ss_boy_sport: response.nominee_ss_boy_sport,
             nominee_ss_boy_photo: response.nominee_ss_boy_photo,
             nominee_ss_boy_supportings: response.nominee_ss_boy_supportings,
+            isApprovedSportsBoy: response.isApprovedSportsBoy,
             q_25: response.q_25,
             q_26: response.q_26,
             q_27: response.q_27,
@@ -184,6 +186,7 @@ const inspiringCoachDataHandler = asyncHandler(async (req, res) => {
             nominee_coach_comments: response.nominee_coach_comments,
             nominee_coach_photo: response.nominee_coach_photo,
             nominee_coach_supportings: response.nominee_coach_supportings,
+            isApprovedCoach: response.isApprovedCoach,
             q_01: response.q_01,
             q_02: response.q_02,
             q_03: response.q_03,
@@ -240,8 +243,58 @@ const inspiringCoachDataHandler = asyncHandler(async (req, res) => {
     })
 })
 
+
+//@desc update recommendation of sports form nominees
+//@route GET sports-admin/data/update
+//@access PRIVATE
+
+const sportsDataUpdater = asyncHandler( async(req,res)=>{
+
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if (user.role != 'SPORTS ADMIN') {
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const {type , applicationID} = req.body;
+
+    const applicationForm  = await Sports.findOne({where: {id: applicationID}});
+
+    switch(type){
+
+        case 'sports star boy':
+            await applicationForm.update({isApprovedSportsBoy : true})
+            break;
+
+        case 'sports star girl':
+            await applicationForm.update({isApprovedSportGirl : true})
+            break;
+        
+        case 'inspiring coach':
+            await applicationForm.update({isApprovedCoach : true})
+            break;
+    }
+
+    res.status(200).json({
+        message: 'Sucessfully Updated',
+    })
+})
+
+
 module.exports = {
     sportsStarGirlDataHandler,
     sportsStarBoyDataHandler,
     inspiringCoachDataHandler,
+    sportsDataUpdater,
 }

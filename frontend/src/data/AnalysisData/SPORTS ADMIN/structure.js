@@ -1,4 +1,7 @@
 import { GridColDef } from "@mui/x-data-grid";
+import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
+import Swal from 'sweetalert2';
+import axios from "axios";
 
 /**
  * NOTE 
@@ -6,6 +9,161 @@ import { GridColDef } from "@mui/x-data-grid";
  * columns01 -> Sports Star Girl
  * columns02 -> Sports Star Boy
  * columns03 -> Inspiring Coach
+ */
+
+/**
+ * Methods
+ */
+
+const handleBoyChange = (params, event) => {
+    if (event.target.checked == true) {
+
+        const approvedNomineeName = params.row['nominee_ss_boy'];
+
+        const data = {
+            type:'sports star boy',
+            applicationID: params.row['id'],
+        };
+
+
+        Swal.fire({
+            title: 'Confirmation',
+            icon: 'question',
+            text: `Do you to confirm your decision to approve ${approvedNomineeName} ?`,
+            showDenyButton: true,
+            confirmButtonText: "Confirm",
+            denyButtonText: 'Deny',
+            confirmButtonColor: '#4bb543',
+
+        })
+            .then((res) => {
+                if (res.isConfirmed == true) {
+                    //axios put
+                    axios.put(`http://localhost:5001/sports-admin/data/update`, data, {
+                        headers: {
+                            'user_id': localStorage.getItem('user_id'),
+                            'x-access-token': localStorage.getItem('token'),
+                        }
+                    })
+                        .then((res) => {
+                            console.log(res);
+                            window.location.reload();
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+                else {
+                    event.target.checked = false;
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+}
+
+const handleGirlChange = (params, event) => {
+    if (event.target.checked == true) {
+
+        const approvedNomineeName = params.row['nominee_ss_girl'];
+
+        const data = {
+            type:'sports star girl',
+            applicationID: params.row['id'],
+        };
+
+
+        Swal.fire({
+            title: 'Confirmation',
+            icon: 'question',
+            text: `Do you to confirm your decision to approve ${approvedNomineeName} ?`,
+            showDenyButton: true,
+            confirmButtonText: "Confirm",
+            denyButtonText: 'Deny',
+            confirmButtonColor: '#4bb543',
+
+        })
+            .then((res) => {
+                if (res.isConfirmed == true) {
+                    //axios put
+                    axios.put(`http://localhost:5001/sports-admin/data/update`, data, {
+                        headers: {
+                            'user_id': localStorage.getItem('user_id'),
+                            'x-access-token': localStorage.getItem('token'),
+                        }
+                    })
+                        .then((res) => {
+                            console.log(res);
+                            window.location.reload();
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+                else {
+                    event.target.checked = false;
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+}
+
+
+const handleCoachChange = (params, event) => {
+
+    if (event.target.checked == true) {
+
+        const approvedNomineeName = params.row['nominee_inspiring_coach'];
+
+        const data = {
+            type:'inspiring coach',
+            applicationID: params.row['id'],
+        };
+
+
+        Swal.fire({
+            title: 'Confirmation',
+            icon: 'question',
+            text: `Do you to confirm your decision to approve ${approvedNomineeName} ?`,
+            showDenyButton: true,
+            confirmButtonText: "Confirm",
+            denyButtonText: 'Deny',
+            confirmButtonColor: '#4bb543',
+
+        })
+            .then((res) => {
+                if (res.isConfirmed == true) {
+                    //axios put
+                    axios.put(`http://localhost:5001/sports-admin/data/update`, data, {
+                        headers: {
+                            'user_id': localStorage.getItem('user_id'),
+                            'x-access-token': localStorage.getItem('token'),
+                        }
+                    })
+                        .then((res) => {
+                            console.log(res);
+                            window.location.reload();
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
+                }
+                else {
+                    event.target.checked = false;
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+}
+
+/**
+ * Structures
  */
 
 const columns01: GridColDef[] = [
@@ -67,6 +225,20 @@ const columns01: GridColDef[] = [
         headerName: 'Final Score (out of 5) ',
         width: 100,
 
+    },
+    {
+        field: 'isApprovedSportsGirl', headerName: 'Recommended', width: 200, type: 'boolean', renderCell: (params) => {
+            return params.value ?
+                (
+                    <CheckRoundedIcon style={{ color: '#15803d' }} />
+                ) :
+                <input
+                    type="checkbox"
+                    onChange={(event) => handleGirlChange(params, event)}
+                >
+
+                </input>
+        },
     },
     {
         field: 'nominee_ss_girl_photo',
@@ -148,6 +320,19 @@ const columns02: GridColDef[] = [
         headerName: 'Final Score (out of 5) ',
         width: 100,
 
+    },
+    {
+        field: 'isApprovedSportsBoy', headerName: 'Recommended', width: 200, type: 'boolean', renderCell: (params) => {
+            return params.value ?
+                (
+                    <CheckRoundedIcon style={{ color: '#15803d' }} />
+                ) :
+                <input
+                    type="checkbox"
+                    onChange={(event) => handleBoyChange(params, event)}
+                >
+                </input>
+        },
     },
     {
         field: 'nominee_ss_boy_photo',
@@ -327,6 +512,20 @@ const columns03: GridColDef[] = [
 
     },
     {
+        field: 'isApprovedCoach', headerName: 'Recommended', width: 200, type: 'boolean', renderCell: (params) => {
+            return params.value ?
+                (
+                    <CheckRoundedIcon style={{ color: '#15803d' }} />
+                ) :
+                <input
+                    type="checkbox"
+                    onChange={(event) => handleCoachChange(params, event)}
+                >
+
+                </input>
+        },
+    },
+    {
         field: 'nominee_coach_photo',
         headerName: 'Nominee Photo',
         width: 200,
@@ -344,6 +543,7 @@ const columns03: GridColDef[] = [
         }
 
     },
+
 ]
 
 export {
