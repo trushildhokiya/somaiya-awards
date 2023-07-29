@@ -9,6 +9,7 @@ import Lottie from 'lottie-react';
 import CertificateData from '../assests/certificate.json';
 import TrophyData from '../assests/trophy.json';
 import MoneyData from '../assests/money.json';
+import EnvMapTexture from '../assests/skyfire.hdr'
 
 const Home = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const Home = () => {
             <ambientLight intensity={0.5} color="#ffffff" />
 
             {/* Environment Map */}
-            <Environment preset='sunset' intensity={2} />
+            <Environment files={EnvMapTexture} intensity={2} />
 
             <Model />
           </Canvas>
