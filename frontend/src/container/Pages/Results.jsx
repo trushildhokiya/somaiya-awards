@@ -62,7 +62,7 @@ const Results = () => {
                     <tbody className='border-2 border-slate-800'>
                       {jsonData.map((row, index) => (
                         <tr key={index} className={index % 2 === 0 ? "bg-gray-200" : "bg-white"} >
-                          <td className='border-2 border-slate-800 p-3 text-center '>{row["Name "]}</td>
+                          <td className='border-2 border-slate-800 p-3 text-center '>{row["Name"]}</td>
                           <td className='border-2 border-slate-800 p-3 text-center '>{row["Institution"]}</td>
                           <td className='border-2 border-slate-800 p-3 text-center '>{row["Category"]}</td>
                         </tr>
