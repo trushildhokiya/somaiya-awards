@@ -78,6 +78,77 @@ const Home = () => {
         </p>
       </div>
 
+      {/* SECTION Nomenclature */}
+      <div className='p-8'>
+        <h2 className='text-red-800 font-Roboto text-2xl font-semibold'>
+          Nomeclature Of Awards
+          <hr className='w-[4%] border-slate-300 border-2' />
+        </h2>
+        <p className='my-3 text-md font-Poppins text-slate-950'>
+
+          <table className='w-[100%] border-black border-2 text-left divide-y divide-gray-400'>
+            <thead className='bg-amber-100'>
+              <tr>
+                <th rowSpan={7} className='border-black border-2 p-4 text-center'>
+                  Shri. K. J. Somaiya Award
+                </th>
+              </tr>
+              <tr>
+                <td className='p-4'>Outstanding College</td>
+              </tr>
+              <tr>
+                <td className='border-black border-2 p-4'>Outstanding Boy Student</td>
+              </tr>
+              <tr>
+                <td className='border-black border-2 p-4'>Student of the Year</td>
+              </tr>
+              <tr>
+                <td className='border-black border-2 p-4'>Employee of the Year</td>
+              </tr>
+              <tr>
+                <td className='border-black border-2 p-4'>Outstanding Employee – K J Somaiya Hospital</td>
+              </tr>
+              <tr>
+                <td className='border-black border-2 p-4'>Outstanding Employee – Somaiya Trust</td>
+              </tr>
+            </thead>
+            <tbody className='divide-y divide-gray-400 bg-green-100'>
+              <tr>
+                <th rowSpan={5} className='border-black border-2 p-4 text-center'>
+                  Smt. Sakarben K. Somaiya Award
+                </th>
+              </tr>
+              <tr>
+                <td className='p-4'>Outstanding Girl Student</td>
+              </tr>
+              <tr>
+                <td className='border-black border-2 p-4'>Outstanding School</td>
+              </tr>
+              <tr>
+                <td className='border-black border-2 p-4'>Promising Employee</td>
+              </tr>
+              <tr>
+                <td className='border-black border-2 p-4'>Promising Teacher</td>
+              </tr>
+            </tbody>
+            <tbody className='divide-y divide-gray-400 bg-blue-100'>
+              <tr>
+                <th rowSpan={3} className='border-black border-2 p-4 text-center'>
+                  Dr. S. K. Somaiya Award
+                </th>
+              </tr>
+              <tr>
+                <td className='p-4'>Excellence in Teaching</td>
+              </tr>
+              <tr>
+                <td className='border-black border-2 p-4'>Excellence in Research</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </p>
+      </div>
+
       {/* SECTION Awards Prizes */}
       <div className='p-8'>
         <h2 className='text-red-800 font-Roboto text-2xl font-semibold'>
