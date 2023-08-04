@@ -134,9 +134,28 @@ ___
 
 #### Contributors
 
-<a href="https://github.com/trushildhokiya/somaiya-awards/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=trushildhokiya/somaiya-awards" />
-</a>
+## Contributors
+
+<div style="display: flex; justify-content: space-around;">
+  
+  <a href="https://github.com/contributor1" style="text-align: center;">
+    <img src="https://avatars.githubusercontent.com/u/95337251?s=64&v=4" alt="Contributor 1" style="border-radius: 50%; width: 100px;">
+    <br>
+    Trushil Dhokiya
+  </a>
+  
+  <a href="https://github.com/contributor1" style="text-align: center;">
+    <img src="https://avatars.githubusercontent.com/u/110166138?s=64&v=4" alt="Contributor 1" style="border-radius: 50%; width: 100px;">
+    <br>
+    Hitanshu Gandhi
+  </a>
+  
+  <a href="https://github.com/contributor2" style="text-align: center;">
+    <img src="https://avatars.githubusercontent.com/u/102577733?s=64&v=4" alt="Contributor 2" style="border-radius: 50%; width: 100px;">
+    <br>
+    Kushal Harsora
+  </a>
 
 
+</div>
 
