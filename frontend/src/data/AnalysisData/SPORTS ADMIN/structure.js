@@ -386,121 +386,121 @@ const columns03: GridColDef[] = [
     },
     {
         field: 'q_01',
-        headerName: 'Q_01',
+        headerName: 'Skill to demonstrate competency in motor skills and movement patterns needed to perform a variety of physical activities.',
         width: 100,
 
     },
     {
         field: 'q_02',
-        headerName: 'Q_02',
+        headerName: 'Skill in analysis of the training and competition preparation required by athletes (the team) to perform at the top level (International/National/State)',
         width: 100,
 
     },
     {
         field: 'q_03',
-        headerName: 'Q_03',
+        headerName: 'Skill in analysis of the strategies, tactics and psychological preparation required by athletes (the team) to perform at the top level',
         width: 100,
 
     },
     {
         field: 'q_04',
-        headerName: 'Q_04',
+        headerName: 'Skill to exhibit responsible personal and social behavior that respects self and others in physical activity settings.',
         width: 100,
 
     },
     {
         field: 'q_05',
-        headerName: 'Q_05',
+        headerName: 'Skill to value physical activity for health, enjoyment, challenge, self-expression, and/or social interaction.',
         width: 100,
 
     },
     {
         field: 'q_06',
-        headerName: 'Q_06',
+        headerName: 'Ability to explain the factors that contribute to high performance to Athletes and others.',
         width: 100,
 
     },
     {
         field: 'q_07',
-        headerName: 'Q_07',
+        headerName: 'Delivery of training sessions aligned to short- and long-term performance goals and appropriate to the athletes involved.',
         width: 100,
 
     },
     {
         field: 'q_08',
-        headerName: 'Q_08',
+        headerName: 'Organization of training sessions that are time-effective and maximize value of available equipment and facilities.',
         width: 100,
 
     },
     {
         field: 'q_09',
-        headerName: 'Q_09',
+        headerName: 'Analysis of athlete`s or team`s performance and determination of necessary changes in training and preparation',
         width: 100,
 
     },
     {
         field: 'q_10',
-        headerName: 'Q_10',
+        headerName: 'Setting of appropriate level goals for athletes (the team) for the year and long-term ',
         width: 100,
 
     },
     {
         field: 'q_11',
-        headerName: 'Q_11',
+        headerName: 'Demonstrated ability to set progression of goals to achieve long-range (International medal) goals',
         width: 100,
 
     },
     {
         field: 'q_12',
-        headerName: 'Q_12',
+        headerName: 'Ability to have athletes (the team) peak at appropriate times of the season / academic year',
         width: 100,
 
     },
     {
         field: 'q_13',
-        headerName: 'Q_13',
+        headerName: 'Effective monitoring of student-athletes for over-training, injuries, or illness (on own or through use of experts) and appropriate response',
         width: 100,
 
     },
     {
         field: 'q_14',
-        headerName: 'Q_14',
+        headerName: 'Effective feedback to athletes (the team) related to training and performance results',
         width: 100,
 
     },
     {
         field: 'q_15',
-        headerName: 'Q_15',
+        headerName: 'Ensuring that elements surrounding competition (for example, nutrition, and transport to and from sites, accommodation, training venues, and so on) support the athletes’ (team’s) ability to perform well',
         width: 100,
 
     },
     {
         field: 'q_16',
-        headerName: 'Q_16',
+        headerName: 'Work within assigned budget and effectively manage program resources',
         width: 100,
 
     },
     {
         field: 'q_17',
-        headerName: 'Q_17',
+        headerName: 'Manage the logistics of team projects, including travel, team meetings, technical meetings and practice matches, and discipline',
         width: 100,
 
     },
     {
         field: 'q_18',
-        headerName: 'Q_18',
+        headerName: 'Ability to learn from each competition cycle and apply lessons to future planning and decision making',
         width: 100,
 
     },
     {
         field: 'q_19',
-        headerName: 'Q_19',
+        headerName: 'Ability to define and communicate a clear vision for athletes (team)',
         width: 100,
 
     },
     {
         field: 'q_20',
-        headerName: 'Q_20',
+        headerName: 'Act consistently and instill in athletes (team) belief in their ability to perform at a national/ world level',
 
         width: 100,
 
