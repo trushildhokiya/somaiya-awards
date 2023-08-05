@@ -134,9 +134,7 @@ ___
 
 #### Contributors
 
-<a href="https://github.com/trushildhokiya/somaiya-awards/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=trushildhokiya/somaiya-awards" />
-</a>
+<table><tr><td align="center"><a href="https://github.com/trushildhokiya"><img alt="trushildhokiya" src="https://avatars.githubusercontent.com/u/95337251?v=4" width="117" /><br />trushildhokiya</a></td><td align="center"><a href="https://github.com/KushalHarsora"><img alt="KushalHarsora" src="https://avatars.githubusercontent.com/u/102577733?v=4" width="117" /><br />KushalHarsora</a></td><td align="center"><a href="https://github.com/Hitanshu-Gandhi"><img alt="Hitanshu-Gandhi" src="https://avatars.githubusercontent.com/u/110166138?v=4" width="117" /><br />Hitanshu-Gandhi</a></td></tr></table>
 
 
 
