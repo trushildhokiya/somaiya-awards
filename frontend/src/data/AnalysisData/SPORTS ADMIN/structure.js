@@ -16,7 +16,7 @@ import axios from "axios";
  */
 
 const handleBoyChange = (params, event) => {
-    if (event.target.checked == true) {
+    if (event.target.checked === true) {
 
         const approvedNomineeName = params.row['nominee_ss_boy'];
 
@@ -37,7 +37,7 @@ const handleBoyChange = (params, event) => {
 
         })
             .then((res) => {
-                if (res.isConfirmed == true) {
+                if (res.isConfirmed === true) {
                     //axios put
                     axios.put(`http://localhost:5001/sports-admin/data/update`, data, {
                         headers: {
@@ -64,7 +64,7 @@ const handleBoyChange = (params, event) => {
 }
 
 const handleGirlChange = (params, event) => {
-    if (event.target.checked == true) {
+    if (event.target.checked === true) {
 
         const approvedNomineeName = params.row['nominee_ss_girl'];
 
@@ -85,7 +85,7 @@ const handleGirlChange = (params, event) => {
 
         })
             .then((res) => {
-                if (res.isConfirmed == true) {
+                if (res.isConfirmed === true) {
                     //axios put
                     axios.put(`http://localhost:5001/sports-admin/data/update`, data, {
                         headers: {
@@ -114,7 +114,7 @@ const handleGirlChange = (params, event) => {
 
 const handleCoachChange = (params, event) => {
 
-    if (event.target.checked == true) {
+    if (event.target.checked === true) {
 
         const approvedNomineeName = params.row['nominee_inspiring_coach'];
 
@@ -135,7 +135,7 @@ const handleCoachChange = (params, event) => {
 
         })
             .then((res) => {
-                if (res.isConfirmed == true) {
+                if (res.isConfirmed === true) {
                     //axios put
                     axios.put(`http://localhost:5001/sports-admin/data/update`, data, {
                         headers: {

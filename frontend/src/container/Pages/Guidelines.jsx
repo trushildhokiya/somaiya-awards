@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import CreditFooter from '../../components/CreditFooter';
 
 const Guidelines = () => {
   return (
@@ -125,6 +126,7 @@ const Guidelines = () => {
 
       </div>
       <Footer />
+      <CreditFooter/>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import CertificateData from '../assests/certificate.json';
 import TrophyData from '../assests/trophy.json';
 import MoneyData from '../assests/money.json';
 import EnvMapTexture from '../assests/skyfire.hdr'
+import CreditFooter from '../../components/CreditFooter';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -179,6 +180,7 @@ const Home = () => {
       </div>
 
       <Footer />
+      <CreditFooter/>
     </div>
   );
 };

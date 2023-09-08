@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import TableData from '../../data/Institutions/TableData';
+import CreditFooter from '../../components/CreditFooter';
 
 const Groups = () => {
 
@@ -55,6 +56,7 @@ const Groups = () => {
                 </div>
             </div>
             <Footer />
+            <CreditFooter/>
         </div>
     );
 };

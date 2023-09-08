@@ -11,7 +11,7 @@ const Navbar = () => {
                 {/* Image  */}
                 <Link to='/'>
                     <div className='m-3'>
-                        <img src="https://kjsit.somaiya.edu.in/assets/kjsieit/images/Logo/kjsieit-logo.svg" alt='kjsit-logo' className='scale-100' />
+                        <img src="https://kjsit.somaiya.edu.in/assets/kjsieit/images/Logo/kjsieit-logo.svg" alt='kjsit-logo' style={{height:"100px", width:"600px"}}  className='scale-100' />
                     </div>
                 </Link>
 
@@ -20,7 +20,7 @@ const Navbar = () => {
 
                     <Link to={'/guidelines'}>
                         <div className=' cursor-pointer p-2 mx-4 hover:scale-105 transition-all duration-300'>
-                            <p>
+                            <p className='text-red-800 font-Roboto text-2xl font-semibold'>
                                 Guidelines
                             </p>
                         </div>
@@ -28,7 +28,7 @@ const Navbar = () => {
 
                     <Link to={'/groups'}>
                         <div className='p-2 mx-4 cursor-pointer hover:scale-105 transition-all duration-300'>
-                            <p>
+                            <p className='text-red-800 font-Roboto text-2xl font-semibold'>
                                 Groups
                             </p>
                         </div>
@@ -36,7 +36,7 @@ const Navbar = () => {
 
                     <Link to='/results'>
                         <div className='p-2 mx-4 cursor-pointer hover:scale-105 transition-all duration-300'>
-                            <p>
+                            <p className='text-red-800 font-Roboto text-2xl font-semibold'>
                                 Results
                             </p>
                         </div>
@@ -44,7 +44,7 @@ const Navbar = () => {
 
                     <Link to='/about'>
                         <div className='p-2 mx-4 cursor-pointer hover:scale-105 transition-all duration-300'>
-                            <p>
+                            <p className='text-red-800 font-Roboto text-2xl font-semibold'>
                                 About
                             </p>
                         </div>

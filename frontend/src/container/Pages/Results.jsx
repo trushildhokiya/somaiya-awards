@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import * as XLSX from "xlsx";
 import axios from 'axios'
+import CreditFooter from '../../components/CreditFooter';
 
 const Results = () => {
 
@@ -76,6 +77,7 @@ const Results = () => {
         </div>
       </div>
       <Footer />
+      <CreditFooter/>
     </div>
   )
 }
