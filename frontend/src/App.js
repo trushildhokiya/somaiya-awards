@@ -37,6 +37,7 @@ import SportsResponses from "./container/views/sportsAdmin/pages/SportsResponses
 import Announce from "./container/views/admin/pages/Announce";
 import ResearchAdmin from "./container/views/researchAdmin/ResearchAdmin";
 import ResearchResponses from "./container/views/researchAdmin/pages/ResearchResponses";
+import Users from "./container/views/admin/pages/Users";
  
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
         <Route path="/admin/responses/:formType" element={<Responses />} />
         <Route path="/admin/:formType/scorecard/:id" element={<ScoreCard />} />
         <Route path="/admin/manage-users" element={<ManageUsers />} />
+        <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/announce-result" element={<Announce />} />
         <Route path="/students-admin" element={<StudentsAdmin />} />
         <Route path="/students-admin/responses/:formType" element={<StudentResponses />} />

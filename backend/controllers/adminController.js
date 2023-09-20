@@ -1838,6 +1838,36 @@ const getResultsData = asyncHandler(async (req, res) => {
     })
 })
 
+//@desc GET results file
+//@route GET admin/data/users
+//@access Private
+
+const getUsersData = asyncHandler( async (req,res)=>{
+    
+    const user_id = res.user_id;
+
+    const user = await User.findOne({ where: { id: user_id } });
+
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
+
+    if (user.role != 'ADMIN') {
+
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
+
+    const result =  await User.findAll()
+
+    res.status(200).json({
+        users:result
+    })
+})
+
 // custom functions which will be used in Admin Controllers
 
 // @desc: extracts date from data 
@@ -1957,5 +1987,6 @@ module.exports = {
     getStudentsData,
     getSportsGirlData,
     getSportsBoyData,
-    getSportsCoachData
+    getSportsCoachData,
+    getUsersData
 }

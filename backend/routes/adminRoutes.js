@@ -23,7 +23,8 @@ const {
         getStudentsData,
         getSportsGirlData,
         getSportsBoyData,
-        getSportsCoachData
+        getSportsCoachData,
+        getUsersData
     } = require('../controllers/adminController')
 
 /** GET ROUTES */
@@ -32,6 +33,7 @@ router.route('/count/all').get(userAuthenticator, getCounts);
 router.route('/count/15').get(userAuthenticator,getDaysCount)
 router.route('/count/institution-wise').get(userAuthenticator,getInstitutionWiseCount)
 router.route('/count/group').get(userAuthenticator,getGroupWiseCount)
+router.route('/users').get(userAuthenticator,getUsersData)
 
 // responses
 
