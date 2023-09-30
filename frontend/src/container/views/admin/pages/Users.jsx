@@ -10,6 +10,34 @@ import { useNavigate } from 'react-router-dom'
 const Users = () => {
 
     const [rows, setRows] = useState([])
+    const [email, setEmail] = useState({});
+    const [submitted, setSubmitted] = useState(false)
+    const [serverResponse , setServerResponse] = useState({})
+    const deleteUser = async (params) => {
+        const user = {}
+        // all Counts
+        user.email = params.row["email_id"]
+        await axios.post('http://localhost:5001/auth/deleteuser', user ,{
+            headers: {
+                'user_id': localStorage.getItem('user_id'),
+                'x-access-token': localStorage.getItem('token'),
+            }})
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                
+                const response = err.response.data
+                setServerResponse(response)
+                setSubmitted(true)
+            })
+        
+
+        console.log(serverResponse);
+       
+
+
+    }
     const [columns, setColumns] = useState([
         {
             field: 'id',
@@ -31,11 +59,19 @@ const Users = () => {
             headerName: 'Role',
             width: 350,
         },
+        {
+            field: 'delete', headerName: 'Delete', width: 200, renderCell: (params) => {
+                return <a  onClick={()=>{deleteUser(params)}} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins">Delete</a>;
+            }
+        },
     ])
     const [authorized, setAuthorized] = useState(false)
     const [loading, setLoading] = useState(true)
 
     const navigate = useNavigate()
+
+    
+
     
     useEffect(() => {
 
@@ -79,6 +115,7 @@ const Users = () => {
                         .catch((err) => {
                             console.log(err);
                         })
+                        
 
                 }
                 else {

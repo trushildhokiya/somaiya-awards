@@ -293,6 +293,54 @@ const userValidate = asyncHandler(async (req, res) => {
 
 })
 
+/* for deleting the user */
+const deleteUser = asyncHandler(async (req, res) => {
+
+    const token = res.params.token
+    const user_id = res.params.user_id
+    const { user_email} = req.body;
+
+    try {
+        const user = await User.findOne({ where: { id: user_id } })
+        if (!user) {
+            // throw error
+            res.status(404)
+            throw new Error(" User not found !")
+        }
+        const secret = process.env.JWT_SECRET + user.password
+        const result = jwt.verify(token, secret)
+        if (!result) {
+            //throw error
+
+            res.status(401)
+            throw new Error("User token invalid. Try logging again")
+        }
+        if (user.role != "Admin"){
+            res.status(401)
+            throw new Error(" Unauthorised !")
+        }
+        const userd = await User.findOne({ where: { email: user_email } })
+
+        if (userd) {
+            //delete user
+
+            await User.destroy({ where: { email: user_email } })
+
+        }
+
+        res.status(200).json({
+            authorized: true,
+            role: user.role,
+            message:"succesfully done"
+        })
+    }
+    catch (err) {
+        res.status(401)
+
+        throw new Error("User token invalid. Try logging again")
+    }
+
+})
 
 /**
  * Exports
@@ -304,7 +352,8 @@ module.exports = {
     verifyForPasswordReset,
     changePassword,
     userValidate,
-    registerUser
+    registerUser,
+    deleteUser
 }
 
 /**

@@ -64,6 +64,7 @@ function App() {
         <Route path="/admin/responses/:formType" element={<Responses />} />
         <Route path="/admin/:formType/scorecard/:id" element={<ScoreCard />} />
         <Route path="/admin/manage-users" element={<ManageUsers />} />
+        
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/announce-result" element={<Announce />} />
         <Route path="/students-admin" element={<StudentsAdmin />} />

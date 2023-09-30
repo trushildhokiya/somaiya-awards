@@ -795,8 +795,11 @@ const columns12: GridColDef[] = [
         }
 
     },
+    
 
 ]
+
+
 
 export {
     columns01,
