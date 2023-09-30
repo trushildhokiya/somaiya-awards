@@ -296,35 +296,43 @@ const userValidate = asyncHandler(async (req, res) => {
 /* for deleting the user */
 const deleteUser = asyncHandler(async (req, res) => {
 
-    const token = res.params.token
-    const user_id = res.params.user_id
-    const { user_email} = req.body;
+    const token = req.headers.token
+    const user_id = req.headers.user_id
+    const { email } = req.body;
 
     try {
+        
         const user = await User.findOne({ where: { id: user_id } })
         if (!user) {
             // throw error
             res.status(404)
             throw new Error(" User not found !")
         }
-        const secret = process.env.JWT_SECRET + user.password
-        const result = jwt.verify(token, secret)
-        if (!result) {
-            //throw error
+        // const secret = process.env.JWT_SECRET + user.password
+        // const result = jwt.verify(token, secret)
+        // if (!result) {
+        //     //throw error
 
-            res.status(401)
-            throw new Error("User token invalid. Try logging again")
-        }
-        if (user.role != "Admin"){
+        //     res.status(401)
+        //     throw new Error("User token invalid. Try logging again")
+        // }
+        console.log(user);
+        console.log(req.user_id);
+
+        if (user.role != "ADMIN"){
             res.status(401)
             throw new Error(" Unauthorised !")
         }
-        const userd = await User.findOne({ where: { email: user_email } })
 
+        const userd = await User.findOne({ where: { email_id: email } })
+        console.log(userd)
         if (userd) {
             //delete user
 
-            await User.destroy({ where: { email: user_email } })
+            await User.destroy({ where: { email_id: email } })
+            .then((rs)=>{
+                console.log(rs);
+            })
 
         }
 
@@ -336,8 +344,8 @@ const deleteUser = asyncHandler(async (req, res) => {
     }
     catch (err) {
         res.status(401)
-
-        throw new Error("User token invalid. Try logging again")
+        console.log(err)
+        throw new Error("User token invalid yoo. Try logging again")
     }
 
 })

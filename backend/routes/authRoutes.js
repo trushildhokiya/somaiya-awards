@@ -22,7 +22,7 @@ router.route('/:id/:token').get(verifyForPasswordReset)
 router.route('/:id/:token').post(changePassword)
 router.route('/validate').get(userAuthenticator, userValidate)
 router.route('/register').post(registerUser)
-router.route('/deleteuser').post(deleteUser)
+router.route('/deleteuser').post(userAuthenticator,deleteUser)
 /**
  * Exports
  */
