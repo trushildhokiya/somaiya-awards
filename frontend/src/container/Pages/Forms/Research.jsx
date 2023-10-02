@@ -11,7 +11,7 @@ import { MoonLoader } from 'react-spinners'
 
 const Research = () => {
 
-
+  const ResearchForm2 = ResearchForm()
   const [loading, setLoading] = useState(true)
   const [authorized, setAuthorized] = useState(false)
   const navigate = useNavigate()
@@ -116,7 +116,7 @@ const Research = () => {
               <Forms
                 pageCount={limit}
                 pageHeadings={headings}
-                data={ResearchForm}
+                data={ResearchForm2}
                 stages={ResearchFormStages}
                 message={message}
               />

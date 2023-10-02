@@ -12,7 +12,7 @@ import axios from 'axios'
 
 const Teaching = () => {
 
-
+  const TeachingForm2 = TeachingForm()
   const [loading, setLoading] = useState(true)
   const [authorized, setAuthorized] = useState(false)
   const navigate = useNavigate()
@@ -116,7 +116,7 @@ const Teaching = () => {
               <Forms
                 pageHeadings={headings}
                 pageCount={limit}
-                data={TeachingForm}
+                data={TeachingForm2}
                 stages={TeachingFormStages}
                 message={message}
               />

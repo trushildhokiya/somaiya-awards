@@ -10,7 +10,7 @@ import { MoonLoader } from 'react-spinners'
 import FormInfo from '../../../components/FormInfo'
 
 const Students = () => {
-
+    const StudentsFormData2 = StudentsFormData()
     const [loading, setLoading] = useState(true)
     const [authorized, setAuthorized] = useState(false)
     const navigate = useNavigate()
@@ -114,7 +114,7 @@ const Students = () => {
               <Forms
                 pageHeadings={pageHeaders}
                 pageCount={limit}
-                data={StudentsFormData}
+                data={StudentsFormData2}
                 stages={StudentsFormStages}
                 message={message}
               />

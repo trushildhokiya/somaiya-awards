@@ -15,7 +15,7 @@ const NonTeaching = () => {
   /**
    * Authentication
    */
-
+  const NonTeachingForm2 = NonTeachingForm()
   const [loading, setLoading] = useState(true)
   const [authorized, setAuthorized] = useState(false)
   const navigate = useNavigate()
@@ -126,7 +126,7 @@ const NonTeaching = () => {
                 pageHeadings={headings}
                 pageCount={limit}
                 message={message}
-                data={NonTeachingForm}
+                data={NonTeachingForm2}
                 stages={NonTeachingFormStages}
               />
             </>

@@ -123,9 +123,6 @@ const SideBar = () => {
                     <MenuItem icon={<GroupAddIcon />} component={<Link to='/admin/manage-users' />}>
                         Manage Users
                     </MenuItem>
-                    <MenuItem icon={<GroupAddIcon />} component={<Link to='/admin/allusers' />}>
-                        All Users
-                    </MenuItem>
                     <MenuItem icon={<CampaignRoundedIcon />} component={<Link to='/admin/announce-result' />}>
                         Announce
                     </MenuItem>

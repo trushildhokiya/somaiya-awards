@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
 import axios from 'axios'
 
 const OutstandingInstitution = () => {
-
+  const OutstandingInstForm2 = OutstandingInstForm()
   const [loading, setLoading] = useState(true)
   const [authorized, setAuthorized] = useState(false)
   const navigate = useNavigate()
@@ -113,7 +113,7 @@ const OutstandingInstitution = () => {
               <Forms
                 pageHeadings={pageHeaders}
                 pageCount={limit}
-                data={OutstandingInstForm}
+                data={OutstandingInstForm2}
                 stages={OutsInstStages}
                 message={message}
               />

@@ -282,7 +282,8 @@ const userValidate = asyncHandler(async (req, res) => {
 
         res.status(200).json({
             authorized: true,
-            role: user.role
+            role: user.role,
+            institution: user.institution
         })
     }
     catch (err) {
@@ -349,6 +350,11 @@ const deleteUser = asyncHandler(async (req, res) => {
     }
 
 })
+
+
+
+
+
 
 /**
  * Exports

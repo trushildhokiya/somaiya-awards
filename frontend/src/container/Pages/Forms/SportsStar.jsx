@@ -10,7 +10,7 @@ import axios from 'axios'
 import { MoonLoader } from 'react-spinners'
 
 const SportsStar = () => {
-
+  const SportsStarForm2 = SportsStarForm()
   const [loading, setLoading] = useState(true)
   const [authorized, setAuthorized] = useState(false)
   const navigate = useNavigate()
@@ -152,7 +152,7 @@ const SportsStar = () => {
               <Forms
                 pageHeadings={headings}
                 pageCount={limit}
-                data={SportsStarForm}
+                data={SportsStarForm2}
                 stages={SportsStarStages}
                 message={message}
               />
