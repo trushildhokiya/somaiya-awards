@@ -11,12 +11,14 @@ import { useReactToPrint } from 'react-to-print';
 const FormPreview = () => {
   const [data, setData] = useState({});
   const [formInfo, setFormInfo] = useState();
+  const [title,setTitle] = useState()
 
   useEffect(() => {
     const formType = window.location.href.split('/')[4];
     const applicationID = window.location.href.split('/')[6];
     const url = `http://localhost:5001/admin/data/${formType}/preview`;
 
+    setTitle(formType)
     switch (formType) {
       case 'outstanding-institution':
         setFormInfo(OutstandingInstForm);
@@ -66,7 +68,7 @@ const FormPreview = () => {
   return (
     <div className="p-5" ref={componentRef}>
       <p className="text-xl text-red-800 mb-10 font-bold">
-        Form Preview
+        {title.toUpperCase()} Form Preview
       </p>
       {formInfo && Object.keys(data).length > 0 ? (
         <form>
@@ -91,7 +93,7 @@ const FormPreview = () => {
                   name={key}
                   value={data[key]}
                   readOnly
-                  className="block mt-1 p-2 mb-9 border outline-none shadow-lg rounded w-[50%]"
+                  className="block mt-1 p-2 mb-9 border outline-none shadow-lg h-auto rounded w-[50%]"
                 />
               )}
             </div>
