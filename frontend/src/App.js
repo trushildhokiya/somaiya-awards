@@ -39,12 +39,8 @@ import Announce from "./container/views/admin/pages/Announce";
 import ResearchAdmin from "./container/views/researchAdmin/ResearchAdmin";
 import ResearchResponses from "./container/views/researchAdmin/pages/ResearchResponses";
 import Users from "./container/views/admin/pages/Users";
-<<<<<<< HEAD
-
-=======
 import Dev from "./container/Pages/Utility/Dev";
  
->>>>>>> 0f6172d212883753e0bcb5e7de00a0a692ffea94
 function App() {
   return (
     <BrowserRouter>

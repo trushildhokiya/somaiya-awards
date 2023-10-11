@@ -969,7 +969,7 @@ const getSportsGirlData = asyncHandler(async (req, res) => {
                 sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
                 { isApprovedSportsGirl: true }
             ]
-        } 
+        }
     })
 
     const data = [];
@@ -1016,7 +1016,7 @@ const getSportsGirlData = asyncHandler(async (req, res) => {
 //@route admin/data/forms/sports-boy
 //@access Private
 
-const getSportsBoyData = asyncHandler( async(req,res)=>{
+const getSportsBoyData = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -1043,7 +1043,7 @@ const getSportsBoyData = asyncHandler( async(req,res)=>{
                 sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
                 { isApprovedSportsBoy: true }
             ]
-        } 
+        }
     })
 
     const data = [];
@@ -1052,7 +1052,7 @@ const getSportsBoyData = asyncHandler( async(req,res)=>{
 
 
         const object = {
-            id:response.id,
+            id: response.id,
             email_id: response.email_id,
             institute_name: response.institute_name,
             nominee_ss_boy: response.nominee_ss_boy,
@@ -1065,10 +1065,10 @@ const getSportsBoyData = asyncHandler( async(req,res)=>{
             q_27: response.q_27,
             q_28: response.q_28,
             final_score: (
-                response.q_25*0.4 +
-                response.q_26*0.3 +
-                response.q_27*0.2 +
-                response.q_28 *0.1
+                response.q_25 * 0.4 +
+                response.q_26 * 0.3 +
+                response.q_27 * 0.2 +
+                response.q_28 * 0.1
 
             )
         }
@@ -1076,7 +1076,7 @@ const getSportsBoyData = asyncHandler( async(req,res)=>{
         data.push(object)
 
     }
-    
+
 
     res.status(200).json({
         message: 'Request Successful',
@@ -1091,7 +1091,7 @@ const getSportsBoyData = asyncHandler( async(req,res)=>{
 //@route admin/data/forms/sports-coach
 //@access Private
 
-const getSportsCoachData  = asyncHandler( async(req,res)=>{
+const getSportsCoachData = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
 
@@ -1118,7 +1118,7 @@ const getSportsCoachData  = asyncHandler( async(req,res)=>{
                 sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
                 { isApprovedCoach: true }
             ]
-        } 
+        }
     })
 
     const data = [];
@@ -1127,7 +1127,7 @@ const getSportsCoachData  = asyncHandler( async(req,res)=>{
 
 
         const object = {
-            id:response.id,
+            id: response.id,
             email_id: response.email_id,
             institute_name: response.institute_name,
             nominee_inspiring_coach: response.nominee_inspiring_coach,
@@ -1843,8 +1843,8 @@ const getResultsData = asyncHandler(async (req, res) => {
 //@route GET admin/data/users
 //@access Private
 
-const getUsersData = asyncHandler( async (req,res)=>{
-    
+const getUsersData = asyncHandler(async (req, res) => {
+
     const user_id = res.user_id;
 
     const user = await User.findOne({ where: { id: user_id } });
@@ -1862,39 +1862,160 @@ const getUsersData = asyncHandler( async (req,res)=>{
         throw new Error("FORBIDDEN ACCESS TO RESOURCE")
     }
 
-    const result =  await User.findAll()
+    const result = await User.findAll()
 
     res.status(200).json({
-        users:result
+        users: result
     })
 })
 
-const getTeachingFormPreviewData = asyncHandler(async(req,res)=>{
-    const user_id = res.user_id;
+const getFormPreviewData = asyncHandler(async (req, res) => {
 
-    const user = await User.findOne({ where: { id: user_id } });
+    // const user_id = res.user_id;
 
-    if (!user) {
-        //throw error
-        res.status(400)
-        throw new Error("User Not found")
+    // const user = await User.findOne({ where: { id: user_id } });
+
+    // if (!user) {
+    //     //throw error
+    //     res.status(400)
+    //     throw new Error("User Not found")
+    // }
+
+    // if (user.role != 'ADMIN') {
+
+    //     //throw error
+    //     res.status(403)
+    //     throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    // }
+
+    // const currentYear = new Date().getFullYear();
+
+    const formType = req.params.formtype
+    const applicationID = req.headers.applicationid
+
+    let application;
+
+    switch (formType) {
+
+        case 'outstanding-institution':
+            application = await OutstandingInstitution.findOne({
+                where: { id: applicationID }
+            })
+            break;
+
+        case 'research':
+            application = await Research.findOne({
+                where: { id: applicationID }
+            })
+            break
+
+        case 'sports-boy':
+
+        const data = await Sports.findOne({
+            where: { id: applicationID }
+        });
+        
+        const object_boy = {
+            id: data.id,
+            email_id: data.email_id,
+            institute_name: data.institute_name,
+            nominee_ss_boy: data.nominee_ss_boy,
+            nominee_ss_boy_sport: data.nominee_ss_boy_sport,
+            nominee_ss_boy_photo: data.nominee_ss_boy_photo,
+            nominee_ss_boy_supportings: data.nominee_ss_boy_supportings,
+            q_25: data.q_25,
+            q_26: data.q_26,
+            q_27: data.q_27,
+            q_28: data.q_28
+        };
+        
+        application = object_boy;
+        break
+
+
+        case 'sports-girl':
+            application = await Sports.findOne({
+                where: { id: applicationID }
+            })
+
+            const object_girl = {
+                id: application.id,
+                email_id: application.email_id,
+                institute_name: application.institute_name,
+                nominee_ss_girl: application.nominee_ss_girl,
+                nominee_ss_girl_sport: application.nominee_ss_girl_sport,
+                nominee_ss_girl_photo: application.nominee_ss_girl_photo,
+                nominee_ss_girl_supportings: application.nominee_ss_girl_supportings,
+                q_21: application.q_21,
+                q_22: application.q_22,
+                q_23: application.q_23,
+                q_24: application.q_24,
+            }
+            application = object_girl
+            break
+
+        case 'sports-coach':
+            application = await Sports.findOne({
+                where: { id: applicationID }
+            })
+
+            const object_coach = {
+                id: application.id,
+                email_id: application.email_id,
+                institute_name: application.institute_name,
+                nominee_inspiring_coach: application.nominee_inspiring_coach,
+                nominee_coach_comments: application.nominee_coach_comments,
+                nominee_coach_photo: application.nominee_coach_photo,
+                nominee_coach_supportings: application.nominee_coach_supportings,
+                q_01: application.q_01,
+                q_02: application.q_02,
+                q_03: application.q_03,
+                q_04: application.q_04,
+                q_05: application.q_05,
+                q_06: application.q_06,
+                q_07: application.q_07,
+                q_08: application.q_08,
+                q_09: application.q_09,
+                q_10: application.q_10,
+                q_11: application.q_11,
+                q_12: application.q_12,
+                q_13: application.q_13,
+                q_14: application.q_14,
+                q_15: application.q_15,
+                q_16: application.q_16,
+                q_17: application.q_17,
+                q_18: application.q_18,
+                q_19: application.q_19,
+                q_20: application.q_20
+            }
+            application = object_coach
+            break
+
+
+        case 'students':
+            application = await Students.findOne({
+                where: { id: applicationID }
+            })
+            break
+
+        case 'teaching':
+            application = await Teaching.findOne({
+                where: { id: applicationID }
+            })
+            break
+
+        case 'non-teaching':
+            application = await NonTeaching.findOne({
+                where: { id: applicationID }
+            })
+            break
+
+        default: break
+
     }
-
-    if (user.role != 'ADMIN') {
-
-        //throw error
-        res.status(403)
-        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
-    }
-
-    const currentYear = new Date().getFullYear();
-
-    const application = await Teaching.findOne({
-        where: { id: applicationID }
-    })
 
     res.status(200).json({
-        data:application
+        data: application
     })
 })
 
@@ -2019,5 +2140,5 @@ module.exports = {
     getSportsBoyData,
     getSportsCoachData,
     getUsersData,
-    getTeachingFormPreviewData
+    getFormPreviewData
 }
