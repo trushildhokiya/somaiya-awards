@@ -8,6 +8,7 @@ const {
         getInstitutionWiseCount,
         getInstitutionData,
         getResearchData,
+        getTeachingFormPreviewData,
         getSportsData,
         getTeachingData,
         getNonTeachingData,
@@ -55,6 +56,7 @@ router.route('/forms/feedback-04').get(userAuthenticator, getFeedback04Data)
 
 router.route('/teaching/scorecard').get(userAuthenticator, getTeachingScoreCardData);
 router.route('/non-teaching/scorecard').get(userAuthenticator, getNonTeachingScoreCardData);
+router.route('/teaching/preview').get(userAuthenticator, getTeachingFormPreviewData);
 
 // Announce Results
 

@@ -3,6 +3,7 @@ import OutstandingInstitution from "./container/Pages/Forms/OutstandingInstituti
 import SportsStar from './container/Pages/Forms/SportsStar'
 import Teaching from './container/Pages/Forms/Teaching'
 import Research from './container/Pages/Forms/Research'
+import FormPreview from "./container/views/admin/pages/FormPreview";
 import NonTeaching from './container/Pages/Forms/NonTeaching'
 import FeedbackTeachingST from './container/Pages/Forms/FeedbackTeachingST'
 import FeedbackTeachingPR from './container/Pages/Forms/FeedbackTeachingPR'
@@ -38,12 +39,12 @@ import Announce from "./container/views/admin/pages/Announce";
 import ResearchAdmin from "./container/views/researchAdmin/ResearchAdmin";
 import ResearchResponses from "./container/views/researchAdmin/pages/ResearchResponses";
 import Users from "./container/views/admin/pages/Users";
- 
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index  element={<Home />}  />
+        <Route index element={<Home />} />
         <Route path="/results" element={<Results />} />
         <Route path="/groups" element={<Groups />} />
         <Route path="/guidelines" element={<Guidelines />} />
@@ -61,6 +62,7 @@ function App() {
         <Route path='/admin/dashboard' element={<Admin />} />
         <Route path="/admin/responses/:formType" element={<Responses />} />
         <Route path="/admin/:formType/scorecard/:id" element={<ScoreCard />} />
+        <Route path="/admin/:formType/preview/:id" element={<FormPreview />} />
         <Route path="/admin/manage-users" element={<ManageUsers />} />
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/announce-result" element={<Announce />} />
@@ -70,16 +72,16 @@ function App() {
         <Route path="/sports-admin/responses/:formType" element={<SportsResponses />} />
         <Route path="/research-admin" element={<ResearchAdmin />} />
         <Route path="/research-admin/responses/research" element={<ResearchResponses />} />
-        <Route path="/forms/outstanding-institution" element={<OutstandingInstitution />}  />
-        <Route path="/forms/sports" element={<SportsStar />}  />
-        <Route path="/forms/research" element={<Research />}  />
-        <Route path="/forms/teaching" element={<Teaching />}  />
-        <Route path="/forms/non-teaching" element={<NonTeaching />}  />
-        <Route path="/forms/students" element={<Students />}  />
-        <Route path="/forms/feedback-01" element={<FeedbackTeachingST />}  />
-        <Route path="/forms/feedback-02" element={<FeedbackTeachingPR />}  />
-        <Route path="/forms/feedback-03" element={<FeedbackNonTeachingST />}  />
-        <Route path="/forms/feedback-04" element={<FeedbackNonTeachingPR />}  />
+        <Route path="/forms/outstanding-institution" element={<OutstandingInstitution />} />
+        <Route path="/forms/sports" element={<SportsStar />} />
+        <Route path="/forms/research" element={<Research />} />
+        <Route path="/forms/teaching" element={<Teaching />} />
+        <Route path="/forms/non-teaching" element={<NonTeaching />} />
+        <Route path="/forms/students" element={<Students />} />
+        <Route path="/forms/feedback-01" element={<FeedbackTeachingST />} />
+        <Route path="/forms/feedback-02" element={<FeedbackTeachingPR />} />
+        <Route path="/forms/feedback-03" element={<FeedbackNonTeachingST />} />
+        <Route path="/forms/feedback-04" element={<FeedbackNonTeachingPR />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

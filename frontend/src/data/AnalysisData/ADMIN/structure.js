@@ -247,6 +247,17 @@ const columns04: GridColDef[] = [
             return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
         }
     },
+    {
+        field: 'formdownload', headerName: 'Download Form', width: 200, renderCell: (params) => {
+            return (
+                <Link to={`/admin/teaching/preview/${params.id}`}>
+                    <a className='p-2 cursor-pointer bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
+                        Preview Form
+                    </a>
+                </Link>
+            )
+        }
+    },
 ];
 
 // Non Teaching
