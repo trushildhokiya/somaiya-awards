@@ -1871,24 +1871,23 @@ const getUsersData = asyncHandler(async (req, res) => {
 
 const getFormPreviewData = asyncHandler(async (req, res) => {
 
-    // const user_id = res.user_id;
+    const user_id = res.user_id;
 
-    // const user = await User.findOne({ where: { id: user_id } });
+    const user = await User.findOne({ where: { id: user_id } });
 
-    // if (!user) {
-    //     //throw error
-    //     res.status(400)
-    //     throw new Error("User Not found")
-    // }
+    if (!user) {
+        //throw error
+        res.status(400)
+        throw new Error("User Not found")
+    }
 
-    // if (user.role != 'ADMIN') {
+    if (user.role != 'ADMIN') {
 
-    //     //throw error
-    //     res.status(403)
-    //     throw new Error("FORBIDDEN ACCESS TO RESOURCE")
-    // }
+        //throw error
+        res.status(403)
+        throw new Error("FORBIDDEN ACCESS TO RESOURCE")
+    }
 
-    // const currentYear = new Date().getFullYear();
 
     const formType = req.params.formtype
     const applicationID = req.headers.applicationid
