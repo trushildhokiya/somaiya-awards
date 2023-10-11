@@ -161,7 +161,7 @@ const Responses = () => {
       }
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setRows(res.data.data)
       })
       .catch((err) => {

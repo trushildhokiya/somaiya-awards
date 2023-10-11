@@ -77,7 +77,17 @@ const columns01: GridColDef[] = [
             return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" target='_blank' download>Download</a>;
         }
     },
-
+    {
+        field: 'formdownload', headerName: 'Download Form', width: 200, renderCell: (params) => {
+            return (
+                <Link to={`/admin/outstanding-institution/preview/${params.id}`}>
+                    <a className='p-2 cursor-pointer bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
+                        Preview Form
+                    </a>
+                </Link>
+            )
+        }
+    },
 ];
 
 
@@ -139,9 +149,20 @@ const columns02: GridColDef[] = [
                 )
         },
     },
+    {
+        field: 'formdownload', headerName: 'Download Form', width: 200, renderCell: (params) => {
+            return (
+                <Link to={`/admin/research/preview/${params.id}`}>
+                    <a className='p-2 cursor-pointer bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
+                        Preview Form
+                    </a>
+                </Link>
+            )
+        }
+    },
 ];
 
-// Sports
+// students
 
 const columns03: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -167,6 +188,17 @@ const columns03: GridColDef[] = [
     {
         field: 'supportings', headerName: 'Supportings', width: 200, renderCell: (params) => {
             return <a target="_blank" href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+        }
+    },
+    {
+        field: 'formdownload', headerName: 'Download Form', width: 200, renderCell: (params) => {
+            return (
+                <Link to={`/admin/students/preview/${params.id}`}>
+                    <a className='p-2 cursor-pointer bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
+                        Preview Form
+                    </a>
+                </Link>
+            )
         }
     },
 ];
@@ -336,6 +368,17 @@ const columns05: GridColDef[] = [
     {
         field: 'ieacApprovedFile', headerName: 'IEAC Approved File', width: 200, renderCell: (params) => {
             return <a href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
+        }
+    },
+    {
+        field: 'formdownload', headerName: 'Download Form', width: 200, renderCell: (params) => {
+            return (
+                <Link to={`/admin/non-teaching/preview/${params.id}`}>
+                    <a className='p-2 cursor-pointer bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
+                        Preview Form
+                    </a>
+                </Link>
+            )
         }
     },
 
@@ -526,6 +569,17 @@ const columns10: GridColDef[] = [
         }
 
     },
+    {
+        field: 'formdownload', headerName: 'Download Form', width: 200, renderCell: (params) => {
+            return (
+                <Link to={`/admin/sports-girl/preview/${params.id}`}>
+                    <a className='p-2 cursor-pointer bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
+                        Preview Form
+                    </a>
+                </Link>
+            )
+        }
+    },
 
 ]
 
@@ -617,6 +671,17 @@ const columns11: GridColDef[] = [
             return <a target="_blank" href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
         }
 
+    },
+    {
+        field: 'formdownload', headerName: 'Download Form', width: 200, renderCell: (params) => {
+            return (
+                <Link to={`/admin/sports-boy/preview/${params.id}`}>
+                    <a className='p-2 cursor-pointer bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
+                        Preview Form
+                    </a>
+                </Link>
+            )
+        }
     },
 ]
 
@@ -805,6 +870,17 @@ const columns12: GridColDef[] = [
             return <a target="_blank" href={`http://localhost:5001/${params.value ? params.value.split("data")[1] : null}`} className="p-2 rounded-2xl cursor-pointer bg-red-700 text-white font-Poppins" download>Download</a>;
         }
 
+    },
+    {
+        field: 'formdownload', headerName: 'Download Form', width: 200, renderCell: (params) => {
+            return (
+                <Link to={`/admin/sports-coach/preview/${params.id}`}>
+                    <a className='p-2 cursor-pointer bg-red-700 font-Poppins text-sm text-white rounded-2xl shadow-md'>
+                        Preview Form
+                    </a>
+                </Link>
+            )
+        }
     },
 
 ]
