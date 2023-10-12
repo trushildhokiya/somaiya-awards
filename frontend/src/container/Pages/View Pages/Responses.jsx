@@ -86,7 +86,7 @@ const Responses = () => {
 
     let path = location.pathname.split('/responses/')[1];
 
-    console.log(path);
+    // console.log(path);
 
     switch (path) {
       case 'outstanding-institution':
@@ -206,7 +206,17 @@ const Responses = () => {
                     <h2 className='text-xl font-Poppins font-semibold'>
                       {title}
                     </h2>
-
+                    {
+                      location.pathname.split('/responses/')[1] === 'teaching' ||  location.pathname.split('/responses/')[1] === 'non-teaching' 
+                      ?
+                      <div className=''>
+                      <button className='px-3 py-2 bg-red-800 text-white font-Poppins my-5 rounded-full'>
+                      Jury Summary
+                      </button>
+                      </div>
+                      :
+                      null
+                    }
                     <div className='my-5'>
 
                       <DataGrid

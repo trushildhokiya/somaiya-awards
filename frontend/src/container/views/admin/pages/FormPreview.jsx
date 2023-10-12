@@ -68,7 +68,7 @@ const FormPreview = () => {
   return (
     <div className="p-5" ref={componentRef}>
       <p className="text-xl text-red-800 mb-10 font-bold">
-        {title.toUpperCase()} Form Preview
+        {title? title.toUpperCase(): "loading ..."} Form Preview
       </p>
       {formInfo && Object.keys(data).length > 0 ? (
         <form>

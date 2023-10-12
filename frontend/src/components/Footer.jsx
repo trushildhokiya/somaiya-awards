@@ -54,19 +54,7 @@ const Footer = () => {
           <h2 className="font-bold text-lg">Developed by</h2>
           {/* <br></br> */}
           <div className="grid grid-cols-1 md:grid-cols-8 gap-6 my-2">
-            <div className=" md:-order-1 order-1">
-              <a href="https://linkedin.com/in/jash-joshi01/" target="_blank">
-                Jash J. Joshi
-              </a>
-            </div>
-            <div className=" md:-order-1 order-1">
-              <a
-                href="https://linkedin.com/in/riya-kapadia-a571401bb/"
-                target="_blank"
-              >
-                Riya Kapadia
-              </a>
-            </div>
+            
             <div>
               <a
                 href="https://linkedin.com/in/trushil-dhokiya/"
@@ -81,6 +69,19 @@ const Footer = () => {
                 target="_blank"
               >
                 Hitanshu Gandhi
+              </a>
+            </div>
+            <div className=" ">
+              <a href="https://linkedin.com/in/jash-joshi01/" target="_blank">
+                Jash J. Joshi
+              </a>
+            </div>
+            <div className=" ">
+              <a
+                href="https://linkedin.com/in/riya-kapadia-a571401bb/"
+                target="_blank"
+              >
+                Riya Kapadia
               </a>
             </div>
             <div>

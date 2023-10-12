@@ -1869,6 +1869,9 @@ const getUsersData = asyncHandler(async (req, res) => {
     })
 })
 
+//@desc GET Form Preview Data
+//@route GET admin/data/preview/formType
+//@access Private
 const getFormPreviewData = asyncHandler(async (req, res) => {
 
     const user_id = res.user_id;
@@ -1910,26 +1913,26 @@ const getFormPreviewData = asyncHandler(async (req, res) => {
 
         case 'sports-boy':
 
-        const data = await Sports.findOne({
-            where: { id: applicationID }
-        });
-        
-        const object_boy = {
-            id: data.id,
-            email_id: data.email_id,
-            institute_name: data.institute_name,
-            nominee_ss_boy: data.nominee_ss_boy,
-            nominee_ss_boy_sport: data.nominee_ss_boy_sport,
-            nominee_ss_boy_photo: data.nominee_ss_boy_photo,
-            nominee_ss_boy_supportings: data.nominee_ss_boy_supportings,
-            q_25: data.q_25,
-            q_26: data.q_26,
-            q_27: data.q_27,
-            q_28: data.q_28
-        };
-        
-        application = object_boy;
-        break
+            const data = await Sports.findOne({
+                where: { id: applicationID }
+            });
+
+            const object_boy = {
+                id: data.id,
+                email_id: data.email_id,
+                institute_name: data.institute_name,
+                nominee_ss_boy: data.nominee_ss_boy,
+                nominee_ss_boy_sport: data.nominee_ss_boy_sport,
+                nominee_ss_boy_photo: data.nominee_ss_boy_photo,
+                nominee_ss_boy_supportings: data.nominee_ss_boy_supportings,
+                q_25: data.q_25,
+                q_26: data.q_26,
+                q_27: data.q_27,
+                q_28: data.q_28
+            };
+
+            application = object_boy;
+            break
 
 
         case 'sports-girl':
@@ -2015,6 +2018,162 @@ const getFormPreviewData = asyncHandler(async (req, res) => {
 
     res.status(200).json({
         data: application
+    })
+})
+
+//@desc GET jury summary data
+//@route GET admin/data/jury-summary/teaching
+//@access Private
+const getTeachingJurySummaryData = asyncHandler(async (req, res) => {
+    const currentYear = new Date().getFullYear();
+    let result;
+
+    // Fetch data
+    result = await Teaching.findAll({
+        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
+    });
+
+    // Create arrays to segregate faculty into categories
+    const excellenceApproved = [];
+    const excellenceNotApproved = [];
+    const promisingApproved = [];
+    const promisingNotApproved = [];
+
+    result.forEach((faculty) => {
+        // Calculate the average score
+        const totalQuestions = 20;
+        const totalIEACScores = 3;
+        const questionScores = Array.from({ length: totalQuestions }, (_, i) => faculty[`q_${i + 1}`]);
+        const sumQuestionScores = questionScores.reduce((sum, score) => sum + (isNaN(score) ? 0 : score), 0); // Ensure score is numeric
+        const sumIEACScores = ['A', 'B', 'C'].reduce((sum, letter) => sum + (isNaN(parseFloat(faculty[`ieac_score${letter}`])) ? 0 : parseFloat(faculty[`ieac_score${letter}`])), 0); // Ensure score is numeric
+        const averageScore = (sumQuestionScores + sumIEACScores) / (totalQuestions + totalIEACScores);
+
+        // Calculate the application score as 40% of the average score
+        const applicationScore = averageScore * 0.4;
+
+        // Check if the college name is in the grouping object
+        const collegeName = faculty.institute_name;
+        const collegeGroups = grouping[collegeName] || [];
+
+        // Create an object with selected properties
+        const facultyWithGroup = {
+            id: faculty.id,
+            faculty_name: faculty.faculty_name,
+            institute_name: faculty.institute_name,
+            applicationScore,
+            feedbackScore: 0,
+            totalScore: applicationScore,
+        };
+
+        if (collegeGroups.length > 0) {
+            facultyWithGroup.groups = collegeGroups;
+        }
+
+        // Categorize faculty members into respective arrays
+        if (faculty.awards_category === "Promising Teacher of the year (1 to 3 years of service)") {
+            if (faculty.ieacApproved) {
+                promisingApproved.push(facultyWithGroup);
+            } else {
+                promisingNotApproved.push(facultyWithGroup);
+            }
+        } else if (faculty.awards_category === "Excellence in Teaching (more than 3 years of service)") {
+            if (faculty.ieacApproved) {
+                excellenceApproved.push(facultyWithGroup);
+            } else {
+                excellenceNotApproved.push(facultyWithGroup);
+            }
+        }
+    });
+
+    // Create arrays with selected properties
+    const promisingApprovedData = promisingApproved.map((faculty) => ({
+        id: faculty.id,
+        faculty_name: faculty.faculty_name,
+        institute_name: faculty.institute_name,
+        applicationScore: faculty.applicationScore,
+        feedbackScore: faculty.feedbackScore,
+        totalScore: faculty.totalScore,
+        groups: faculty.groups,
+    }));
+
+    const promisingNotApprovedData = promisingNotApproved.map((faculty) => ({
+        id: faculty.id,
+        faculty_name: faculty.faculty_name,
+        institute_name: faculty.institute_name,
+        applicationScore: faculty.applicationScore,
+        feedbackScore: faculty.feedbackScore,
+        totalScore: faculty.totalScore,
+        groups: faculty.groups,
+    }));
+
+    const excellenceApprovedData = excellenceApproved.map((faculty) => ({
+        id: faculty.id,
+        faculty_name: faculty.faculty_name,
+        institute_name: faculty.institute_name,
+        applicationScore: faculty.applicationScore,
+        feedbackScore: faculty.feedbackScore,
+        totalScore: faculty.totalScore,
+        groups: faculty.groups,
+    }));
+
+    const excellenceNotApprovedData = excellenceNotApproved.map((faculty) => ({
+        id: faculty.id,
+        faculty_name: faculty.faculty_name,
+        institute_name: faculty.institute_name,
+        applicationScore: faculty.applicationScore,
+        feedbackScore: faculty.feedbackScore,
+        totalScore: faculty.totalScore,
+        groups: faculty.groups,
+    }));
+
+    res.status(200).json({
+        promising_approved: promisingApprovedData,
+        excellence_approved: excellenceApprovedData,
+        promising_notApproved: promisingNotApprovedData,
+        excellence_notApproved: excellenceNotApprovedData,
+    });
+});
+
+
+
+//@desc GET jury summary data
+//@route GET admin/data/jury-summary/non-teaching
+//@access Private
+const getNonTeachingJurySummaryData = asyncHandler(async (req, res) => {
+
+    const currentYear = new Date().getFullYear()
+    let result;
+
+
+
+    // fetch
+    result = await Teaching.findAll(
+        {
+            where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+        }
+    )
+
+    // segregate
+
+    const excellenceAwards = [];
+    const promisingAwards = [];
+
+    // Iterate through the data and categorize faculty members
+    result.forEach(faculty => {
+        const awardsCategory = faculty.awards_category;
+        if (awardsCategory === "Excellence in Teaching (more than 3 years of service)") {
+            excellenceAwards.push(faculty);
+        } else if (awardsCategory === "Promising Teacher of the year (1 to 3 years of service)") {
+            promisingAwards.push(faculty);
+        }
+
+        // You can add more categories if needed
+    });
+
+
+
+    res.status(200).json({
+        message: result
     })
 })
 
@@ -2139,5 +2298,7 @@ module.exports = {
     getSportsBoyData,
     getSportsCoachData,
     getUsersData,
-    getFormPreviewData
+    getFormPreviewData,
+    getTeachingJurySummaryData,
+    getNonTeachingJurySummaryData
 }

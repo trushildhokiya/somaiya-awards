@@ -10,6 +10,8 @@ const {
         getResearchData,
         getFormPreviewData,
         getSportsData,
+        getTeachingJurySummaryData,
+        getNonTeachingJurySummaryData,
         getTeachingData,
         getNonTeachingData,
         getFeedback01Data,
@@ -65,5 +67,10 @@ router.route('/announce-results').post(upload11.single('result'),resultsDataHand
 // GET RESULTS
 
 router.route('/results').get(getResultsData);
+
+// Jury summary
+
+router.route('/jury-summary/teaching').get(userAuthenticator, getTeachingJurySummaryData)
+router.route('/jury-summary/NonTeaching').get(userAuthenticator, getNonTeachingJurySummaryData)
 
 module.exports = router;
