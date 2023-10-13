@@ -2025,106 +2025,143 @@ const getFormPreviewData = asyncHandler(async (req, res) => {
 //@route GET admin/data/jury-summary/teaching
 //@access Private
 const getTeachingJurySummaryData = asyncHandler(async (req, res) => {
+
+    // data
+    let promisingApprovedData = []
+    let excellenceApprovedData = []
+    let promisingNotApprovedData = []
+    let excellenceNotApprovedData = []
+
     const currentYear = new Date().getFullYear();
-    let result;
 
-    // Fetch data
-    result = await Teaching.findAll({
-        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear),
-    });
+    // fetch
 
-    // Create arrays to segregate faculty into categories
-    const excellenceApproved = [];
-    const excellenceNotApproved = [];
-    const promisingApproved = [];
-    const promisingNotApproved = [];
+    // applications
+    const applications = await Teaching.findAll({
+        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+    })
 
-    result.forEach((faculty) => {
-        // Calculate the average score
-        const totalQuestions = 20;
-        const totalIEACScores = 3;
-        const questionScores = Array.from({ length: totalQuestions }, (_, i) => faculty[`q_${i + 1}`]);
-        const sumQuestionScores = questionScores.reduce((sum, score) => sum + (isNaN(score) ? 0 : score), 0); // Ensure score is numeric
-        const sumIEACScores = ['A', 'B', 'C'].reduce((sum, letter) => sum + (isNaN(parseFloat(faculty[`ieac_score${letter}`])) ? 0 : parseFloat(faculty[`ieac_score${letter}`])), 0); // Ensure score is numeric
-        const averageScore = (sumQuestionScores + sumIEACScores) / (totalQuestions + totalIEACScores);
+    // feedbacks
 
-        // Calculate the application score as 40% of the average score
-        const applicationScore = averageScore * 0.4;
+    const StudentsFeedbacks = await FeedbackOne.findAll({
+        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+    })
 
-        // Check if the college name is in the grouping object
-        const collegeName = faculty.institute_name;
-        const collegeGroups = grouping[collegeName] || [];
+    const PeersFeedbacks = await FeedbackTwo.findAll({
+        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+    })
 
-        // Create an object with selected properties
-        const facultyWithGroup = {
-            id: faculty.id,
-            faculty_name: faculty.faculty_name,
-            institute_name: faculty.institute_name,
-            applicationScore,
-            feedbackScore: 0,
-            totalScore: applicationScore,
-        };
+    // calculate scores and add data in respective arrays
 
-        if (collegeGroups.length > 0) {
-            facultyWithGroup.groups = collegeGroups;
+    for (entry of applications) {
+
+        const faculty = {}
+        faculty.id = entry.id
+        faculty.faculty_name = entry.faculty_name
+        faculty.institute_name = entry.institute_name
+        faculty.designation = entry.designation
+        faculty.applicationScore = 0.4*(
+            entry.q_01 +
+            entry.q_02 +
+            entry.q_03 +
+            entry.q_04 +
+            entry.q_05 +
+            entry.q_06 +
+            entry.q_07 +
+            entry.q_08 +
+            entry.q_09 +
+            entry.q_11 +
+            entry.q_12 +
+            entry.q_13 +
+            entry.q_14 +
+            entry.q_15 +
+            entry.q_16 +
+            entry.q_17 +
+            entry.q_18 +
+            entry.q_19 +
+            entry.q_20
+        ) / 20
+
+        faculty.groups = grouping[entry.institute_name]
+        faculty.ieacApprovedFile = entry.ieacApprovedFile
+        faculty.feedbackScore = 0
+
+        // calculate feedbackScore
+
+        // segregate feedbacks
+
+        let validStudentsFeedbacks = []
+        let validPeersFeedbacks = []
+
+        for (feedback of StudentsFeedbacks) {
+            if (feedback.teacher_name.trim().toLowerCase() === entry.faculty_name.trim().toLowerCase()) {
+                validStudentsFeedbacks.push(feedback)
+            }
         }
 
-        // Categorize faculty members into respective arrays
-        if (faculty.awards_category === "Promising Teacher of the year (1 to 3 years of service)") {
-            if (faculty.ieacApproved) {
-                promisingApproved.push(facultyWithGroup);
-            } else {
-                promisingNotApproved.push(facultyWithGroup);
-            }
-        } else if (faculty.awards_category === "Excellence in Teaching (more than 3 years of service)") {
-            if (faculty.ieacApproved) {
-                excellenceApproved.push(facultyWithGroup);
-            } else {
-                excellenceNotApproved.push(facultyWithGroup);
+        for (feedback of PeersFeedbacks) {
+            if (feedback.teacher_name.trim().toLowerCase() === entry.faculty_name.trim().toLowerCase()) {
+                validPeersFeedbacks.push(feedback)
             }
         }
-    });
 
-    // Create arrays with selected properties
-    const promisingApprovedData = promisingApproved.map((faculty) => ({
-        id: faculty.id,
-        faculty_name: faculty.faculty_name,
-        institute_name: faculty.institute_name,
-        applicationScore: faculty.applicationScore,
-        feedbackScore: faculty.feedbackScore,
-        totalScore: faculty.totalScore,
-        groups: faculty.groups,
-    }));
+        // calucate avg of students feedback
 
-    const promisingNotApprovedData = promisingNotApproved.map((faculty) => ({
-        id: faculty.id,
-        faculty_name: faculty.faculty_name,
-        institute_name: faculty.institute_name,
-        applicationScore: faculty.applicationScore,
-        feedbackScore: faculty.feedbackScore,
-        totalScore: faculty.totalScore,
-        groups: faculty.groups,
-    }));
+        let studentFeedbackScoreSum = 0
+        let peersFeedbackScoreSum = 0
 
-    const excellenceApprovedData = excellenceApproved.map((faculty) => ({
-        id: faculty.id,
-        faculty_name: faculty.faculty_name,
-        institute_name: faculty.institute_name,
-        applicationScore: faculty.applicationScore,
-        feedbackScore: faculty.feedbackScore,
-        totalScore: faculty.totalScore,
-        groups: faculty.groups,
-    }));
+        for (feedback of validStudentsFeedbacks) {
+            studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_01)
+            studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_02)
+            studentFeedbackScoreSum = studentFeedbackScoreSum + feedback.q_03
+            studentFeedbackScoreSum = studentFeedbackScoreSum + feedback.q_04
+            studentFeedbackScoreSum = studentFeedbackScoreSum + feedback.q_05
+            studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_06)
+            studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_07)
+            studentFeedbackScoreSum = studentFeedbackScoreSum + feedback.q_08
+            studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_09)
+            studentFeedbackScoreSum = studentFeedbackScoreSum + textToScore(feedback.q_11)
+        }
 
-    const excellenceNotApprovedData = excellenceNotApproved.map((faculty) => ({
-        id: faculty.id,
-        faculty_name: faculty.faculty_name,
-        institute_name: faculty.institute_name,
-        applicationScore: faculty.applicationScore,
-        feedbackScore: faculty.feedbackScore,
-        totalScore: faculty.totalScore,
-        groups: faculty.groups,
-    }));
+        for (feedback of validPeersFeedbacks) {
+            peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_01)
+            peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_02)
+            peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_03)
+            peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_04)
+            peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_05)
+            peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_06)
+            peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_07)
+            peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_08)
+            peersFeedbackScoreSum = peersFeedbackScoreSum + textToScore(feedback.q_09)
+        }
+
+        const studentsFeedbackAverageScore = Number((studentFeedbackScoreSum / (10 * validStudentsFeedbacks.length)).toFixed(2))
+        const peersFeedbackAverageScore = Number((peersFeedbackScoreSum / (validPeersFeedbacks.length * 9)).toFixed(2))
+
+        faculty.feedbackScore = Number((0.6*(studentsFeedbackAverageScore + peersFeedbackAverageScore) /2 ).toFixed(2))
+        faculty.totalScore = faculty.applicationScore + faculty.feedbackScore
+
+        if( entry.awards_category === 'Excellence in Teaching (more than 3 years of service)'){
+            
+            if(entry.ieacApproved){
+                excellenceApprovedData.push(faculty)
+            }
+            else{
+                excellenceNotApprovedData.push(faculty)
+            }
+        }
+
+        else if ( entry.awards_category === 'Promising Teacher of the year (1 to 3 years of service)'){
+
+            if(entry.ieacApproved){
+                promisingApprovedData.push(faculty)
+            }
+            else{
+                promisingNotApprovedData.push(faculty)
+            }
+        }
+
+    }
 
     res.status(200).json({
         promising_approved: promisingApprovedData,
