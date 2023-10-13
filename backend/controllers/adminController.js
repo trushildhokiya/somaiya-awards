@@ -2178,39 +2178,81 @@ const getTeachingJurySummaryData = asyncHandler(async (req, res) => {
 //@access Private
 const getNonTeachingJurySummaryData = asyncHandler(async (req, res) => {
 
+    // data
+
+    let EmpYearApprovedData = []
+    let EmpYearNotApprovedData = []
+    let PromisingEmpEIApprovedData = []
+    let PromisingEmpEINotApprovedData = []
+    let PromisingEmpSTApprovedData = []
+    let PromisingEmpSTNotApprovedData = []
+    let OutstandingEmpApprovedData = []
+    let OutstandingEmpNotApprovedData = []
+
     const currentYear = new Date().getFullYear()
-    let result;
 
+    // fetch data
 
+    const applications = await NonTeaching.findAll({
+        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+    })
 
-    // fetch
-    result = await Teaching.findAll(
-        {
-            where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
-        }
-    )
+    const studentsFeedbacks = await FeedbackThree.findAll({
+        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+    })
 
-    // segregate
+    const  peersFeedbacks = await FeedbackFour.findAll({
+        where: sequelize.where(sequelize.fn('YEAR', sequelize.col('createdAt')), currentYear)
+    })
 
-    const excellenceAwards = [];
-    const promisingAwards = [];
+    // calculate scores and add entry in respective category
 
-    // Iterate through the data and categorize faculty members
-    result.forEach(faculty => {
-        const awardsCategory = faculty.awards_category;
-        if (awardsCategory === "Excellence in Teaching (more than 3 years of service)") {
-            excellenceAwards.push(faculty);
-        } else if (awardsCategory === "Promising Teacher of the year (1 to 3 years of service)") {
-            promisingAwards.push(faculty);
-        }
+    for ( entry of applications ){
 
-        // You can add more categories if needed
-    });
+        let employee = {}
+        employee.id = entry.id
+        employee.staff_name = entry.staff_name
+        employee.institute_name = entry.institute_name
+        employee.designation = entry.designation
+        employee.group = grouping[entry.institute_name]
+        employee.ieacApprovedFile = entry.ieacApprovedFile
+        employee.applicationScore = 0.4 *((
+            entry.q_01 + 
+            entry.q_02 + 
+            entry.q_03 + 
+            entry.q_04 + 
+            entry.q_05 + 
+            entry.q_06 + 
+            entry.q_07 + 
+            entry.q_08 + 
+            entry.q_09 + 
+            entry.q_10 + 
+            entry.q_11 + 
+            entry.q_12 + 
+            entry.q_13 + 
+            entry.q_14 + 
+            entry.q_15 + 
+            entry.q_16 + 
+            entry.q_17 + 
+            entry.q_18 + 
+            entry.q_19 + 
+            entry.q_20 + 
+            entry.q_21 + 
+            entry.q_22 + 
+            entry.q_23 + 
+            entry.q_24 
+        ) / 24)
+        employee.feedbackScore = 0 
+        employee.totalScore = 0
 
-
+        EmpYearApprovedData.push(employee)
+    }
 
     res.status(200).json({
-        message: result
+        data : applications,
+        data2: studentsFeedbacks,
+        data3: peersFeedbacks,
+        data4: EmpYearApprovedData
     })
 })
 

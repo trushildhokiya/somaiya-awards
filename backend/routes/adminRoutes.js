@@ -71,6 +71,6 @@ router.route('/results').get(getResultsData);
 // Jury summary
 
 router.route('/jury-summary/teaching').get(userAuthenticator, getTeachingJurySummaryData)
-router.route('/jury-summary/NonTeaching').get(userAuthenticator, getNonTeachingJurySummaryData)
+router.route('/jury-summary/non-teaching').get(userAuthenticator, getNonTeachingJurySummaryData)
 
 module.exports = router;
