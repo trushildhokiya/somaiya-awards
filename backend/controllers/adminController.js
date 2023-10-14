@@ -1779,7 +1779,7 @@ const getNonTeachingScoreCardData = asyncHandler(async (req, res) => {
     }
 
     const peers_avg = Number(((peerFeedbackSum) / (8 * peerValidFeedbacks.length)).toFixed(2))
-
+  
     // get necessary data
 
     const name = applicationData.staff_name
@@ -2180,14 +2180,17 @@ const getNonTeachingJurySummaryData = asyncHandler(async (req, res) => {
 
     // data
 
-    let EmpYearApprovedData = []
-    let EmpYearNotApprovedData = []
-    let PromisingEmpEIApprovedData = []
-    let PromisingEmpEINotApprovedData = []
-    let PromisingEmpSTApprovedData = []
-    let PromisingEmpSTNotApprovedData = []
-    let OutstandingEmpApprovedData = []
-    let OutstandingEmpNotApprovedData = []
+    let array01 = []    //Employee of the Year (More than 3 years of service) : approved
+    let array001 = []   //Employee of the Year (More than 3 years of service) : not approved
+    let array02 = []    //Promising Employee Educational Institute (1 to 3 years of service) : approved
+    let array002 = []   //Promising Employee Educational Institute (1 to 3 years of service) : not approved
+    let array03 = []    //Promising Employee Somaiya Trust/GVPM (1 to 3 years of service) : approved
+    let array003 = []   //Promising Employee Somaiya Trust/GVPM (1 to 3 years of service): not approved
+    let array04 = []    //Outstanding Employee Somaiya Trust/GVPM : approved
+    let array004 = []   //Outstanding Employee Somaiya Trust/GVPM : not approved
+    let array05 = []    //Outstanding Employee K. J. Somaiya Hospital & Research Centre : approved
+    let array005 = []   //Outstanding Employee K. J. Somaiya Hospital & Research Centre : not approved
+
 
     const currentYear = new Date().getFullYear()
 
@@ -2216,7 +2219,7 @@ const getNonTeachingJurySummaryData = asyncHandler(async (req, res) => {
         employee.designation = entry.designation
         employee.group = grouping[entry.institute_name]
         employee.ieacApprovedFile = entry.ieacApprovedFile
-        employee.applicationScore = 0.4 *((
+        employee.applicationScore = Number((0.4 *((
             entry.q_01 + 
             entry.q_02 + 
             entry.q_03 + 
@@ -2241,18 +2244,122 @@ const getNonTeachingJurySummaryData = asyncHandler(async (req, res) => {
             entry.q_22 + 
             entry.q_23 + 
             entry.q_24 
-        ) / 24)
+        ) / 24)).toFixed(2))
         employee.feedbackScore = 0 
         employee.totalScore = 0
 
-        EmpYearApprovedData.push(employee)
+        // calculate feedback score
+
+        // segregate feedbacks
+        let studentsValidFeedbacks = []
+        let peersValidFeedbacks = []
+
+        for( const feedback of studentsFeedbacks){
+
+            if( entry.staff_name.trim().toLowerCase() === feedback.employee_name.trim().toLowerCase()){
+                studentsValidFeedbacks.push(feedback)
+            }
+        }
+
+        for( const feedback of peersFeedbacks){
+
+            if( entry.staff_name.trim().toLowerCase() === feedback.nominee_name.trim().toLowerCase()){
+                peersValidFeedbacks.push(feedback)
+            }
+        }
+
+        // calculate avg
+        let studentsfeedbackSum = 0
+
+        for( const feedback of studentsValidFeedbacks){
+            studentsfeedbackSum = (
+                studentsfeedbackSum +
+                textToScore(feedback.q_01) +
+                textToScore(feedback.q_02) +
+                textToScore(feedback.q_03) +
+                textToScore(feedback.q_04) +
+                textToScore(feedback.q_05)
+            )
+        }
+
+        let peerFeedbackSum = 0 
+
+        for ( const feedback of peersValidFeedbacks ){
+            peerFeedbackSum = (
+                peerFeedbackSum +
+                textToScore(feedback.q_01) +
+                textToScore(feedback.q_02) +
+                textToScore(feedback.q_03) +
+                textToScore(feedback.q_04) +
+                textToScore(feedback.q_05) +
+                textToScore(feedback.q_06) +
+                textToScore(feedback.q_07) +
+                textToScore(feedback.q_08)
+            )
+        }
+
+        const student_avg = Number((studentsfeedbackSum / (5 * studentsValidFeedbacks.length)).toFixed(2))
+        const peers_avg = Number(((peerFeedbackSum) / (8 * peersValidFeedbacks.length)).toFixed(2))
+
+        employee.feedbackScore = Number((0.6*((student_avg+ peers_avg)/2)).toFixed(2))
+        employee.totalScore = employee.applicationScore + employee.feedbackScore
+        
+        if( entry.award_category === 'Employee of the Year (More than 3 years of service)'){
+
+            if(entry.ieacApproved){
+                array01.push(employee)
+            }
+            else{
+                array001.push(employee)
+            }
+
+        }
+        else if( entry.award_category === 'Promising Employee Educational Institute (1 to 3 years of service)'){
+            if(entry.ieacApproved){
+                array02.push(employee)
+            }
+            else{
+                array002.push(employee)
+            }
+        }
+        else if( entry.award_category === 'Promising Employee Somaiya Trust/GVPM (1 to 3 years of service)'){
+            if(entry.ieacApproved){
+                array03.push(employee)
+            }
+            else{
+                array003.push(employee)
+            }
+        }
+        else if( entry.award_category === 'Outstanding Employee Somaiya Trust/GVPM'){
+            if(entry.ieacApproved){
+                array04.push(employee)
+            }
+            else{
+                array004.push(employee)
+            }
+        }
+        else if( entry.award_category === 'Outstanding Employee K. J. Somaiya Hospital & Research Centre'){
+            if(entry.ieacApproved){
+                array05.push(employee)
+            }
+            else{
+                array005.push(employee)
+            }
+        }
+
     }
 
     res.status(200).json({
-        data : applications,
-        data2: studentsFeedbacks,
-        data3: peersFeedbacks,
-        data4: EmpYearApprovedData
+        array01: array01,
+        array001: array001,
+        array02: array02,
+        array002: array002,
+        array03: array03,
+        array003: array003,
+        array04: array04,
+        array004: array004,
+        array05: array05,
+        array005: array005
     })
 })
 
