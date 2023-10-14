@@ -8,7 +8,8 @@ const {
     FeedbackOne,
     FeedbackTwo,
     FeedbackThree,
-    FeedbackFour } = require('../models')
+    FeedbackFour,
+Sequelize } = require('../models')
 
 const asyncHandler = require('express-async-handler')
 const { formLogger } = require('../middleware/logger')
@@ -320,15 +321,37 @@ const submitForm_03 = asyncHandler(async (req, res) => {
 
 const submitForm_04 = asyncHandler(async (req, res) => {
 
+    const {somaiya_mail_id,awards_category} =req.body
+
+    const currentYear = new Date().getFullYear();
+
+    // Check if an entry with the same year, email, and awards category already exists
+    const existingTeachingEntry = await Teaching.findOne({
+        
+        awards_category: awards_category,
+        somaiya_mail_id: somaiya_mail_id,
+        createdAt: {
+            $gte: new Date(`${currentYear}-01-01`),
+            $lt: new Date(`${currentYear + 1}-01-01`)
+        }
+    });
+
+    if (existingTeachingEntry) {
+        res.status(400).json({
+            message: "A duplicate entry already exists for this year, email, and awards category.",
+            submitted: false
+        });
+        return;
+    }
+
     const {
         email_id,
         faculty_name,
-        awards_category,
         institute_name,
         department,
         designation,
         date_of_appointment,
-        somaiya_mail_id,
+        
         contact_number,
         q_01,
         q_02,

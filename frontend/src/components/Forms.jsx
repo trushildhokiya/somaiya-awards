@@ -168,12 +168,9 @@ const Forms = (props) => {
           })
           .catch((err) => {
 
-            navigate({
-              pathname: '/forms/cards',
-              search: createSearchParams({
-                submitted: false,
-                title: "Form submitted Successfully"
-              }).toString()
+            Swal.fire({
+              text:err.response.data.message,
+              icon:'error'
             })
 
             console.log(err);
