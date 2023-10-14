@@ -8,7 +8,7 @@ import { columns01, columns02, columns03, columns04, columns05, columns06, colum
 import axios from 'axios';
 import { MoonLoader } from 'react-spinners';
 import Swal from 'sweetalert2';
-
+import xlsx from 'json-as-xlsx'
 
 const Responses = () => {
 
@@ -171,7 +171,267 @@ const Responses = () => {
 
   }, [location]);
 
+  // handle summary download 
+  const handleJuryReporyDownload = () => {
 
+    const path = location.pathname.split('/responses/')[1]
+
+    axios.get(`http://localhost:5001/admin/data/jury-summary/${path}`, {
+      headers: {
+        'user_id': localStorage.getItem('user_id'),
+        'x-access-token': localStorage.getItem('token')
+      }
+    })
+      .then((res) => {
+        // console.log(res);
+        if (path === 'teaching') {
+
+          let data = [
+            {
+              sheet: "Excellence in Teaching",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"faculty_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" }, 
+                { label: "Total Score", value: "totalScore" }, 
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content: res.data.excellence_approved
+            },
+            {
+              sheet: "Excellence in Teaching - NA",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"faculty_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" }, 
+                { label: "Total Score", value: "totalScore" }, 
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content: res.data.excellence_notApproved
+            },
+            {
+              sheet: "Promising Teacher",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"faculty_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" }, 
+                { label: "Total Score", value: "totalScore" }, 
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content: res.data.promising_approved
+            },
+            {
+              sheet: "Promising Teacher - NA",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"faculty_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" }, 
+                { label: "Total Score", value: "totalScore" }, 
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content: res.data.promising_notApproved
+            },
+          ]
+          
+          let settings = {
+            fileName: "Jury - Summary Teaching", 
+            extraLength: 3, 
+            writeMode: "writeFile",  
+            writeOptions: {}, 
+            RTL: false, 
+          }
+          
+          xlsx(data, settings)
+
+        }
+        else if (path === 'non-teaching') {
+
+          let data = [
+            {
+              sheet: "Emp of Year",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"staff_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" }, 
+                { label: "Total Score", value: "totalScore" }, 
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content:res.data.array01
+            },
+            {
+              sheet: "Emp of Year - NA",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"staff_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" }, 
+                { label: "Total Score", value: "totalScore" }, 
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content:res.data.array001
+            },
+            {
+              sheet: "Promising Emp EI",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"staff_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" }, 
+                { label: "Total Score", value: "totalScore" }, 
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content:res.data.array02
+            },
+            {
+              sheet: "Promising Emp EI- NA",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"staff_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" }, 
+                { label: "Total Score", value: "totalScore" }, 
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content:res.data.array002
+            },
+            {
+              sheet: "Promising Emp Trust",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"staff_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" }, 
+                { label: "Total Score", value: "totalScore" }, 
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content:res.data.array03
+            },
+            {
+              sheet: "Promising Emp Trust - NA",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"staff_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" },
+                { label: "Total Score", value: "totalScore" },  
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content:res.data.array003
+            },
+            {
+              sheet: "Outstanding Emp Trust",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"staff_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" },
+                { label: "Total Score", value: "totalScore" },  
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content:res.data.array04
+            },
+            {
+              sheet: "Outstanding Emp Trust -NA",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"staff_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" }, 
+                { label: "Total Score", value: "totalScore" }, 
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content:res.data.array004
+            },
+            {
+              sheet: "Outstanding Emp Medical",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"staff_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" }, 
+                { label: "Total Score", value: "totalScore" }, 
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content:res.data.array05
+            },
+            {
+              sheet: "Outstanding Emp Med -NA",
+              columns: [
+                { label: "ID", value: "id" }, 
+                { label: "Faculty Name", value:"staff_name" }, 
+                { label: "Institution", value: "institute_name" }, 
+                { label: "Designation", value: "designation" }, 
+                { label: "Application Score (40%)", value: "applicationScore" }, 
+                { label: "Feedback Score (60%)", value: "feedbackScore" }, 
+                { label: "Total Score", value: "totalScore" }, 
+                { label: "Group", value: (row) => row.groups.join(', ')}, 
+                { label: "File", value: "ieacApprovedFile" }
+              ],
+              content:res.data.array005
+            },
+            
+          ]
+          
+          let settings = {
+            fileName: "Jury Summary - Non Teaching", 
+            extraLength: 3, 
+            writeMode: "writeFile", 
+            writeOptions: {}, 
+            RTL: false, 
+          }
+          
+          xlsx(data, settings)
+
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 
   return (
     <div>
@@ -207,15 +467,15 @@ const Responses = () => {
                       {title}
                     </h2>
                     {
-                      location.pathname.split('/responses/')[1] === 'teaching' ||  location.pathname.split('/responses/')[1] === 'non-teaching' 
-                      ?
-                      <div className=''>
-                      <button className='px-3 py-2 bg-red-800 text-white font-Poppins my-5 rounded-full'>
-                      Jury Summary
-                      </button>
-                      </div>
-                      :
-                      null
+                      location.pathname.split('/responses/')[1] === 'teaching' || location.pathname.split('/responses/')[1] === 'non-teaching'
+                        ?
+                        <div className=''>
+                          <button onClick={handleJuryReporyDownload} className='px-3 py-2 bg-red-800 text-white font-Poppins my-5 rounded-full'>
+                            Jury Summary
+                          </button>
+                        </div>
+                        :
+                        null
                     }
                     <div className='my-5'>
 

@@ -2217,7 +2217,7 @@ const getNonTeachingJurySummaryData = asyncHandler(async (req, res) => {
         employee.staff_name = entry.staff_name
         employee.institute_name = entry.institute_name
         employee.designation = entry.designation
-        employee.group = grouping[entry.institute_name]
+        employee.groups = grouping[entry.institute_name]
         employee.ieacApprovedFile = entry.ieacApprovedFile
         employee.applicationScore = Number((0.4 *((
             entry.q_01 + 
@@ -2247,6 +2247,7 @@ const getNonTeachingJurySummaryData = asyncHandler(async (req, res) => {
         ) / 24)).toFixed(2))
         employee.feedbackScore = 0 
         employee.totalScore = 0
+        employee.ieacApprovedFile = entry.ieacApprovedFile
 
         // calculate feedback score
 
