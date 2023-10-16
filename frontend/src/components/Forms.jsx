@@ -228,6 +228,7 @@ const Forms = (props) => {
             name={entry._name}
             required={entry.requiredStatus}
             validate={entry.hasValidations}
+            dropOpt = {entry.drop_opt}
             validateType={entry.validationType}
             dropdownHiddenItem={entry.dropdownHiddenItem}
             options={entry.options}

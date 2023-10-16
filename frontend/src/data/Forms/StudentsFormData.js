@@ -43,6 +43,7 @@ const StudentsFormData = [
         type: "dropdown",
         requiredStatus: true,
         dropdownHiddenItem:'Select your institute',
+        drop_opt:'single',
         hasOptions: true,
         options: [
             "The Somaiya School",
