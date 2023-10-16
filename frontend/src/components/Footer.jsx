@@ -25,7 +25,7 @@ const Footer = () => {
 
         <div className="w-[70%] p-3">
           <div className="w-full text-center flex flex-col items-center ">
-            <img src="https://kjsit.somaiya.edu.in/assets/kjsieit/images/Logo/kjsieit-logo.svg" />
+            <img src="https://www.somaiya.edu.in/assets/default_asset/img/somiaya-vidyavihar-logo.svg" />
             <h2 className="mt-5 text-sm">Designed and Developed by</h2>
             <h2 className="font-Poppins text-xs mt-2">
               Department Of Computer Engineering

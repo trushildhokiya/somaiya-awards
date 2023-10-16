@@ -160,7 +160,7 @@ const Home = () => {
           <div style={{ width: '200px', height: '200px' }}>
             <Lottie animationData={CertificateData} />
             <p className='text-center font-Poppins text-sm text-red-800'>
-              Certificate of Participation
+              Certificate of Appreciation
             </p>
           </div>
           <div style={{ width: '200px', height: '200px' }}>
