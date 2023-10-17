@@ -10,6 +10,7 @@ const {
         getResearchData,
         getFormPreviewData,
         getSportsData,
+        deleteUser,
         getTeachingJurySummaryData,
         getNonTeachingJurySummaryData,
         getTeachingData,
@@ -72,5 +73,8 @@ router.route('/results').get(getResultsData);
 
 router.route('/jury-summary/teaching').get(userAuthenticator, getTeachingJurySummaryData)
 router.route('/jury-summary/non-teaching').get(userAuthenticator, getNonTeachingJurySummaryData)
+
+// delete query
+router.route('/delete-user').delete(userAuthenticator, deleteUser)
 
 module.exports = router;

@@ -9,7 +9,8 @@ const {
     FeedbackTwo,
     FeedbackThree,
     FeedbackFour,
-Sequelize } = require('../models')
+    Sequelize } = require('../models')
+const { Op } = require('sequelize');
 
 const asyncHandler = require('express-async-handler')
 const { formLogger } = require('../middleware/logger')
@@ -259,44 +260,44 @@ const submitForm_03 = asyncHandler(async (req, res) => {
         nominee_coach_comments: nominee_coach_comments,
         nominee_coach_photo: nominee_coach_photo,
         nominee_coach_supportings: nominee_coach_supportings,
-        q_01:q_01,
-        q_02:q_02,
-        q_03:q_03,
-        q_04:q_04,
-        q_05:q_05,
-        q_06:q_06,
-        q_07:q_07,
-        q_08:q_08,
-        q_09:q_09,
-        q_10:q_10,
-        q_11:q_11,
-        q_12:q_12,
-        q_13:q_13,
-        q_14:q_14,
-        q_15:q_15,
-        q_16:q_16,
-        q_17:q_17,
-        q_18:q_18,
-        q_19:q_19,
-        q_20:q_20,
+        q_01: q_01,
+        q_02: q_02,
+        q_03: q_03,
+        q_04: q_04,
+        q_05: q_05,
+        q_06: q_06,
+        q_07: q_07,
+        q_08: q_08,
+        q_09: q_09,
+        q_10: q_10,
+        q_11: q_11,
+        q_12: q_12,
+        q_13: q_13,
+        q_14: q_14,
+        q_15: q_15,
+        q_16: q_16,
+        q_17: q_17,
+        q_18: q_18,
+        q_19: q_19,
+        q_20: q_20,
 
         nominee_ss_girl: nominee_ss_girl,
         nominee_ss_girl_sport: nominee_ss_girl_sport,
         nominee_ss_girl_photo: nominee_ss_girl_photo,
         nominee_ss_girl_supportings: nominee_ss_girl_supportings,
-        q_21:q_21,
-        q_22:q_22,
-        q_23:q_23,
-        q_24:q_24,
+        q_21: q_21,
+        q_22: q_22,
+        q_23: q_23,
+        q_24: q_24,
 
         nominee_ss_boy: nominee_ss_boy,
         nominee_ss_boy_sport: nominee_ss_boy_sport,
         nominee_ss_boy_photo: nominee_ss_boy_photo,
         nominee_ss_boy_supportings: nominee_ss_boy_supportings,
-        q_25:q_25,
-        q_26:q_26,
-        q_27:q_27,
-        q_28:q_28,
+        q_25: q_25,
+        q_26: q_26,
+        q_27: q_27,
+        q_28: q_28,
     });
 
     if (!result) {
@@ -321,25 +322,26 @@ const submitForm_03 = asyncHandler(async (req, res) => {
 
 const submitForm_04 = asyncHandler(async (req, res) => {
 
-    const {somaiya_mail_id,awards_category} =req.body
+    const { somaiya_mail_id, awards_category } = req.body
 
     const currentYear = new Date().getFullYear();
 
     // Check if an entry with the same year, email, and awards category already exists
     const existingTeachingEntry = await Teaching.findOne({
-        
-        awards_category: awards_category,
-        somaiya_mail_id: somaiya_mail_id,
-        createdAt: {
-            $gte: new Date(`${currentYear}-01-01`),
-            $lt: new Date(`${currentYear + 1}-01-01`)
-        }
+        where: {
+            [Op.and]: [
+                { somaiya_mail_id: somaiya_mail_id },
+                { awards_category: awards_category },
+                Sequelize.literal('YEAR(createdAt) = YEAR(CURDATE())'),
+            ],
+        },
     });
 
     if (existingTeachingEntry) {
         res.status(400).json({
             message: "A duplicate entry already exists for this year, email, and awards category.",
-            submitted: false
+            submitted: false,
+            data: existingTeachingEntry
         });
         return;
     }
@@ -351,7 +353,7 @@ const submitForm_04 = asyncHandler(async (req, res) => {
         department,
         designation,
         date_of_appointment,
-        
+
         contact_number,
         q_01,
         q_02,
@@ -435,15 +437,37 @@ const submitForm_04 = asyncHandler(async (req, res) => {
 
 const submitForm_05 = asyncHandler(async (req, res) => {
 
+    const { somaiya_email_id, award_category } = req.body
+    const currentYear = new Date().getFullYear();
+
+    // Check if an entry with the same year, email, and awards category already exists
+    const existingNonTeachingEntry = await Teaching.findOne({
+        where: {
+            [Op.and]: [
+                { somaiya_email_id: somaiya_email_id },
+                { award_category: award_category },
+                Sequelize.literal('YEAR(createdAt) = YEAR(CURDATE())'),
+            ],
+        },
+    });
+
+    if (existingNonTeachingEntry) {
+        res.status(400).json({
+            message: "A duplicate entry already exists for this year, email, and awards category.",
+            submitted: false,
+            data: existingNonTeachingEntry
+        });
+        return;
+    }
+
+
     const {
         email_id,
         staff_name,
-        award_category,
         institute_name,
         department,
         designation,
         appointment_date,
-        somaiya_email_id,
         phone_number,
         q_01,
         q_02,
@@ -546,7 +570,7 @@ const submitForm_10 = asyncHandler(async (req, res) => {
 
     const supportings = req.file.path;
 
-    const result = await  Students.create({
+    const result = await Students.create({
         email_id: email_id,
         student_name: student_name,
         students_class: students_class,
@@ -557,7 +581,7 @@ const submitForm_10 = asyncHandler(async (req, res) => {
         supportings: supportings
     })
 
-  
+
     if (!result) {
 
         // throw error

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import '../utils/css/config.css';
 
-  /**validations */
-const validator = (props,value) => {
+/**validations */
+const validator = (props, value) => {
 
   if (props.validateType === 'somaiya-mail-id') {
 
@@ -47,25 +47,25 @@ const validator = (props,value) => {
 
     return validatePair
   }
-  
+
   if (props.validateType === 'date') {
     const date1 = new Date(value || new Date());
-    const date2 = new Date(); 
+    const date2 = new Date();
 
     const validatePair = [];
-  
+
     if (date1 >= date2) {
 
       validatePair.push(true);
       validatePair.push('Invalid Date');
 
     } else {
-   
+
       validatePair.push(false);
       validatePair.push("Valid Date")
 
     }
-  
+
     return validatePair;
   }
 }
@@ -111,9 +111,9 @@ const Field = (props) => {
           </p>
         ) : null}
 
-        {props.validate !== undefined && validator(props,value)[0]  &&
+        {props.validate !== undefined && validator(props, value)[0] &&
           <p className='font-Poppins text-red-700'>
-            {validator(props,value)[1]}
+            {validator(props, value)[1]}
           </p>
         }
 
@@ -128,7 +128,7 @@ const Field = (props) => {
                   name={props.name}
                   required={props.required}
                   value={item}
-                  checked={props.value==item ? true : false}
+                  checked={props.value == item ? true : false}
                   className=""
                   onChange={handleChange}
                 />{' '}
@@ -137,18 +137,31 @@ const Field = (props) => {
             </div>
           ))
         ) : props.type === 'dropdown' ? (
-          <select
-            name={props.name}
-            required={props.requiredStatus}
-            onChange={handleChange}
-            value={props.value}
-            className="w-72 p-2 rounded-md shadow-lg active:shadow-2xl hover:w-full transition-all duration-500 outline-none"
-          >
-            <option hidden> {props.dropdownHiddenItem} </option>
-            {props.options.map((item) => {
-              return <option name={props.name} value={item}>{item}</option>;
-            })}
-          </select>
+          props.dropOpt === 'single'
+            ?
+            <select
+              name={props.name}
+              required={props.requiredStatus}
+              onChange={handleChange}
+              value={props.value}
+              className="w-72 p-2 rounded-md shadow-lg active:shadow-2xl hover:w-full transition-all duration-500 outline-none"
+            >
+              <option hidden> {props.dropdownHiddenItem} </option>
+              <option name={props.name} value={localStorage.getItem('institution')}>{localStorage.getItem('institution')}</option>
+            </select>
+            :
+            <select
+              name={props.name}
+              required={props.requiredStatus}
+              onChange={handleChange}
+              value={props.value}
+              className="w-72 p-2 rounded-md shadow-lg active:shadow-2xl hover:w-full transition-all duration-500 outline-none"
+            >
+              <option hidden> {props.dropdownHiddenItem} </option>
+              {props.options.map((item) => {
+                return <option name={props.name} value={item}>{item}</option>;
+              })}
+            </select>
         ) : props.type === 'textarea' ? (
           <textarea
             className="border-black p-3 border-2 rounded-lg w-full h-48"
@@ -158,17 +171,17 @@ const Field = (props) => {
           ></textarea>
         ) : props.type === 'file' ? (
           <>
-          {console.log(props.value)}
-          <input
-            autoComplete='off'
-            type={props.type}
-            name={props.name}
-            required={props.required}
-            className={`focus:outline-none color-red-400 }`}
-            // value={props.value}
-            onChange={handleChange}
-          />
-          <p className='p-2 '> <span className='text-red-700 font-semibold font-Poppins'> selected File : </span> {props.value['name']}</p>
+            {console.log(props.value)}
+            <input
+              autoComplete='off'
+              type={props.type}
+              name={props.name}
+              required={props.required}
+              className={`focus:outline-none color-red-400 }`}
+              // value={props.value}
+              onChange={handleChange}
+            />
+            <p className='p-2 '> <span className='text-red-700 font-semibold font-Poppins'> selected File : </span> {props.value['name']}</p>
           </>
         ) : props.type === 'number' ? (
           <input
@@ -200,4 +213,4 @@ const Field = (props) => {
 };
 
 export default Field;
-export {validator}
+export { validator }

@@ -17,6 +17,7 @@ const SportsStarForm = [
         dropdownHiddenItem:'Select your institute',
         requiredStatus: true,
         hasOptions: true,
+        drop_opt:'single',
         options: [
             "The Somaiya School",
             "S. K. Somaiya Prathmik Shala",

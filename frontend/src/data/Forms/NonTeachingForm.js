@@ -40,6 +40,7 @@ const NonTeachingForm = [
         type: "dropdown",
         dropdownHiddenItem:'Select your institute',
         requiredStatus: true,
+        drop_opt:'single',
         hasOptions: true,
         options: [
             "The Somaiya School",

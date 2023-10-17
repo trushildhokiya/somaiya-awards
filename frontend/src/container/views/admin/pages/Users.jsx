@@ -5,7 +5,7 @@ import axios from 'axios'
 import { MoonLoader } from 'react-spinners'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
-
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
 const Users = () => {
 
@@ -31,12 +31,61 @@ const Users = () => {
             headerName: 'Role',
             width: 350,
         },
+        {
+            field: 'delete user',
+            headerName: 'Actions',
+            width: 200,
+            renderCell: (params) => {
+                return (
+                    <div>
+                        <button onClick={(event) => handleDelete(params, event)} >
+                            <DeleteRoundedIcon style={{ color: 'gray' }} />
+                        </button>
+                    </div>
+                )
+            }
+        }
     ])
+
+
+    const handleDelete = (params) => {
+        // console.log(params);
+        Swal.fire({
+            title: 'Confirmation',
+            icon: 'question',
+            text: `Do you wish to delete User ${params.row.email_id}`,
+            showDenyButton: true,
+            confirmButtonText: "Confirm",
+            denyButtonText: 'Deny',
+            confirmButtonColor: '#4bb543',
+        })
+            .then((res) => {
+                if (res.isConfirmed) {
+
+                    // delete query
+                    axios.delete('http://localhost:5001/admin/data/delete-user', {
+                        data: { userId: params.row.id },
+                        headers: {
+                            'x-access-token': localStorage.getItem('token'),
+                            'user_id': localStorage.getItem('user_id')
+                        },
+                    })
+                        .then((res) => {
+                            window.location.reload()
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
+
+                }
+            })
+    }
+
     const [authorized, setAuthorized] = useState(false)
     const [loading, setLoading] = useState(true)
 
     const navigate = useNavigate()
-    
+
     useEffect(() => {
 
         // check user authentication

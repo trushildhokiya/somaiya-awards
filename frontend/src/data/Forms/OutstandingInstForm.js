@@ -24,6 +24,7 @@ const OutstandingInstForm= [
         title: "Name of Institution",
         _name:"institution_name",
         type: "dropdown",
+        drop_opt:'single',
         requiredStatus: true,
         dropdownHiddenItem:'Select your institute',
         hasOptions: true,

@@ -22,6 +22,7 @@ const ResearchForm = [
         _name: "institution",
         type: "dropdown",
         dropdownHiddenItem:'Select your institute',
+        drop_opt:'single',
         requiredStatus: true,
         hasOptions: true,
         options: [
