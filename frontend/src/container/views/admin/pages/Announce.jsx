@@ -4,7 +4,9 @@ import { FileUploader } from 'react-drag-drop-files'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 import { MoonLoader } from 'react-spinners'
-import { useNavigate } from 'react-router-dom'
+import { json, useNavigate } from 'react-router-dom'
+import xlsx from 'json-as-xlsx'
+
 const Announce = () => {
 
     const [announced, setAnnounced] = useState(false)
@@ -42,6 +44,39 @@ const Announce = () => {
                         })
                 }
             })
+    }
+
+    const handleDownload = () =>{
+        let data = [
+            {
+              sheet: "Results",
+              columns: [
+                { label: "Name", value: "name" }, 
+                { label: "Institution", value:"inst" }, 
+                { label: "Category", value: "category" }, 
+              
+              ],
+              content: [
+                {
+                    name:'jash',
+                    inst:'kjsit',
+                    category:'jk'
+                }
+              ]
+            },
+            
+          ]
+          
+          let settings = {
+            fileName: "Awards Result Announcement", 
+            extraLength: 3, 
+            writeMode: "writeFile", 
+            writeOptions: {}, 
+            RTL: false, 
+          }
+          
+          xlsx(data, settings)
+
     }
 
     useEffect(() => {
@@ -172,9 +207,17 @@ const Announce = () => {
                                                 <p className='my-2'>
                                                     <span className='font-semibold text-green-700'>Status</span> : Not Announced
                                                 </p>
+
+                                                
                                                 <p className='text-md my-3'>
                                                     Drop a Excel File with names of winner's , their institute name  and Award category to Announce Results Publicly
                                                 </p>
+
+                                                <div>
+                                                    <button className='px-3 py-2 bg-red-800 rounded-full text-white' onClick={handleDownload}>
+                                                        Download CSV Format
+                                                    </button>
+                                                </div>
 
                                                 <div className='my-5 p-2 flex justify-center'>
                                                     <div className=' rounded-xl bg-slate-100 h-[200px] w-[50%] flex justify-center items-center'>
