@@ -291,10 +291,39 @@ const sportsDataUpdater = asyncHandler( async(req,res)=>{
     })
 })
 
+//@desc get nominated faculty names for particular college
+//@route GET sports-admin/data/nominated-coach-names
+//@access PRIVATE
+
+const getNominatedNames = asyncHandler( async(req,res)=>{
+
+    let names = []
+
+    const institute_name = req.headers['institute_name']
+
+    const result = await Sports.findAll({
+        where: {
+            [Op.and]: [
+                {institute_name: institute_name},
+                Sequelize.literal('YEAR(createdAt) = YEAR(CURDATE())'),
+            ],
+        },
+    })
+
+    for ( const feedback of result ){
+
+        names.push(feedback.nominee_inspiring_coach)
+    }
+
+    res.status(200).json({
+        data: names
+    })
+})
 
 module.exports = {
     sportsStarGirlDataHandler,
     sportsStarBoyDataHandler,
     inspiringCoachDataHandler,
     sportsDataUpdater,
+    getNominatedNames
 }

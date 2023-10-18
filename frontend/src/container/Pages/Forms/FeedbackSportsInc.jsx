@@ -45,6 +45,7 @@ const FeedbackSportsInc = () => {
 
             setAuthorized(res.data['authorized'])
             setLoading(false)
+            
           }
           else {
 
