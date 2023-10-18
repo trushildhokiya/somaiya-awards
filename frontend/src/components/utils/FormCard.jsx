@@ -29,7 +29,7 @@ const FormCard = (props) => {
               <h2 className='font-Poppins text-xl text-white ml-[5%] py-2'>
                 {props.title}
               </h2>
-              <p className='text-sm font-Poppins text-white p-2'>
+              <p className='text-sm font-Poppins text-white  ml-[5%]'>
                 {props.info}
               </p>
 

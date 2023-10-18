@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import FormCard from '../../../components/utils/FormCard';
 import Teaching from '../../assests/teaching.jpeg'
 import NonTeaching from '../../assests/non-teaching.jpeg'
+import Sports from '../../assests/SportsCoach.jpg'
 import { MoonLoader } from 'react-spinners';
 import axios from 'axios';
 
@@ -146,6 +147,19 @@ const Student = () => {
                                         title="Non Teaching Feedback"
                                         info="Feedbacks for non-teaching staff for awards nomination"
                                         link="/forms/feedback-03"
+                                    />
+                                </div>
+
+                            </div>
+
+                            <div className='flex w-full justify-evenly p-10 mb-8'>
+
+                                <div className='w-[50%]'>
+                                    <FormCard
+                                        image={Sports}
+                                        title="Sports Incharge/ Coach Feedback"
+                                        info="Feedbacks for sports incharge/ coach for awards nomination"
+                                        link="/forms/feedback-05"
                                     />
                                 </div>
 

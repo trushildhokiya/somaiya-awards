@@ -40,6 +40,7 @@ import ResearchAdmin from "./container/views/researchAdmin/ResearchAdmin";
 import ResearchResponses from "./container/views/researchAdmin/pages/ResearchResponses";
 import Users from "./container/views/admin/pages/Users";
 import Dev from "./container/Pages/Utility/Dev";
+import FeedbackSportsInc from "./container/Pages/Forms/FeedbackSportsInc";
  
 function App() {
   return (
@@ -84,6 +85,7 @@ function App() {
         <Route path="/forms/feedback-02" element={<FeedbackTeachingPR />} />
         <Route path="/forms/feedback-03" element={<FeedbackNonTeachingST />} />
         <Route path="/forms/feedback-04" element={<FeedbackNonTeachingPR />} />
+        <Route path="/forms/feedback-05" element={<FeedbackSportsInc />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

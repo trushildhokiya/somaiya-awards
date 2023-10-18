@@ -1,4 +1,4 @@
-const express =  require('express')
+const express = require('express')
 const router = express.Router()
 const {
     submitForm_01,
@@ -10,8 +10,9 @@ const {
     submitFeedback_01,
     submitFeedback_02,
     submitFeedback_03,
-    submitFeedback_04} = require('../controllers/formController')
-const {upload01,upload02, upload03, upload04, upload05, upload10} = require('../middleware/fileUpload')
+    submitFeedback_04,
+    submitFeedback_05 } = require('../controllers/formController')
+const { upload01, upload02, upload03, upload04, upload05, upload10 } = require('../middleware/fileUpload')
 
 /**
  * Support note:
@@ -31,6 +32,7 @@ const {upload01,upload02, upload03, upload04, upload05, upload10} = require('../
  *      feeback02 : peers feedback for teaching staff form
  *      feeback03 : students feedback for non teaching staff form
  *      feeback04 : peer feedback for non teaching staff form
+ *      feeback05 : Feedback form for sports incharge / coach
  * 
  *  // update JULY 2023
  * 
@@ -45,20 +47,20 @@ router.route('/outstanding-institution').post(
 
 router.route('/research').post(
     upload02.fields([
-        {name:'evidence_of_research', maxCount:1},
-        {name:'evidence_of_data_provided', maxCount:1}
+        { name: 'evidence_of_research', maxCount: 1 },
+        { name: 'evidence_of_data_provided', maxCount: 1 }
     ]),
     submitForm_02
 );
 
 router.route('/sports').post(
     upload03.fields([
-        {name:'nominee_coach_photo',maxCount:1},
-        {name:'nominee_coach_supportings',maxCount:1},
-        {name:'nominee_ss_girl_photo',maxCount:1},
-        {name:'nominee_ss_girl_supportings',maxCount:1},
-        {name:'nominee_ss_boy_photo',maxCount:1},
-        {name:'nominee_ss_boy_supportings',maxCount:1},
+        { name: 'nominee_coach_photo', maxCount: 1 },
+        { name: 'nominee_coach_supportings', maxCount: 1 },
+        { name: 'nominee_ss_girl_photo', maxCount: 1 },
+        { name: 'nominee_ss_girl_supportings', maxCount: 1 },
+        { name: 'nominee_ss_boy_photo', maxCount: 1 },
+        { name: 'nominee_ss_boy_supportings', maxCount: 1 },
     ]),
     submitForm_03
 );
@@ -66,16 +68,16 @@ router.route('/sports').post(
 
 router.route('/teaching').post(
     upload04.fields([
-        {name: 'data_evidence' , maxCount:1},
-        {name: 'profile_photograph' , maxCount:1}
+        { name: 'data_evidence', maxCount: 1 },
+        { name: 'profile_photograph', maxCount: 1 }
     ]),
     submitForm_04
 );
 
 router.route('/non-teaching').post(
     upload05.fields([
-        {name: 'proof_docs' , maxCount:1},
-        {name: 'nominee_photograph' , maxCount:1}
+        { name: 'proof_docs', maxCount: 1 },
+        { name: 'nominee_photograph', maxCount: 1 }
     ]),
     submitForm_05
 );
@@ -92,5 +94,7 @@ router.route('/feedback-02').post(submitFeedback_02)
 router.route('/feedback-03').post(submitFeedback_03)
 
 router.route('/feedback-04').post(submitFeedback_04)
+
+router.route('/feedback-05').post(submitFeedback_05)
 
 module.exports = router

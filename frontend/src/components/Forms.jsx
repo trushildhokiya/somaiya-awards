@@ -116,7 +116,7 @@ const Forms = (props) => {
       const formType = window.location.href.split('/forms/')[1]
       const postUrl = `http://localhost:5001/forms/${formType}`
 
-      if (formType === 'feedback-01' || formType === 'feedback-02' || formType === 'feedback-03' || formType === 'feedback-04') {
+      if (formType === 'feedback-01' || formType === 'feedback-02' || formType === 'feedback-03' || formType === 'feedback-04' || formType === 'feedback-05') {
 
         axios.post(postUrl, formData, {
           headers: {

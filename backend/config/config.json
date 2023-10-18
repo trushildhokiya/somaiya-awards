@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "<password>",
+    "password": "Trushil#SQL#",
     "database": "somaiya_awards",
     "host": "localhost",
     "dialect": "mysql"

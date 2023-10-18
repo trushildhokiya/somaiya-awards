@@ -9,11 +9,13 @@ const {
     FeedbackTwo,
     FeedbackThree,
     FeedbackFour,
+    FeedbackFive,
     Sequelize } = require('../models')
 const { Op } = require('sequelize');
 
 const asyncHandler = require('express-async-handler')
-const { formLogger } = require('../middleware/logger')
+const { formLogger } = require('../middleware/logger');
+
 
 //@desc handle institution form submission
 //@route POST /forms/outstanding-institution
@@ -389,26 +391,26 @@ const submitForm_04 = asyncHandler(async (req, res) => {
         date_of_appointment: date_of_appointment,
         somaiya_mail_id: somaiya_mail_id,
         contact_number: contact_number,
-        q_01: q_01,
-        q_02: q_02,
-        q_03: q_03,
-        q_04: q_04,
-        q_05: q_05,
-        q_06: q_06,
-        q_07: q_07,
-        q_08: q_08,
-        q_09: q_09,
-        q_10: q_10,
-        q_11: q_11,
-        q_12: q_12,
-        q_13: q_13,
-        q_14: q_14,
-        q_15: q_15,
-        q_16: q_16,
-        q_17: q_17,
-        q_18: q_18,
-        q_19: q_19,
-        q_20: q_20,
+        q_01: Number(q_01),
+        q_02: Number(q_02),
+        q_03: Number(q_03),
+        q_04: Number(q_04),
+        q_05: Number(q_05),
+        q_06: Number(q_06),
+        q_07: Number(q_07),
+        q_08: Number(q_08),
+        q_09: Number(q_09),
+        q_10: Number(q_10),
+        q_11: Number(q_11),
+        q_12: Number(q_12),
+        q_13: Number(q_13),
+        q_14: Number(q_14),
+        q_15: Number(q_15),
+        q_16: Number(q_16),
+        q_17: Number(q_17),
+        q_18: Number(q_18),
+        q_19: Number(q_19),
+        q_20: Number(q_20),
         data_evidence: data_evidence,
         profile_photograph: profile_photograph,
     });
@@ -441,7 +443,7 @@ const submitForm_05 = asyncHandler(async (req, res) => {
     const currentYear = new Date().getFullYear();
 
     // Check if an entry with the same year, email, and awards category already exists
-    const existingNonTeachingEntry = await Teaching.findOne({
+    const existingNonTeachingEntry = await NonTeaching.findOne({
         where: {
             [Op.and]: [
                 { somaiya_email_id: somaiya_email_id },
@@ -851,6 +853,82 @@ const submitFeedback_04 = asyncHandler(async (req, res) => {
 })
 
 
+//@desc handle feedback05 form submission
+//@route POST /forms/feedback-05
+//@access private
+
+const submitFeedback_05 = asyncHandler(async (req, res) => {
+
+    const {
+        rater_name,
+        institution,
+        somaiya_mail_id,
+        nominee_name,
+        q_01,
+        q_02,
+        q_03,
+        q_04,
+        q_05,
+        q_06,
+        q_07,
+        q_08,
+        q_09,
+        q_10,
+        q_11,
+        q_12,
+        q_13,
+        q_14,
+        q_15,
+        q_16,
+        q_17,
+        q_18,
+        q_19,
+        q_20 } = req.body;
+
+    const result = await FeedbackFive.create({
+        rater_name: rater_name,
+        institution: institution,
+        somaiya_mail_id: somaiya_mail_id,
+        nominee_name: nominee_name,
+        q_01: q_01,
+        q_02: q_02,
+        q_03: q_03,
+        q_04: q_04,
+        q_05: q_05,
+        q_06: q_06,
+        q_07: q_07,
+        q_08: q_08,
+        q_09: q_09,
+        q_10: q_10,
+        q_11: q_11,
+        q_12: q_12,
+        q_13: q_13,
+        q_14: q_14,
+        q_15: q_15,
+        q_16: q_16,
+        q_17: q_17,
+        q_18: q_18,
+        q_19: q_19,
+        q_20: q_20
+    })
+
+    if (!result) {
+
+        // throw error
+        res.status(500)
+        formLogger.info(`Feedback 05 form filled by client ${req.ip} was not accepted`)
+        throw new Error("Failed to accept your response")
+    }
+
+    formLogger.info(`Feedback 05 form successfully filled by client ${req.ip}`)
+    res.status(200).json({
+        message: "Form submitted successfully",
+        submitted: true
+    })
+
+})
+
+
 
 
 module.exports = {
@@ -863,5 +941,6 @@ module.exports = {
     submitFeedback_02,
     submitFeedback_03,
     submitFeedback_04,
+    submitFeedback_05,
     submitForm_10
 }
