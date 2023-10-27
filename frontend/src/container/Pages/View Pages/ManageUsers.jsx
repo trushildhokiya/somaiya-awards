@@ -29,7 +29,7 @@ const ManageUsers = () => {
     "SK Somaiya Vinay Mandir Junior College, Mumbai",
     "KJ Somaiya Private Industrial Training Institute",
     "Smt. Sakarben Somaiya Junior College of Education (DEd)",
-    "KJ Somaiya Institute of Engineering and Information Technology, Ayurvihar",
+    "KJ Somaiya Institute of Technology, Ayurvihar",
     "KJ Somaiya College of Engineering",
     "KJ Somaiya Institute of Management",
     "KJ Somaiya Polytechnic College",
@@ -227,7 +227,7 @@ const ManageUsers = () => {
                 <SideBar />
                 <div className='flex flex-col w-full p-5 overflow-y-scroll'>
                   <div className='font-Poppins text-2xl font-semibold'>
-                    <h2>Manage Users</h2>
+                    <h2>ADD Users</h2>
                   </div>
                   <div className='flex justify-center'>
 
@@ -242,7 +242,7 @@ const ManageUsers = () => {
                         <Field
                           title='Email ID'
                           type='email'
-                          placeholder="trushil.d@somaiya.edu"
+                          placeholder="sams@somaiya.edu"
                           name='user_email_id'
                           value={credentials['user_email_id'] || ''}
                           onChange={handleChange}

@@ -14,7 +14,7 @@ const Groups={
     "SK Somaiya Vinay Mandir Junior College, Mumbai": [2],
     "KJ Somaiya Private Industrial Training Institute": [2],
     "Smt. Sakarben Somaiya Junior College of Education (DEd)": [2],
-    "KJ Somaiya Institute of Engineering and Information Technology, Ayurvihar": [3],
+    "KJ Somaiya Institute of Technology, Ayurvihar": [3],
     "KJ Somaiya College of Engineering": [3],
     "KJ Somaiya Institute of Management": [3],
     "KJ Somaiya Polytechnic College": [3],

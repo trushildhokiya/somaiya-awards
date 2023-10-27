@@ -56,7 +56,7 @@ const TeachingForm = [
             "SK Somaiya Vinay Mandir Junior College, Mumbai",
             "KJ Somaiya Private Industrial Training Institute",
             "Smt. Sakarben Somaiya Junior College of Education (DEd)",
-            "KJ Somaiya Institute of Engineering and Information Technology, Ayurvihar",
+            "KJ Somaiya Institute of Technology, Ayurvihar",
             "KJ Somaiya College of Engineering",
             "KJ Somaiya Institute of Management",
             "KJ Somaiya Polytechnic College",
