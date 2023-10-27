@@ -45,20 +45,39 @@ const Footer = () => {
           <h2 className="font-bold text-lg"> Under the guidance of</h2>
           <table className="w-[40%] font-m my-2">
             <tr>
-              <td>Dr. Sarita Ambadekar</td>
-              <td>Prof. Abhijit Patil</td>
-              <td>Ms. Aarti Sahitya</td>
+              <td>
+              <a href="https://in.linkedin.com/in/sarita-ambadekar-699030146?trk=public_profile_browsemap"
+                  target="_blank"
+                  className="cursor-pointer"
+                  rel="noreferrer">Dr. Sarita Ambadekar
+                </a>
+              </td>
+              <td>
+              <a href="https://in.linkedin.com/in/abhijit-patil-477a4760"
+                  target="_blank"
+                  className="cursor-pointer"
+                  rel="noreferrer">Prof. Abhijit Patil
+                </a>
+              </td>
+              <td>
+                <a href="https://in.linkedin.com/in/aarti-sahitya-01175b128"
+                  target="_blank"
+                  className="cursor-pointer"
+                  rel="noreferrer">Prof. Aarti Sahitya
+                </a>
+              </td>
             </tr>
           </table>
           <br></br>
           <h2 className="font-bold text-lg">Developed by</h2>
           {/* <br></br> */}
           <div className="grid grid-cols-1 md:grid-cols-8 gap-6 my-2">
-            
+
             <div>
               <a
                 href="https://linkedin.com/in/trushil-dhokiya/"
                 target="_blank"
+                rel="noreferrer"
               >
                 Trushil Dhokiya
               </a>
@@ -67,12 +86,13 @@ const Footer = () => {
               <a
                 href="https://linkedin.com/in/hitanshu-gandhi-92b855244/"
                 target="_blank"
+                rel="noreferrer"
               >
                 Hitanshu Gandhi
               </a>
             </div>
             <div className=" ">
-              <a href="https://linkedin.com/in/jash-joshi01/" target="_blank">
+              <a href="https://linkedin.com/in/jash-joshi01/" rel="noreferrer" target="_blank">
                 Jash J. Joshi
               </a>
             </div>
@@ -80,12 +100,13 @@ const Footer = () => {
               <a
                 href="https://linkedin.com/in/riya-kapadia-a571401bb/"
                 target="_blank"
+                rel="noreferrer"
               >
                 Riya Kapadia
               </a>
             </div>
             <div>
-              <a href="https://linkedin.com/in/kushal-harsora" target="_blank">
+              <a href="https://linkedin.com/in/kushal-harsora" rel="noreferrer" target="_blank">
                 Kushal Harsora
               </a>
             </div>
@@ -93,6 +114,7 @@ const Footer = () => {
               <a
                 href="https://linkedin.com/in/swaraj-dusane-35941722b"
                 target="_blank"
+                rel="noreferrer"
               >
                 Swaraj Dusane
               </a>
@@ -101,6 +123,7 @@ const Footer = () => {
               <a
                 href="https://linkedin.com/in/yash-chauhan-180031203"
                 target="_blank"
+                rel="noreferrer"
               >
                 Yash Chauhan
               </a>
@@ -109,6 +132,7 @@ const Footer = () => {
               <a
                 href="https://linkedin.com/in/yashkumar-dubey-716933222"
                 target="_blank"
+                rel="noreferrer"
               >
                 Yashkumar Dubey
               </a>
